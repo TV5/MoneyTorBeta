@@ -57,7 +57,7 @@
 <div class="ui container">
 	<div class="ui text menu firstmenu" width="100%">
 	  <img src="assets/images/logo.png" style="width:30px;height:30px;margin-top:5px">
-	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main')}">
+	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main', params: [username:user.username, userId:user.id])}">
 		MONEYTOR	
 	   </a>
 	   </div>
@@ -65,9 +65,9 @@
 	  
 	  <div class="right menu">
 	   <a class="item link">
-	     <b>username</b>
+	     <b>${user.username}</b>
 	   </a>
-	   <a class="item" href="${createLink(controller: 'user', action: 'users')}">
+	   <a class="item" href="${createLink(controller: 'user', action: 'users', params: [username:user.username, userId:user.id])}">
 			Users
 	   </a>
 	   <a id="settingsLink" class="item">

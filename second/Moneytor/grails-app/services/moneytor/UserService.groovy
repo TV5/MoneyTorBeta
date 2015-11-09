@@ -12,9 +12,9 @@ class UserService {
 		def userCheck = User.findByUsername(user.username)
 		if(userCheck){
 			return "username already in use"
-		}
+		}else{
 		user.save()
-		
+		}
 	}
 	def login(username, password) {
 		def user = User.findByUsernameAndPassword(username, password)
@@ -22,12 +22,12 @@ class UserService {
 		
 	}
 	def listEmployees(){
-		def empList =User.findAllWhere(status:1, type:"e")
+		def empList =User.findAllByStatusAndType(1, "E")
 		return empList
 	}
 	
 	def listAdmins(){
-		def adminList = User.findAllWhere(status:1, type: "a")
+		def adminList = User.findAllByStatusAndType(1, "A")
 		return adminList
 	}
 }

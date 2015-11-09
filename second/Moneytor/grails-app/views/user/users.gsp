@@ -57,7 +57,7 @@ a {
 <div class="ui container">
 	<div class="ui text menu firstmenu" width="100%">
 	  <img src="assets/images/logo.png" style="width:30px;height:30px;margin-top:5px">
-	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main')}">
+	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main', params: [username:user.username, userId:user.id])}">
 		MONEYTOR	
 	   </a>
 	   </div>
@@ -65,9 +65,9 @@ a {
 	  
 	  <div class="right menu">
 	   <a class="item link">
-	     <b>josephpalmaras</b>
+	     <b>${user.username}</b>
 	   </a>
-	   <a class="item" href="${createLink(controller: 'user', action: 'users')}">
+	   <a class="item" href="${createLink(controller: 'user', action: 'users', params: [username:user.username, userId:user.id])}">
 			Users
 	   </a>
 	   <a id="settingsLink" class="item">
@@ -114,36 +114,14 @@ a {
 					</tr>
 				</thead>
 				<tbody>
+				<g:each var="emp" in="${empList}">
 					<tr>
-						<th>dksandimas</th>
-						<th>DK</th>
-						<th>Sandimas</th>
+						<th>${emp.username }</th>
+						<th>${emp.f_name}</th>
+						<th>${emp.l_name }</th>
 						<th><button class="ui button teal" id="editemployeeBtn">edit</button></th>
 					</tr>
-					<tr>
-						<th>ivanchua</th>
-						<th>Ivan</th>
-						<th>Chua</th>
-						<th><button class="ui button teal" id="editemployeeBtn">edit</button></th>
-					</tr>
-					<tr>
-						<th>jp</th>
-						<th>Joseph</th>
-						<th>Palmaras</th>
-						<th><button class="ui button teal" id="editemployeeBtn">edit</button></th>
-					</tr>
-					<tr>
-						<th>svd</th>
-						<th>Sonia</th>
-						<th>Vidal</th>
-						<th><button class="ui button teal" id="editemployeeBtn">edit</button></th>
-					</tr>
-					<tr>
-						<th>trishalim</th>
-						<th>Trisha</th>
-						<th>Lim</th>
-						<th><button class="ui button teal" id="editemployeeBtn">edit</button></th>
-					</tr>
+					</g:each>
 				</tbody>
 			</table>	
 		  
@@ -191,25 +169,14 @@ a {
 					</tr>
 				</thead>
 				<tbody>
+				<g:each var="admin" in="${adminList}">
 					<tr>
-						<th>dksandimas</th>
-						<th>DK</th>
-						<th>Sandimas</th>
-						<th><button class="ui button teal" id="editadministratorBtn">edit</button></th>
+						<th>${admin.username }</th>
+						<th>${admin.f_name}</th>
+						<th>${admin.l_name }</th>
+						<th><button class="ui button teal" id="editemployeeBtn">edit</button></th>
 					</tr>
-					<tr>
-						<th>ivanchua</th>
-						<th>Ivan</th>
-						<th>Chua</th>
-						<th><button class="ui button teal" id="editadministratorBtn">edit</button></th>
-					</tr>
-					<tr>
-						<th>jp</th>
-						<th>Joseph</th>
-						<th>Palmaras</th>
-						<th><button class="ui button teal" id="editadministratorBtn">edit</button></th>
-					</tr>
-					
+					</g:each>				
 				</tbody>
 			</table>
 
@@ -227,14 +194,14 @@ a {
 		<div id="addemployee" class="ui modal">
 			<div class="header">Employee</div>
 			<div class="content">
-				<form class="ui form">
+				<g:form class="ui form" controller="user" action="addEmployee">
 
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text">
+				            <g:textField name="ef_name" value="${ef_name}" placeholder="first name" />
 						</div>
 					</div>
 
@@ -243,7 +210,7 @@ a {
 							<label>Last Name</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text">
+				            <g:textField name="el_name" value="${el_name}" placeholder="last name" />
 						</div>
 					</div>
 
@@ -252,7 +219,7 @@ a {
 							<label>Username</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text">
+				            <g:textField name="eusername" value="${eusername}" placeholder="username" />
 						</div>
 					</div>
 
@@ -261,7 +228,7 @@ a {
 							<label>Password</label>
 						</div>
 						<div class="seven wide field">
-							<input type="number">
+				            <g:passwordField name="epassword" value="${password}" placeholder="password"/>
 						</div>
 					</div>
 
@@ -270,30 +237,33 @@ a {
 							<label>Confirm Password</label>
 						</div>
 						<div class="seven wide field">
-							<input type="number">
+				            <g:passwordField name="ecpassword" value="${ecpassword}" placeholder="confirm password"/>
 						</div>
 					</div>
-				</form>
+					<g:hiddenField name="etype" value="E" />
+					<g:hiddenField name="userUsername" value="${user.username}" />
+					<g:hiddenField name="userId" value="${user.id}" />				
 			</div>
 			<div class="actions">
-				<div class="ui approve button">Save</div>
+				<g:actionSubmit class="ui approve large teal submit button" value="save" action="addEmployee"/>
 				<div class="ui button">Add More</div>
 				<div class="ui cancel button">Cancel</div>
 			</div>
+			</g:form>
 		</div>
 
 		<!-- administrator INFORMATION  -->
 		<div id="addadministrator" class="ui modal">
 			<div class="header">Administrator</div>
 			<div class="content">
-				<form class="ui form">
+				<g:form class="ui form" controller="user" action="addAdmin">
 
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text">
+				            <g:textField name="af_name" value="${af_name}" placeholder="first name" />
 						</div>
 					</div>
 
@@ -302,7 +272,7 @@ a {
 							<label>Last Name</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text">
+				            <g:textField name="al_name" value="${al_name}" placeholder="last name" />
 						</div>
 					</div>
 
@@ -311,7 +281,7 @@ a {
 							<label>Username</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text">
+				            <g:textField name="ausername" value="${ausername}" placeholder="username" />
 						</div>
 					</div>
 
@@ -320,7 +290,7 @@ a {
 							<label>Password</label>
 						</div>
 						<div class="seven wide field">
-							<input type="number">
+				            <g:passwordField name="apassword" value="${apassword}" placeholder="password"/>
 						</div>
 					</div>
 
@@ -329,16 +299,19 @@ a {
 							<label>Confirm Password</label>
 						</div>
 						<div class="seven wide field">
-							<input type="number">
+				            <g:passwordField name="acpassword" value="${acpassword}" placeholder="confirm password"/>
 						</div>
 					</div>
-				</form>
+					<g:hiddenField name="atype" value="A" />
+					<g:hiddenField name="userUsername" value="${user.username}" />
+					<g:hiddenField name="userId" value="${user.id}" />				
 			</div>
 			<div class="actions">
-				<div class="ui approve button">Save</div>
+				<g:actionSubmit class="ui approve large teal submit button" value="save" action="addAdmin"/>
 				<div class="ui button">Add More</div>
 				<div class="ui cancel button">Cancel</div>
 			</div>
+			</g:form>
 		</div>
 
 <!-- edit employee INFORMATION  -->
@@ -800,9 +773,9 @@ a {
       <div class="ui negative button">
         No
       </div>
-      <div class="ui positive right labeled icon button">
-        Yes
-        <i class="checkmark icon"></i>
+      <div class="ui positive right labeled icon button" >
+        <a href="${createLink(absolute:'http://localhost:8080/Moneytor/')}">Yes
+        <i class="checkmark icon"></i></a>
       </div>
     </div>
   </div>
