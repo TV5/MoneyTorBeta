@@ -1,122 +1,113 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
+  <!-- Site Properities -->
+  <title>Login</title>
+  <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
+  <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
+  <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
+  <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
+  <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
 
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
+  <style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+  <script>
+  $(document)
+    .ready(function() {
+      $('.ui.form')
+        .form({
+          fields: {
+            email: {
+              identifier  : 'username',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your password must be at least 8 characters'
+                  }
+                  
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    })
+  ;
+  </script>
+</head>
+<body>
 
-			#status li {
-				line-height: 1.3;
-			}
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <img src="assets/images/logo.png" class="image">
+      <div class="content">
+        MoneyTor
+      </div>
+    </h2>
 
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
+    <g:form class="ui large form" name="form" controller="main" action="login" id="form">
+      <div class="ui stacked segment">
+    <g:if test="${flash.error}">
+	    <div class="ui alert alert-error" >error: ${flash.error}</div>
+    </g:if>
 
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <g:textField name="username" value="${username}" placeholder="username" />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <g:passwordField name="password" value="${password}" placeholder="password"/>
+          </div>
+        </div>
 
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
+        <g:actionSubmit class="ui fluid large teal submit button" value="login" action="login"/>
+      </div>
 
-			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
-			}
+      <div class="ui error message"></div>
 
-			#controller-list ul {
-				list-style-position: inside;
-			}
+    </g:form>
 
-			#controller-list li {
-				line-height: 1.3;
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
+  </div>
+</div>
 
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
+</body>
 
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
-			<ul>
-				<li>App version: <g:meta name="app.version"/></li>
-				<li>Grails version: <g:meta name="app.grails.version"/></li>
-				<li>Groovy version: ${GroovySystem.getVersion()}</li>
-				<li>JVM version: ${System.getProperty('java.version')}</li>
-				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
-				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-			</ul>
-			<h1>Installed Plugins</h1>
-			<ul>
-				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-					<li>${plugin.name} - ${plugin.version}</li>
-				</g:each>
-			</ul>
-		</div>
-		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
-
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
-			</div>
-		</div>
-	</body>
 </html>
