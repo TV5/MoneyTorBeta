@@ -56,7 +56,7 @@
 
 <div class="ui container">
 	<div class="ui text menu firstmenu" width="100%">
-	  <img src="assets/images/logo.png" style="width:30px;height:30px;margin-top:5px">
+	  <img src="assets/images/moneytor_logo.png" style="width:30px;height:30px;margin-top:5px">
 	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main', params: [username:user.username, userId:user.id])}">
 		MONEYTOR	
 	   </a>
