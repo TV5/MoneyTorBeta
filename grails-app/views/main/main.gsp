@@ -1,6 +1,15 @@
+<!-- 
+/* -------------------------------------------------------------------------
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Copyright (C) Moneytor
+ * -------------------------------------------------------------------------
+ -->
+ 
 <!DOCTYPE html>
 <html>
 <head>
+
 <!-- Standard Meta -->
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -56,7 +65,7 @@
 
 <div class="ui container">
 	<div class="ui text menu firstmenu" width="100%">
-	  <img src="assets/images/logo.png" style="width:30px;height:30px;margin-top:5px">
+	  <img src="${resource(dir: 'images', file: 'logo.png')}" style="width:30px;height:30px;margin-top:5px">
 	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main', params: [username:user.username, userId:user.id])}">
 		MONEYTOR	
 	   </a>
@@ -68,7 +77,7 @@
 	     <b>${user.username}</b>
 	   </a>
 	   <g:if test="${user.type}">
-	   <a class="item" href="${createLink(controller: 'user', action: 'users', params: [username:user.username, userId:user.id])}">
+	   <a class="item" href="${createLink(controller: 'user', action: 'users', params: [username:user.username, userId:user.id, type:user.type])}">
 			Users
 	   </a>
 	   </g:if>
