@@ -2,8 +2,7 @@ package moneytor
 
 class MainController {
 	def userService
-    def index() { }
-	
+	def index(){}
 	def login() {
 		def user = userService.login(params.username, params.password)
 		if(user){
@@ -13,12 +12,12 @@ class MainController {
 			redirect (uri: "/")
 		}
 	}
-	
 	def main(){
 		def username=params.username
 		def userId=params.userId
 		def type = params.type
 		[user:[username:username, id:userId, type:type]]
 	}
+
 	
 }

@@ -23,7 +23,7 @@ class UserController {
 			user.type=params.etype
 			user.status=1
 			user.updated_on=new Date()
-			user.updated_by=params.userId
+			user.updated_by=params.int('userId')
 			userService.addUser(user)
 			
 			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
@@ -39,7 +39,7 @@ class UserController {
 			user.type=params.atype
 			user.status=1
 			user.updated_on=new Date() 
-			user.updated_by=params.userId
+			user.updated_by=params.int('userId')
 			userService.addUser(user)
 			
 			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
