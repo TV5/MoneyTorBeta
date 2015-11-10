@@ -103,6 +103,17 @@ a {
 	$('#changepass').hide();
 	$('#saveBtn').hide();
 	$('#newPass').hide();
+	
+	function editEmployee(id, username, f_name, l_name, password, status){
+		document.getElementById("empId").value=id;
+		document.getElementById("empUsername").value=username;
+		document.getElementById("empF_name").value=f_name;
+		document.getElementById("empL_name").value=l_name;
+		document.getElementById("empPassword").value=password;
+		document.getElementById("empCpassword").value=password;
+		document.getElementById("empStatus").value=status;
+		$('#editemployee').modal('show');
+	}
 
 	function edit(){
 		$('#saveBtn').toggle();
@@ -144,11 +155,11 @@ a {
 	$('#addadministratorBtn').click(function(){
 		$('#addadministrator').modal('show');
 	});
-
+/*
 	$('#editemployeeBtn').click(function() {
 		$('#editemployee').modal('show');
 	});
-
+*/
 	$('#editadministratorBtn').click(function() {
 		$('#editadministrator').modal('show');
 	});

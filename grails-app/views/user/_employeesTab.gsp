@@ -26,7 +26,7 @@
 						<th>${emp.username }</th>
 						<th>${emp.f_name}</th>
 						<th>${emp.l_name }</th>
-						<th><button class="ui button teal" id="editemployeeBtn">edit</button></th>
+						<th><button class="ui button teal" onclick="editEmployee(${emp.id}, '${emp.username}', '${emp.f_name }', '${emp.l_name}', '${emp.password}', ${emp.status})" id="editemployeeBtn">edit</button></th>
 					</tr>
 					</g:each>
 				</tbody>

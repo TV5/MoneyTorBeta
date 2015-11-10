@@ -45,6 +45,35 @@ class UserController {
 			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
 		}
 	}
+	
+	def editEmployee(){
+		if(params.empCpassword==params.empPassword){
+			def user =new User()
+			user.id = params.int('empId');
+			user.f_name=params.empF_name
+			user.l_name=params.empL_name
+			user.username=params.empUsername
+			user.password=params.empPassword
+			user.updated_on=new Date()
+			user.updated_by=params.int('userId')
+			userService.editUser(user.id, user)
+			
+			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
+		}
+
+	}
+	def changeStatus(){
+		def user =new User()
+		user.id = params.int('empId');
+		user.updated_on=new Date()
+		user.updated_by=params.int('userId')
+		userService.changeUserStatus(user.id, user)
+			
+		redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
+		
+
+	}
+
 	def users(){
 		def username=params.username
 		def userId=params.userId
