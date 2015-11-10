@@ -1,3 +1,11 @@
+<!-- 
+/* -------------------------------------------------------------------------
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Copyright (C) Moneytor
+ * -------------------------------------------------------------------------
+ -->
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +64,8 @@ a {
 
 <div class="ui container">
 	<div class="ui text menu firstmenu" width="100%">
-	  <img src="assets/images/moneytor_logo.png" style="width:30px;height:30px;margin-top:5px">
-	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main', params: [username:user.username, userId:user.id, type: user.type])}">
+	  <img src="${resource(dir: 'images', file: 'logo.png')}" style="width:30px;height:30px;margin-top:5px">
+	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main', params: [username:user.username, userId:user.id, type:user.type])}">
 		MONEYTOR	
 	   </a>
 	   </div>
@@ -201,7 +209,7 @@ a {
 							<label>First Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="ef_name" value="${ef_name}" placeholder="first name" />
+				            <g:textField name="ef_name" value="${ef_name}" />
 						</div>
 					</div>
 
@@ -210,7 +218,7 @@ a {
 							<label>Last Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="el_name" value="${el_name}" placeholder="last name" />
+				            <g:textField name="el_name" value="${el_name}" />
 						</div>
 					</div>
 
@@ -219,7 +227,7 @@ a {
 							<label>Username</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="eusername" value="${eusername}" placeholder="username" />
+				            <g:textField name="eusername" value="${eusername}" />
 						</div>
 					</div>
 
@@ -228,7 +236,7 @@ a {
 							<label>Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="epassword" value="${password}" placeholder="password"/>
+				            <g:passwordField name="epassword" value="${epassword}" />
 						</div>
 					</div>
 
@@ -237,7 +245,7 @@ a {
 							<label>Confirm Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="ecpassword" value="${ecpassword}" placeholder="confirm password"/>
+				            <g:passwordField name="ecpassword" value="${ecpassword}" />
 						</div>
 					</div>
 					<g:hiddenField name="etype" value="E" />
@@ -263,7 +271,7 @@ a {
 							<label>First Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="af_name" value="${af_name}" placeholder="first name" />
+				            <g:textField name="af_name" value="${af_name}" />
 						</div>
 					</div>
 
@@ -272,7 +280,7 @@ a {
 							<label>Last Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="al_name" value="${al_name}" placeholder="last name" />
+				            <g:textField name="al_name" value="${al_name}" />
 						</div>
 					</div>
 
@@ -281,7 +289,7 @@ a {
 							<label>Username</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="ausername" value="${ausername}" placeholder="username" />
+				            <g:textField name="ausername" value="${ausername}" />
 						</div>
 					</div>
 
@@ -290,7 +298,7 @@ a {
 							<label>Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="apassword" value="${apassword}" placeholder="password"/>
+				            <g:passwordField name="apassword" value="${apassword}" />
 						</div>
 					</div>
 
@@ -299,7 +307,7 @@ a {
 							<label>Confirm Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="acpassword" value="${acpassword}" placeholder="confirm password"/>
+				            <g:passwordField name="acpassword" value="${acpassword}" />
 						</div>
 					</div>
 					<g:hiddenField name="atype" value="A" />
