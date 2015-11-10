@@ -21,14 +21,14 @@
 			    <button class="ui button teal">Print</button>
 		    </div>
 		  </div>
-		  <table class="ui celled padded table">
+		  <table id="receivablesTable" class="display ui celled padded table"  cellspacing="0" width="100%">
 		  <thead>
 		    <tr>
-		    <th>OR No. <i class="dropdown icon link" style="float:right"></i></th>
-		    <th>Customer <i class="dropdown icon link" style="float:right"></i></th>
-		    <th>Amount <i class="dropdown icon link" style="float:right"></i></th>
-		    <th>Transaction Date <i class="dropdown icon link" style="float:right"></i></th>
-		    <th>Due Date <i class="dropdown icon link" style="float:right"></i></th>
+		    <th>OR No.</th>
+		    <th>Customer</th>
+		    <th>Amount</th>
+		    <th>Transaction Date</th>
+		    <th>Due Date</th>
 		  	</tr>
 		  </thead>
 		  <tbody>
@@ -76,22 +76,5 @@
 		  	</tr>
 		  </tbody>
 		  </table>
-		<div class="ui pagination menu right" style="float:right">
-		  <a class="active item">
-		    1
-		  </a>
-		  <div class="disabled item">
-		    ...
-		  </div>
-		  <a class="item">
-		    10
-		  </a>
-		  <a class="item">
-		    11
-		  </a>
-		  <a class="item">
-		    12
-		  </a>
-		</div>
 		<b>Total Amount: </b> P79,300.00</p>
 	</div>

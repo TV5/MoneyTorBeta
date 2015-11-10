@@ -11,16 +11,13 @@
 			    <button class="ui button teal" id="addemployeeBtn">Add employees</button>
 		    </div>
 		  </div>
-			<table id="employeesTable" class="ui celled padded table">
+			<table id="employeesTable" class="ui celled padded table display" cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Username <i class="dropdown icon link"
-							style="float: right"></i></th>
-						<th>First Name <i class="dropdown icon link"
-							style="float: right"></i></th>
-						<th>Last Name <i class="dropdown icon link"
-							style="float: right"></i></th>
-						<th></th>
+						<th>Username</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Edit</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,22 +31,4 @@
 					</g:each>
 				</tbody>
 			</table>	
-		  
-			<div class="ui pagination menu right" style="float:right">
-			  <a class="active item">
-			    1
-			  </a>
-			  <div class="disabled item">
-			    ...
-			  </div>
-			  <a class="item">
-			    10
-			  </a>
-			  <a class="item">
-			    11
-			  </a>
-			  <a class="item">
-			    12
-			  </a>
-			</div>
 		</div>

@@ -20,15 +20,17 @@
 <title>Main Page</title>
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
-
+  <link rel="stylesheet" href="${resource(dir: 'datatables/media/css', file: 'jquery.dataTables.min.css')}" type="text/css">
+  
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
-  <script src="${resource(dir: 'js', file: 'jquery.dataTables.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'tab.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'modal.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'dimmer.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'transition.min.js')}"></script>
+  <script src="${resource(dir: 'js', file: 'main.js')}"></script>
 
   <style type="text/css">
     body {
@@ -86,6 +88,7 @@
 	<g:render template="accounts/payablesTab" />
 	<g:render template="accounts/receivablesTab" />
 	<g:render template="transactors/suppliersTab" />
+	<g:render template="transactors/customersTab" />
 	<g:render template="../header/userSettingsModal" />	
 	<g:render template="payments/paymentsModal" />	
 	<g:render template="accounts/addReceivableModal" />
@@ -100,46 +103,11 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-	    $('#employeesTable').DataTable();
+	    $('#payablesTable').DataTable();
+	    $('#receivablesTable').DataTable();
+	    $('#customersTable').DataTable();
+	    $('#suppliersTable').DataTable();
 	} );
-	
-	$('#fnametxt').hide();
-	$('#usernametxt').hide();
-	$('#lnametxt').hide();
-	$('#changepass').hide();
-	$('#saveBtn').hide();
-	$('#newPass').hide();
-
-	function edit(){
-		$('#saveBtn').toggle();
-		$('#username').toggle();
-		$('#fname').toggle();
-		$('#lname').toggle();
-		$('#usernametxt').toggle();
-		$('#fnametxt').toggle();
-		$('#lnametxt').toggle();
-		$('#editBtn').toggle();
-		$('#changepass').toggle();
-	}
-
-	function changePassword(){
-		$('#currPass').toggle();
-		$('#newPass').toggle();
-	}
-
-	function cancelEdit(){
-		$('#saveBtn').toggle();
-		$('#username').toggle();
-		$('#fname').toggle();
-		$('#lname').toggle();
-		$('#usernametxt').toggle();
-		$('#fnametxt').toggle();
-		$('#lnametxt').toggle();
-		$('#editBtn').toggle();
-		$('#changepass').toggle();
-		$('#currPass').toggle();
-		$('#newPass').toggle();
-	}
 
 	$('.top.menu .item').tab();
 

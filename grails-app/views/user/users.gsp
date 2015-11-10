@@ -18,15 +18,17 @@
 <!-- Site Properities -->
 <title>User Management</title>
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
-  <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
-
+  <link rel="stylesheet" href="${resource(dir: 'datatables/media/css', file: 'jquery.dataTables.min.css')}" type="text/css">
+  
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'tab.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'modal.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'dimmer.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'transition.min.js')}"></script>
+  
 
 <style type="text/css">
 body {
@@ -88,6 +90,12 @@ a {
 
 </body>
 <script type="text/javascript">
+
+	$(document).ready(function() {
+	    $('#employeesTable').DataTable();
+	    $('#administratorsTable').DataTable();
+	} );
+	
 	  //user settings
 	$('#fnametxt').hide();
 	$('#usernametxt').hide();
