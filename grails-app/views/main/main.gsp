@@ -86,7 +86,7 @@
 	<g:render template="accounts/receivablesTab" />
 	<g:render template="transactors/suppliersTab" />
 	<g:render template="userSettingsModal" />	
-	<g:render template="paymentsModal" />	
+	<g:render template="payments/paymentsModal" />	
 	<g:render template="accounts/addReceivableModal" />
 	<g:render template="accounts/addPayableModal" />
 	<g:render template="accounts/editPayableModal" />
