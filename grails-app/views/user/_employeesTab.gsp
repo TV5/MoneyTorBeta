@@ -11,7 +11,7 @@
 			    <button class="ui button teal" id="addemployeeBtn">Add employees</button>
 		    </div>
 		  </div>
-			<table class="ui celled padded table">
+			<table id="employeesTable" class="ui celled padded table">
 				<thead>
 					<tr>
 						<th>Username <i class="dropdown icon link"

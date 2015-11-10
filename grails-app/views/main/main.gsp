@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
 
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
+  <script src="${resource(dir: 'js', file: 'jquery.dataTables.min.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
   <script src="${resource(dir: 'dist/components', file: 'tab.min.js')}"></script>
@@ -65,7 +66,7 @@
 
 <div class="ui container">
 
-	<g:render template="header" />
+	<g:render template="../header/header" />
 	
 	<div class="ui top attached tabular menu">
 	  <a data-tab="payablesTab" class="item active" >
@@ -85,7 +86,7 @@
 	<g:render template="accounts/payablesTab" />
 	<g:render template="accounts/receivablesTab" />
 	<g:render template="transactors/suppliersTab" />
-	<g:render template="userSettingsModal" />	
+	<g:render template="../header/userSettingsModal" />	
 	<g:render template="payments/paymentsModal" />	
 	<g:render template="accounts/addReceivableModal" />
 	<g:render template="accounts/addPayableModal" />
@@ -93,10 +94,15 @@
 	<g:render template="accounts/editReceivableModal" />
 	<g:render template="transactors/addSupplierModal" />
 	<g:render template="transactors/addCustomerModal" />
-	<g:render template="logout" />
+	<g:render template="../header/logout" />
 
 </body>
 <script type="text/javascript">
+
+	$(document).ready(function() {
+	    $('#employeesTable').DataTable();
+	} );
+	
 	$('#fnametxt').hide();
 	$('#usernametxt').hide();
 	$('#lnametxt').hide();
