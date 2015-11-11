@@ -26,11 +26,7 @@
 		<link>
 			<name>.link_to_grails_plugins</name>
 			<type>2</type>
-<<<<<<< HEAD
 			<location>/Users/ivanwesleychua/Documents/GitItDone/Grails/MoneyTorBeta/target/work/plugins</location>
-=======
-			<location>C:/Users/lalala/Documents/GitHub/MoneyTorBeta/target/work/plugins</location>
->>>>>>> master
 		</link>
 	</linkedResources>
 </projectDescription>
