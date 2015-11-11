@@ -1,9 +1,17 @@
 package moneytor
 
 class UserController {
+	def beforeInterceptor = [action:this.&auth]
+	def scaffold=true
 	def userService
     def index() { 
 		
+	}
+	def auth(){
+		if(!session.user){
+			redirect(uri: "/")
+			return false
+		}
 	}
 	def listEmployees(){
 		def empList=userService.listEmployees()	
@@ -26,7 +34,7 @@ class UserController {
 			user.updated_by=params.int('userId')
 			userService.addUser(user)
 			
-			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
+			redirect(action: "users")
 		}
 	}
 	def addAdmin() {
@@ -42,7 +50,7 @@ class UserController {
 			user.updated_by=params.int('userId')
 			userService.addUser(user)
 			
-			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
+			redirect(action: "users")
 		}
 	}
 	
@@ -92,13 +100,10 @@ class UserController {
 	}
 
 	def users(){
-		def username=params.username
-		def userId=params.userId
 		def empList=listEmployees()
 		def adminList=listAdmins()
-		def type = params.type
 
-		[user:[username:username, id:userId, type:type], empList:empList, adminList:adminList]
+		[user:session.user, empList:empList, adminList:adminList]
 		
 	}
 }

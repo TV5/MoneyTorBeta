@@ -6,17 +6,27 @@ class MainController {
 	def login() {
 		def user = userService.login(params.username, params.password)
 		if(user){
-			redirect(action:"main", params:[userId:user.id, username: user.username, type: user.type])
+			session.user=user
+			redirect(action:"main")
 		}else{
 			flash.error ="invalid username/password"
 			redirect (uri: "/")
 		}
 	}
+	def logout() {
+		if(session.user){
+			session.user = null
+			redirect(uri:"/")
+		}
+	}
 	def main(){
-		def username=params.username
-		def userId=params.userId
-		def type = params.type
-		[user:[username:username, id:userId, type:type]]
+		if(session.user){
+			[user:session.user]
+		}else{
+			redirect(uri: "/")
+			return false
+		}
+
 	}
 
 	
