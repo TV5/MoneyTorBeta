@@ -11,13 +11,17 @@
 			    <button class="ui button teal" id="addemployeeBtn">Add employees</button>
 		    </div>
 		  </div>
+		
 			<table id="employeesTable" class="ui celled padded table display" cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th>Username</th>
 						<th>First Name</th>
 						<th>Last Name</th>
+						<th>Updated By</th>
+						<th>Updated On</th>
 						<th>Edit</th>
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -26,8 +30,11 @@
 						<th>${emp.username }</th>
 						<th>${emp.f_name}</th>
 						<th>${emp.l_name }</th>
+						<th>${emp.updated_by}</th>
+						<th>${emp.updated_on }</th>
 						<th><button class="ui button teal" onclick="editEmployee(${emp.id}, '${emp.username}', '${emp.f_name }', '${emp.l_name}', '${emp.password}', ${emp.status})" id="editemployeeBtn">edit</button></th>
 					</tr>
+
 					</g:each>
 				</tbody>
 			</table>	

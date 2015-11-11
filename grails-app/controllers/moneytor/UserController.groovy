@@ -62,6 +62,23 @@ class UserController {
 		}
 
 	}
+	def editAdmin(){
+		if(params.adminCpassword==params.adminPassword){
+			def user =new User()
+			user.id = params.int('adminId');
+			user.f_name=params.adminF_name
+			user.l_name=params.adminL_name
+			user.username=params.adminUsername
+			user.password=params.adminPassword
+			user.updated_on=new Date()
+			user.updated_by=params.int('userId')
+			userService.editUser(user.id, user)
+			
+			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
+		}
+
+	}
+
 	def changeStatus(){
 		def user =new User()
 		user.id = params.int('empId');

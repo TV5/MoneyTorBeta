@@ -8,7 +8,7 @@
 		  	
 		    </div>
 		    <div class="three wide feild" style="float:right">
-			    <button class="ui button teal" id="addadministratorBtn">Add administrators</button>
+			    <button class="ui button teal"  id="addadministratorBtn">Add administrators</button>
 		    </div>
 		  </div>
 			<table id="administratorsTable" class="ui celled padded table display" cellspacing="0" width="100%">
@@ -17,6 +17,8 @@
 						<th>Username</th>
 						<th>First Name</th>
 						<th>Last Name</th>
+						<th>Updated By</th>
+						<th>Updated On</th>						
 						<th>Edit</th>
 					</tr>
 				</thead>
@@ -26,7 +28,9 @@
 						<th>${admin.username }</th>
 						<th>${admin.f_name}</th>
 						<th>${admin.l_name }</th>
-						<th><button class="ui button teal" id="editemployeeBtn">edit</button></th>
+						<th>${admin.updated_by}</th>
+						<th>${admin.updated_on }</th>						
+						<th><button class="ui button teal" onclick="editEmployee(${admin.id}, '${admin.username}', '${admin.f_name }', '${admin.l_name}', '${admin.password}', ${admin.status})" id="editemployeeBtn">edit</button></th>
 					</tr>
 					</g:each>				
 				</tbody>

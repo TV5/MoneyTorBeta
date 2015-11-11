@@ -115,6 +115,17 @@ a {
 		$('#editemployee').modal('show');
 	}
 
+	function editAdmin(id, username, f_name, l_name, password, status){
+		document.getElementById("adminId").value=id;
+		document.getElementById("adminUsername").value=username;
+		document.getElementById("adminF_name").value=f_name;
+		document.getElementById("adminL_name").value=l_name;
+		document.getElementById("adminPassword").value=password;
+		document.getElementById("adminCpassword").value=password;
+		document.getElementById("adminStatus").value=status;
+		$('#editadministrator').modal('show');
+	}
+	
 	function edit(){
 		$('#saveBtn').toggle();
 		$('#username').toggle();
@@ -155,15 +166,10 @@ a {
 	$('#addadministratorBtn').click(function(){
 		$('#addadministrator').modal('show');
 	});
-/*
-	$('#editemployeeBtn').click(function() {
-		$('#editemployee').modal('show');
-	});
-*/
-	$('#editadministratorBtn').click(function() {
+/*	$('#editadministratorBtn').click(function() {
 		$('#editadministrator').modal('show');
 	});
-	
+	*/
 	$('#settingsLink').click(function(){
 
 		$('#userSettings').modal('show');
