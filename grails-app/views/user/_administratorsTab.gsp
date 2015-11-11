@@ -30,7 +30,7 @@
 						<th>${admin.l_name }</th>
 						<th>${admin.updated_by}</th>
 						<th>${admin.updated_on }</th>						
-						<th><button class="ui button teal" onclick="editEmployee(${admin.id}, '${admin.username}', '${admin.f_name }', '${admin.l_name}', '${admin.password}', ${admin.status})" id="editemployeeBtn">edit</button></th>
+						<th><button class="ui button teal" onclick="editAdmin(${admin.id}, '${admin.username}', '${admin.f_name }', '${admin.l_name}', '${admin.password}', ${admin.status})" id="editemployeeBtn">edit</button></th>
 					</tr>
 					</g:each>				
 				</tbody>

@@ -9,9 +9,11 @@
       <div class="ui negative button">
         No
       </div>
+      <a href="${createLink(controller: 'main', action: 'logout')}">
       <div class="ui positive right labeled icon button">
         Yes
         <i class="checkmark icon"></i>
       </div>
+      </a>
     </div>
   </div>

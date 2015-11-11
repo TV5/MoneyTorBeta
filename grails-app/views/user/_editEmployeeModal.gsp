@@ -1,8 +1,8 @@
 <div id="editemployee" class="ui modal">
-			<div class="header">employee</div>
+			<div class="header">Employee</div>
 			<div class="content">
 				<g:form class="ui form" controller="user">
-
+				<div class="ui error message"></div>		
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>

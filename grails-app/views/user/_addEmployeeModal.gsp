@@ -2,14 +2,15 @@
 			<div class="header">Employee</div>
 			<div class="content">
 				<g:form class="ui form" controller="user" action="addEmployee">
-
+				<div class="ui error message"></div>		
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="ef_name" value="${ef_name}" />
+				            <g:textField name="ef_name" value="${ef_name}" required="true"/>
 						</div>
+						<div class="two wide field" id="usernameTaken"></div>
 					</div>
 
 					<div class="inline fields">
@@ -17,7 +18,7 @@
 							<label>Last Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="el_name" value="${el_name}" />
+				            <g:textField name="el_name" value="${el_name}" required="true"/>
 						</div>
 					</div>
 
@@ -26,7 +27,7 @@
 							<label>Username</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="eusername" value="${eusername}" />
+				            <g:textField name="eusername" value="${eusername}" required="true"/>
 						</div>
 					</div>
 
@@ -35,7 +36,7 @@
 							<label>Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="epassword" value="${epassword}" />
+				            <g:passwordField name="epassword" value="${epassword}" required="true"/>
 						</div>
 					</div>
 
@@ -44,7 +45,7 @@
 							<label>Confirm Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="ecpassword" value="${ecpassword}" />
+				            <g:passwordField name="ecpassword" value="${ecpassword}" required="true"/>
 						</div>
 					</div>
 					<g:hiddenField name="etype" value="E" />

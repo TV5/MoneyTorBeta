@@ -1,8 +1,9 @@
 <div id="editadministrator" class="ui modal">
 			<div class="header">Administrator</div>
 			<div class="content">
-				<g:form class="ui form" controller="user">
 
+				<g:form class="ui form" controller="user">
+				<div class="ui error message"></div>		
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>
@@ -60,4 +61,5 @@
 			</g:form>
 				<div class="ui cancel button">Cancel</div>
 			</div>
+
 		</div>
