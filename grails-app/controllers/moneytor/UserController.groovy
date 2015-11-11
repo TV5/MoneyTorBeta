@@ -66,7 +66,7 @@ class UserController {
 			user.updated_by=params.int('userId')
 			userService.editUser(user.id, user)
 			
-			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
+			redirect(action: "users")
 		}
 
 	}
@@ -82,19 +82,23 @@ class UserController {
 			user.updated_by=params.int('userId')
 			userService.editUser(user.id, user)
 			
-			redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
+			redirect(action: "users")
 		}
 
 	}
 
 	def changeStatus(){
 		def user =new User()
-		user.id = params.int('empId');
+		if(params.int('empId')){
+			user.id = params.int('empId');
+		}else{
+			user.id = params.int('adminId');
+		}
 		user.updated_on=new Date()
-		user.updated_by=params.int('userId')
+		user.updated_by=session.user.id
 		userService.changeUserStatus(user.id, user)
 			
-		redirect(action: "users", params: [username:params.userUsername, userId:params.userId, type:params.userType])
+		redirect(action: "users")
 		
 
 	}
