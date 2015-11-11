@@ -1,14 +1,14 @@
 <div id="editemployee" class="ui modal">
 			<div class="header">employee</div>
 			<div class="content">
-				<form class="ui form">
+				<g:form class="ui form" controller="user">
 
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text" value="Trisha">
+				            <g:textField name="empF_name"/>
 						</div>
 					</div>
 
@@ -17,7 +17,7 @@
 							<label>Last Name</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text" value="Lim">
+				            <g:textField name="empL_name" />
 						</div>
 					</div>
 
@@ -26,7 +26,7 @@
 							<label>Username</label>
 						</div>
 						<div class="seven wide field">
-							<input type="text" value="trishalim">
+				            <g:textField name="empUsername" />
 						</div>
 					</div>
 
@@ -35,7 +35,7 @@
 							<label>Password</label>
 						</div>
 						<div class="seven wide field">
-							<input type="number" value="*******">
+				            <g:passwordField name="empPassword" />
 						</div>
 					</div>
 
@@ -44,14 +44,22 @@
 							<label>Confirm Password</label>
 						</div>
 						<div class="seven wide field">
-							<input type="number">
+				            <g:passwordField name="empCpassword" />
 						</div>
 					</div>
-				</form>
+						
+					<g:hiddenField name="empId" />
+					<g:hiddenField name="empStatus" />
+					<g:hiddenField name="userUsername" value="${user.username}" />
+					<g:hiddenField name="userId" value="${user.id}" />				
+					<g:hiddenField name="userType" value="${user.type}" />
+				
 			</div>
 			<div class="actions">
-				<div class="ui approve button">Save</div>
-				<div class="ui button">Change Status</div>
+				<g:actionSubmit class="ui approve button" value="save" action="editEmployee"/>		
+				<g:actionSubmit class="ui button" value="Change Status" action="changeStatus"/>				
+			</g:form>
 				<div class="ui cancel button">Cancel</div>
 			</div>
+
 		</div>
