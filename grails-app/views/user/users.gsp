@@ -61,12 +61,185 @@ a {
 	color: #00b5ad !important;
 }
   </style>
+
+  <g:javascript>
+
+  $(document)
+    .ready(function() {
+      $('.ui.form')
+        .form({
+          fields: {
+            eusername: {
+              identifier  : 'eusername',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your username must be at least 8 characters'
+                  }
+                  
+              ]
+            },
+            epassword: {
+              identifier  : 'epassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]              
+            },
+            ecpassword: {
+              identifier  : 'ecpassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'match[epassword]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            },
+            ausername: {
+              identifier  : 'ausername',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your username must be at least 8 characters'
+                 }
+                  
+              ]
+            },
+            apassword: {
+              identifier  : 'apassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]              
+            },
+            acpassword: {
+              identifier  : 'acpassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'match[apassword]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            },
+            empUsername: {
+              identifier  : 'empUsername',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your username must be at least 8 characters'
+                  }
+                  
+              ]
+            },
+            empPassword: {
+              identifier  : 'empPassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]              
+            },
+            empCpassword: {
+              identifier  : 'empCpassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'match[empPassword]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            },
+            adminUsername: {
+              identifier  : 'adminUsername',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your username must be at least 8 characters'
+                  }
+                  
+              ]
+            },
+            adminPassword: {
+              identifier  : 'adminPassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]              
+            },
+            adminCpassword: {
+              identifier  : 'adminCpassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'match[adminPassword]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            }     
+          }
+        })
+      ;
+    })
+  ;
+  </g:javascript>  
 </head>
 <body>
 
 <div class="ui container">
 	<g:render template="../header/header" />
-	
 	<div class="ui top attached tabular menu">
 	  <a data-tab="employeesTab" class="item active" >
 	    EMPLOYEES
@@ -166,10 +339,7 @@ a {
 	$('#addadministratorBtn').click(function(){
 		$('#addadministrator').modal('show');
 	});
-/*	$('#editadministratorBtn').click(function() {
-		$('#editadministrator').modal('show');
-	});
-	*/
+
 	$('#settingsLink').click(function(){
 
 		$('#userSettings').modal('show');

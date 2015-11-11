@@ -9,16 +9,20 @@ class UserService {
 
     }
 	def addUser(user){
-		def userCheck = User.findByUsername(user.username)
+		def userCheck = checkUsername(user.username)
 		if(userCheck){
 			return "username already in use"
 		}else{
 		user.save()
 		}
 	}
+	def checkUsername(username){
+		def userCheck = User.findByUsername(username)
+		return userCheck
+	}
 	def editUser(userId, user){
 
-		def userCheck = User.findByUsername(user.username)
+		def userCheck = checkUsername(user.username)
 		if(userCheck==null || userCheck.id==user.id){
 			def updateUser = User.get(userId)
 			updateUser.username=user.username
