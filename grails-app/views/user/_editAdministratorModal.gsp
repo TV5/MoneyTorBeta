@@ -51,7 +51,7 @@
 					<g:hiddenField name="adminId" />
 					<g:hiddenField name="adminStatus" />
 					<g:hiddenField name="userUsername" value="${user.username}" />
-					<g:textField name="userId" value="${user.id}" />				
+					<g:hiddenField name="userId" value="${user.id}" />				
 					<g:hiddenField name="userType" value="${user.type}" />
 				
 			</div>
