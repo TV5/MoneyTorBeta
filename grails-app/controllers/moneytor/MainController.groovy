@@ -19,6 +19,16 @@ class MainController {
 			redirect(uri:"/")
 		}
 	}
+	def checkUsername(){
+		def available
+		if(userService.checkUsername(params.eusername)) {
+		   available = false
+		} else {
+		   available = true
+		}
+		response.contentType = "application/json"
+		render """{"available":${available}}"""
+	}
 	def main(){
 		if(session.user){
 			[user:session.user]

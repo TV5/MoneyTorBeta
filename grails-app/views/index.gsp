@@ -38,7 +38,8 @@
       max-width: 450px;
     }
   </style>
-  <script>
+  <g:javascript>
+
   $(document)
     .ready(function() {
       $('.ui.form')
@@ -70,13 +71,13 @@
                   prompt : 'Your password must be at least 8 characters'
                 }
               ]
-            }
+            }       
           }
         })
       ;
     })
   ;
-  </script>
+  </g:javascript>
 </head>
 <body>
 
@@ -106,12 +107,11 @@
 
         <g:actionSubmit class="ui fluid large teal submit button" value="login" action="login"/>
       </div>
+
+    	    <div class="ui error message"></div>  
     <g:if test="${flash.error}">
-	    <div class="ui message" ><a>error: ${flash.error}</a></div>
-    </g:if>
-
-
-
+    	    <div class="ui message" style="color: #9f3a38; background-color: #fff6f6; ">${flash.error}</div>
+    </g:if>      
     </g:form>
 
   </div>

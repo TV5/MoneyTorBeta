@@ -2,13 +2,13 @@
 			<div class="header">Administrator</div>
 			<div class="content">
 				<g:form class="ui form" controller="user" action="addAdmin">
-
+				<div class="ui error message"></div>		
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="af_name" value="${af_name}" />
+				            <g:textField name="af_name" value="${af_name}" required="true"/>
 						</div>
 					</div>
 
@@ -17,7 +17,7 @@
 							<label>Last Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="al_name" value="${al_name}" />
+				            <g:textField name="al_name" value="${al_name}" required="true"/>
 						</div>
 					</div>
 
@@ -26,7 +26,7 @@
 							<label>Username</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="ausername" value="${ausername}" />
+				            <g:textField name="ausername" value="${ausername}" required="true"/>
 						</div>
 					</div>
 
@@ -35,7 +35,7 @@
 							<label>Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="apassword" value="${apassword}" />
+				            <g:passwordField name="apassword" value="${apassword}" required="true"/>
 						</div>
 					</div>
 
@@ -44,7 +44,7 @@
 							<label>Confirm Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="acpassword" value="${acpassword}" />
+				            <g:passwordField name="acpassword" value="${acpassword}" required="true"/>
 						</div>
 					</div>
 					<g:hiddenField name="atype" value="A" />
