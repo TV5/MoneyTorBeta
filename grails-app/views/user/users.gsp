@@ -284,7 +284,7 @@ a {
 		document.getElementById("empL_name").value=l_name;
 		document.getElementById("empPassword").value=password;
 		document.getElementById("empCpassword").value=password;
-		document.getElementById("empStatus").value=status;
+
 		$('#editemployee').modal('show');
 	}
 
@@ -295,7 +295,7 @@ a {
 		document.getElementById("adminL_name").value=l_name;
 		document.getElementById("adminPassword").value=password;
 		document.getElementById("adminCpassword").value=password;
-		document.getElementById("adminStatus").value=status;
+
 		$('#editadministrator').modal('show');
 	}
 	
