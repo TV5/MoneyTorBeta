@@ -54,7 +54,7 @@
 					<g:hiddenField name="userType" value="${user.type}" />
 			</div>
 			<div class="actions">
-				<g:actionSubmit class="ui approve large teal submit button" value="save" action="addEmployee"/>
+				<g:actionSubmit class="ui approve large teal submit button" value="Save" action="addEmployee"/>
 				<div class="ui cancel button">Cancel</div>
 			</div>
 			</g:form>

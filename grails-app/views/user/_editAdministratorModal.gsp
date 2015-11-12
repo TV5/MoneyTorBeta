@@ -56,8 +56,8 @@
 				
 			</div>
 			<div class="actions">
-				<g:actionSubmit class="ui approve button" value="save" action="editAdmin"/>		
-				<g:actionSubmit class="ui button" value="Change Status" action="changeStatus"/>				
+				<g:actionSubmit class="ui approve button" value="Save" action="editAdmin"/>		
+				<g:actionSubmit class="ui button" value="Deactivate" action="changeStatus"/>				
 			</g:form>
 				<div class="ui cancel button">Cancel</div>
 			</div>

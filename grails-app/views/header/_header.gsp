@@ -1,7 +1,7 @@
 	<div class="ui text menu firstmenu" width="100%">
-	  <img src="${resource(dir: 'images', file: 'logo.png')}" style="width:30px;height:30px;margin-top:5px">
+	  <img src="${resource(dir: 'images', file: 'logo.png')}" style="width:50px;height:50px;margin-top:5px">
 	  <div class="header item">	   <a class="item" href="${createLink(controller: 'main', action: 'main')}">
-		MONEYTOR	
+		<h1>MONEYTOR</h1>	
 	   </a>
 	   </div>
 	  
