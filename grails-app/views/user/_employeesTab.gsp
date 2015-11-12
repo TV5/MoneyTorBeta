@@ -1,17 +1,13 @@
 <div class="ui bottom attached tab segment active" data-tab="employeesTab" style="padding-bottom:50px">
 			<div class="ui form ">
 		  	<div class="inline fields" style="float:left">
-		    <div class="eleven wide field">
-		      <label>Entries per page</label>
-		      <input type="number" value="10">
-		    </div>
-		  	
+		    
 		    </div>
 		    <div class="three wide feild" style="float:right">
 			    <button class="ui button teal" id="addemployeeBtn">Add employees</button>
 		    </div>
 		  </div>
-		
+		</br></br></br>
 			<table id="employeesTable" class="ui celled padded table display" cellspacing="0" width="100%">
 				<thead>
 					<tr>
