@@ -1,7 +1,7 @@
 <div id="userSettings" class="ui modal">
   <div class="header">User Settings</div>
   <div class="content">
-    <form class="ui form">
+    <g:form class="ui form" controller="user">
     
     	<div class="inline fields">
 		    <div class="two wide field">
@@ -18,7 +18,7 @@
 		    </div>
 		    <div class="eight wide field">
 		    	<label class="displayFirst">${user.f_name}</label>
-		      <input class="displaySec" type="text" value="${user.f_name}"/>
+		      <g:textField class="displaySec" type="text" placeholder="${user.f_name}" name="uF_name"/>
 		    </div>
 		</div>
 		<div class="inline fields">
@@ -27,7 +27,7 @@
 		    </div>
 		    <div class="eight wide field">
 		    	<label class="displayFirst">${user.l_name}</label>
-		      <input class="displaySec" type="text" value="${user.l_name}"/>
+		      <g:textField class="displaySec" type="text" placeholder="${user.l_name}" name="uL_name"/>
 		    </div>
 		</div>
 		<div class="inline fields oldPass">
@@ -45,7 +45,7 @@
 			      <label>Current Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <input type="text"/>
+			      <g:passwordField name="uCurrPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -53,7 +53,7 @@
 			      <label>New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <input type="text"/>
+			      <g:passwordField id="newPW" name="uNewPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -61,15 +61,16 @@
 			      <label>Confirm New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <input type="text"/>
+			      <input id = "confNewPW" type="text"/>
 			    </div>
 			</div>
+			<g:hiddenField name="uId" />
 		</div>
-    </form>
+    </g:form>
   </div>
 		<div class="actions">
 			<div id="editBtn" class="ui button teal" onclick="edit()">Edit</div>
-			<div id="saveBtn" class="ui button teal" onclick="save()">Save</div>
+			<g:actionSubmit id="saveBtn" class="ui approve button teal" onclick="save()" value="Save" action="editUserAccount"/>
 		    <div class="ui cancel button teal" onclick="cancelEdit()">Cancel</div>
 		</div>
 </div>
