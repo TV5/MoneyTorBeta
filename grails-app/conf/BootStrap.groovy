@@ -8,6 +8,8 @@ class BootStrap {
 			log.error "Could not save user!!"
 			log.error "${user.errors}"
 		  }	
+		Account account = new Account(amount: '120',type: 'P').save()
+		Account account1 = new Account(amount: '120',type: 'R').save()
 	}
     def destroy = {
     }
