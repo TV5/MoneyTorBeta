@@ -133,5 +133,26 @@
 		$('#logout').modal('show');
 	});
 
+	function editPayable(or_no, supplier_name, amount, transaction_date) {
+		alert(or_no);
+		document.getElementById("por_no").value= or_no;
+		$('#editPayable').modal('show');
+		document.getElementById("psupplier_name").value= supplier_name;
+		document.getElementById("pamount").value= amount;
+		document.getElementById("ptransaction_date").value= transaction_date;
+	}
+	
+	function editAdmin(id, username, f_name, l_name, password, status){
+		document.getElementById("adminId").value=id;
+		document.getElementById("adminUsername").value=username;
+		document.getElementById("adminF_name").value=f_name;
+		document.getElementById("adminL_name").value=l_name;
+		document.getElementById("adminPassword").value=password;
+		document.getElementById("adminCpassword").value=password;
+
+		$('#editadministrator').modal('show');
+	}
+	
+
 </script>
 </html>
