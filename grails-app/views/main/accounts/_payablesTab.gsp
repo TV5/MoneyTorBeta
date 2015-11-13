@@ -43,7 +43,7 @@
 		    <th>${payable.transaction_date}</th>
 		    <th>Due date</th>
 		    <th><a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-		    <th> <button class="ui button teal paymentsBtn" >View Payments</button></th>
+		    <th> <button class="ui button teal paymentsBtn" onClick="editPayable(${payable.or_no},"supplier",${payable.amount },${payable.transaction_date})">View Payments</button></th>
 		  	</tr>	  		
 	  	</g:each>
 	  
