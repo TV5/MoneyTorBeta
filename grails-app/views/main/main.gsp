@@ -60,7 +60,6 @@
   </style>
 </head>
 <body>
-
 <div class="ui container">
 
 	<g:render template="../header/header" />
@@ -79,7 +78,6 @@
 	    CUSTOMERS
 	  </a>
 	</div>
-
 	<g:render template="accounts/payablesTab" />
 	<g:render template="accounts/receivablesTab" />
 	<g:render template="transactors/suppliersTab" />
