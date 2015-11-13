@@ -33,6 +33,16 @@ class UserService {
 			return "username already exists"
 		}
 	}
+	
+	def editUserAccount(userId, user){
+		def updateUser = User.get(userId)
+		updateUser.f_name=user.f_name
+		updateUser.l_name=user.l_name
+		updateUser.password=user.password
+
+		updateUser.save()
+	}
+	
 	def changeUserStatus(userId, user){
 		def updateUser = User.get(userId)
 		if(updateUser.status==1){

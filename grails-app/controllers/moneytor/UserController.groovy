@@ -71,6 +71,18 @@ class UserController {
 		}
 
 	}
+	
+	def editUserAccount(){
+			def user =new User()
+			user.id = params.int('uId')
+			user.f_name=params.uF_name
+			user.l_name=params.uL_name
+			user.password=params.uNewPass
+			userService.editUserAccount(user.id, user)
+			
+			redirect(action: "main")
+	}
+	
 	def editAdmin(){
 		if(params.adminCpassword==params.adminPassword){
 			def user =new User()

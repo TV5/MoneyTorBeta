@@ -4,10 +4,10 @@ import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(MoneytorController)
-class MoneytorControllerSpec extends Specification {
+@TestFor(TransactorService)
+class TransactorServiceSpec extends Specification {
 
     def setup() {
     }

@@ -36,7 +36,8 @@ class MainController {
 		
 		if(session.user){
 			def payableList = accountController.getPayableList()
-			[user:session.user,payableList:payableList]
+			def receivableList = accountController.getReceivableList()
+			[user:session.user,payableList:payableList,receivableList:receivableList]
 			
 		}else{
 			redirect(uri: "/")

@@ -3,9 +3,15 @@ package moneytor
 class AccountController {
 
 	def accountService
+	
 	def getPayableList() {
 		def payableList = accountService.getPayableList() 
 		return payableList
+	}
+	
+	def getReceivableList() {
+		def receivableList = accountService.getReceivableList()
+		return receivableList
 	}
 	
 	def addPayable() {
@@ -23,6 +29,19 @@ class AccountController {
 		redirect(action: "main", controller: "main")
 	}
 	
+	def editAccount() {
+		System.out.println("edit account " + params.type)
+		def account = new Account(
+			or_no: params.por_no,
+			transactor_id: 1,
+			amount: params.pamount,
+			transaction_date: params.pdate,
+			type: params.type,
+			updated_by: session.user.id
+			)
+		accountService.editAccount(account)
+		redirect(action: "main", controller: "main")
+	}
 	
     def index() { 
 		

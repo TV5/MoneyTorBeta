@@ -24,12 +24,7 @@
   
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
   <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'tab.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'modal.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'dimmer.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'transition.min.js')}"></script>
+  <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
   <script src="${resource(dir: 'js', file: 'main.js')}"></script>
 
   <style type="text/css">
@@ -106,7 +101,7 @@
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 	} );
-
+	
 	$('.top.menu .item').tab();
 
 	$('#addPayableBtn').click(function(){
@@ -127,11 +122,37 @@
 	
 	$('#settingsLink').click(function(){
 		$('#userSettings').modal('show');
+		$('.displaySec').hide();
+		$('.displayFirst').show();
+		$('#changepass').hide();
+		$('#saveBtn').hide();
+		$('#newPass').hide();
 	});
 	
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
+
+	function editPayable(or_no, supplier_name, amount, transaction_date) {
+		alert(or_no);
+		document.getElementById("por_no").value= or_no;
+		$('#editPayable').modal('show');
+		document.getElementById("psupplier_name").value= supplier_name;
+		document.getElementById("pamount").value= amount;
+		document.getElementById("ptransaction_date").value= transaction_date;
+	}
+	
+	function editAdmin(id, username, f_name, l_name, password, status){
+		document.getElementById("adminId").value=id;
+		document.getElementById("adminUsername").value=username;
+		document.getElementById("adminF_name").value=f_name;
+		document.getElementById("adminL_name").value=l_name;
+		document.getElementById("adminPassword").value=password;
+		document.getElementById("adminCpassword").value=password;
+
+		$('#editadministrator').modal('show');
+	}
+	
 
 </script>
 </html>
