@@ -8,8 +8,8 @@
 		      <label>Username</label>      
 		    </div>
 		    <div class="eight wide field">
-		      <label id="username">josephpalmaras</label>
-		      <input id="usernametxt" type="text" value="josephpalmaras" disabled/>
+		      <label class="displayFirst">${user.username}</label>
+		      <input class="displaySec" type="text" value="${user.username}" disabled/>
 		    </div>
 		</div>
 		<div class="inline fields">
@@ -17,8 +17,8 @@
 		      <label>First Name</label>      
 		    </div>
 		    <div class="eight wide field">
-		    	<label id="fname">Joseph Gabriell</label>
-		      <input id="fnametxt" type="text" value="Joseph Gabriell"/>
+		    	<label class="displayFirst">${user.f_name}</label>
+		      <input class="displaySec" type="text" value="${user.f_name}"/>
 		    </div>
 		</div>
 		<div class="inline fields">
@@ -26,16 +26,17 @@
 		      <label>Last Name</label>      
 		    </div>
 		    <div class="eight wide field">
-		    	<label id="lname">Palmaras</label>
-		      <input id="lnametxt" type="text" value="Palmaras"/>
+		    	<label class="displayFirst">${user.l_name}</label>
+		      <input class="displaySec" type="text" value="${user.l_name}"/>
 		    </div>
 		</div>
-		<div id="currPass" class="inline fields">
+		<div class="inline fields oldPass">
 		    <div class="two wide field">
 		      <label>Password</label>      
 		    </div>
 		    <div class="eight wide field">
-		      <text>********</text> <a id="changepass" href="#" onclick="changePassword()">change password</a>
+		      <label>********</label> 
+		      <a class="displaySec" href="#" onclick="changePassword()">change password</a>
 		    </div>
 		</div>
 		<div id="newPass">
@@ -68,7 +69,7 @@
   </div>
 		<div class="actions">
 			<div id="editBtn" class="ui button teal" onclick="edit()">Edit</div>
-			<div id="saveBtn" class="ui button teal" onclick="edit()">Save</div>
+			<div id="saveBtn" class="ui button teal" onclick="save()">Save</div>
 		    <div class="ui cancel button teal" onclick="cancelEdit()">Cancel</div>
 		</div>
 </div>

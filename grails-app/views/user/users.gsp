@@ -22,12 +22,8 @@
   
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
   <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'tab.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'modal.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'dimmer.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'transition.min.js')}"></script>
+  <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
+  <script src="${resource(dir: 'js', file: 'main.js')}"></script>
   
 
 <style type="text/css">
@@ -269,14 +265,6 @@ a {
 	    $('#administratorsTable').DataTable();
 	} );
 	
-	  //user settings
-	$('#fnametxt').hide();
-	$('#usernametxt').hide();
-	$('#lnametxt').hide();
-	$('#changepass').hide();
-	$('#saveBtn').hide();
-	$('#newPass').hide();
-	
 	function editEmployee(id, username, f_name, l_name, password, status){
 		document.getElementById("empId").value=id;
 		document.getElementById("empUsername").value=username;
@@ -299,37 +287,6 @@ a {
 		$('#editadministrator').modal('show');
 	}
 	
-	function edit(){
-		$('#saveBtn').toggle();
-		$('#username').toggle();
-		$('#fname').toggle();
-		$('#lname').toggle();
-		$('#usernametxt').toggle();
-		$('#fnametxt').toggle();
-		$('#lnametxt').toggle();
-		$('#editBtn').toggle();
-		$('#changepass').toggle();
-	}
-
-	function changePassword(){
-		$('#currPass').toggle();
-		$('#newPass').toggle();
-	}
-
-	function cancelEdit(){
-		$('#saveBtn').toggle();
-		$('#username').toggle();
-		$('#fname').toggle();
-		$('#lname').toggle();
-		$('#usernametxt').toggle();
-		$('#fnametxt').toggle();
-		$('#lnametxt').toggle();
-		$('#editBtn').toggle();
-		$('#changepass').toggle();
-		$('#currPass').toggle();
-		$('#newPass').toggle();
-	}
-	//-----end user settings
 	$('.top.menu .item').tab();
 	
 	$('#addemployeeBtn').click(function(){
@@ -341,8 +298,12 @@ a {
 	});
 
 	$('#settingsLink').click(function(){
-
 		$('#userSettings').modal('show');
+		$('.displaySec').hide();
+		$('.displayFirst').show();
+		$('#changepass').hide();
+		$('#saveBtn').hide();
+		$('#newPass').hide();
 	});
 	
 	$('#logoutLink').click(function(){
