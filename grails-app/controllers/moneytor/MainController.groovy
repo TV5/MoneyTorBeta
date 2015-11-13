@@ -2,6 +2,7 @@ package moneytor
 
 class MainController {
 	def userService
+	def accountService
 	AccountController accountController = new AccountController()
 	
 	def index(){}

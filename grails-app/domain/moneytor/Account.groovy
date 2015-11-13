@@ -19,6 +19,5 @@ class Account {
 		transaction_date nullable: true
 		type default: 'P'
 		updated_by nullable: true
-		
     }
 }

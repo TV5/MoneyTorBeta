@@ -9,6 +9,10 @@ class AccountService {
 		return Account.findAllByType('P')
 	}
 	
+	def addAccount(account) {
+		account.save()
+	}
+	
     def serviceMethod() {
 
     }
