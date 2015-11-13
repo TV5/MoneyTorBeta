@@ -21,8 +21,7 @@
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
+  <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
 
   <style type="text/css">
     body {

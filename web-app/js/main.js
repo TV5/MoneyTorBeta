@@ -51,40 +51,26 @@
 	    $('#editReceivable').modal('show');
 	}
 	
-	$('#fnametxt').hide();
-	$('#usernametxt').hide();
-	$('#lnametxt').hide();
-	$('#changepass').hide();
-	$('#saveBtn').hide();
-	$('#newPass').hide();
+	
 
 	function edit(){
-		$('#saveBtn').toggle();
-		$('#username').toggle();
-		$('#fname').toggle();
-		$('#lname').toggle();
-		$('#usernametxt').toggle();
-		$('#fnametxt').toggle();
-		$('#lnametxt').toggle();
-		$('#editBtn').toggle();
-		$('#changepass').toggle();
+		$('#saveBtn').show();
+		$('.displayFirst').hide();
+		$('.displaySec').show();
+		$('#editBtn').hide();
+	}
+	
+	function save(){
+		$('#saveBtn').hide();
+		$('.displayFirst').show();
+		$('.displaySec').hide();
+		$('#editBtn').show();
+		$('#newPass').hide();
+		$('.oldPass').show();
 	}
 
 	function changePassword(){
-		$('#currPass').toggle();
-		$('#newPass').toggle();
+		$('.oldPass').hide();
+		$('#newPass').show();
 	}
 
-	function cancelEdit(){
-		$('#saveBtn').toggle();
-		$('#username').toggle();
-		$('#fname').toggle();
-		$('#lname').toggle();
-		$('#usernametxt').toggle();
-		$('#fnametxt').toggle();
-		$('#lnametxt').toggle();
-		$('#editBtn').toggle();
-		$('#changepass').toggle();
-		$('#currPass').toggle();
-		$('#newPass').toggle();
-	}
