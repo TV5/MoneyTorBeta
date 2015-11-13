@@ -23,15 +23,16 @@ class UserController {
 	}
 	def addEmployee() {
 		if(params.ecpassword==params.epassword){
-			def user =new User()
-			user.f_name=params.ef_name
-			user.l_name=params.el_name
-			user.username=params.eusername
-			user.password=params.epassword
-			user.type=params.etype
-			user.status=1
-			user.updated_on=new Date()
-			user.updated_by=params.int('userId')
+			def user =new User(
+					f_name: params.ef_name,
+					l_name: params.el_name,
+					username: params.eusername,
+					password: params.epassword,
+					type: params.etype,
+					status: 1,
+					updated_on: new Date(),
+					updated_by: params.int('userId')
+				)
 			userService.addUser(user)
 			
 			redirect(action: "users")
