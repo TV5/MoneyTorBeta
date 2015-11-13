@@ -1,15 +1,15 @@
 <div id="userSettings" class="ui modal">
   <div class="header">User Settings</div>
   <div class="content">
-    <form class="ui form">
+    <g:form class="ui form" controller="user">
     
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Username</label>      
 		    </div>
 		    <div class="eight wide field">
-		      <label class="displayFirst">${user.username}</label>
-		      <input class="displaySec" type="text" value="${user.username}" disabled/>
+		      <label id="username">josephpalmaras</label>
+		      <input id="usernametxt" type="text" value="josephpalmaras" disabled/>
 		    </div>
 		</div>
 		<div class="inline fields">
@@ -17,8 +17,13 @@
 		      <label>First Name</label>      
 		    </div>
 		    <div class="eight wide field">
+<<<<<<< HEAD
 		    	<label class="displayFirst">${user.f_name}</label>
-		      <input class="displaySec" type="text" value="${user.f_name}"/>
+		      <g:textField class="displaySec" type="text" placeholder="${user.f_name}" name="uF_name"/>
+=======
+		    	<label id="fname">Joseph Gabriell</label>
+		      <input id="fnametxt" type="text" value="Joseph Gabriell"/>
+>>>>>>> refs/remotes/origin/master
 		    </div>
 		</div>
 		<div class="inline fields">
@@ -26,17 +31,21 @@
 		      <label>Last Name</label>      
 		    </div>
 		    <div class="eight wide field">
+<<<<<<< HEAD
 		    	<label class="displayFirst">${user.l_name}</label>
-		      <input class="displaySec" type="text" value="${user.l_name}"/>
+		      <g:textField class="displaySec" type="text" placeholder="${user.l_name}" name="uL_name"/>
+=======
+		    	<label id="lname">Palmaras</label>
+		      <input id="lnametxt" type="text" value="Palmaras"/>
+>>>>>>> refs/remotes/origin/master
 		    </div>
 		</div>
-		<div class="inline fields oldPass">
+		<div id="currPass" class="inline fields">
 		    <div class="two wide field">
 		      <label>Password</label>      
 		    </div>
 		    <div class="eight wide field">
-		      <label>********</label> 
-		      <a class="displaySec" href="#" onclick="changePassword()">change password</a>
+		      <text>********</text> <a id="changepass" href="#" onclick="changePassword()">change password</a>
 		    </div>
 		</div>
 		<div id="newPass">
@@ -45,7 +54,7 @@
 			      <label>Current Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <input type="text"/>
+			      <g:passwordField name="uCurrPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -53,7 +62,7 @@
 			      <label>New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <input type="text"/>
+			      <g:passwordField id="newPW" name="uNewPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -61,15 +70,17 @@
 			      <label>Confirm New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <input type="text"/>
+			      <input id = "confNewPW" type="text"/>
 			    </div>
 			</div>
+			<g:hiddenField name="uId" />
 		</div>
-    </form>
+    </g:form>
   </div>
 		<div class="actions">
 			<div id="editBtn" class="ui button teal" onclick="edit()">Edit</div>
-			<div id="saveBtn" class="ui button teal" onclick="save()">Save</div>
+			<g:actionSubmit id="saveBtn" class="ui approve button teal" onclick="save()" value="Save" action="editUserAccount"/>
+
 		    <div class="ui cancel button teal" onclick="cancelEdit()">Cancel</div>
 		</div>
 </div>

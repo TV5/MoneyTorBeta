@@ -15,7 +15,7 @@
 			Users
 	   </a>
 	   </g:if>
-	   <a id="settingsLink" class="item">
+	   <a id="settingsLink" class="item" onClick="editUserAccount('${user.id}','${user.f_name}','${user.l_name}','${user.password}')">
 	     Settings
 	   </a>
 	   <a id="logoutLink" class="ui item">

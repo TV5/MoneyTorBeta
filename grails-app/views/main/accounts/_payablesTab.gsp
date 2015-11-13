@@ -34,120 +34,17 @@
 	  	</tr>
 	  </thead>
 	  <tbody>
-	  
 	  	<g:each in="${payableList}" var="payable">
 		  	<tr>
-		    <th>${payable.or_no}</th>
-		    <th>Supplier</th>
-		    <th>P${payable.amount }</th>
-		    <th>${payable.transaction_date}</th>
-		    <th>Due date</th>
-		    <th><a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-		    <th> <button class="ui button teal paymentsBtn" >View Payments</button></th>
+		    <td>${payable.or_no}</td>
+		    <td>Supplier</td>
+		    <td>P${payable.amount }</td>
+		    <td>${payable.transaction_date}</td>
+		    <td>Due date</td>
+		    <td><a href="#" onClick="editPayable(${payable.or_no})"><i class="edit icon"></i></a></td>
+		    <td> <button class="ui button teal paymentsBtn">View Payments</button></td>
 		  	</tr>	  		
 	  	</g:each>
-	  
-	  <!-- 
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	<tr>
-	    <th>001724</th>
-	    <th>SM Entertainment </th>
-	    <th>P16,400.00</th>
-	    <th>August 12, 2015</th>
-	    <th>September 19, 2015</th>
-	    <th> <a href="#" onClick="editData()"><i class="edit icon"></i></a></th>
-	    <th> <button class="ui button teal paymentsBtn">View Payments</button></th>
-	  	</tr>
-	  	 -->
 	  </tbody>
 	  </table>
 	

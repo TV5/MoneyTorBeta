@@ -43,15 +43,25 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
-	
+	/*
 	function editData() {
 	    $('#editPayable').modal('show');
 	}
 	function editDataR() {
 	    $('#editReceivable').modal('show');
 	}
+<<<<<<< HEAD
+	*/
+	$('#fnametxt').hide();
+	$('#usernametxt').hide();
+	$('#lnametxt').hide();
+	$('#changepass').hide();
+	$('#saveBtn').hide();
+	$('#newPass').hide();
+=======
 	
 	
+>>>>>>> refs/remotes/origin/master
 
 	function edit(){
 		$('#saveBtn').show();
@@ -72,5 +82,14 @@
 	function changePassword(){
 		$('.oldPass').hide();
 		$('#newPass').show();
+	}
+	
+	function editUserAccount(id, f_name, l_name, password){
+		document.getElementById("uId").value=id;
+		document.getElementById("uF_name").value=f_name;
+		document.getElementById("uL_name").value=l_name;
+		document.getElementById("uNewPass").value=password;
+
+		$('#editemployee').modal('show');
 	}
 
