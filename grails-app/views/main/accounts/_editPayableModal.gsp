@@ -37,8 +37,9 @@
 		      <g:datePicker name="pdate"/>
 		    </div>
 		</div>
+		<g:hiddenField name="type" value="P" />
 	  <div class="actions">
-	    <div class="ui approve button teal">Save</div>
+	    <g:actionSubmit class="ui approve button" value="Save" action="editAccount"/>
 	    <div class="ui cancel button teal">Done</div>
 	  </div>
     </g:form>
