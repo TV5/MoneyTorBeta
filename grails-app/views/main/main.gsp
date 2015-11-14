@@ -134,8 +134,9 @@
 	});
 
 	function editPayable(or_no, supplier_name, amount, transaction_date) {
-		alert(or_no);
+		document.getElementById("supplier_name").value="supplier name";
 		document.getElementById("por_no").value= or_no;
+		alert(document.getElementById("por_no").value);
 		$('#editPayable').modal('show');
 		document.getElementById("psupplier_name").value= supplier_name;
 		document.getElementById("pamount").value= amount;
