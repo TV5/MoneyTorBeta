@@ -8,7 +8,9 @@ import grails.transaction.Transactional
 class AccountService {
 
 	def getPayableList() {
+		System.out.println("before")
 		return Account.findAllByType('P')
+		System.out.println("after")
 	}
 	
 	def getReceivableList() {
