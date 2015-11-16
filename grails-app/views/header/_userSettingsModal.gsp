@@ -8,8 +8,8 @@
 		      <label>Username</label>      
 		    </div>
 		    <div class="eight wide field">
-		      <label id="username">josephpalmaras</label>
-		      <input id="usernametxt" type="text" value="josephpalmaras" disabled/>
+		      <label class="displayFirst" id="username">${user.username}</label>
+		      <input class="displaySec" id="usernametxt" type="text" value="${user.username}" disabled/>
 		    </div>
 		</div>
 		<div class="inline fields">
@@ -29,17 +29,15 @@
 		    <div class="eight wide field">
 		    	<label class="displayFirst">${user.l_name}</label>
 		      <g:textField class="displaySec" type="text" placeholder="${user.l_name}" name="uL_name"/>
-
-		    	<label id="lname">Palmaras</label>
-		      <input id="lnametxt" type="text" value="Palmaras"/>
 		    </div>
 		</div>
-		<div id="currPass" class="inline fields">
+		<div class="inline fields oldPass">
 		    <div class="two wide field">
 		      <label>Password</label>      
 		    </div>
 		    <div class="eight wide field">
-		      <text>********</text> <a id="changepass" href="#" onclick="changePassword()">change password</a>
+		      <text>********</text> 
+		      <a class="displaySec" href="#" onclick="changePassword()">change password</a>
 		    </div>
 		</div>
 		<div id="newPass">
@@ -72,8 +70,8 @@
     </g:form>
   </div>
 		<div class="actions">
-			<div id="editBtn" class="ui button teal" onclick="edit()">Edit</div>
-			<g:actionSubmit id="saveBtn" class="ui approve button teal" onclick="save()" value="Save" action="editUserAccount"/>
+			<div id="editBtn" class="ui button teal displayFirst" onclick="edit()">Edit</div>
+			<g:actionSubmit id="saveBtn" class="ui approve button teal displaySec" onclick="save()" value="Save" action="editUserAccount"/>
 
 		    <div class="ui cancel button teal" onclick="cancelEdit()">Cancel</div>
 		</div>
