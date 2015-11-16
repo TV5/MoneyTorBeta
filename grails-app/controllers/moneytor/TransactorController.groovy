@@ -6,9 +6,12 @@ class TransactorController {
     def index() { 
 		def tList = getTransactorList()
 		[transactorList:tList]
+		
+		
 	}
 	def addTransactor() {
 		System.out.println("add transactor")
+		System.out.println("hehe")
 		def transactor = new Transactor(
 			name: params.name,
 			address: params.address,
@@ -18,7 +21,9 @@ class TransactorController {
 			type: params.type
 			)
 		transactorService.addTransactor(transactor)
+		System.out.println("added!")
 		
+		redirect(action: "index")
 		
 	}
 	def getTransactorList() {
