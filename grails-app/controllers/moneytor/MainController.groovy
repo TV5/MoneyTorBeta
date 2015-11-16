@@ -3,6 +3,7 @@ package moneytor
 class MainController {
 	def userService
 	def accountService
+	def transactorService
 	
 	def index(){}
 	def login() {
@@ -36,7 +37,8 @@ class MainController {
 		if(session.user){
 			def payableList = accountService.getPayableList()
 			def receivableList = accountService.getReceivableList()
-			[user:session.user,payableList:payableList,receivableList:receivableList]
+			def transactorList = transactorService.getTransactorList()
+			[user:session.user,payableList:payableList,receivableList:receivableList, transactorList:transactorList]
 			
 		}else{
 			redirect(uri: "/")
