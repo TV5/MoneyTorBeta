@@ -3,7 +3,6 @@ package moneytor
 class MainController {
 	def userService
 	def accountService
-	AccountController accountController = new AccountController()
 	
 	def index(){}
 	def login() {
@@ -35,8 +34,8 @@ class MainController {
 	def main(){
 		
 		if(session.user){
-			def payableList = accountController.getPayableList()
-			def receivableList = accountController.getReceivableList()
+			def payableList = accountService.getPayableList()
+			def receivableList = accountService.getReceivableList()
 			[user:session.user,payableList:payableList,receivableList:receivableList]
 			
 		}else{
