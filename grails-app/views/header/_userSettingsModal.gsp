@@ -17,13 +17,9 @@
 		      <label>First Name</label>      
 		    </div>
 		    <div class="eight wide field">
-<<<<<<< HEAD
 		    	<label class="displayFirst">${user.f_name}</label>
 		      <g:textField class="displaySec" type="text" placeholder="${user.f_name}" name="uF_name"/>
-=======
-		    	<label id="fname">Joseph Gabriell</label>
-		      <input id="fnametxt" type="text" value="Joseph Gabriell"/>
->>>>>>> refs/remotes/origin/master
+
 		    </div>
 		</div>
 		<div class="inline fields">
@@ -31,13 +27,11 @@
 		      <label>Last Name</label>      
 		    </div>
 		    <div class="eight wide field">
-<<<<<<< HEAD
 		    	<label class="displayFirst">${user.l_name}</label>
 		      <g:textField class="displaySec" type="text" placeholder="${user.l_name}" name="uL_name"/>
-=======
+
 		    	<label id="lname">Palmaras</label>
 		      <input id="lnametxt" type="text" value="Palmaras"/>
->>>>>>> refs/remotes/origin/master
 		    </div>
 		</div>
 		<div id="currPass" class="inline fields">
