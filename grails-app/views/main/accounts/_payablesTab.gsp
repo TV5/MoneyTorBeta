@@ -3,15 +3,20 @@
 	  	<div class="inline fields" style="float:left">
 	    <div class="four wide field">
 	      <label>Entries per page</label>
-	      <input type="number" value="10">
+	      <select class="ui dropdown" id="payablesNumEntries">
+			  <option value="10">10</option>
+			  <option value="15">15</option>
+			  <option value="30">30</option>
+			  <option value="100">100</option>
+		  </select>
 	    </div>
 	  	<div class="five wide field">
 	      <label>Start Date</label>
-	      <input type="date">
+	      <input type="date" id="min">
 	    </div>
 	    <div class="five wide field">
 	      <label>End Date</label>
-	      <input type="date">
+	      <input type="date" id="max">
 	    </div>
 	    </div>
 	    <div class="three wide feild" style="float:right">
@@ -21,6 +26,9 @@
 		    <button class="ui button teal">Print</button>
 	    </div>
 	  </div>
+	  
+	  
+	  
 	  <table id="payablesTable" class="display ui celled padded table"  cellspacing="0" width="100%">
 	  <thead>
 	    <tr>
@@ -38,7 +46,7 @@
 		  	<tr>
 		    <td>${payable.or_no}</td>
 		    <td>Supplier</td>
-		    <td>P${payable.amount }</td>
+		    <td>${payable.amount }</td>
 		    <td>${payable.transaction_date}</td>
 		    <td>Due date</td>
 		    <td><a href="#" onClick="editPayable(${payable.or_no})"><i class="edit icon"></i></a></td>

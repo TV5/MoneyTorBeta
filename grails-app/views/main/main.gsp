@@ -96,10 +96,22 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-	    $('#payablesTable').DataTable();
 	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
+		var num = $('#payablesNumEntries').val();
+	    var payablesTable = $('#payablesTable').DataTable({
+			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
+			"pageLength": num
+		});
+	    //$("div.dateFilter").html('<label> Start Date </label><input type="date" id="min" name="min"><label> End Date </label><input type="date" id="max" name="max">');
+	    $('#min, #max').change( function() {
+	        payablesTable.draw();
+	    } );
+		$('#payablesNumEntries').change(function(){
+			console.log('change');
+			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
+		});
 	} );
 	
 	$('.top.menu .item').tab();
@@ -134,8 +146,9 @@
 	});
 
 	function editPayable(or_no, supplier_name, amount, transaction_date) {
-		alert(or_no);
+		document.getElementById("supplier_name").value="supplier name";
 		document.getElementById("por_no").value= or_no;
+		alert(document.getElementById("por_no").value);
 		$('#editPayable').modal('show');
 		document.getElementById("psupplier_name").value= supplier_name;
 		document.getElementById("pamount").value= amount;
@@ -152,7 +165,23 @@
 
 		$('#editadministrator').modal('show');
 	}
-	
 
+	$.fn.dataTable.ext.search.push(
+		    function( settings, data, dataIndex ) {
+		  		var min = Date.parse($('#min').val(),10);
+		  		var max = Date.parse($('#max').val());
+		  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
+		        if ( ( isNaN( min ) && isNaN( max ) ) ||
+		             ( isNaN( min ) && date <= max ) ||
+		             ( min <= date   && isNaN( max ) ) ||
+		             ( min <= date   && date <= max ) )
+		        {
+		            return true;
+		        }
+		        return false;
+		    }
+		);
+
+	
 </script>
 </html>
