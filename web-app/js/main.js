@@ -50,18 +50,8 @@
 	function editDataR() {
 	    $('#editReceivable').modal('show');
 	}
-<<<<<<< HEAD
+
 	*/
-	$('#fnametxt').hide();
-	$('#usernametxt').hide();
-	$('#lnametxt').hide();
-	$('#changepass').hide();
-	$('#saveBtn').hide();
-	$('#newPass').hide();
-=======
-	
-	
->>>>>>> refs/remotes/origin/master
 
 	function edit(){
 		$('#saveBtn').show();
