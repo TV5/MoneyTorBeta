@@ -60,7 +60,9 @@
 		</div>    	
 		<g:hiddenField name="type" value="C" />
     	<div class="actions">
-				<g:actionSubmit class="ui approve large teal submit button" value="Save" action="addTransactor"/>
+    			
+    			<div class="ui large button teal">Save</div>
+				<g:link class="ui large button teal" name="Save">Save</g:link>
 				<g:field class="ui button" action="addMore" type="reset" name="myReset" value="Add More"/>
 				
 				<div class="ui cancel button">Cancel</div>
