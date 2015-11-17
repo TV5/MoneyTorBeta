@@ -16,14 +16,23 @@
 			    <tr>
 			    <th>Name</th>
 			    <th>Address</th>
-			    <th>Contact</th>
+			    <th>Telephone No</th>
+			    <th>Mobile No</th>
 			    <th>Terms</th>
-			    <th>Date Created</th>
-			    <th>Date Updated</th>
+			    <th>Edit</th>
 			  	</tr>
 			  </thead>
 			  <tbody>
-			  	
+	  	        <g:each in="${transactorList}" var="transactor">
+        		<tr>			  	
+					<th>${transactor.name}</th>
+					<th>${transactor.address}</th>	
+					<th>${transactor.telephone_no}</th>
+					<th>${transactor.mobile_no}</th>
+					<th>${transactor.terms}</th>
+					<th><a href="#"><i class="edit icon editCustomerBtn"></i></a></th>
+			</tr>	
+        		</g:each>
 			  </tbody>
 			  </table>
 		</div>

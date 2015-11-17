@@ -1,8 +1,8 @@
 <div id="addSupplier" class="ui modal">
   <div class="header">Supplier</div>
   <div class="content">
-    <form class="ui form">
-    	
+    
+      <g:form class="ui form" controller="transactor" action="addTransactor">	
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Name</label>      
@@ -47,7 +47,7 @@
 		    </div>
 		</div>    	
     	
-    </form>
+    </g:form>
   </div>
   <div class="actions">
     <div class="ui approve button">Save</div>
