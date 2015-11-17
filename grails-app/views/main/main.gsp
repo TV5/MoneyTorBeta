@@ -104,14 +104,16 @@
 			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
 			"pageLength": num
 		});
-	    //$("div.dateFilter").html('<label> Start Date </label><input type="date" id="min" name="min"><label> End Date </label><input type="date" id="max" name="max">');
+
+	    //payables
+	    var payablesAmounts = $("#payablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+		console.log(payablesAmounts);
 	    $('#min, #max').change( function() {
 	        payablesTable.draw();
 	    } );
 	    var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {
-	        console.log(value, index);
+	       // console.log(value, index);
 	    });
-	    console.log(filter);
 		$('#payablesNumEntries').change(function(){
 			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
 		});
