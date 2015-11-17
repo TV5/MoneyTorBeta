@@ -108,8 +108,11 @@
 	    $('#min, #max').change( function() {
 	        payablesTable.draw();
 	    } );
+	    var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {
+	        console.log(value, index);
+	    });
+	    console.log(filter);
 		$('#payablesNumEntries').change(function(){
-			console.log('change');
 			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
 		});
 	} );
