@@ -23,7 +23,8 @@ class TransactorController {
 		transactorService.addTransactor(transactor)
 		System.out.println("added!")
 		
-		redirect(controller: "main", action: "main")
+		redirect(uri: "/main/main#2")
+		
 		
 	}
 	def addMore() {
