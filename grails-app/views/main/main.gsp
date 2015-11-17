@@ -24,12 +24,7 @@
   
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
   <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'tab.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'modal.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'dimmer.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'transition.min.js')}"></script>
+  <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
   <script src="${resource(dir: 'js', file: 'main.js')}"></script>
 
   <style type="text/css">
@@ -65,7 +60,6 @@
   </style>
 </head>
 <body>
-
 <div class="ui container">
 
 	<g:render template="../header/header" />
@@ -84,7 +78,6 @@
 	    CUSTOMERS
 	  </a>
 	</div>
-
 	<g:render template="accounts/payablesTab" />
 	<g:render template="accounts/receivablesTab" />
 	<g:render template="transactors/suppliersTab" />
@@ -103,12 +96,27 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-	    $('#payablesTable').DataTable();
 	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
+		var num = $('#payablesNumEntries').val();
+	    var payablesTable = $('#payablesTable').DataTable({
+			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
+			"pageLength": num
+		});
+	    //$("div.dateFilter").html('<label> Start Date </label><input type="date" id="min" name="min"><label> End Date </label><input type="date" id="max" name="max">');
+	    $('#min, #max').change( function() {
+	        payablesTable.draw();
+	    } );
+	    var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {
+	        console.log(value, index);
+	    });
+	    console.log(filter);
+		$('#payablesNumEntries').change(function(){
+			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
+		});
 	} );
-
+	
 	$('.top.menu .item').tab();
 
 	$('#addPayableBtn').click(function(){
@@ -129,11 +137,69 @@
 	
 	$('#settingsLink').click(function(){
 		$('#userSettings').modal('show');
+		$('.displaySec').hide();
+		$('.displayFirst').show();
+		$('#changepass').hide();
+		$('#saveBtn').hide();
+		$('#newPass').hide();
 	});
 	
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
 
+	function editPayable(or_no, supplier_name, amount, transaction_date) {
+		document.getElementById("supplier_name").value="supplier name";
+		document.getElementById("por_no").value= or_no;
+		alert(document.getElementById("por_no").value);
+		$('#editPayable').modal('show');
+		document.getElementById("psupplier_name").value= supplier_name;
+		document.getElementById("pamount").value= amount;
+		document.getElementById("ptransaction_date").value= transaction_date;
+	}
+	
+	function editAdmin(id, username, f_name, l_name, password, status){
+		document.getElementById("adminId").value=id;
+		document.getElementById("adminUsername").value=username;
+		document.getElementById("adminF_name").value=f_name;
+		document.getElementById("adminL_name").value=l_name;
+		document.getElementById("adminPassword").value=password;
+		document.getElementById("adminCpassword").value=password;
+
+		$('#editadministrator').modal('show');
+	}
+
+	function editTransactor(name, address, telephone_no, mobile_no, terms){
+		document.getElementById("empId").value=id;
+		document.getElementById("empUsername").value=username;
+		document.getElementById("empF_name").value=f_name;
+		document.getElementById("empL_name").value=l_name;
+		document.getElementById("empPassword").value=password;
+		document.getElementById("empCpassword").value=password;
+
+		$('#editemployee').modal('show');
+		
+	}
+	$('#addCustomerBtn').click(function(){
+		$('#addCustomer').modal('show');
+	});
+
+	$.fn.dataTable.ext.search.push(
+		    function( settings, data, dataIndex ) {
+		  		var min = Date.parse($('#min').val(),10);
+		  		var max = Date.parse($('#max').val());
+		  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
+		        if ( ( isNaN( min ) && isNaN( max ) ) ||
+		             ( isNaN( min ) && date <= max ) ||
+		             ( min <= date   && isNaN( max ) ) ||
+		             ( min <= date   && date <= max ) )
+		        {
+		            return true;
+		        }
+		        return false;
+		    }
+		);
+
+	
 </script>
 </html>

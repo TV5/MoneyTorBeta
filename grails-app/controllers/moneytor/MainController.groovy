@@ -2,6 +2,9 @@ package moneytor
 
 class MainController {
 	def userService
+	def accountService
+	def transactorService
+	
 	def index(){}
 	def login() {
 		def user = userService.login(params.username, params.password)
@@ -30,12 +33,18 @@ class MainController {
 		render """{"available":${available}}"""
 	}
 	def main(){
+		
 		if(session.user){
-			[user:session.user]
+			def payableList = accountService.getPayableList()
+			def receivableList = accountService.getReceivableList()
+			def transactorList = transactorService.getTransactorList()
+			[user:session.user,payableList:payableList,receivableList:receivableList, transactorList:transactorList]
+			
 		}else{
 			redirect(uri: "/")
 			return false
 		}
+		
 
 	}
 
