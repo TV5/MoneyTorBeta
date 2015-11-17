@@ -166,6 +166,21 @@
 		$('#editadministrator').modal('show');
 	}
 
+	function editTransactor(name, address, telephone_no, mobile_no, terms){
+		document.getElementById("empId").value=id;
+		document.getElementById("empUsername").value=username;
+		document.getElementById("empF_name").value=f_name;
+		document.getElementById("empL_name").value=l_name;
+		document.getElementById("empPassword").value=password;
+		document.getElementById("empCpassword").value=password;
+
+		$('#editemployee').modal('show');
+		
+	}
+	$('#addCustomerBtn').click(function(){
+		$('#addCustomer').modal('show');
+	});
+
 	$.fn.dataTable.ext.search.push(
 		    function( settings, data, dataIndex ) {
 		  		var min = Date.parse($('#min').val(),10);
