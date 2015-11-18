@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<g:javascript library="jquery"/>
 <!-- Standard Meta -->
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -63,7 +63,6 @@
 <div class="ui container">
 
 	<g:render template="../header/header" />
-	
 	<div class="ui top attached tabular menu">
 	  <a data-tab="payablesTab" class="item active" >
 	    PAYABLES
@@ -93,8 +92,8 @@
 	<g:render template="../header/logout" />
 
 </body>
-<script type="text/javascript">
 
+<script type="text/javascript">
 	$(document).ready(function() {
 	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
@@ -167,6 +166,7 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
+	
 
 	function editPayable(or_no, transactor_id, amount, transaction_date) {
 		console.log(or_no, amount);
@@ -199,6 +199,11 @@
 		$('#editemployee').modal('show');
 		
 	}
+	
+	function changeSaveBtn(){
+		$( "#saveBtn" ).toggleClass( teal );
+	}
+	
 	$('#addCustomerBtn').click(function(){
 		$('#addCustomer').modal('show');
 	});
@@ -219,14 +224,6 @@
 		    }
 		);
 
-	function popModal() {
-			$('#addCustomer').modal('show');
-		}
-	var hash = window.location.hash;
-	if (hash.substring(1) == '2') {
-	  popModal();
-	}
-	
-	
 </script>
+
 </html>

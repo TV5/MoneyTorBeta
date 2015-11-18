@@ -23,7 +23,7 @@ class TransactorController {
 		transactorService.addTransactor(transactor)
 		System.out.println("added!")
 		
-		redirect(uri: "/main/main#2")
+		
 		
 		
 	}
