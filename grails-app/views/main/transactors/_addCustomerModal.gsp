@@ -1,14 +1,15 @@
 <div id="addCustomer" class="ui modal">
-  <div class="header">Supplier</div>
+
+  <div class="header">Customer</div>
   <div class="content">
-    <form class="ui form">
+    <g:form class="ui form" controller="transactor" action="addTransactor" id="myForm">	
     	
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="text">
+		      <g:textField name="name" value="${name}" required="true"/>
 		    </div>
 		</div>
 		
@@ -17,26 +18,38 @@
 		      <label>Address</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="text">
+		        <g:textField name="address" value="${address}" required="true"/>
 		    </div>
 		</div>
 		
     	<div class="inline fields">
 		    <div class="two wide field">
-		      <label>Contact Number</label>      
+		      <label>Telephone Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="text">
+		      <g:textField name="telephone_no" value="${telephone_no}" required="true"/>
 		    </div>
 		</div>
+		
+		<div class="inline fields">
+		    <div class="two wide field">
+		      <label>Mobile Number</label>      
+		    </div>
+		    <div class="fourteen wide field">
+		      <g:textField name="mobile_no" value="${mobile_no}" required="true"/>
+		    </div>
+		</div>
+		
 		
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Terms</label>      
 		    </div>
 		    <div class="seven wide field">
-		      <input type="number">
+		       <g:field type="number" name="terms" value="${terms}" required="true"/>
 		    </div>
+		    
+		    
 		    <div class="seven wide field">
 		      <select class="ui fluid dropdown">
     			<option value="">days</option>
@@ -46,12 +59,14 @@
     		  </select>
 		    </div>
 		</div>    	
-    	
-    </form>
+		<g:hiddenField name="type" value="C" />
+    	<div class="actions">
+    		<g:submitToRemote url="[action: 'addTransactor']" class="ui teal button" value="Save" id="saveBtn" onComplete="alert('Marked as favorite')" />
+			<g:field class="ui button" type="reset" name="myReset" value="Add More"/>
+			<div class="ui button"  onclick="myFunction()" >Cancel</div>
+			<div class="ui cancel button"  " >Cancel</div>
+		</div>
+   </g:form>
   </div>
-  <div class="actions">
-    <div class="ui approve button">Save</div>
-    <div class="ui button">Add More</div>
-    <div class="ui cancel button">Cancel</div>
-  </div>
+ 
 </div>

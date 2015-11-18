@@ -3,6 +3,7 @@ package moneytor
 class MainController {
 	def userService
 	def accountService
+	def transactorService
 	
 	def index(){}
 	def login() {
@@ -32,18 +33,30 @@ class MainController {
 		render """{"available":${available}}"""
 	}
 	def main(){
-		
 		if(session.user){
 			def payableList = accountService.getPayableList()
 			def receivableList = accountService.getReceivableList()
-			[user:session.user,payableList:payableList,receivableList:receivableList]
+			def transactorList = transactorService.getTransactorList()
+			def supplierList = transactorService.getSupplierList()
+			[user: session.user, payableList: payableList, receivableList: receivableList, 
+				transactorList: transactorList, supplierList: supplierList]
 			
 		}else{
 			redirect(uri: "/")
 			return false
 		}
-		
-
+	}
+	def addTransactor(){
+		def transactor = new Transactor(
+			name: params.name,
+			address: params.address,
+			telephone_no: params.telephone_no,
+			mobile_no: params.mobile_no,
+			terms: params.terms,
+			type: params.type
+			)
+		transactorService.addTransactor(transactor)
+		System.out.println("added2!")
 	}
 
 	

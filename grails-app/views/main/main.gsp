@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<g:javascript library="jquery"/>
 <!-- Standard Meta -->
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -63,7 +63,6 @@
 <div class="ui container">
 
 	<g:render template="../header/header" />
-	
 	<div class="ui top attached tabular menu">
 	  <a data-tab="payablesTab" class="item active" >
 	    PAYABLES
@@ -93,14 +92,49 @@
 	<g:render template="../header/logout" />
 
 </body>
-<script type="text/javascript">
 
+<script type="text/javascript">
 	$(document).ready(function() {
-	    $('#payablesTable').DataTable();
 	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
+		var num = $('#payablesNumEntries').val();
+	    var payablesTable = $('#payablesTable').DataTable({
+			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
+			"pageLength": num
+		});
+
+	    //payables
+		$('#max').val(new Date().toDateInputValue());
+		var max = new Date();
+		max.setMonth(max.getMonth() - 1);
+		$('#min').val(max.toDateInputValue());
+	    function setPayablesTotalAmt(){
+		    console.log("setPayablesTotalAmt")
+		    var payablesAmounts = $("#payablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+			var payablesTotal=0;
+			for (var i = 0; i<payablesAmounts.length; i++){
+				payablesAmounts[i] = payablesAmounts[i].textContent;
+				payablesTotal+=parseFloat(payablesAmounts[i]);
+			}
+			$('#payablesTotal').html("Php"+payablesTotal);
+		}
+		setPayablesTotalAmt();
+	    $('#min, #max').change( function() {
+	        payablesTable.draw();
+	    	setPayablesTotalAmt();
+	    } );
+	    var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+		$('#payablesNumEntries').change(function(){
+			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
+		});
 	} );
+
+	Date.prototype.toDateInputValue = (function() {
+	    var local = new Date(this);
+	    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+	    return local.toJSON().slice(0,10);
+	});
 	
 	$('.top.menu .item').tab();
 
@@ -132,14 +166,15 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
+	
 
-	function editPayable(or_no, supplier_name, amount, transaction_date) {
-		alert(or_no);
-		document.getElementById("por_no").value= or_no;
+	function editPayable(or_no, transactor_id, amount, transaction_date) {
+		console.log(or_no, amount);
+		document.getElementById("epsupplier_name").value=transactor_id;
+		document.getElementById("epor_no").value= or_no;
+		document.getElementById("epamount").value= amount;
 		$('#editPayable').modal('show');
-		document.getElementById("psupplier_name").value= supplier_name;
-		document.getElementById("pamount").value= amount;
-		document.getElementById("ptransaction_date").value= transaction_date;
+		document.getElementById("eptransaction_date").value= transaction_date;
 	}
 	
 	function editAdmin(id, username, f_name, l_name, password, status){
@@ -152,7 +187,43 @@
 
 		$('#editadministrator').modal('show');
 	}
+
+	function editTransactor(name, address, telephone_no, mobile_no, terms){
+		document.getElementById("empId").value=id;
+		document.getElementById("empUsername").value=username;
+		document.getElementById("empF_name").value=f_name;
+		document.getElementById("empL_name").value=l_name;
+		document.getElementById("empPassword").value=password;
+		document.getElementById("empCpassword").value=password;
+
+		$('#editemployee').modal('show');
+		
+	}
 	
+	function changeSaveBtn(){
+		$( "#saveBtn" ).toggleClass( teal );
+	}
+	
+	$('#addCustomerBtn').click(function(){
+		$('#addCustomer').modal('show');
+	});
+
+	$.fn.dataTable.ext.search.push(
+		    function( settings, data, dataIndex ) {
+		  		var min = Date.parse($('#min').val(),10);
+		  		var max = Date.parse($('#max').val());
+		  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
+		        if ( ( isNaN( min ) && isNaN( max ) ) ||
+		             ( isNaN( min ) && date <= max ) ||
+		             ( min <= date   && isNaN( max ) ) ||
+		             ( min <= date   && date <= max ) )
+		        {
+		            return true;
+		        }
+		        return false;
+		    }
+		);
 
 </script>
+
 </html>
