@@ -212,6 +212,14 @@
 		    }
 		);
 
+	function popModal() {
+			$('#addCustomer').modal('show');
+		}
+	var hash = window.location.hash;
+	if (hash.substring(1) == '2') {
+	  popModal();
+	}
+	
 	
 </script>
 </html>
