@@ -11,7 +11,6 @@ class Account {
 	String updated_by
 	Date updated_on = new Date()
 	
-	
     static constraints = {
 		or_no nullable: true
 		transactor_id  nullable: true

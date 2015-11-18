@@ -8,7 +8,12 @@
 		      <label>Supplier Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="supplier_name" value="${supplier_name}"/>
+		      <select name="transactor_id" class="ui dropdown" id="payablesNumEntries">
+			      <g:each in="${supplierList}" var="supplier">
+			      	<option value="${supplier.id}">${supplier.name}</option>	
+			      </g:each>
+		      </select>
+		      <%--<g:textField name="supplier_name" value="${supplier_name}"/>--%>
 		    </div>
 		</div>
 		
@@ -35,14 +40,14 @@
 		      <label>Transaction Date</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:datePicker name="pdate" value="${pdate}" />
+		      <g:datePicker name="pdate" value="${pdate}" precision="day"/>
 		    </div>
 		</div>
+	  </div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve large teal submit button" value="Save" action="addPayable"/>
+	    <g:actionSubmit class="ui approve teal submit button" value="Save" action="addPayable"/>
 	    <div class="ui button teal">Add More</div>
 	    <div class="ui cancel button teal">Cancel</div>
 	  </div>
     </g:form>
-  </div>
 </div> 
