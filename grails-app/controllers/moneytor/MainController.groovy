@@ -33,19 +33,18 @@ class MainController {
 		render """{"available":${available}}"""
 	}
 	def main(){
-		
 		if(session.user){
 			def payableList = accountService.getPayableList()
 			def receivableList = accountService.getReceivableList()
 			def transactorList = transactorService.getTransactorList()
-			[user:session.user,payableList:payableList,receivableList:receivableList, transactorList:transactorList]
+			def supplierList = transactorService.getSupplierList()
+			[user: session.user, payableList: payableList, receivableList: receivableList, 
+				transactorList: transactorList, supplierList: supplierList]
 			
 		}else{
 			redirect(uri: "/")
 			return false
 		}
-		
-
 	}
 	def addTransactor(){
 		def transactor = new Transactor(
