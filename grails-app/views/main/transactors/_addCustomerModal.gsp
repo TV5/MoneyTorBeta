@@ -1,7 +1,8 @@
 <div id="addCustomer" class="ui modal">
+
   <div class="header">Customer</div>
   <div class="content">
-    <g:form class="ui form" controller="transactor" action="addTransactor">	
+    <g:form class="ui form" controller="transactor" action="addTransactor" id="myForm">	
     	
     	<div class="inline fields">
 		    <div class="two wide field">
@@ -60,12 +61,10 @@
 		</div>    	
 		<g:hiddenField name="type" value="C" />
     	<div class="actions">
-    			
-    			<div class="ui large button teal">Save</div>
-				<g:link class="ui large button teal" name="Save">Save</g:link>
-				<g:field class="ui button" action="addMore" type="reset" name="myReset" value="Add More"/>
-				
-				<div class="ui cancel button">Cancel</div>
+    		<g:submitToRemote url="[action: 'addTransactor']" class="ui teal button" value="Save" id="saveBtn" onComplete="alert('Marked as favorite')" />
+			<g:field class="ui button" type="reset" name="myReset" value="Add More"/>
+			<div class="ui button"  onclick="myFunction()" >Cancel</div>
+			<div class="ui cancel button"  " >Cancel</div>
 		</div>
    </g:form>
   </div>
