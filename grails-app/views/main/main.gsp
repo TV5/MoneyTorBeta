@@ -21,9 +21,11 @@
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'datatables/media/css', file: 'jquery.dataTables.min.css')}" type="text/css">
+  <link rel="stylesheet" href="${resource(dir: 'datatables/extensions/Buttons/css', file: 'buttons.dataTables.min.css')}" type="text/css">
   
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
   <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'dataTables.buttons.min.js')}"></script>
   <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
   <script src="${resource(dir: 'js', file: 'main.js')}"></script>
 
@@ -77,7 +79,7 @@
 	    CUSTOMERS
 	  </a>
 	</div>
-	<g:render template="accounts/payablesTab" />
+	<%--<g:render template="accounts/payablesTab" />--%>
 	<g:render template="accounts/receivablesTab" />
 	<g:render template="transactors/suppliersTab" />
 	<g:render template="transactors/customersTab" />
@@ -95,7 +97,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable();
+	    $('#receivablesTable').DataTable({
+	        buttons: [
+	                  'copy', 'excel', 'pdf'
+	              ]
+	          });
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
