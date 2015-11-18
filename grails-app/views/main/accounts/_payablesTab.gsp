@@ -20,7 +20,7 @@
 	    </div>
 	    </div>
 	    <div class="three wide feild" style="float:right">
-	      <button id="addPayableBtn" class="ui button teal">Add Payable</button>
+	      <button id="addPayableBtn" class="ui button teal">Add</button>
 	    </div>
 	    <div class="three wide feild" style="float:right">
 		    <button class="ui button teal">Print</button>
@@ -45,12 +45,19 @@
 	  	<g:each in="${payableList}" var="payable">
 		  	<tr>
 		    <td>${payable.or_no}</td>
-		    <td>Supplier</td>
+		    <td>
+			<g:findAll in="${supplierList}" expr="it.id == payable.transactor_id">
+			    ${it.name}
+			</g:findAll>
+			</td>
 		    <td>${payable.amount }</td>
 		    <td><g:formatDate format="MM/dd/yyyy" date="${payable.transaction_date}"/></td>
-		    <td>Due date</td>
+		    <td>
+		    <% def dueDate = payable.transaction_date-it.terms %>
+		    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
+		    </td>
 		    <td><a href="#" onClick="editPayable('${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
-		    <td> <button class="ui button teal paymentsBtn">View Payments</button></td>
+		    <td> <button class="ui button teal paymentsBtn">View</button></td>
 		  	</tr>	  		
 	  	</g:each>
 	  </tbody>

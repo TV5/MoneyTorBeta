@@ -40,14 +40,14 @@
 		      <label>Transaction Date</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:datePicker name="pdate" value="${pdate}" />
+		      <g:datePicker name="pdate" value="${pdate}" precision="day"/>
 		    </div>
 		</div>
+	  </div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve large teal submit button" value="Save" action="addPayable"/>
+	    <g:actionSubmit class="ui approve teal submit button" value="Save" action="addPayable"/>
 	    <div class="ui button teal">Add More</div>
 	    <div class="ui cancel button teal">Cancel</div>
 	  </div>
     </g:form>
-  </div>
 </div> 

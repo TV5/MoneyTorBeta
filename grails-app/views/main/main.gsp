@@ -106,6 +106,10 @@
 		});
 
 	    //payables
+		$('#max').val(new Date().toDateInputValue());
+		var max = new Date();
+		max.setMonth(max.getMonth() - 1);
+		$('#min').val(max.toDateInputValue());
 	    function setPayablesTotalAmt(){
 		    console.log("setPayablesTotalAmt")
 		    var payablesAmounts = $("#payablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
@@ -117,7 +121,6 @@
 			$('#payablesTotal').html("Php"+payablesTotal);
 		}
 		setPayablesTotalAmt();
-		
 	    $('#min, #max').change( function() {
 	        payablesTable.draw();
 	    	setPayablesTotalAmt();
@@ -127,6 +130,12 @@
 			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
 		});
 	} );
+
+	Date.prototype.toDateInputValue = (function() {
+	    var local = new Date(this);
+	    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+	    return local.toJSON().slice(0,10);
+	});
 	
 	$('.top.menu .item').tab();
 
@@ -161,13 +170,11 @@
 
 	function editPayable(or_no, transactor_id, amount, transaction_date) {
 		console.log(or_no, amount);
-		document.getElementById("psupplier_name").value=transactor_id;
-		document.getElementById("por_no").value= or_no;
-		document.getElementById("pamount").value= amount;
+		document.getElementById("epsupplier_name").value=transactor_id;
+		document.getElementById("epor_no").value= or_no;
+		document.getElementById("epamount").value= amount;
 		$('#editPayable').modal('show');
-		document.getElementById("psupplier_name").value= transactor_id;
-		document.getElementById("ptransaction_date").value= transaction_date;
-		alert(document.getElementById("por_no").value);
+		document.getElementById("eptransaction_date").value= transaction_date;
 	}
 	
 	function editAdmin(id, username, f_name, l_name, password, status){

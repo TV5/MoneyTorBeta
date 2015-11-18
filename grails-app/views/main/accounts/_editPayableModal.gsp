@@ -7,7 +7,7 @@
 		      <label>Supplier Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="psupplier_name"/>
+		      <g:textField name="epsupplier_name"/>
 		    </div>
 		</div>
 		
@@ -16,7 +16,7 @@
 		      <label>Official Receipt Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="por_no"/>
+		      <g:textField name="epor_no"/>
 		    </div>
 		</div>
 		
@@ -25,7 +25,7 @@
 		      <label>Amount</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:field type="number" name="pamount"/>
+		      <g:field type="number" name="epamount"/>
 		    </div>
 		</div>
 		
@@ -34,14 +34,14 @@
 		      <label>Transaction Date</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:datePicker name="ptransaction_date"/>
+		      <g:datePicker name="eptransaction_date"/>
 		    </div>
 		</div>
 		<g:hiddenField name="type" value="P" />
+	  </div>
 	  <div class="actions">
 	    <g:actionSubmit class="ui approve button" value="Save" action="editAccount"/>
 	    <div class="ui cancel button teal">Done</div>
 	  </div>
     </g:form>
-  </div>
 </div> 
