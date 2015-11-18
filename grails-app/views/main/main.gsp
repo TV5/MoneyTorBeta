@@ -106,14 +106,23 @@
 		});
 
 	    //payables
-	    var payablesAmounts = $("#payablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
-		console.log(payablesAmounts);
+	    function setPayablesTotalAmt(){
+		    console.log("setPayablesTotalAmt")
+		    var payablesAmounts = $("#payablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+			var payablesTotal=0;
+			for (var i = 0; i<payablesAmounts.length; i++){
+				payablesAmounts[i] = payablesAmounts[i].textContent;
+				payablesTotal+=parseFloat(payablesAmounts[i]);
+			}
+			$('#payablesTotal').html("Php"+payablesTotal);
+		}
+		setPayablesTotalAmt();
+		
 	    $('#min, #max').change( function() {
 	        payablesTable.draw();
+	    	setPayablesTotalAmt();
 	    } );
-	    var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {
-	       // console.log(value, index);
-	    });
+	    var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 		$('#payablesNumEntries').change(function(){
 			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
 		});
@@ -150,14 +159,15 @@
 		$('#logout').modal('show');
 	});
 
-	function editPayable(or_no, supplier_name, amount, transaction_date) {
-		document.getElementById("supplier_name").value="supplier name";
+	function editPayable(or_no, transactor_id, amount, transaction_date) {
+		console.log(or_no, amount);
+		document.getElementById("psupplier_name").value=transactor_id;
 		document.getElementById("por_no").value= or_no;
-		alert(document.getElementById("por_no").value);
-		$('#editPayable').modal('show');
-		document.getElementById("psupplier_name").value= supplier_name;
 		document.getElementById("pamount").value= amount;
+		$('#editPayable').modal('show');
+		document.getElementById("psupplier_name").value= transactor_id;
 		document.getElementById("ptransaction_date").value= transaction_date;
+		alert(document.getElementById("por_no").value);
 	}
 	
 	function editAdmin(id, username, f_name, l_name, password, status){

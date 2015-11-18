@@ -7,7 +7,7 @@
 		      <label>Supplier Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="supplier_name"/>
+		      <g:textField name="psupplier_name"/>
 		    </div>
 		</div>
 		
@@ -34,7 +34,7 @@
 		      <label>Transaction Date</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:datePicker name="pdate"/>
+		      <g:datePicker name="ptransaction_date"/>
 		    </div>
 		</div>
 		<g:hiddenField name="type" value="P" />

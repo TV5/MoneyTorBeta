@@ -8,7 +8,12 @@
 		      <label>Supplier Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="supplier_name" value="${supplier_name}"/>
+		      <select name="transactor_id" class="ui dropdown" id="payablesNumEntries">
+			      <g:each in="${supplierList}" var="supplier">
+			      	<option value="${supplier.id}">${supplier.name}</option>	
+			      </g:each>
+		      </select>
+		      <%--<g:textField name="supplier_name" value="${supplier_name}"/>--%>
 		    </div>
 		</div>
 		
