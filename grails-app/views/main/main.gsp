@@ -200,10 +200,11 @@
 		
 	}
 	
-	function changeSaveBtn(){
-		$( "#saveBtn" ).toggleClass( teal );
-	}
-	
+	function saved(){
+		document.getElementById('addmore').className = 'ui teal button'; 
+		document.getElementById('saveBtn').value = 'Saved';
+		} 
+		
 	$('#addCustomerBtn').click(function(){
 		$('#addCustomer').modal('show');
 	});
