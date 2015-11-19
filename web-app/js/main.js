@@ -285,7 +285,13 @@
 	}
 	
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable();
+	    var receivableTable = $('#receivablesTable').DataTable();
+	    var receivableTableTools = new $.fn.dataTable.TableTools(receivableTable, {
+	    	'sSwfPath': '/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf'
+	    });
+	    $(receivableTableTools.fnContainer()).insertBefore('#receivablesTable_wrapper');
+	    
+	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
