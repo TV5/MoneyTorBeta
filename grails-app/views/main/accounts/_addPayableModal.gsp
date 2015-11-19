@@ -13,7 +13,6 @@
 			      	<option value="${supplier.id}">${supplier.name}</option>	
 			      </g:each>
 		      </select>
-		      <%--<g:textField name="supplier_name" value="${supplier_name}"/>--%>
 		    </div>
 		</div>
 		

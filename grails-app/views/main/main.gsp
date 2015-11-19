@@ -168,13 +168,17 @@
 	});
 	
 
-	function editPayable(or_no, transactor_id, amount, transaction_date) {
-		console.log(or_no, amount);
+	function editPayable(id,or_no, transactor_id, amount, transaction_date) {
+		alert(id);
+		transaction_date = transaction_date.toString().split(' ')[0];
+		console.log(transaction_date);
+		document.getElementById("payable_id").value=id;
+		console.log('id',document.getElementById("payable_id").value);
 		document.getElementById("epsupplier_name").value=transactor_id;
 		document.getElementById("epor_no").value= or_no;
 		document.getElementById("epamount").value= amount;
+		document.getElementById("eptransaction_date").value = transaction_date;
 		$('#editPayable').modal('show');
-		document.getElementById("eptransaction_date").value= transaction_date;
 	}
 	
 	function editAdmin(id, username, f_name, l_name, password, status){
