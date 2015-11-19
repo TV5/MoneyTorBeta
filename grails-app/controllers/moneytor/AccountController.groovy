@@ -30,7 +30,7 @@ class AccountController {
 	
 	def editAccount() {
 		def account = new Account(
-			id: params.payable_id,
+			id: params.ep_id,
 			or_no: params.epor_no,
 			transactor_id: params.epsuplier_name,
 			amount: params.epamount,
@@ -38,8 +38,8 @@ class AccountController {
 			type: params.type,
 			updated_by: session.user.id
 			)
-		print 'controller' + params.payable_id
-		accountService.editAccount(params.payable_id.toString(),account)
+		//print 'controller' + params.payable_id
+		//accountService.editAccount(params.payable_id.toString(),account)
 		redirect(action: "main", controller: "main")
 	}
 	
