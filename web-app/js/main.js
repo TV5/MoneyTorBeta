@@ -39,15 +39,6 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
-	/*
-	function editData() {
-	    $('#editPayable').modal('show');
-	}
-	function editDataR() {
-	    $('#editReceivable').modal('show');
-	}
-
-	*/
 	
 	function edit(){
 		$('#saveBtn').show();
@@ -266,7 +257,19 @@
 	}
 	
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable();
+	    $('#receivablesTable').DataTable({
+	    	buttons: [	            
+	    	          extend: 'collection',
+	    		      text: 'Export',
+	    		      buttons: [
+	    		                'copy',
+	    		                'excel',
+	    		                'csv',
+	    		                'pdf',
+	    		                'print'
+	    		                ]
+	    	]
+	    });
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
@@ -275,7 +278,7 @@
 			"pageLength": num
 		});
 
-	    //payables
+	    // payables
 		$('#max').val(new Date().toDateInputValue());
 		var max = new Date();
 		max.setMonth(max.getMonth() - 1);
@@ -316,14 +319,18 @@
 		$('#newPass').hide();
 	});	
 
-	function editPayable(or_no, transactor_id, amount, transaction_date) {
-		console.log(or_no, amount);
+	/*function editPayable(id,or_no, transactor_id, amount, transaction_date) {
+		alert(id);
+		transaction_date = transaction_date.toString().split(' ')[0];
+		console.log(transaction_date);
+		document.getElementById("payable_id").value=id;
+		console.log('id',document.getElementById("payable_id").value);
 		document.getElementById("epsupplier_name").value=transactor_id;
 		document.getElementById("epor_no").value= or_no;
 		document.getElementById("epamount").value= amount;
+		document.getElementById("eptransaction_date").value = transaction_date;
 		$('#editPayable').modal('show');
-		document.getElementById("eptransaction_date").value= transaction_date;
-	}
+	}*/
 	
 	function editAdmin(id, username, f_name, l_name, password, status){
 		document.getElementById("adminId").value=id;
@@ -366,7 +373,8 @@
 		        }
 		        return false;
 		    }
-		);
+	);
+	
 	$(document).ready(function() {
 	    $('#employeesTable').DataTable();
 	    $('#administratorsTable').DataTable();
@@ -398,6 +406,7 @@
 	function saved(){
 		document.getElementById('addmore').className = 'ui teal button'; 
 		document.getElementById('saveBtn').value = 'Saved';
+
 		} 
 	
 	function addmore(){
@@ -411,3 +420,5 @@
 			return false;
 		}
 	}
+
+		} 

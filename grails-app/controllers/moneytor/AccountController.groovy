@@ -29,16 +29,17 @@ class AccountController {
 	}
 	
 	def editAccount() {
-		System.out.println("edit account " + params.type)
 		def account = new Account(
-			or_no: params.por_no,
-			transactor_id: 1,
-			amount: params.pamount,
-			transaction_date: params.pdate,
+			id: params.ep_id,
+			or_no: params.epor_no,
+			transactor_id: params.epsuplier_name,
+			amount: params.epamount,
+			transaction_date: params.eptransaction_date,
 			type: params.type,
 			updated_by: session.user.id
 			)
-		accountService.editAccount(account)
+		//print 'controller' + params.payable_id
+		//accountService.editAccount(params.payable_id.toString(),account)
 		redirect(action: "main", controller: "main")
 	}
 	
