@@ -79,7 +79,7 @@
 	    CUSTOMERS
 	  </a>
 	</div>
-	<%--<g:render template="accounts/payablesTab" />--%>
+	<g:render template="accounts/payablesTab" />
 	<g:render template="accounts/receivablesTab" />
 	<g:render template="transactors/suppliersTab" />
 	<g:render template="transactors/customersTab" />
@@ -97,14 +97,37 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-	    
-	    var table = $('#receivablesTable').DataTable( {
-	        buttons: [
-	            'copy', 'excel', 'pdf'
-	        ]
-	    } );
-	      
-	    table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+		//receivablesTable
+	    	$('#receivablesTable').DataTable( {
+	            dom: 'Bfrtip',
+	            //ajax: "../php/staff.php",
+<%--	            columns: [--%>
+<%--	                { data: null, render: function ( data, type, row ) {--%>
+<%--	                    // Combine the first and last names into a single table field--%>
+<%--	                    return data.first_name+' '+data.last_name;--%>
+<%--	                } },--%>
+<%--	                { data: "position" },--%>
+<%--	                { data: "office" },--%>
+<%--	                { data: "extn" },--%>
+<%--	                { data: "start_date" },--%>
+<%--	                { data: "salary", render: $.fn.dataTable.render.number( ',', '.', 0, '$' ) }--%>
+<%--	            ],--%>
+	            select: true,
+	            buttons: [
+	                {
+	                    extend: 'collection',
+	                    text: 'Export',
+	                    buttons: [
+	                        'excel',
+	                        'csv',
+	                        'pdf',
+	                        'print'
+	                    ]
+	                }
+	            ]
+	        } );
+
+		    
 
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();

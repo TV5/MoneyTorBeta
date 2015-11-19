@@ -15,7 +15,7 @@
 		    </div>
 		    </div>
 		    <div class="three wide feild" style="float:right">
-		      <button id="addReceivableBtn" class="ui button teal">Add Receivable</button>
+		      <button id="addReceivableBtn" class="ui button teal">Add</button>
 		    </div>
 		    <div class="three wide feild" style="float:right">
 			    <button class="ui button teal">Print</button>
