@@ -257,7 +257,19 @@
 	}
 	
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable();
+	    $('#receivablesTable').DataTable({
+	    	buttons: [	            
+	    	          extend: 'collection',
+	    		      text: 'Export',
+	    		      buttons: [
+	    		                'copy',
+	    		                'excel',
+	    		                'csv',
+	    		                'pdf',
+	    		                'print'
+	    		                ]
+	    	]
+	    });
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
@@ -266,7 +278,7 @@
 			"pageLength": num
 		});
 
-	    //payables
+	    // payables
 		$('#max').val(new Date().toDateInputValue());
 		var max = new Date();
 		max.setMonth(max.getMonth() - 1);
