@@ -393,3 +393,9 @@
 
 		$('#editadministrator').modal('show');
 	}
+	
+
+	function saved(){
+		document.getElementById('addmore').className = 'ui teal button'; 
+		document.getElementById('saveBtn').value = 'Saved';
+		} 
