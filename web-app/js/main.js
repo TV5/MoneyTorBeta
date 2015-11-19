@@ -39,15 +39,6 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
-	/*
-	function editData() {
-	    $('#editPayable').modal('show');
-	}
-	function editDataR() {
-	    $('#editReceivable').modal('show');
-	}
-
-	*/
 	
 	function edit(){
 		$('#saveBtn').show();
@@ -393,3 +384,9 @@
 
 		$('#editadministrator').modal('show');
 	}
+	
+
+	function saved(){
+		document.getElementById('addmore').className = 'ui teal button'; 
+		document.getElementById('saveBtn').value = 'Saved';
+		} 

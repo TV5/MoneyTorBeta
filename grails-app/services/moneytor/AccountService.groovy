@@ -19,8 +19,10 @@ class AccountService {
 		account.save()
 	}
 	
-	def editAccount(Account account) {
-		Account newAccount = Account.get(account.id)
+	def editAccount(String id,Account account) {
+		long newid = Long.parseLong(id)
+		Account newAccount = Account.get(newid)
+		print 'newaccount id' + newAccount.id
 		newAccount.or_no = account.or_no
 		newAccount.transactor_id = account.transactor_id
 		newAccount.amount = account.amount
@@ -33,4 +35,6 @@ class AccountService {
     def serviceMethod() {
 
     }
+	
+	
 }
