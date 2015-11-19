@@ -26,6 +26,8 @@
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
   <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
   <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'dataTables.buttons.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.html5.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.flash.min.js')}"></script>
   <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
   <script src="${resource(dir: 'js', file: 'main.js')}"></script>
 
@@ -97,38 +99,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		//receivablesTable
-	    	$('#receivablesTable').DataTable( {
-	            dom: 'Bfrtip',
-	            //ajax: "../php/staff.php",
-<%--	            columns: [--%>
-<%--	                { data: null, render: function ( data, type, row ) {--%>
-<%--	                    // Combine the first and last names into a single table field--%>
-<%--	                    return data.first_name+' '+data.last_name;--%>
-<%--	                } },--%>
-<%--	                { data: "position" },--%>
-<%--	                { data: "office" },--%>
-<%--	                { data: "extn" },--%>
-<%--	                { data: "start_date" },--%>
-<%--	                { data: "salary", render: $.fn.dataTable.render.number( ',', '.', 0, '$' ) }--%>
-<%--	            ],--%>
-	            select: true,
-	            buttons: [
-	                {
-	                    extend: 'collection',
-	                    text: 'Export',
-	                    buttons: [
-	                        'excel',
-	                        'csv',
-	                        'pdf',
-	                        'print'
-	                    ]
-	                }
-	            ]
-	        } );
-
-		    
-
+	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
