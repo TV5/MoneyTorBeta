@@ -285,27 +285,11 @@
 	}
 	
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable( {
-	        dom: '',
-	        ajax: '',
-	        select: true,
-	        buttons: [
-	            { extend: 'create', editor: editor },
-	            { extend: 'edit',   editor: editor },
-	            { extend: 'remove', editor: editor },
-	            {
-	                extend: 'collection',
-	                text: 'Export',
-	                buttons: [
-	                    'copy',
-	                    'excel',
-	                    'csv',
-	                    'pdf',
-	                    'print'
-	                ]
-	            }
-	        ]
-	    });
+	    var receivableTable = $('#receivablesTable').DataTable();
+	    var receivableTableTools = new $.fn.dataTable.TableTools(receivableTable);
+	    $(receivableTableTools.fnContainer()).insertBefore('#receivablesTable_wrapper');
+	    
+	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
