@@ -39,7 +39,8 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
-	
+
+
 	function edit(){
 		$('#saveBtn').show();
 		$('.displayFirst').hide();
@@ -56,10 +57,11 @@
 		$('.oldPass').show();
 	}
 
-	function changePassword(){
+	function changePassword(){		
 		$('.oldPass').hide();
 		$('#newPass').show();
 	}
+	
 	$(document)
     .ready(function() {
       $('.ui.form')
@@ -242,18 +244,44 @@
                   prompt : 'Please enter your Last Name'
                 }
               ]
-            }         
+            },
+            username: {
+                identifier  : 'username',
+                rules: [
+                  {
+                    type   : 'empty',
+                    prompt : 'Please enter your username'
+                  },                
+                  {
+                      type   : 'length[8]',
+                      prompt : 'Your username must be at least 8 characters'
+                    }
+                    
+                ]
+              },
+              password: {
+                identifier  : 'password',
+                rules: [
+                  {
+                    type   : 'empty',
+                    prompt : 'Please enter your password'
+                  },
+                  {
+                    type   : 'length[8]',
+                    prompt : 'Your password must be at least 8 characters'
+                  }
+                ]
+              }
           }
-        })
-      ;
-    })
-  ;
+        });
+    });
 	
 	function editUserAccount(id, f_name, l_name, password){
 		document.getElementById("uId").value=id;
 		document.getElementById("uF_name").value=f_name;
 		document.getElementById("uL_name").value=l_name;
 		document.getElementById("uNewPass").value=password;
+		document.getElementById("uCurrentPass").value=password;
 	}
 	
 	$(document).ready(function() {
@@ -360,7 +388,7 @@
 	}
 
 	$.fn.dataTable.ext.search.push(
-		    function( settings, data, dataIndex ) {
+			function( settings, data, dataIndex ) {
 		  		var min = Date.parse($('#min').val(),10);
 		  		var max = Date.parse($('#max').val());
 		  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
@@ -374,7 +402,7 @@
 		        return false;
 		    }
 	);
-	
+
 	$(document).ready(function() {
 	    $('#employeesTable').DataTable();
 	    $('#administratorsTable').DataTable();
