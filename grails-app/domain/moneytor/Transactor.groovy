@@ -18,6 +18,7 @@ class Transactor {
 		mobile_no nullable: true
 		terms nullable: false, default: 0
 		type nullable: false
+		status nullable: false, default: A
 	}
 	
 	

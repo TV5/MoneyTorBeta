@@ -16,7 +16,7 @@ class TransactorService {
 		def tList = Transactor.findAllByType("C")
 		return tList
 	}
-	
+	 
 	def getSupplierList() {
 		def supplierList = Transactor.findAllByType("S")
 		return supplierList
