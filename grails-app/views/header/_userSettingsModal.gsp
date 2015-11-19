@@ -2,7 +2,7 @@
   <div class="header">User Settings</div>
   <div class="content">
     <g:form class="ui form" controller="user">
-    
+    <div class="ui error message"></div>		
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Username</label>      
@@ -18,7 +18,7 @@
 		    </div>
 		    <div class="eight wide field">
 		    	<label class="displayFirst">${user.f_name}</label>
-		      <g:textField class="displaySec" type="text" placeholder="${user.f_name}" name="uF_name"/>
+		      <g:textField class="displaySec" type="text" value="${user.f_name}" name="uF_name"/>
 
 		    </div>
 		</div>
@@ -28,7 +28,7 @@
 		    </div>
 		    <div class="eight wide field">
 		    	<label class="displayFirst">${user.l_name}</label>
-		      <g:textField class="displaySec" type="text" placeholder="${user.l_name}" name="uL_name"/>
+		      <g:textField class="displaySec" type="text" value="${user.l_name}" name="uL_name"/>
 		    </div>
 		</div>
 		<div class="inline fields oldPass">
@@ -46,7 +46,7 @@
 			      <label>Current Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <g:passwordField name="uCurrPass"/>
+			      <g:textField value="uCurrPass"  name="uCurrPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -54,7 +54,7 @@
 			      <label>New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <g:passwordField id="newPW" name="uNewPass"/>
+			      <g:textField id="newPW" value="uNewPass" name="uNewPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -62,17 +62,17 @@
 			      <label>Confirm New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <input id = "confNewPW" type="text"/>
+			      <g:textField  value="uCNewPass" name="uCNewPass"/>
 			    </div>
 			</div>
 			<g:hiddenField name="uId" />
 		</div>
-    </g:form>
+    
   </div>
 		<div class="actions">
 			<div id="editBtn" class="ui button teal displayFirst" onclick="edit()">Edit</div>
-			<g:actionSubmit id="saveBtn" class="ui approve button teal displaySec" onclick="save()" value="Save" action="editUserAccount"/>
-
+			<g:actionSubmit class="ui approve button teal displaySec" onClick="save()" value="Save" action="editUserAccount"/>
+</g:form>
 		    <div class="ui cancel button teal" onclick="cancelEdit()">Cancel</div>
 		</div>
 </div>
