@@ -22,7 +22,7 @@ class TransactorService {
 		return supplierList
 	}
 	
-	def saveName(){
-		return "Save"
+	def saveName(text){
+		return text
 	}
 }
