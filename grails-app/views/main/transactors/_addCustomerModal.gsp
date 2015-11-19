@@ -1,6 +1,6 @@
 <div id="addCustomer" class="ui modal">
 
-  <div class="header">Customer</div>
+  <div class="header">Add Customer</div>
   <div class="content">
     <g:form class="ui form" controller="transactor" action="addTransactor" id="myForm">	
     	
