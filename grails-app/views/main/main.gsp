@@ -98,16 +98,13 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 	    
-	    var table = $('#receivablesTable').DataTable();
-	    
-	    new $.fn.dataTable.Buttons( table, {
+	    var table = $('#receivablesTable').DataTable( {
 	        buttons: [
 	            'copy', 'excel', 'pdf'
 	        ]
 	    } );
-	     
-	    table.buttons().container()
-	        .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+	      
+	    table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
 
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
