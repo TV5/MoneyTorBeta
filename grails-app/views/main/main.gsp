@@ -93,4 +93,5 @@
 </body>
 
 <script src="${resource(dir: 'js', file: 'main.js')}"></script>
+
 </html>

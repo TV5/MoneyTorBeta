@@ -21,4 +21,8 @@ class TransactorService {
 		def supplierList = Transactor.findAllByType("S")
 		return supplierList
 	}
+	
+	def saveName(){
+		return "Save"
+	}
 }
