@@ -39,15 +39,6 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
-	/*
-	function editData() {
-	    $('#editPayable').modal('show');
-	}
-	function editDataR() {
-	    $('#editReceivable').modal('show');
-	}
-
-	*/
 	
 	function edit(){
 		$('#saveBtn').show();
