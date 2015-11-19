@@ -257,7 +257,27 @@
 	}
 	
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable();
+	    $('#receivablesTable').DataTable( {
+	        dom: '',
+	        ajax: '',
+	        select: true,
+	        buttons: [
+	            { extend: 'create', editor: editor },
+	            { extend: 'edit',   editor: editor },
+	            { extend: 'remove', editor: editor },
+	            {
+	                extend: 'collection',
+	                text: 'Export',
+	                buttons: [
+	                    'copy',
+	                    'excel',
+	                    'csv',
+	                    'pdf',
+	                    'print'
+	                ]
+	            }
+	        ]
+	    });
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
