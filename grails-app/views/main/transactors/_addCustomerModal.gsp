@@ -62,9 +62,11 @@
 		<g:hiddenField name="type" value="C" />
     	<div class="actions">
     		
-    		<g:submitToRemote url="[action: 'addTransactor']"  update="saveBtn" class="ui teal button" value="${saveName}" id="saveBtn" onComplete="saved()" />
+    		<g:submitToRemote url="[action: 'addTransactor']"  update="saveBtn" class="ui teal button" value="Save" id="saveBtn" onComplete="saved()" />
+			<g:submitToRemote  update="saveBtn" class="ui teal button" value="Save" id="saveBtn2" onComplete="addmore()" />
 			
-			<g:field id="addmore" class="ui button" type="reset" name="myReset" value="Add More"/>
+			<g:field id="addmore" class="ui button" type="button" name="myReset"  update="saveBtn" value="Add More" onComplete="addmore()"/>
+			<input type='reset' value='Reset' class="ui button" onClick="addmore()"  />
 			<div class="ui button"  onclick="myFunction()" >Cancel</div>
 			<div class="ui cancel button"  " >Cancel</div>
 		</div>
