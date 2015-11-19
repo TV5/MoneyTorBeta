@@ -1,6 +1,6 @@
 <div id="addCustomer" class="ui modal">
 
-  <div class="header">Customer</div>
+  <div class="header">Add Customer</div>
   <div class="content">
     <g:form class="ui form" controller="transactor" action="addTransactor" id="myForm">	
     	
@@ -9,7 +9,7 @@
 		      <label>Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="name" value="${name}" required="true"/>
+		      <g:textField id="name" name="name" value="${name}" required="true"/>
 		    </div>
 		</div>
 		
@@ -18,7 +18,7 @@
 		      <label>Address</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		        <g:textField name="address" value="${address}" required="true"/>
+		        <g:textField id="address" name="address" value="${address}" required="true"/>
 		    </div>
 		</div>
 		
@@ -27,7 +27,7 @@
 		      <label>Telephone Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="telephone_no" value="${telephone_no}" required="true"/>
+		      <g:textField id="telephone_no" name="telephone_no" value="${telephone_no}" required="true"/>
 		    </div>
 		</div>
 		
@@ -36,7 +36,7 @@
 		      <label>Mobile Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="mobile_no" value="${mobile_no}" required="true"/>
+		      <g:textField id="mobile_no" name="mobile_no" value="${mobile_no}" required="true"/>
 		    </div>
 		</div>
 		
@@ -46,12 +46,12 @@
 		      <label>Terms</label>      
 		    </div>
 		    <div class="seven wide field">
-		       <g:field type="number" name="terms" value="${terms}" required="true"/>
+		       <g:field id="terms" type="number" name="terms" value="${terms}" required="true"/>
 		    </div>
 		    
 		    
 		    <div class="seven wide field">
-		      <select class="ui fluid dropdown">
+		      <select id="select" class="ui fluid dropdown">
     			<option value="">days</option>
     			<option value="">weeks</option>
     			<option value="">months</option>
@@ -63,11 +63,9 @@
     	<div class="actions">
     		
     		<g:submitToRemote url="[action: 'addTransactor']"  update="saveBtn" class="ui teal button" value="Save" id="saveBtn" onComplete="saved()" />
-			<g:submitToRemote  update="saveBtn" class="ui teal button" value="Save" id="saveBtn2" onComplete="addmore()" />
-			
-			<g:field id="addmore" class="ui button" type="button" name="myReset"  update="saveBtn" value="Add More" onComplete="addmore()"/>
-			<input type='reset' value='Reset' class="ui button" onClick="addmore()"  />
-			<div class="ui button"  onclick="myFunction()" >Cancel</div>
+			<g:submitToRemote  url="" update="saveBtn" class="ui button" value="Add More" id="addMoreBtn" onComplete="addmoreClick()" />
+			<!--<g:field id="addmore" class="ui button" type="reset" name="myReset"  update="saveBtn" value="Add More" url="" onComplete="addmoreClick()"/> -->
+			<input type='reset' id="resetBtn" value='Reset' hidden />
 			<div class="ui cancel button"  " >Cancel</div>
 		</div>
    </g:form>

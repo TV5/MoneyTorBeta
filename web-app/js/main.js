@@ -394,6 +394,8 @@
 	$(document).ready(function() {
 	    $('#employeesTable').DataTable();
 	    $('#administratorsTable').DataTable();
+	    $("#addMoreBtn").attr("disabled", "disabled");
+	    
 	} );
 	
 	function editEmployee(id, username, f_name, l_name, password, status){
@@ -420,21 +422,32 @@
 	
 
 	function saved(){
-		document.getElementById('addmore').className = 'ui teal button'; 
+		document.getElementById('addMoreBtn').className = 'ui teal button'; 
 		document.getElementById('saveBtn').value = 'Saved';
-
+		$("#saveBtn").attr("disabled", "disabled");
+		$("#addMoreBtn").removeAttr("disabled");
+		$('#name').prop('readonly', true);
+		$('#address').prop('readonly', true);
+		$('#telephone_no').prop('readonly', true);
+		$('#mobile_no').prop('readonly', true);
+		$('#terms').prop('readonly', true);
+		$('#select').prop('disabled', true);
 		} 
 	
-	function addmore(){
+	function addmoreClick(){
 		document.getElementById('saveBtn').value = 'Save';
+		document.getElementById('addMoreBtn').className = 'ui button'; 
+		$("#saveBtn").removeAttr("disabled");
+		$("#addMoreBtn").attr("disabled", "disabled");
+		document.getElementById('resetBtn').click();
+		$('#name').prop('readonly', false);
+		$('#address').prop('readonly', false);
+		$('#telephone_no').prop('readonly', false);
+		$('#mobile_no').prop('readonly', false);
+		$('#terms').prop('readonly', false);
+		$('#select').prop('disabled', false);
 		} 
 	
-	function checkSave(){
-		if(document.getElementById('addmore').className == 'ui teal button'){
-			return true;
-		}else{
-			return false;
-		}
-	}
+	
 
 		
