@@ -285,19 +285,7 @@
 	}
 	
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable({
-	    	buttons: [	            
-	    	          extend: 'collection',
-	    		      text: 'Export',
-	    		      buttons: [
-	    		                'copy',
-	    		                'excel',
-	    		                'csv',
-	    		                'pdf',
-	    		                'print'
-	    		                ]
-	    	]
-	    });
+	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
@@ -438,7 +426,7 @@
 		} 
 	
 	function addmore(){
-		document.getElementById('addmore').className = 'ui button'; 
+		document.getElementById('saveBtn').value = 'Save';
 		} 
 	
 	function checkSave(){
@@ -449,4 +437,4 @@
 		}
 	}
 
-		} 
+		
