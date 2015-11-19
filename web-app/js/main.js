@@ -394,4 +394,19 @@
 	function saved(){
 		document.getElementById('addmore').className = 'ui teal button'; 
 		document.getElementById('saveBtn').value = 'Saved';
+
+		} 
+	
+	function addmore(){
+		document.getElementById('addmore').className = 'ui button'; 
+		} 
+	
+	function checkSave(){
+		if(document.getElementById('addmore').className == 'ui teal button'){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 		} 
