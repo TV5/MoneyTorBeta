@@ -70,4 +70,9 @@ class UserService {
 		def adminList = User.findAllByStatusAndType(1, "A")
 		return adminList
 	}
+	
+	def getUser(userId){
+		def user = User.get(userId)
+		return user
+	}
 }
