@@ -91,5 +91,7 @@
 	<g:render template="../header/logout" />
 
 </body>
+
 <script src="${resource(dir: 'js', file: 'main.js')}"></script>
+
 </html>
