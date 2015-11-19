@@ -79,8 +79,8 @@ class UserController {
 			user.l_name=params.uL_name
 			user.password=params.uNewPass
 			userService.editUserAccount(user.id, user)
-			
-			redirect(action: "main")
+			session.user=userService.getUser(user.id)
+			redirect(uri: request.getHeader('referer'))
 	}
 	
 	def editAdmin(){
