@@ -257,19 +257,7 @@
 	}
 	
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable({
-	    	buttons: [	            
-	    	          extend: 'collection',
-	    		      text: 'Export',
-	    		      buttons: [
-	    		                'copy',
-	    		                'excel',
-	    		                'csv',
-	    		                'pdf',
-	    		                'print'
-	    		                ]
-	    	]
-	    });
+	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
