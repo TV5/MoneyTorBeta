@@ -345,10 +345,64 @@
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
+		
 	    var payablesTable = $('#payablesTable').DataTable({
 			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
 			"pageLength": num
 		});
+	    new $.fn.dataTable.Buttons(payablesTable, {
+	        buttons: [
+				{
+				    extend: 'collection',
+				    text: 'Export',
+				    buttons: [
+						{
+						    extend: 'copyHtml5',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'excelHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'csvHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'pdfHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+				    ]
+				},
+				{
+				    extend: 'print',
+				    title: 'Payables Summary',
+				    orientation: 'portrait',
+				    pageSize: 'LETTER',
+				    exportOptions: {
+				        columns: [ 0, 1, 2, 3, 4 ]
+				    }
+				}
+	        ]
+	    });
+	    payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
 	    // payables
 		$('#max').val(new Date().toDateInputValue());
