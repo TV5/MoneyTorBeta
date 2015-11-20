@@ -285,8 +285,10 @@
 	}
 
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable({
-	        dom: 'Bfrtip',
+		
+		//receivables
+	    var receivablesTable = $('#receivablesTable').DataTable();
+	    new $.fn.dataTable.Buttons(receivablesTable, {
 	        buttons: [
 				{
 				    extend: 'collection',
@@ -338,6 +340,7 @@
 				}
 	        ]
 	    });
+	    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
 	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
