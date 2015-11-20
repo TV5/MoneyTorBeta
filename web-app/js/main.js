@@ -285,16 +285,43 @@
 	}
 
 	$(document).ready(function() {
-	    $('#receivablesTable').DataTable({
+	    var receivableTable = $('#receivablesTable').DataTable();
+	    new $.fn.dataTable.Buttons(receivableTable, {
 	        dom: 'Bfrtip',
 	        buttons: [
 	            'copyHtml5',
-	            'excelHtml5',
-	            'csvHtml5',
-	            'pdfHtml5',
-	            'print'
+	            {
+	                extend: 'excelHtml5',
+	                title: 'Receivables Summary',
+	                exportOptions: {
+	                	columns: [ 0, 1, 2, 3, 4 ]
+	                }
+	            },
+	            {
+	                extend: 'csvHtml5',
+	                title: 'Receivables Summary',
+	                exportOptions: {
+	                	columns: [ 0, 1, 2, 3, 4 ]
+	                }
+	            },
+	            {
+	                extend: 'pdfHtml5',
+	                title: 'Receivables Summary',
+	                exportOptions: {
+	                	columns: [ 0, 1, 2, 3, 4 ]
+	                }
+	            },
+	            {
+	                extend: 'print',
+	                title: 'Receivables Summary',
+	                exportOptions: {
+	                    columns: [ 0, 1, 2, 3, 4 ]
+	                }
+	            },
+	            'colvis'
 	        ]
 	    });
+	    receivableTable.buttons( 0, null ).container().prependTo(receivableTable.table().container());
 	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
