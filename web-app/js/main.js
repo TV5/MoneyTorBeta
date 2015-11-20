@@ -293,6 +293,8 @@
 	            {
 	                extend: 'excelHtml5',
 	                title: 'Receivables Summary',
+	                orientation: 'portrait',
+	                pageSize: 'LETTER',
 	                exportOptions: {
 	                	columns: [ 0, 1, 2, 3, 4 ]
 	                }
@@ -300,6 +302,8 @@
 	            {
 	                extend: 'csvHtml5',
 	                title: 'Receivables Summary',
+	                orientation: 'portrait',
+	                pageSize: 'LETTER',
 	                exportOptions: {
 	                	columns: [ 0, 1, 2, 3, 4 ]
 	                }
@@ -307,6 +311,8 @@
 	            {
 	                extend: 'pdfHtml5',
 	                title: 'Receivables Summary',
+	                orientation: 'portrait',
+	                pageSize: 'LETTER',
 	                exportOptions: {
 	                	columns: [ 0, 1, 2, 3, 4 ]
 	                }
@@ -314,6 +320,8 @@
 	            {
 	                extend: 'print',
 	                title: 'Receivables Summary',
+	                orientation: 'portrait',
+	                pageSize: 'LETTER',
 	                exportOptions: {
 	                    columns: [ 0, 1, 2, 3, 4 ]
 	                }
