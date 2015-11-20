@@ -291,7 +291,8 @@
 	            'copyHtml5',
 	            'excelHtml5',
 	            'csvHtml5',
-	            'pdfHtml5'
+	            'pdfHtml5',
+	            'print'
 	        ]
 	    });
 	    
