@@ -283,14 +283,45 @@
 		document.getElementById("uNewPass").value=password;
 		document.getElementById("uCurrentPass").value=password;
 	}
-	
+
 	$(document).ready(function() {
 	    var receivableTable = $('#receivablesTable').DataTable();
-	    var receivableTableTools = new $.fn.dataTable.TableTools(receivableTable, {
-	    	'sSwfPath': '/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf'
+	    new $.fn.dataTable.Buttons(receivableTable, {
+	        dom: 'Bfrtip',
+	        buttons: [
+	            'copyHtml5',
+	            {
+	                extend: 'excelHtml5',
+	                title: 'Receivables Summary',
+	                exportOptions: {
+	                	columns: [ 0, 1, 2, 3, 4 ]
+	                }
+	            },
+	            {
+	                extend: 'csvHtml5',
+	                title: 'Receivables Summary',
+	                exportOptions: {
+	                	columns: [ 0, 1, 2, 3, 4 ]
+	                }
+	            },
+	            {
+	                extend: 'pdfHtml5',
+	                title: 'Receivables Summary',
+	                exportOptions: {
+	                	columns: [ 0, 1, 2, 3, 4 ]
+	                }
+	            },
+	            {
+	                extend: 'print',
+	                title: 'Receivables Summary',
+	                exportOptions: {
+	                    columns: [ 0, 1, 2, 3, 4 ]
+	                }
+	            },
+	            'colvis'
+	        ]
 	    });
-	    $(receivableTableTools.fnContainer()).insertBefore('#receivablesTable_wrapper');
-	    
+	    receivableTable.buttons( 0, null ).container().prependTo(receivableTable.table().container());
 	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
