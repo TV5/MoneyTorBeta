@@ -22,6 +22,7 @@ class UserController {
 		return adminList
 	}
 	def addEmployee() {
+		System.out.println("Add Emp")
 		if(params.ecpassword==params.epassword){
 			def user =new User(
 					f_name: params.ef_name,
@@ -33,32 +34,40 @@ class UserController {
 					updated_on: new Date(),
 					updated_by: params.int('userId')
 				)
-			userService.addUser(user)
+			if(user!=null){
+				System.out.println(params.eusername)
+				userService.addUser(user)
+				System.out.println("added")
 			
-			redirect(action: "users")
+			}
 		}
 	}
 	def addAdmin() {
+		System.out.println("Add Admin")
 		if(params.acpassword==params.apassword){
 			def user =new User()
 			user.f_name=params.af_name
 			user.l_name=params.al_name
 			user.username=params.ausername
 			user.password=params.apassword
-			user.type=params.atype
+			user.type='A'
 			user.status=1
 			user.updated_on=new Date() 
-			user.updated_by=params.int('userId')
-			userService.addUser(user)
+			user.updated_by=session.user.id
 			
-			redirect(action: "users")
+		if(user!=null){
+				System.out.println(params.ausername)
+				userService.addUser(user)
+				System.out.println("added")
+			
+			}
 		}
 	}
 	
 	def editEmployee(){
 		if(params.empCpassword==params.empPassword){
 			def user =new User()
-			user.id = params.int('empId');
+			user.id = params.int('empId')
 			user.f_name=params.empF_name
 			user.l_name=params.empL_name
 			user.username=params.empUsername
@@ -86,7 +95,7 @@ class UserController {
 	def editAdmin(){
 		if(params.adminCpassword==params.adminPassword){
 			def user =new User()
-			user.id = params.int('adminId');
+			user.id = params.int('adminId')
 			user.f_name=params.adminF_name
 			user.l_name=params.adminL_name
 			user.username=params.adminUsername
@@ -103,9 +112,9 @@ class UserController {
 	def changeStatus(){
 		def user =new User()
 		if(params.int('empId')){
-			user.id = params.int('empId');
+			user.id = params.int('empId')
 		}else{
-			user.id = params.int('adminId');
+			user.id = params.int('adminId')
 		}
 		user.updated_on=new Date()
 		user.updated_by=session.user.id

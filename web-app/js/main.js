@@ -439,7 +439,22 @@
 		$('#terms').prop('readonly', true);
 		$('#select').prop('disabled', true);
 		} 
-	
+	function addedEmployee(){
+		alert("added");
+		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
+		document.getElementById('saveBtn').value = 'Saved';
+		$("#saveBtn").attr("disabled", "disabled");
+		$("#addMoreBtn").removeAttr("disabled");*/
+
+		} 
+	function addedAdmin(){
+		alert("added");
+		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
+		document.getElementById('saveBtn').value = 'Saved';
+		$("#saveBtn").attr("disabled", "disabled");
+		$("#addMoreBtn").removeAttr("disabled");*/
+
+		} 
 	function addmoreClick(){
 		document.getElementById('saveBtn').value = 'Save';
 		document.getElementById('addMoreBtn').className = 'ui button'; 

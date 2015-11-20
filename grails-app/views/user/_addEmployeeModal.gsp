@@ -8,7 +8,7 @@
 							<label>First Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="ef_name" value="${ef_name}" required="true"/>
+				            <g:textField name="ef_name" id="ef_name" required="true"/>
 						</div>
 						<div class="two wide field" id="usernameTaken"></div>
 					</div>
@@ -18,7 +18,7 @@
 							<label>Last Name</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="el_name" value="${el_name}" required="true"/>
+				            <g:textField name="el_name" id="ef_name" required="true"/>
 						</div>
 					</div>
 
@@ -27,7 +27,7 @@
 							<label>Username</label>
 						</div>
 						<div class="seven wide field">
-				            <g:textField name="eusername" value="${eusername}" required="true"/>
+				            <g:textField name="eusername" id="eusername" required="true"/>
 						</div>
 					</div>
 
@@ -36,7 +36,7 @@
 							<label>Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="epassword" value="${epassword}" required="true"/>
+				            <g:passwordField name="epassword" id="epassword" required="true"/>
 						</div>
 					</div>
 
@@ -45,15 +45,16 @@
 							<label>Confirm Password</label>
 						</div>
 						<div class="seven wide field">
-				            <g:passwordField name="ecpassword" value="${ecpassword}" required="true"/>
+				            <g:passwordField name="ecpassword" id="ecpassword" required="true"/>
 						</div>
 					</div>
-					<g:hiddenField name="etype" value="E" />
-					<g:hiddenField name="userUsername" value="${user.username}" />
-					<g:hiddenField name="userId" value="${user.id}" />				
-					<g:hiddenField name="userType" value="${user.type}" />
+					<g:hiddenField name="etype" id="etype" value="E" />
+					<g:hiddenField name="userUsername" id="userUsername" value="${user.username}" />
+					<g:hiddenField name="userId" id="userId" value="${user.id}" />
 			</div>
 			<div class="actions">
+				<g:submitToRemote url="[action: 'addEmployee']"  class="ui teal large button" value="Save" id="saveBtn" onSuccess="addedEmployee()" />
+				<!--<g:submitToRemote  url="" update="saveBtn" class="ui button" value="Add More" id="addMoreBtn" onComplete="addmoreClick()" />-->			
 				<g:actionSubmit class="ui approve large teal submit button" value="Save" action="addEmployee"/>
 				<div class="ui cancel button">Cancel</div>
 			</div>

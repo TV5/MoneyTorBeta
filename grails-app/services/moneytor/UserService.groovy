@@ -11,9 +11,15 @@ class UserService {
 	def addUser(user){
 		def userCheck = User.findByUsername(user.username)
 		if(userCheck){
+			System.out.println("username shit")
 			return "username already in use"
 		}else{
+		System.out.println("saving")
 		user.save()
+		def nuser= User.findByUsername(user.username)
+		if(nuser){
+			System.our.println("na add bitaw gyud huhu")
+		}
 		}
 	}
 	def editUser(userId, user){
