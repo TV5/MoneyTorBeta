@@ -46,14 +46,14 @@ class UserController {
 		System.out.println("Add Admin")
 		if(params.acpassword==params.apassword){
 			def user =new User(
-			f_name=params.af_name,
-			l_name=params.al_name,
-			username=params.ausername,
-			password=params.apassword,
-			type=params.atype,
-			status=1,
-			updated_on=new Date(), 
-			updated_by=session.user.id,
+			f_name:params.af_name,
+			l_name:params.al_name,
+			username:params.ausername,
+			password:params.apassword,
+			type:params.atype,
+			status:1,
+			updated_on:new Date(), 
+			updated_by:session.user.id
 		)	
 		if(user!=null){
 				System.out.println(params.ausername)
