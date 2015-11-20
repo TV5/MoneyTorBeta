@@ -20,18 +20,6 @@
 		</div>
 	</div>
 
-	<div class="dt-buttons">
-		<a class="dt-button buttons-create" tabindex="0"
-			aria-controls="example"> <span>New</span>
-		</a> <a class="dt-button buttons-selected buttons-edit disabled"
-			tabindex="0" aria-controls="example"> <span>Edit</span>
-		</a> <a class="dt-button buttons-selected buttons-remove disabled"
-			tabindex="0" aria-controls="example"> <span>Delete</span>
-		</a> <a class="dt-button buttons-collection" tabindex="0"
-			aria-controls="example"> <span>Export</span>
-		</a>
-	</div>
-
 	<table id="receivablesTable" class="display ui celled padded table"
 		cellspacing="0" width="100%">
 		<thead>

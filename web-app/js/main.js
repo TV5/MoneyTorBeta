@@ -283,22 +283,126 @@
 		document.getElementById("uNewPass").value=password;
 		document.getElementById("uCurrentPass").value=password;
 	}
-	
+
 	$(document).ready(function() {
-	    var receivableTable = $('#receivablesTable').DataTable();
-	    var receivableTableTools = new $.fn.dataTable.TableTools(receivableTable, {
-	    	'sSwfPath': '/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf'
+		
+		//receivables
+	    var receivablesTable = $('#receivablesTable').DataTable();
+	    new $.fn.dataTable.Buttons(receivablesTable, {
+	        buttons: [
+				{
+				    extend: 'collection',
+				    text: 'Export',
+				    buttons: [
+						{
+						    extend: 'copyHtml5',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'excelHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'csvHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'pdfHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+				    ]
+				},
+				{
+				    extend: 'print',
+				    title: 'Receivables Summary',
+				    orientation: 'portrait',
+				    pageSize: 'LETTER',
+				    exportOptions: {
+				        columns: [ 0, 1, 2, 3, 4 ]
+				    }
+				}
+	        ]
 	    });
-	    $(receivableTableTools.fnContainer()).insertBefore('#receivablesTable_wrapper');
-	    
+	    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
 	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
+		
 	    var payablesTable = $('#payablesTable').DataTable({
 			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
 			"pageLength": num
 		});
+	    new $.fn.dataTable.Buttons(payablesTable, {
+	        buttons: [
+				{
+				    extend: 'collection',
+				    text: 'Export',
+				    buttons: [
+						{
+						    extend: 'copyHtml5',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'excelHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'csvHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'pdfHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+				    ]
+				},
+				{
+				    extend: 'print',
+				    title: 'Payables Summary',
+				    orientation: 'portrait',
+				    pageSize: 'LETTER',
+				    exportOptions: {
+				        columns: [ 0, 1, 2, 3, 4 ]
+				    }
+				}
+	        ]
+	    });
+	    payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
 	    // payables
 		$('#max').val(new Date().toDateInputValue());

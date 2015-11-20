@@ -21,11 +21,17 @@
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'datatables/media/css', file: 'jquery.dataTables.min.css')}" type="text/css">
-  <link rel="stylesheet" href="${resource(dir: 'datatables/extensions/TableTools/css', file: 'dataTables.tableTools.min.css')}" type="text/css">
+  <link rel="stylesheet" href="${resource(dir: 'datatables/extensions/Buttons/css', file: 'buttons.dataTables.min.css')}" type="text/css">
   
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
   <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
-  <script src="${resource(dir: 'datatables/extensions/TableTools/js', file: 'dataTables.tableTools.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'dataTables.buttons.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/JSZip', file: 'jszip.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/pdfmake/build', file: 'pdfmake.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/pdfmake/build', file: 'vfs_fonts.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.html5.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.print.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.colVis.min.js')}"></script>
   <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
 
   <style type="text/css">
