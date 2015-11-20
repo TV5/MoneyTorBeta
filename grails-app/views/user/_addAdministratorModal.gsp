@@ -48,12 +48,12 @@
 						</div>
 					</div>
 					<g:hiddenField name="atype" value="A" />
-					<g:hiddenField name="userUsername" value="${user.username}" />
 					<g:hiddenField name="userId" value="${user.id}" />				
-					<g:hiddenField name="userType" value="${user.type}" />				
 			</div>
 			<div class="actions">
-				<g:actionSubmit class="ui approve large teal submit button" value="Save" action="addAdmin"/>
+				<g:submitToRemote url="[action: 'addAdmin']"  update="saveBtn" class="ui teal large button" value="Save" id="saveBtn" onComplete="addAdmin()" />
+				<!--<g:submitToRemote  url="" update="saveBtn" class="ui button" value="Add More" id="addMoreBtn" onComplete="addmoreClick()" />-->
+				<!--<g:actionSubmit class="ui approve large teal submit button" value="Save" action="addAdmin"/>-->
 				<div class="ui cancel button">Cancel</div>
 			</div>
 			</g:form>
