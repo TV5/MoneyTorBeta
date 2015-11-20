@@ -13,7 +13,7 @@ class TransactorService {
 	}
 	
 	def getTransactorList() {
-		def tList = Transactor.findAllByType("C")
+		def tList = Transactor.findAllByTypeAndStatus("C","A")
 		return tList
 	}
 	 

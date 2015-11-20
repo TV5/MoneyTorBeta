@@ -10,7 +10,7 @@ class Transactor {
 	String mobile_no
 	int terms
 	char type
-	/*char status*/
+	char status
 	
 	static constraints = {
 		name nullable: false
@@ -19,7 +19,7 @@ class Transactor {
 		mobile_no nullable: true
 		terms nullable: false, default: 0
 		type nullable: false
-		/*status nullable: true, default: 'A'*/
+		status nullable: true, default: 'A'
 	}
 	
 	
