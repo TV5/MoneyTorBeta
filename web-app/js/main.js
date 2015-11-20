@@ -283,14 +283,17 @@
 		document.getElementById("uNewPass").value=password;
 		document.getElementById("uCurrentPass").value=password;
 	}
-	
+
 	$(document).ready(function() {
-	    var receivableTable = $('#receivablesTable').DataTable();
-	    var receivableTableTools = new $.fn.dataTable.TableTools(receivableTable, {
-	    	'sSwfPath': '/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf'
+	    $('#receivablesTable').DataTable({
+	        dom: 'Bfrtip',
+	        buttons: [
+	            'copyHtml5',
+	            'excelHtml5',
+	            'csvHtml5',
+	            'pdfHtml5'
+	        ]
 	    });
-	    $(receivableTableTools.fnContainer()).insertBefore('#receivablesTable_wrapper');
-	    
 	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
