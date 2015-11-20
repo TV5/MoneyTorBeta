@@ -30,6 +30,7 @@
   <script src="${resource(dir: 'datatables/extensions/pdfmake/build', file: 'pdfmake.min.js')}"></script>
   <script src="${resource(dir: 'datatables/extensions/pdfmake/build', file: 'vfs_fonts.js')}"></script>
   <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.html5.min.js')}"></script>
+  <script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.print.min.js')}"></script>
   <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
 
   <style type="text/css">
