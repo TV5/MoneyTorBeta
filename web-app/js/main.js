@@ -285,51 +285,59 @@
 	}
 
 	$(document).ready(function() {
-	    var receivableTable = $('#receivablesTable').DataTable();
-	    new $.fn.dataTable.Buttons(receivableTable, {
+	    $('#receivablesTable').DataTable({
 	        dom: 'Bfrtip',
 	        buttons: [
-	            'copyHtml5',
-	            {
-	                extend: 'excelHtml5',
-	                title: 'Receivables Summary',
-	                orientation: 'portrait',
-	                pageSize: 'LETTER',
-	                exportOptions: {
-	                	columns: [ 0, 1, 2, 3, 4 ]
-	                }
-	            },
-	            {
-	                extend: 'csvHtml5',
-	                title: 'Receivables Summary',
-	                orientation: 'portrait',
-	                pageSize: 'LETTER',
-	                exportOptions: {
-	                	columns: [ 0, 1, 2, 3, 4 ]
-	                }
-	            },
-	            {
-	                extend: 'pdfHtml5',
-	                title: 'Receivables Summary',
-	                orientation: 'portrait',
-	                pageSize: 'LETTER',
-	                exportOptions: {
-	                	columns: [ 0, 1, 2, 3, 4 ]
-	                }
-	            },
-	            {
-	                extend: 'print',
-	                title: 'Receivables Summary',
-	                orientation: 'portrait',
-	                pageSize: 'LETTER',
-	                exportOptions: {
-	                    columns: [ 0, 1, 2, 3, 4 ]
-	                }
-	            },
-	            'colvis'
+				{
+				    extend: 'collection',
+				    text: 'Export',
+				    buttons: [
+						{
+						    extend: 'copyHtml5',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'excelHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'csvHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'pdfHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+				    ]
+				},
+				{
+				    extend: 'print',
+				    title: 'Receivables Summary',
+				    orientation: 'portrait',
+				    pageSize: 'LETTER',
+				    exportOptions: {
+				        columns: [ 0, 1, 2, 3, 4 ]
+				    }
+				}
 	        ]
 	    });
-	    receivableTable.buttons( 0, null ).container().prependTo(receivableTable.table().container());
 	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
