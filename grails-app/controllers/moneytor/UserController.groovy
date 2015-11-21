@@ -45,7 +45,6 @@ class UserController {
 	def addAdmin() {
 		System.out.println("Add Admin")
 		if(params.acpassword==params.apassword){
-<<<<<<< HEAD
 			def user =new User(
 			f_name:params.af_name,
 			l_name:params.al_name,
@@ -61,23 +60,6 @@ class UserController {
 				userService.addUser(user)
 				System.out.println("added")
 			
-=======
-			def user =new User()
-			user.f_name=params.af_name
-			user.l_name=params.al_name
-			user.username=params.ausername
-			user.password=params.apassword
-			user.type='A'
-			user.status=1
-			user.updated_on=new Date() 
-			user.updated_by=session.user.id
-			
-		if(user!=null){
-				System.out.println(params.ausername)
-				userService.addUser(user)
-				System.out.println("added")
-			
->>>>>>> origin/sonia
 			}
 		}
 	}
