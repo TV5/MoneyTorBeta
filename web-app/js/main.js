@@ -256,16 +256,52 @@
 		document.getElementById("uNewPass").value=password;
 	}
 	
+	
 	$(document).ready(function() {
 	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
-	    var payablesTable = $('#payablesTable').DataTable({
-			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
-			"pageLength": num
-		});
-
+	//    var payablesTable = $('#payablesTable').DataTable({
+	//		"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
+	//		"pageLength": num
+	//	});
+	    
+	    $('#payablesTable').DataTable( {
+	        "footerCallback": function ( row, data, start, end, display ) {
+	            var api = this.api(), data;
+	 
+	            // Remove the formatting to get integer data for summation
+	            var intVal = function ( i ) {
+	                return typeof i === 'string' ?
+	                    i.replace(/[\$,]/g, '')*1 :
+	                    typeof i === 'number' ?
+	                        i : 0;
+	            };
+	 
+	            // Total over all pages
+	            total = api
+	                .column( 4 )
+	                .data()
+	                .reduce( function (a, b) {
+	                    return intVal(a) + intVal(b);
+	                }, 0 );
+	 
+	            // Total over this page
+	            pageTotal = api
+	                .column( 4, { page: 'current'} )
+	                .data()
+	                .reduce( function (a, b) {
+	                    return intVal(a) + intVal(b);
+	                }, 0 );
+	 
+	            // Update footer
+	            $( api.column( 4 ).footer() ).html(
+	                '$'+pageTotal +' ( $'+ total +' total)'
+	            );
+	        }
+	    } );
+	    
 	    //payables
 		$('#max').val(new Date().toDateInputValue());
 		var max = new Date();
@@ -297,6 +333,8 @@
 	    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
 	    return local.toJSON().slice(0,10);
 	});
+	
+
 
 	$('#settingsLink').click(function(){
 		$('#userSettings').modal('show');
@@ -307,7 +345,7 @@
 		$('#newPass').hide();
 	});	
 
-	/*function editPayable(id,or_no, transactor_id, amount, transaction_date) {
+	function editPayable(id,or_no, transactor_id, amount, transaction_date) {
 		alert(id);
 		transaction_date = transaction_date.toString().split(' ')[0];
 		console.log(transaction_date);
@@ -318,7 +356,7 @@
 		document.getElementById("epamount").value= amount;
 		document.getElementById("eptransaction_date").value = transaction_date;
 		$('#editPayable').modal('show');
-	}*/
+	}
 	
 	function editAdmin(id, username, f_name, l_name, password, status){
 		document.getElementById("adminId").value=id;
