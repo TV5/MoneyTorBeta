@@ -37,7 +37,7 @@
 		    </div>
 		    <div class="eight wide field">
 		      <text>********</text> 
-		      <a class="displaySec" href="#" onclick="changePassword()">change password</a>
+		      <a class="displaySec" href="#" onclick="changePassword('${user.password}')">change password</a>
 		    </div>
 		</div>
 		<div id="newPass">
@@ -46,7 +46,7 @@
 			      <label>Current Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <g:textField value="uCurrPass"  name="uCurrPass"/>
+			      <g:textField name="uCurrPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -54,7 +54,7 @@
 			      <label>New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <g:textField id="newPW" value="uNewPass" name="uNewPass"/>
+			      <g:textField name="uNewPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -62,10 +62,11 @@
 			      <label>Confirm New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <g:textField  value="uCNewPass" name="uCNewPass"/>
+			      <g:textField name="uCNewPass"/>
 			    </div>
 			</div>
 			<g:hiddenField name="uId" />
+			<g:hiddenField name="uCurrentPass" />
 		</div>
     
   </div>

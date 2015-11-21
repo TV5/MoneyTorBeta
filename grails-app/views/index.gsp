@@ -21,8 +21,7 @@
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'form.js')}"></script>
-  <script src="${resource(dir: 'dist/components', file: 'transition.js')}"></script>
+<script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
 
   <style type="text/css">
     body {
@@ -38,46 +37,7 @@
       max-width: 450px;
     }
   </style>
-  <g:javascript>
 
-  $(document)
-    .ready(function() {
-      $('.ui.form')
-        .form({
-          fields: {
-            username: {
-              identifier  : 'username',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your username'
-                },                
-                {
-                    type   : 'length[8]',
-                    prompt : 'Your username must be at least 8 characters'
-                  }
-                  
-              ]
-            },
-            password: {
-              identifier  : 'password',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[8]',
-                  prompt : 'Your password must be at least 8 characters'
-                }
-              ]
-            }       
-          }
-        })
-      ;
-    })
-  ;
-  </g:javascript>
 </head>
 <body>
 
@@ -118,5 +78,5 @@
 </div>
 
 </body>
-
+<script src="${resource(dir: 'js', file: 'main.js')}"></script>
 </html>
