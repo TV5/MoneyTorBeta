@@ -28,6 +28,9 @@ class TransactorController {
 	def addCustomer() {
 		System.out.println("add customer")
 		System.out.println("hehe")
+		def calculatedTerms
+		//if(params.cterms == )
+		
 		def transactor = new Transactor(
 			name: params.cname,
 			address: params.caddress,
