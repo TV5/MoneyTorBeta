@@ -56,6 +56,22 @@ class AccountController {
 		redirect(action: "main", controller: "main")
 	}
 	
+	def editReceivable() {
+		print 'or ' + params.eror_no
+		def account = new Account(
+			or_no: params.eror_no,
+			transactor_id: params.int('ercustomer_name'),
+			amount: params.eramount,
+			transaction_date: params.ertransaction_date,
+			type: params.type,
+			updated_by: session.user.id
+			)
+		print 'controller trans' + account.transactor_id
+		print 'id' + params.int('receivable_id') + ' ' + account.id
+		accountService.editAccount(params.int('receivable_id'),account)
+		redirect(action: "main", controller: "main")
+	}
+	
     def index() { 
 		
 	}

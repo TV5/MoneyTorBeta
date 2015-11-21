@@ -7,7 +7,7 @@
 		      <label>Customer Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <select id="ercustomer_name" class="ui dropdown" id="receivablesNumEntries">
+		      <select id="ercustomer_name" class="ui dropdown">
 			      <g:each in="${customerList}" var="customer">
 			      	<option value="${customer.id}">${customer.name}</option>	
 			      </g:each>
@@ -46,7 +46,7 @@
 		<g:hiddenField name="type" value="R" />
 	  </div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve button" value="Save" action="editAccount"/>
+	    <g:actionSubmit class="ui approve button" value="Save" action="editReceivable"/>
 	    <div class="ui cancel button teal">Done</div>
 	  </div>
     </g:form>

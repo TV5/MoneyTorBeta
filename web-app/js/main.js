@@ -472,11 +472,11 @@
 	});	
 
 	function editReceivable(id, or_no, transactor_id, amount, date){
-		alert(date);
 		$('#ercustomer_name').val(transactor_id);
 		$('#eror_no').val(or_no);
 		$('#eramount').val(amount);
 		$('#ertransaction_date').val(date.toString().split(' ')[0]);
+		$('#receivable_id').val(id);
 		$('#editReceivableModal').modal('show');
 	}
 	
