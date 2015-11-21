@@ -481,9 +481,6 @@
 		
 	}
 	
-	function changeSaveBtn(){
-		$( "#saveBtn" ).toggleClass( teal );
-	}
 
 	$.fn.dataTable.ext.search.push(
 			function( settings, data, dataIndex ) {
@@ -504,7 +501,7 @@
 	$(document).ready(function() {
 	    $('#employeesTable').DataTable();
 	    $('#administratorsTable').DataTable();
-	    $("#addMoreBtn").attr("disabled", "disabled");
+	    $("#caddMoreBtn").attr("disabled", "disabled");
 	    
 	} );
 	
@@ -531,33 +528,44 @@
 	}
 	
 
-	function saved(){
-		document.getElementById('addMoreBtn').className = 'ui teal button'; 
-		document.getElementById('saveBtn').value = 'Saved';
-		$("#saveBtn").attr("disabled", "disabled");
-		$("#addMoreBtn").removeAttr("disabled");
-		$('#name').prop('readonly', true);
-		$('#address').prop('readonly', true);
-		$('#telephone_no').prop('readonly', true);
-		$('#mobile_no').prop('readonly', true);
-		$('#terms').prop('readonly', true);
-		$('#select').prop('disabled', true);
+	function csaved(){
+	
+		document.getElementById('caddMoreBtn').className = 'ui teal button'; 
+		document.getElementById('csaveBtn').value = 'Saved';
+		$("#csaveBtn").attr("disabled", "disabled");
+		$("#caddMoreBtn").removeAttr("disabled");
+		$('#cname').prop('readonly', true);
+		$('#caddress').prop('readonly', true);
+		$('#ctelephone_no').prop('readonly', true);
+		$('#cmobile_no').prop('readonly', true);
+		$('#cterms').prop('readonly', true);
+		$('#cselect').prop('disabled', true);
 		} 
 	
-	function addmoreClick(){
-		document.getElementById('saveBtn').value = 'Save';
-		document.getElementById('addMoreBtn').className = 'ui button'; 
-		$("#saveBtn").removeAttr("disabled");
-		$("#addMoreBtn").attr("disabled", "disabled");
-		document.getElementById('resetBtn').click();
-		$('#name').prop('readonly', false);
-		$('#address').prop('readonly', false);
-		$('#telephone_no').prop('readonly', false);
-		$('#mobile_no').prop('readonly', false);
-		$('#terms').prop('readonly', false);
-		$('#select').prop('disabled', false);
+	function caddmoreClick(){
+		document.getElementById('csaveBtn').value = 'Save';
+		document.getElementById('caddMoreBtn').className = 'ui button'; 
+		$("#csaveBtn").removeAttr("disabled");
+		$("#caddMoreBtn").attr("disabled", "disabled");
+		document.getElementById('cresetBtn').click();
+		$('#cname').prop('readonly', false);
+		$('#caddress').prop('readonly', false);
+		$('#ctelephone_no').prop('readonly', false);
+		$('#cmobile_no').prop('readonly', false);
+		$('#cterms').prop('readonly', false);
+		$('#cselect').prop('disabled', false);
 		} 
 	
+	function validateForm() {
+		var form = document.getElementById('addCustomerForm');
+		  if(form.validate()) {
+		          return true;
+		        }else {
+		          alert('Form contains invalid data.  Please correct first');
+		          return false;
+		        }
+		          return true;
+		  }
 	
 
 		
