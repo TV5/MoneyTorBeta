@@ -39,8 +39,7 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
-
-
+	
 	function edit(){
 		$('#saveBtn').show();
 		$('.displayFirst').hide();
@@ -57,11 +56,10 @@
 		$('.oldPass').show();
 	}
 
-	function changePassword(){		
+	function changePassword(){
 		$('.oldPass').hide();
 		$('#newPass').show();
 	}
-	
 	$(document)
     .ready(function() {
       $('.ui.form')
@@ -244,167 +242,67 @@
                   prompt : 'Please enter your Last Name'
                 }
               ]
-            },
-            username: {
-                identifier  : 'username',
-                rules: [
-                  {
-                    type   : 'empty',
-                    prompt : 'Please enter your username'
-                  },                
-                  {
-                      type   : 'length[8]',
-                      prompt : 'Your username must be at least 8 characters'
-                    }
-                    
-                ]
-              },
-              password: {
-                identifier  : 'password',
-                rules: [
-                  {
-                    type   : 'empty',
-                    prompt : 'Please enter your password'
-                  },
-                  {
-                    type   : 'length[8]',
-                    prompt : 'Your password must be at least 8 characters'
-                  }
-                ]
-              }
+            }         
           }
-        });
-    });
+        })
+      ;
+    })
+  ;
 	
 	function editUserAccount(id, f_name, l_name, password){
 		document.getElementById("uId").value=id;
 		document.getElementById("uF_name").value=f_name;
 		document.getElementById("uL_name").value=l_name;
 		document.getElementById("uNewPass").value=password;
-		document.getElementById("uCurrentPass").value=password;
 	}
-
+	
+	
 	$(document).ready(function() {
-		
-		//receivables
-	    var receivablesTable = $('#receivablesTable').DataTable();
-	    new $.fn.dataTable.Buttons(receivablesTable, {
-	        buttons: [
-				{
-				    extend: 'collection',
-				    text: 'Export',
-				    buttons: [
-						{
-						    extend: 'copyHtml5',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'excelHtml5',
-						    title: 'Receivables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'csvHtml5',
-						    title: 'Receivables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'pdfHtml5',
-						    title: 'Receivables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-				    ]
-				},
-				{
-				    extend: 'print',
-				    title: 'Receivables Summary',
-				    orientation: 'portrait',
-				    pageSize: 'LETTER',
-				    exportOptions: {
-				        columns: [ 0, 1, 2, 3, 4 ]
-				    }
-				}
-	        ]
-	    });
-	    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
-	    
+	    $('#receivablesTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
-		
-	    var payablesTable = $('#payablesTable').DataTable({
-			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
-			"pageLength": num
-		});
-	    new $.fn.dataTable.Buttons(payablesTable, {
-	        buttons: [
-				{
-				    extend: 'collection',
-				    text: 'Export',
-				    buttons: [
-						{
-						    extend: 'copyHtml5',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'excelHtml5',
-						    title: 'Payables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'csvHtml5',
-						    title: 'Payables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'pdfHtml5',
-						    title: 'Payables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-				    ]
-				},
-				{
-				    extend: 'print',
-				    title: 'Payables Summary',
-				    orientation: 'portrait',
-				    pageSize: 'LETTER',
-				    exportOptions: {
-				        columns: [ 0, 1, 2, 3, 4 ]
-				    }
-				}
-	        ]
-	    });
-	    payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
-
-	    // payables
+	//    var payablesTable = $('#payablesTable').DataTable({
+	//		"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
+	//		"pageLength": num
+	//	});
+	    
+	    $('#payablesTable').DataTable( {
+	        "footerCallback": function ( row, data, start, end, display ) {
+	            var api = this.api(), data;
+	 
+	            // Remove the formatting to get integer data for summation
+	            var intVal = function ( i ) {
+	                return typeof i === 'string' ?
+	                    i.replace(/[\$,]/g, '')*1 :
+	                    typeof i === 'number' ?
+	                        i : 0;
+	            };
+	 
+	            // Total over all pages
+	            total = api
+	                .column( 4 )
+	                .data()
+	                .reduce( function (a, b) {
+	                    return intVal(a) + intVal(b);
+	                }, 0 );
+	 
+	            // Total over this page
+	            pageTotal = api
+	                .column( 4, { page: 'current'} )
+	                .data()
+	                .reduce( function (a, b) {
+	                    return intVal(a) + intVal(b);
+	                }, 0 );
+	 
+	            // Update footer
+	            $( api.column( 4 ).footer() ).html(
+	                '$'+pageTotal +' ( $'+ total +' total)'
+	            );
+	        }
+	    } );
+	    
+	    //payables
 		$('#max').val(new Date().toDateInputValue());
 		var max = new Date();
 		max.setMonth(max.getMonth() - 1);
@@ -435,6 +333,8 @@
 	    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
 	    return local.toJSON().slice(0,10);
 	});
+	
+
 
 	$('#settingsLink').click(function(){
 		$('#userSettings').modal('show');
@@ -445,7 +345,7 @@
 		$('#newPass').hide();
 	});	
 
-	/*function editPayable(id,or_no, transactor_id, amount, transaction_date) {
+	function editPayable(id,or_no, transactor_id, amount, transaction_date) {
 		alert(id);
 		transaction_date = transaction_date.toString().split(' ')[0];
 		console.log(transaction_date);
@@ -456,7 +356,7 @@
 		document.getElementById("epamount").value= amount;
 		document.getElementById("eptransaction_date").value = transaction_date;
 		$('#editPayable').modal('show');
-	}*/
+	}
 	
 	function editAdmin(id, username, f_name, l_name, password, status){
 		document.getElementById("adminId").value=id;
@@ -486,7 +386,7 @@
 	}
 
 	$.fn.dataTable.ext.search.push(
-			function( settings, data, dataIndex ) {
+		    function( settings, data, dataIndex ) {
 		  		var min = Date.parse($('#min').val(),10);
 		  		var max = Date.parse($('#max').val());
 		  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
@@ -500,12 +400,10 @@
 		        return false;
 		    }
 	);
-
+	
 	$(document).ready(function() {
 	    $('#employeesTable').DataTable();
 	    $('#administratorsTable').DataTable();
-	    $("#addMoreBtn").attr("disabled", "disabled");
-	    
 	} );
 	
 	function editEmployee(id, username, f_name, l_name, password, status){
@@ -532,32 +430,6 @@
 	
 
 	function saved(){
-		document.getElementById('addMoreBtn').className = 'ui teal button'; 
+		document.getElementById('addmore').className = 'ui teal button'; 
 		document.getElementById('saveBtn').value = 'Saved';
-		$("#saveBtn").attr("disabled", "disabled");
-		$("#addMoreBtn").removeAttr("disabled");
-		$('#name').prop('readonly', true);
-		$('#address').prop('readonly', true);
-		$('#telephone_no').prop('readonly', true);
-		$('#mobile_no').prop('readonly', true);
-		$('#terms').prop('readonly', true);
-		$('#select').prop('disabled', true);
 		} 
-	
-	function addmoreClick(){
-		document.getElementById('saveBtn').value = 'Save';
-		document.getElementById('addMoreBtn').className = 'ui button'; 
-		$("#saveBtn").removeAttr("disabled");
-		$("#addMoreBtn").attr("disabled", "disabled");
-		document.getElementById('resetBtn').click();
-		$('#name').prop('readonly', false);
-		$('#address').prop('readonly', false);
-		$('#telephone_no').prop('readonly', false);
-		$('#mobile_no').prop('readonly', false);
-		$('#terms').prop('readonly', false);
-		$('#select').prop('disabled', false);
-		} 
-	
-	
-
-		

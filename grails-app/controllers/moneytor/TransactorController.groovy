@@ -22,11 +22,26 @@ class TransactorController {
 			)
 		transactorService.addTransactor(transactor)
 		System.out.println("added!")
-		
-		
-		
-		
+			
 	}
+	
+	def addCustomer() {
+		System.out.println("add customer")
+		System.out.println("hehe")
+		def transactor = new Transactor(
+			name: params.cname,
+			address: params.caddress,
+			telephone_no: params.ctelephone_no,
+			mobile_no: params.cmobile_no,
+			terms: params.cterms,
+			type: params.ctype,
+			status: params.cstatus
+			)
+		transactorService.addTransactor(transactor)
+		System.out.println("added!")
+			
+	}
+	
 	def addMore() {
 		System.out.println("add transactor")
 		System.out.println("hehe")
