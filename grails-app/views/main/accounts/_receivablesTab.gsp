@@ -60,7 +60,7 @@
 				    <% def dueDate = receivable.transaction_date+it.terms %>
 				    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 			    </td>
-			    <td><a href="#" onClick="editreceivable('${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i class="edit icon"></i></a></td>
+			    <td><a href="#" onClick="editReceivable('${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i class="edit icon"></i></a></td>
 			    <td> <button class="ui button teal paymentsBtn">View</button></td>
 			  	</tr>	  		
 	  		</g:each>

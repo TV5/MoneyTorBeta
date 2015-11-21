@@ -1,47 +1,35 @@
-<div id="editReceivable" class="ui modal">
+<div id="editReceivableModal" class="ui modal">
   <div class="header">Edit Account Receivable</div>
   <div class="content">
-    <form class="ui form">
-    	
-    	<div class="inline fields">
+    <g:form class="ui form" controller="account">
+		<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Customer Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="text">
+		      <select id="ercustomer_name" class="ui dropdown" id="receivablesNumEntries">
+			      <g:each in="${customerList}" var="customer">
+			      	<option value="${customer.id}">${customer.name}</option>	
+			      </g:each>
+		      </select>
 		    </div>
 		</div>
 		
     	<div class="inline fields">
 		    <div class="two wide field">
-		      <label>Address</label>      
+		      <label>Official Receipt Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="text">
+		      <g:textField name="eror_no"/>
 		    </div>
 		</div>
-				<div class="inline fields">
-		<div class="two wide field">
-		      <label>Contact Number</label>      
-		    </div>
-		    <div class="fourteen wide field">
-		      <input type="text">
-		    </div>
-		</div>
-		<div class="inline fields">
-		<div class="two wide field">
-		      <label>Terms</label>      
-		    </div>
-		    <div class="fourteen wide field">
-		      <input type="number">
-		    </div>
-		</div>
+		
 		<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Amount</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="number">
+		      <g:field type="number" name="eramount"/>
 		    </div>
 		</div>
 		
@@ -50,24 +38,16 @@
 		      <label>Transaction Date</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="date">
-		    </div>
+		      <input type="date" id="ertransaction_date">
+		      <%--<g:datePicker name="eptransaction_date" precision="day"/>
+		    --%></div>
 		</div>
-		
-		<div class="inline fields">
-		    <div class="two wide field">
-		      <label>Due Date</label>      
-		    </div>
-		    <div class="fourteen wide field">
-		      <input type="date">
-		    </div>
-		</div>
-		
-    	
-    </form>
-  </div>
-  <div class="actions">
-    <div class="ui approve button teal">Save</div>
-    <div class="ui cancel button teal">Done</div>
-  </div>
+		<g:hiddenField name="receivable_id"/>
+		<g:hiddenField name="type" value="R" />
+	  </div>
+	  <div class="actions">
+	    <g:actionSubmit class="ui approve button" value="Save" action="editAccount"/>
+	    <div class="ui cancel button teal">Done</div>
+	  </div>
+    </g:form>
 </div> 

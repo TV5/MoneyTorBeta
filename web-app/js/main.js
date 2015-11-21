@@ -471,6 +471,24 @@
 		$('#newPass').hide();
 	});	
 
+	function editReceivable(id, or_no, transactor_id, amount, date){
+		alert(date);
+		$('#ercustomer_name').val(transactor_id);
+		$('#eror_no').val(or_no);
+		$('#eramount').val(amount);
+		$('#ertransaction_date').val(date.toString().split(' ')[0]);
+		$('#editReceivableModal').modal('show');
+	}
+	
+	function editPayable(id, or_no, transactor_id, amount, date){
+		alert(date);
+		$('#epcustomer_name').val(transactor_id);
+		$('#epor_no').val(or_no);
+		$('#epamount').val(amount);
+		$('#eptransaction_date').val(date.toString().split(' ')[0]);
+		$('#editPayableModal').modal('show');
+	}
+	
 	function editAdmin(id, username, f_name, l_name, password, status){
 		document.getElementById("adminId").value=id;
 		document.getElementById("adminUsername").value=username;
