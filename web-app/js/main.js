@@ -62,8 +62,7 @@
 		$('#newPass').show();
 	}
 	
-	$(document)
-    .ready(function() {
+	function validation() {
       $('.ui.form')
         .form({
           fields: {
@@ -274,7 +273,7 @@
               }
           }
         });
-    });
+    }
 	
 	function editUserAccount(id, f_name, l_name, password){
 		document.getElementById("uId").value=id;
@@ -541,6 +540,36 @@
 		$('#cterms').prop('readonly', true);
 		$('#cselect').prop('disabled', true);
 		} 
+
+	function addedEmployee(){
+		alert("added");
+		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
+		document.getElementById('saveBtn').value = 'Saved';
+		$("#saveBtn").attr("disabled", "disabled");
+		$("#addMoreBtn").removeAttr("disabled");*/
+
+		} 
+	function addedAdmin(){
+		alert("added");
+		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
+		document.getElementById('saveBtn').value = 'Saved';
+		$("#saveBtn").attr("disabled", "disabled");
+		$("#addMoreBtn").removeAttr("disabled");*/
+
+		} 
+	function addmoreClick(){
+		document.getElementById('saveBtn').value = 'Save';
+		document.getElementById('addMoreBtn').className = 'ui button'; 
+		$("#saveBtn").removeAttr("disabled");
+		$("#addMoreBtn").attr("disabled", "disabled");
+		document.getElementById('resetBtn').click();
+		$('#name').prop('readonly', false);
+		$('#address').prop('readonly', false);
+		$('#telephone_no').prop('readonly', false);
+		$('#mobile_no').prop('readonly', false);
+		$('#terms').prop('readonly', false);
+		$('#select').prop('disabled', false);
+	}
 	
 	function caddmoreClick(){
 		document.getElementById('csaveBtn').value = 'Save';
@@ -554,6 +583,7 @@
 		$('#cmobile_no').prop('readonly', false);
 		$('#cterms').prop('readonly', false);
 		$('#cselect').prop('disabled', false);
+
 		} 
 	
 	function validateForm() {
