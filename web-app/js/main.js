@@ -358,7 +358,7 @@
 	    $('#searchReceivables').keyup(function(){
 	          receivablesTable.search($(this).val()).draw() ;
 	    })
-	    var filter = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+	    var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 		$('#receivablesNumEntries').change(function(){
 			 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 		});
@@ -434,7 +434,6 @@
 		max.setMonth(max.getMonth() - 1);
 		$('#min').val(max.toDateInputValue());
 	    function setPayablesTotalAmt(){
-		    console.log("setPayablesTotalAmt")
 		    var payablesAmounts = $("#payablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
 			var payablesTotal=0;
 			for (var i = 0; i<payablesAmounts.length; i++){

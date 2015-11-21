@@ -28,6 +28,19 @@ class AccountController {
 		redirect(action: "main", controller: "main")
 	}
 	
+	def addReceivable() {
+		def account = new Account(
+				or_no: params.ror_no,
+				transactor_id: params.rtransactor_id,
+				amount: params.ramount,
+				transaction_date: params.rdate,
+				type: 'R',
+				updated_by: session.user.id
+				)
+		accountService.addAccount(account)
+		redirect(action: "main", controller: "main")
+	}
+	
 	def editAccount() {
 		def account = new Account(
 			id: params.ep_id,
