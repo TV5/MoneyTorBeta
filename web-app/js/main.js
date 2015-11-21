@@ -62,8 +62,7 @@
 		$('#newPass').show();
 	}
 	
-	$(document)
-    .ready(function() {
+	function validation() {
       $('.ui.form')
         .form({
           fields: {
@@ -274,7 +273,7 @@
               }
           }
         });
-    });
+    }
 	
 	function editUserAccount(id, f_name, l_name, password){
 		document.getElementById("uId").value=id;
@@ -541,13 +540,9 @@
 		$('#cterms').prop('readonly', true);
 		$('#cselect').prop('disabled', true);
 		} 
-<<<<<<< HEAD
+
 	function addedEmployee(){
-		alert("added");
-		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
-		document.getElementById('saveBtn').value = 'Saved';
-		$("#saveBtn").attr("disabled", "disabled");
-		$("#addMoreBtn").removeAttr("disabled");*/
+		alert("Employee has been added!");		
 
 		} 
 	function addedAdmin(){
@@ -570,7 +565,7 @@
 		$('#mobile_no').prop('readonly', false);
 		$('#terms').prop('readonly', false);
 		$('#select').prop('disabled', false);
-=======
+	}
 	
 	function caddmoreClick(){
 		document.getElementById('csaveBtn').value = 'Save';
@@ -584,7 +579,7 @@
 		$('#cmobile_no').prop('readonly', false);
 		$('#cterms').prop('readonly', false);
 		$('#cselect').prop('disabled', false);
->>>>>>> refs/remotes/origin/master
+
 		} 
 	
 	function validateForm() {

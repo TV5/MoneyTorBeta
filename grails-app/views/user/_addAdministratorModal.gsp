@@ -1,5 +1,6 @@
 <div id="addadministrator" class="ui modal">
 			<div class="header">Administrator</div>
+			
 			<div class="content">
 				<g:form class="ui form" controller="user" action="addAdmin">
 				<div class="ui error message"></div>		
@@ -28,6 +29,10 @@
 						<div class="seven wide field">
 				            <g:textField name="ausername" value="${ausername}" required="true"/>
 						</div>
+						<div class="three wide field">
+		    			<g:submitToRemote url="[controller: 'User' ,action: 'checkUsername']"  class="ui button" value="Check Username" update="usernameTakena"/>
+		    			</div>
+						<div id="usernameTakena"></div>	
 					</div>
 
 					<div class="inline fields">
@@ -48,8 +53,7 @@
 						</div>
 					</div>
 					<g:hiddenField name="atype" value="A" />
-					<g:hiddenField name="userId" value="${user.id}" />				
-			</div>
+			
 			<div class="actions">
 				<g:submitToRemote url="[action: 'addAdmin']"  update="saveBtn" class="ui teal large button" value="Save" id="saveBtn" onComplete="addAdmin()" />
 				<!--<g:submitToRemote  url="" update="saveBtn" class="ui button" value="Add More" id="addMoreBtn" onComplete="addmoreClick()" />-->
@@ -57,4 +61,5 @@
 				<div class="ui cancel button">Cancel</div>
 			</div>
 			</g:form>
+			</div>
 		</div>

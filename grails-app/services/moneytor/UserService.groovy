@@ -8,18 +8,20 @@ class UserService {
     def serviceMethod() {
 
     }
+	def checkUser(username){
+		def userCheck = User.findByUsername(username)
+		def ret="available"
+		if(userCheck){
+			ret= "unavailable"
+		}
+		return ret
+	}
 	def addUser(user){
 		def userCheck = User.findByUsername(user.username)
 		if(userCheck){
-			System.out.println("username shit")
 			return "username already in use"
 		}else{
-		System.out.println("saving")
 		user.save()
-		def nuser= User.findByUsername(user.username)
-		if(nuser){
-			System.our.println("na add bitaw gyud huhu")
-		}
 		}
 	}
 	def editUser(userId, user){

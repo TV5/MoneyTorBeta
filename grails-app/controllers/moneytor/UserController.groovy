@@ -12,6 +12,22 @@ class UserController {
 			redirect(uri: "/")
 			return false
 		}
+	}	
+	
+	def checkUsername(){
+		def username
+		def user
+		if(params.eusername!=null){
+			username=params.eusername
+		}else if(params.ausername!=null){
+			username=params.ausername
+		}else if(params.adminUsername!=null){
+			username=params.adminUsername
+		}else if(params.empUsername){
+			username=params.empUsername
+		}
+		user = userService.checkUser(username)
+		render user
 	}
 	def listEmployees(){
 		def empList=userService.listEmployees()	
@@ -22,7 +38,6 @@ class UserController {
 		return adminList
 	}
 	def addEmployee() {
-		System.out.println("Add Emp")
 		if(params.ecpassword==params.epassword){
 			def user =new User(
 					f_name: params.ef_name,
@@ -32,18 +47,14 @@ class UserController {
 					type: params.etype,
 					status: 1,
 					updated_on: new Date(),
-					updated_by: params.int('userId')
+					updated_by: session.user.id
 				)
 			if(user!=null){
-				System.out.println(params.eusername)
-				userService.addUser(user)
-				System.out.println("added")
-			
+				userService.addUser(user)			
 			}
 		}
 	}
 	def addAdmin() {
-		System.out.println("Add Admin")
 		if(params.acpassword==params.apassword){
 			def user =new User(
 			f_name:params.af_name,
@@ -56,10 +67,7 @@ class UserController {
 			updated_by:session.user.id
 		)	
 		if(user!=null){
-				System.out.println(params.ausername)
-				userService.addUser(user)
-				System.out.println("added")
-			
+				userService.addUser(user)			
 			}
 		}
 	}
