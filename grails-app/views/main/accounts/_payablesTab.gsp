@@ -57,7 +57,7 @@
 		    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 		    </td>
 		    <td><a href="#" onClick="editPayable('${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
-		    <td> <button class="ui button teal paymentsBtn">View</button></td>
+		    <td> <button class="ui button teal" onClick="addPayment('${payable.transactor_id}')">View</button></td>
 		  	</tr>	  		
 	  	</g:each>
 	  </tbody>

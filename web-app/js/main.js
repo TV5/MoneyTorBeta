@@ -32,9 +32,11 @@
 		$('#addCustomer').modal('show');
 	});
 	
-	$('.paymentsBtn').click(function(){
+	function addPayment(account_id){
+		document.getElementById("pmAccount_id").value=account_id;
+		
 		$('#payments').modal('show');
-	});
+	}
 	
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
@@ -60,6 +62,51 @@
 	function changePassword(){		
 		$('.oldPass').hide();
 		$('#newPass').show();
+		
+		$('.ui.form')
+        .form({
+          fields: {
+              uCurrentPass: {
+                identifier  : 'uCurrentPass'         
+              },
+            uCurrPass: {
+              identifier  : 'uCurrPass',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter current password'
+                },                
+                {
+                    type   : 'matched[uCurrentPass]',
+                    prompt : 'The current password entered is incorrect.'
+                  }
+                  
+              ]
+            },
+            uNewPass: {
+              identifier  : 'uNewPass',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your new password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your new password must be at least 8 characters'
+                }
+              ]              
+            },
+            uCNewPass: {
+              identifier  : 'uCNewPass',
+              rules: [
+                {
+                  type   : 'match[uNewPass]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            }
+          }
+        });
 	}
 	
 	$(document)
@@ -291,7 +338,7 @@
 	    });
 	    $(receivableTableTools.fnContainer()).insertBefore('#receivablesTable_wrapper');
 	    
-	    
+	    $('#paymentsTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
@@ -313,7 +360,7 @@
 				payablesAmounts[i] = payablesAmounts[i].textContent;
 				payablesTotal+=parseFloat(payablesAmounts[i]);
 			}
-			$('#payablesTotal').html("Php"+payablesTotal);
+			$('#payablesTotal').html("Php "+payablesTotal);
 		}
 		setPayablesTotalAmt();
 	    $('#min, #max').change( function() {
@@ -339,6 +386,7 @@
 		$('#changepass').hide();
 		$('#saveBtn').hide();
 		$('#newPass').hide();
+		$('.oldPass').show();
 	});	
 
 	/*function editPayable(id,or_no, transactor_id, amount, transaction_date) {

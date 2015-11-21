@@ -2,7 +2,7 @@
   <div class="header">Payment History</div>
   <div class="content">
   
-    <table class="ui  padded table">
+    <table id="paymentsTable" class="ui  padded table">
       <thead>
         <tr>
     	  <th>Date</th>	
@@ -10,38 +10,25 @@
     	</tr>
       </thead>
       <tbody>
-        <tr>
-          <td>August 5, 2014</td>
-          <td>P5,000.00</td>
-        </tr>
-         <tr>
-          <td>August 5, 2014</td>
-          <td>P5,000.00</td>
-        </tr>
-         <tr>
-          <td>August 5, 2014</td>
-          <td>P5,000.00</td>
-        </tr>
-        <tr>
-          <td><b>Total Amount Paid:</b></td>
-          <td><b>P15,000.00</b></td>
-        </tr>
-        <tr>
-          <td><b>Remaining Balance:</b></td>
-          <td style="color:red"><b>P7,000.00</b></td>
-        </tr>
+        <g:each in="${paymentList}" var="payments">
+		  	<tr>
+		    <td><g:formatDate format="MM/dd/yyyy" date="${payments.received_date}"/></td>
+		    <td>${payable.amount }</td>
+		  	</tr>	  		
+	  	</g:each>
       </tbody>
     </table>
-    <form class="ui form">
+    <g:form class="ui form" controller="payment">
 		<div class="inline fields">
 		    <div class="thirteen wide field">
-		      <input type="number" placeholder="Amount paid"/>
+		      <g:textField type="number" placeholder="Amount paid" name="pmAmount"/>
 		    </div>
 		    <div class="three wide field">
-		    <div class="ui button teal">Add Payment</div>
+		    <g:actionSubmit class="ui button teal addP" value="Add Payment" action="addPayment"/>
 		    </div>
 		</div>
-    </form>
+		<g:hiddenField name="pmAccount_id" />
+    </g:form>
   </div>
 		<div class="actions">
 			<div class="ui approve button teal">Done</div>
