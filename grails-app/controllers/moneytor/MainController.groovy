@@ -38,9 +38,10 @@ class MainController {
 			def receivableList = accountService.getReceivableList()
 			def transactorList = transactorService.getTransactorList()
 			def supplierList = transactorService.getSupplierList()
+			def customerList = transactorService.getCustomerList()
 			def saveName = transactorService.saveName("Save")
 			[user: session.user, payableList: payableList, receivableList: receivableList, 
-				transactorList: transactorList, supplierList: supplierList, saveName: saveName]
+				transactorList: transactorList, supplierList: supplierList, customerList: customerList,saveName: saveName]
 			
 		}else{
 			redirect(uri: "/")

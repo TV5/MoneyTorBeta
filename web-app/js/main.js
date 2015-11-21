@@ -286,7 +286,13 @@
 	$(document).ready(function() {
 		
 		//receivables
-	    var receivablesTable = $('#receivablesTable').DataTable();
+		var num = $('#receivablesNumEntries').val();
+	    var receivablesTable = $('#receivablesTable').DataTable({
+			"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+			"pageLength": $('#receivablesNumEntries').val(),
+			"order": [[4, "asc"]]
+		});
+	    
 	    new $.fn.dataTable.Buttons(receivablesTable, {
 	        buttons: [
 				{
@@ -340,15 +346,35 @@
 	        ]
 	    });
 	    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
+	    $('#maxR').val(new Date().toDateInputValue());
+		var maxR = new Date();
+		maxR.setMonth(maxR.getMonth() - 1);
+		$('#minR').val(maxR.toDateInputValue());
+	    
+	    $('#minR, #maxR').change( function() {
+	    	alert("change");
+	        receivablesTable.draw();
+	    } );
+	    $('#searchReceivables').keyup(function(){
+	          receivablesTable.search($(this).val()).draw() ;
+	    })
+	    var filter = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+		$('#receivablesNumEntries').change(function(){
+			 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
+		});
 	    
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
+
+	    // payables
 		var num = $('#payablesNumEntries').val();
 		
 	    var payablesTable = $('#payablesTable').DataTable({
 			"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
-			"pageLength": $('#payablesNumEntries').val()
+			"pageLength": $('#payablesNumEntries').val(),
+			"order": [[4, "asc"]]
 		});
+	  
 	    new $.fn.dataTable.Buttons(payablesTable, {
 	        buttons: [
 				{
@@ -403,7 +429,6 @@
 	    });
 	    payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
-	    // payables
 		$('#max').val(new Date().toDateInputValue());
 		var max = new Date();
 		max.setMonth(max.getMonth() - 1);
