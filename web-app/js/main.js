@@ -326,16 +326,16 @@
 						    	columns: [ 0, 1, 2, 3, 4 ]
 						    }
 						},
+						{
+						    extend: 'print',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						        columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						}
 				    ]
-				},
-				{
-				    extend: 'print',
-				    title: 'Receivables Summary',
-				    orientation: 'portrait',
-				    pageSize: 'LETTER',
-				    exportOptions: {
-				        columns: [ 0, 1, 2, 3, 4 ]
-				    }
 				}
 	        ]
 	    });
@@ -346,8 +346,8 @@
 		var num = $('#payablesNumEntries').val();
 		
 	    var payablesTable = $('#payablesTable').DataTable({
-			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
-			"pageLength": num
+			"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+			"pageLength": $('#payablesNumEntries').val()
 		});
 	    new $.fn.dataTable.Buttons(payablesTable, {
 	        buttons: [
@@ -388,16 +388,16 @@
 						    	columns: [ 0, 1, 2, 3, 4 ]
 						    }
 						},
+						{
+						    extend: 'print',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						        columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						}
 				    ]
-				},
-				{
-				    extend: 'print',
-				    title: 'Payables Summary',
-				    orientation: 'portrait',
-				    pageSize: 'LETTER',
-				    exportOptions: {
-				        columns: [ 0, 1, 2, 3, 4 ]
-				    }
 				}
 	        ]
 	    });
@@ -423,6 +423,9 @@
 	        payablesTable.draw();
 	    	setPayablesTotalAmt();
 	    } );
+	    $('#searchPayables').keyup(function(){
+	          payablesTable.search($(this).val()).draw() ;
+	    })
 	    var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 		$('#payablesNumEntries').change(function(){
 			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
@@ -444,19 +447,6 @@
 		$('#newPass').hide();
 	});	
 
-	/*function editPayable(id,or_no, transactor_id, amount, transaction_date) {
-		alert(id);
-		transaction_date = transaction_date.toString().split(' ')[0];
-		console.log(transaction_date);
-		document.getElementById("payable_id").value=id;
-		console.log('id',document.getElementById("payable_id").value);
-		document.getElementById("epsupplier_name").value=transactor_id;
-		document.getElementById("epor_no").value= or_no;
-		document.getElementById("epamount").value= amount;
-		document.getElementById("eptransaction_date").value = transaction_date;
-		$('#editPayable').modal('show');
-	}*/
-	
 	function editAdmin(id, username, f_name, l_name, password, status){
 		document.getElementById("adminId").value=id;
 		document.getElementById("adminUsername").value=username;
@@ -496,6 +486,19 @@
 		        return false;
 		    }
 	);
+	
+	$.fn.dataTable.Api.register( 'sum()', function ( ) {
+	    return this.flatten().reduce( function ( a, b ) {
+	        if ( typeof a === 'string' ) {
+	            a = a.replace(/[^\d.-]/g, '') * 1;
+	        }
+	        if ( typeof b === 'string' ) {
+	            b = b.replace(/[^\d.-]/g, '') * 1;
+	        }
+	 
+	        return a + b;
+	    }, 0 );
+	} );
 
 	$(document).ready(function() {
 	    $('#employeesTable').DataTable();
