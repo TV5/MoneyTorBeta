@@ -109,8 +109,7 @@
         });
 	}
 	
-	$(document)
-    .ready(function() {
+	function validation() {
       $('.ui.form')
         .form({
           fields: {
@@ -321,7 +320,7 @@
               }
           }
         });
-    });
+    }
 	
 	function editUserAccount(id, f_name, l_name, password){
 		document.getElementById("uId").value=id;
@@ -330,22 +329,127 @@
 		document.getElementById("uNewPass").value=password;
 		document.getElementById("uCurrentPass").value=password;
 	}
-	
+
 	$(document).ready(function() {
-	    var receivableTable = $('#receivablesTable').DataTable();
-	    var receivableTableTools = new $.fn.dataTable.TableTools(receivableTable, {
-	    	'sSwfPath': '/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf'
+		
+		//receivables
+	    var receivablesTable = $('#receivablesTable').DataTable();
+	    new $.fn.dataTable.Buttons(receivablesTable, {
+	        buttons: [
+				{
+				    extend: 'collection',
+				    text: 'Export',
+				    buttons: [
+						{
+						    extend: 'copyHtml5',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'excelHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'csvHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'pdfHtml5',
+						    title: 'Receivables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+				    ]
+				},
+				{
+				    extend: 'print',
+				    title: 'Receivables Summary',
+				    orientation: 'portrait',
+				    pageSize: 'LETTER',
+				    exportOptions: {
+				        columns: [ 0, 1, 2, 3, 4 ]
+				    }
+				}
+	        ]
 	    });
-	    $(receivableTableTools.fnContainer()).insertBefore('#receivablesTable_wrapper');
-	    
+
+	    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
 	    $('#paymentsTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 		var num = $('#payablesNumEntries').val();
+		
 	    var payablesTable = $('#payablesTable').DataTable({
 			"dom": '<"top"f><"dateFilter">rt<"bottom"ip><"clear">',
 			"pageLength": num
 		});
+	    new $.fn.dataTable.Buttons(payablesTable, {
+	        buttons: [
+				{
+				    extend: 'collection',
+				    text: 'Export',
+				    buttons: [
+						{
+						    extend: 'copyHtml5',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'excelHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'csvHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+						{
+						    extend: 'pdfHtml5',
+						    title: 'Payables Summary',
+						    orientation: 'portrait',
+						    pageSize: 'LETTER',
+						    exportOptions: {
+						    	columns: [ 0, 1, 2, 3, 4 ]
+						    }
+						},
+				    ]
+				},
+				{
+				    extend: 'print',
+				    title: 'Payables Summary',
+				    orientation: 'portrait',
+				    pageSize: 'LETTER',
+				    exportOptions: {
+				        columns: [ 0, 1, 2, 3, 4 ]
+				    }
+				}
+	        ]
+	    });
+	    payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
 	    // payables
 		$('#max').val(new Date().toDateInputValue());
@@ -425,9 +529,6 @@
 		
 	}
 	
-	function changeSaveBtn(){
-		$( "#saveBtn" ).toggleClass( teal );
-	}
 
 	$.fn.dataTable.ext.search.push(
 			function( settings, data, dataIndex ) {
@@ -448,7 +549,7 @@
 	$(document).ready(function() {
 	    $('#employeesTable').DataTable();
 	    $('#administratorsTable').DataTable();
-	    $("#addMoreBtn").attr("disabled", "disabled");
+	    $("#caddMoreBtn").attr("disabled", "disabled");
 	    
 	} );
 	
@@ -475,19 +576,36 @@
 	}
 	
 
-	function saved(){
-		document.getElementById('addMoreBtn').className = 'ui teal button'; 
+	function csaved(){
+	
+		document.getElementById('caddMoreBtn').className = 'ui teal button'; 
+		document.getElementById('csaveBtn').value = 'Saved';
+		$("#csaveBtn").attr("disabled", "disabled");
+		$("#caddMoreBtn").removeAttr("disabled");
+		$('#cname').prop('readonly', true);
+		$('#caddress').prop('readonly', true);
+		$('#ctelephone_no').prop('readonly', true);
+		$('#cmobile_no').prop('readonly', true);
+		$('#cterms').prop('readonly', true);
+		$('#cselect').prop('disabled', true);
+		} 
+
+	function addedEmployee(){
+		alert("added");
+		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
 		document.getElementById('saveBtn').value = 'Saved';
 		$("#saveBtn").attr("disabled", "disabled");
-		$("#addMoreBtn").removeAttr("disabled");
-		$('#name').prop('readonly', true);
-		$('#address').prop('readonly', true);
-		$('#telephone_no').prop('readonly', true);
-		$('#mobile_no').prop('readonly', true);
-		$('#terms').prop('readonly', true);
-		$('#select').prop('disabled', true);
+		$("#addMoreBtn").removeAttr("disabled");*/
+
 		} 
-	
+	function addedAdmin(){
+		alert("added");
+		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
+		document.getElementById('saveBtn').value = 'Saved';
+		$("#saveBtn").attr("disabled", "disabled");
+		$("#addMoreBtn").removeAttr("disabled");*/
+
+		} 
 	function addmoreClick(){
 		document.getElementById('saveBtn').value = 'Save';
 		document.getElementById('addMoreBtn').className = 'ui button'; 
@@ -500,8 +618,33 @@
 		$('#mobile_no').prop('readonly', false);
 		$('#terms').prop('readonly', false);
 		$('#select').prop('disabled', false);
+	}
+	
+	function caddmoreClick(){
+		document.getElementById('csaveBtn').value = 'Save';
+		document.getElementById('caddMoreBtn').className = 'ui button'; 
+		$("#csaveBtn").removeAttr("disabled");
+		$("#caddMoreBtn").attr("disabled", "disabled");
+		document.getElementById('cresetBtn').click();
+		$('#cname').prop('readonly', false);
+		$('#caddress').prop('readonly', false);
+		$('#ctelephone_no').prop('readonly', false);
+		$('#cmobile_no').prop('readonly', false);
+		$('#cterms').prop('readonly', false);
+		$('#cselect').prop('disabled', false);
+
 		} 
 	
+	function validateForm() {
+		var form = document.getElementById('addCustomerForm');
+		  if(form.validate()) {
+		          return true;
+		        }else {
+		          alert('Form contains invalid data.  Please correct first');
+		          return false;
+		        }
+		          return true;
+		  }
 	
 
 		

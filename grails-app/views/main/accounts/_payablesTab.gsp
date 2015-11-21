@@ -50,7 +50,7 @@
 			    ${it.name}
 			</g:findAll>
 			</td>
-		    <td>${payable.amount }</td>
+		    <td class="sum">${payable.amount }</td>
 		    <td><g:formatDate format="MM/dd/yyyy" date="${payable.transaction_date}"/></td>
 		    <td>
 		    <% def dueDate = payable.transaction_date+it.terms %>
