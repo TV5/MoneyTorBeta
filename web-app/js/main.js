@@ -39,6 +39,7 @@
 	$('#logoutLink').click(function(){
 		$('#logout').modal('show');
 	});
+	$("#cell").text("text");
 
 
 	function edit(){
@@ -596,6 +597,11 @@
 		        }
 		          return true;
 		  }
+	function convertTerms(days){
+		if(days > 7 && days < 30)	{
+			
+		}	
+	}
 	
 
 		
