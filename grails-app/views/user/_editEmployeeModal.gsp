@@ -28,6 +28,10 @@
 						<div class="seven wide field">
 				            <g:textField name="empUsername" />
 						</div>
+						<div class="three wide field">
+		    			<g:submitToRemote url="[controller: 'User' ,action: 'checkUsername']"  class="ui button" value="Check Username" update="eusernameTaken"/>
+		    			</div>
+						<div id="eusernameTaken"></div>	
 					</div>
 
 					<div class="inline fields">

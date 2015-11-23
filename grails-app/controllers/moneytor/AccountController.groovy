@@ -28,6 +28,19 @@ class AccountController {
 		redirect(action: "main", controller: "main")
 	}
 	
+	def addReceivable() {
+		def account = new Account(
+				or_no: params.ror_no,
+				transactor_id: params.rtransactor_id,
+				amount: params.ramount,
+				transaction_date: params.rdate,
+				type: 'R',
+				updated_by: session.user.id
+				)
+		accountService.addAccount(account)
+		redirect(action: "main", controller: "main")
+	}
+	
 	def editAccount() {
 		def account = new Account(
 			id: params.ep_id,
@@ -40,6 +53,22 @@ class AccountController {
 			)
 		//print 'controller' + params.payable_id
 		//accountService.editAccount(params.payable_id.toString(),account)
+		redirect(action: "main", controller: "main")
+	}
+	
+	def editReceivable() {
+		print 'or ' + params.eror_no
+		def account = new Account(
+			or_no: params.eror_no,
+			transactor_id: params.int('ercustomer_name'),
+			amount: params.eramount,
+			transaction_date: params.ertransaction_date,
+			type: params.type,
+			updated_by: session.user.id
+			)
+		print 'controller trans' + account.transactor_id
+		print 'id' + params.int('receivable_id') + ' ' + account.id
+		accountService.editAccount(params.int('receivable_id'),account)
 		redirect(action: "main", controller: "main")
 	}
 	

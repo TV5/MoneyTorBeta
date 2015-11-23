@@ -12,6 +12,22 @@ class UserController {
 			redirect(uri: "/")
 			return false
 		}
+	}	
+	
+	def checkUsername(){
+		def username
+		def user
+		if(params.eusername!=null){
+			username=params.eusername
+		}else if(params.ausername!=null){
+			username=params.ausername
+		}else if(params.adminUsername!=null){
+			username=params.adminUsername
+		}else if(params.empUsername){
+			username=params.empUsername
+		}
+		user = userService.checkUser(username)
+		render user
 	}
 	def listEmployees(){
 		def empList=userService.listEmployees()	
@@ -31,34 +47,35 @@ class UserController {
 					type: params.etype,
 					status: 1,
 					updated_on: new Date(),
-					updated_by: params.int('userId')
+					updated_by: session.user.id
 				)
-			userService.addUser(user)
-			
-			redirect(action: "users")
+			if(user!=null){
+				userService.addUser(user)			
+			}
 		}
 	}
 	def addAdmin() {
 		if(params.acpassword==params.apassword){
-			def user =new User()
-			user.f_name=params.af_name
-			user.l_name=params.al_name
-			user.username=params.ausername
-			user.password=params.apassword
-			user.type=params.atype
-			user.status=1
-			user.updated_on=new Date() 
-			user.updated_by=params.int('userId')
-			userService.addUser(user)
-			
-			redirect(action: "users")
+			def user =new User(
+			f_name:params.af_name,
+			l_name:params.al_name,
+			username:params.ausername,
+			password:params.apassword,
+			type:params.atype,
+			status:1,
+			updated_on:new Date(), 
+			updated_by:session.user.id
+		)	
+		if(user!=null){
+				userService.addUser(user)			
+			}
 		}
 	}
 	
 	def editEmployee(){
 		if(params.empCpassword==params.empPassword){
 			def user =new User()
-			user.id = params.int('empId');
+			user.id = params.int('empId')
 			user.f_name=params.empF_name
 			user.l_name=params.empL_name
 			user.username=params.empUsername
@@ -86,7 +103,7 @@ class UserController {
 	def editAdmin(){
 		if(params.adminCpassword==params.adminPassword){
 			def user =new User()
-			user.id = params.int('adminId');
+			user.id = params.int('adminId')
 			user.f_name=params.adminF_name
 			user.l_name=params.adminL_name
 			user.username=params.adminUsername
@@ -103,9 +120,9 @@ class UserController {
 	def changeStatus(){
 		def user =new User()
 		if(params.int('empId')){
-			user.id = params.int('empId');
+			user.id = params.int('empId')
 		}else{
-			user.id = params.int('adminId');
+			user.id = params.int('adminId')
 		}
 		user.updated_on=new Date()
 		user.updated_by=session.user.id

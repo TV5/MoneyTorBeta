@@ -1,29 +1,33 @@
 <div class="ui bottom attached active tab segment" data-tab="payablesTab" style="padding-bottom:50px">
 	  <div class="ui form ">
-	  	<div class="inline fields" style="float:left">
-	    <div class="four wide field">
-	      <label>Entries per page</label>
-	      <select class="ui dropdown" id="payablesNumEntries">
-			  <option value="10">2</option>
-			  <option value="15">15</option>
-			  <option value="30">30</option>
-			  <option value="100">100</option>
-		  </select>
+	  <div class="inline fields">
+	  	<div class="inline fields thirteen wide" style="float:left">
+		    <div class="three wide field">
+		      <label>Entries per page</label>
+		      <select class="ui dropdown" id="payablesNumEntries">
+				  <option value="10">10</option>
+				  <option value="15">15</option>
+				  <option value="30">30</option>
+				  <option value="100">100</option>
+			  </select>
+		    </div>
+		  	<div class="four wide field">
+		      <label>Start Date</label>
+		      <input type="date" id="min">
+		    </div>
+		    <div class="four wide field">
+		      <label>End Date</label>
+		      <input type="date" id="max">
+		    </div>
+		    <div class="four wide field">
+		      <label>Search</label>
+		      <input type="text" id="searchPayables">
+		    </div>
 	    </div>
-	  	<div class="five wide field">
-	      <label>Start Date</label>
-	      <input type="date" id="min">
+	    <div class="inline fields three wide" style="float:right">
+	    	<button id="" class="ui button teal">Export</button>
+		    <button id="addPayableBtn" class="ui button teal">Add</button>
 	    </div>
-	    <div class="five wide field">
-	      <label>End Date</label>
-	      <input type="date" id="max">
-	    </div>
-	    </div>
-	    <div class="three wide feild" style="float:right">
-	      <button id="addPayableBtn" class="ui button teal">Add</button>
-	    </div>
-	    <div class="three wide feild" style="float:right">
-		    <button class="ui button teal">Print</button>
 	    </div>
 	  </div>
 	  
@@ -57,7 +61,7 @@
 		    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 		    </td>
 		    <td><a href="#" onClick="editPayable('${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
-		    <td> <button class="ui button teal paymentsBtn">View</button></td>
+		    <td> <button class="ui button teal" onClick="addPayment('${payable.transactor_id}')">View</button></td>
 		  	</tr>	  		
 	  	</g:each>
 	  </tbody>
