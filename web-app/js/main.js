@@ -42,7 +42,6 @@
 		$('#logout').modal('show');
 	});
 
-
 	function edit(){
 		$('#saveBtn').show();
 		$('.displayFirst').hide();
@@ -693,6 +692,11 @@
 		        }
 		          return true;
 		  }
+
+	function convertTerms(days){
+		if(days > 7 && days < 30)	{
+			
+		}	
+	}
 	
 
-		
