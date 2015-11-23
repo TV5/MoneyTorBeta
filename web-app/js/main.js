@@ -532,11 +532,11 @@
 	}
 	
 	function editPayable(id, or_no, transactor_id, amount, date){
-		alert(date);
-		$('#epcustomer_name').val(transactor_id);
+		$('#epsupplier_name').val(transactor_id);
 		$('#epor_no').val(or_no);
 		$('#epamount').val(amount);
 		$('#eptransaction_date').val(date.toString().split(' ')[0]);
+		$('#payable_id').val(id);
 		$('#editPayableModal').modal('show');
 	}
 	

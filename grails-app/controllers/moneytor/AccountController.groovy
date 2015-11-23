@@ -60,6 +60,22 @@ class AccountController {
 		redirect(action: "main", controller: "main")
 	}
 	
+	def editPayable() {
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
+		Date trans_date = formatter.parse(params.eptransaction_date)
+		print 'trans date ' + trans_date
+		def account = new Account(
+			or_no: params.epor_no,
+			transactor_id: params.int('epsupplier_name'),
+			amount: params.epamount,
+			transaction_date: trans_date,
+			type: params.type,
+			updated_by: session.user.id
+			)
+		accountService.editAccount(params.int('payable_id'),account)
+		redirect(action: "main", controller: "main")
+	}
+	
     def index() { 
 		
 	}

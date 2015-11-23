@@ -1,4 +1,4 @@
-<div id="editPayable" class="ui modal">
+<div id="editPayableModal" class="ui modal">
   <div class="header">Edit Account Payable</div>
   <div class="content">
     <g:form class="ui form" controller="account">
@@ -7,11 +7,14 @@
 		      <label>Supplier Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <select id="epsupplier_name" class="ui dropdown" id="payablesNumEntries">
-			      <g:each in="${supplierList}" var="supplier">
-			      	<option value="${supplier.id}">${supplier.name}</option>	
-			      </g:each>
-		      </select>
+		     
+		      <g:select name="epsupplier_name"
+		     		from="${supplierList }"
+		     		value="${account?.transactor_id }"
+		     		optionKey="id"
+		     		optionValue="${it?.name }"
+		     		valueMessagePrefix="${it?.name }"
+		     	/>
 		    </div>
 		</div>
 		
@@ -38,7 +41,7 @@
 		      <label>Transaction Date</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="date" id="eptransaction_date">
+		      <input type="date" id="eptransaction_date" name="eptransaction_date">
 		      <%--<g:datePicker name="eptransaction_date" precision="day"/>
 		    --%></div>
 		</div>
@@ -46,7 +49,7 @@
 		<g:hiddenField name="type" value="P" />
 	  </div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve button" value="Save" action="editAccount"/>
+	    <g:actionSubmit class="ui approve button" value="Save" action="editPayable"/>
 	    <div class="ui cancel button teal">Done</div>
 	  </div>
     </g:form>
