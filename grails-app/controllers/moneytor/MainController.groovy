@@ -1,7 +1,7 @@
 package moneytor
 
 class MainController {
-	def beforeInterceptor = [action:this.&auth]
+	//def beforeInterceptor = [action:this.&auth]
 	def userService
 	def accountService
 	def transactorService

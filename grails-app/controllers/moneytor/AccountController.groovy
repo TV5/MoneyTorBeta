@@ -1,5 +1,9 @@
 package moneytor
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Formatter.DateTime
+
 class AccountController {
 
 	def accountService
@@ -57,17 +61,27 @@ class AccountController {
 	}
 	
 	def editReceivable() {
-		print 'or ' + params.eror_no
+		print 'date params '+params.ertransaction_date
+		def splitDate = params.ertransaction_date.split("-")
+		int year = splitDate[0] = Integer.parseInt(splitDate[0])
+		int month = splitDate[1] = Integer.parseInt(splitDate[1])
+		int day = splitDate[2] = Integer.parseInt(splitDate[2])
+		/*print '0'+splitDate[0]
+		print '1'+splitDate[1]
+		print '2'+splitDate[2]
+		Date trans_date = new Date(year+1900,month-1,day)*/
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
+		Date trans_date = formatter.parse(params.ertransaction_date)
+		print 'string ' + trans_date.toString()
 		def account = new Account(
 			or_no: params.eror_no,
 			transactor_id: params.int('ercustomer_name'),
 			amount: params.eramount,
-			transaction_date: params.ertransaction_date,
+			transaction_date: trans_date,
 			type: params.type,
 			updated_by: session.user.id
 			)
-		print 'controller trans' + account.transactor_id
-		print 'id' + params.int('receivable_id') + ' ' + account.id
+		print 'date ' + trans_date.toString()
 		accountService.editAccount(params.int('receivable_id'),account)
 		redirect(action: "main", controller: "main")
 	}

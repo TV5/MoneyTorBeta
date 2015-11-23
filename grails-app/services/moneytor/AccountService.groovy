@@ -19,15 +19,13 @@ class AccountService {
 		account.save()
 	}
 	
-	def editAccount(id, account) {
-		print 'ID '+id
-		
+	def editAccount(id, Account account) {
 		Account newAccount = Account.get(id)
 		
 		newAccount.or_no = account.or_no
 		newAccount.transactor_id = account.transactor_id
 		newAccount.amount = account.amount
-		newAccount.transaction_date = new Date()
+		newAccount.transaction_date = account.transaction_date
 		newAccount.updated_by = account.updated_by
 		newAccount.updated_on = new Date()
 		newAccount.save()
