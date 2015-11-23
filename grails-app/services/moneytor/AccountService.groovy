@@ -21,7 +21,6 @@ class AccountService {
 	
 	def editAccount(id, Account account) {
 		Account newAccount = Account.get(id)
-		
 		newAccount.or_no = account.or_no
 		newAccount.transactor_id = account.transactor_id
 		newAccount.amount = account.amount
