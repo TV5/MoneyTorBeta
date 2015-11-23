@@ -1,11 +1,18 @@
 package moneytor
 
 class MainController {
+	def beforeInterceptor = [action:this.&auth]
 	def userService
 	def accountService
 	def transactorService
 	
 	def index(){}
+	def auth(){
+		if(!session.user){
+			redirect(uri: "/")
+			return false
+		}
+	}
 	def login() {
 		def user = userService.login(params.username, params.password)
 		if(user){

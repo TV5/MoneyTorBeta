@@ -8,7 +8,7 @@
 		      <label>Username</label>      
 		    </div>
 		    <div class="eight wide field">
-		      <label class="displayFirst" id="username">${user.username}</label>
+		      <label class="displayFirst">${user.username}</label>
 		      <input class="displaySec" id="usernametxt" type="text" value="${user.username}" disabled/>
 		    </div>
 		</div>
@@ -36,8 +36,9 @@
 		      <label>Password</label>      
 		    </div>
 		    <div class="eight wide field">
-		      <text>********</text> 
-		      <a class="displaySec" href="#" onclick="changePassword('${user.password}')">change password</a>
+		    	<text class="displayFirst">********</text>
+		      <input class="displaySec" type="password" value="${user.password}" disabled/>
+		      <a class="displaySec" href="#" onclick="changePassword('${user.password}')" style="left-padding:10px;">change password</a>
 		    </div>
 		</div>
 		<div id="newPass">
@@ -46,7 +47,7 @@
 			      <label>Current Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <g:textField name="uCurrPass"/>
+			      <g:passwordField name="uCurrPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -54,7 +55,7 @@
 			      <label>New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <g:textField name="uNewPass"/>
+			      <g:passwordField name="uNewPass"/>
 			    </div>
 			</div>
 			<div class="inline fields">
@@ -62,7 +63,7 @@
 			      <label>Confirm New Password</label>      
 			    </div>
 			    <div class="eight wide field">
-			      <g:textField name="uCNewPass"/>
+			      <g:passwordField name="uCNewPass"/>
 			    </div>
 			</div>
 			<g:hiddenField name="uId" />
