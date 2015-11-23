@@ -67,7 +67,6 @@
 		<input id="aff" type="button"/>
 		
     	<div class="actions">
-    		
     		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addCustomer']"  update="csaveBtn" class="ui teal button" value="Save" id="csaveBtn" onComplete="csaved()" />
 			<g:submitToRemote  url="" update="csaveBtn" class="ui button" value="Add More" id="caddMoreBtn" onComplete="caddmoreClick()" />
 			<!--<g:field id="addmore" class="ui button" type="reset" name="myReset"  update="saveBtn" value="Add More" url="" onComplete="addmoreClick()"/> -->
