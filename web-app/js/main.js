@@ -591,11 +591,15 @@
 		} 
 
 	function addedEmployee(){
+<<<<<<< HEAD
+		alert("Employee has been added!");		
+=======
 		alert("added");
 		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
 		document.getElementById('saveBtn').value = 'Saved';
 		$("#saveBtn").attr("disabled", "disabled");
 		$("#addMoreBtn").removeAttr("disabled");*/
+>>>>>>> refs/remotes/origin/master
 
 		} 
 	function addedAdmin(){

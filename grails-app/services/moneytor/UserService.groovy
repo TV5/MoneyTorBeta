@@ -8,6 +8,14 @@ class UserService {
     def serviceMethod() {
 
     }
+	def checkUser(username){
+		def userCheck = User.findByUsername(username)
+		def ret="available"
+		if(userCheck){
+			ret= "unavailable"
+		}
+		return ret
+	}
 	def addUser(user){
 		def userCheck = User.findByUsername(user.username)
 		if(userCheck){
