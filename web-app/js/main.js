@@ -334,16 +334,24 @@
 		//receivables
 		var num = $('#receivablesNumEntries').val();
 	    var receivablesTable = $('#receivablesTable').DataTable({
-			"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+	    	"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
 			"pageLength": $('#receivablesNumEntries').val(),
 			"order": [[4, "asc"]]
 		});
-	    
+	    $('#maxR').val(new Date().toDateInputValue());
+		var maxR = new Date();
+		maxR.setMonth(maxR.getMonth() - 1);
+		$('#minR').val(maxR.toDateInputValue());
+		receivablesTable.draw();
+	    $('#minR, #maxR').change( function() {
+	        receivablesTable.draw();
+	    } );
 	    new $.fn.dataTable.Buttons(receivablesTable, {
 	        buttons: [
 				{
 				    extend: 'collection',
 				    text: 'Export',
+				    className: 'ui button teal',
 				    buttons: [
 						{
 						    extend: 'copyHtml5',
@@ -394,15 +402,7 @@
 
 	    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
 
-	    $('#maxR').val(new Date().toDateInputValue());
-		var maxR = new Date();
-		maxR.setMonth(maxR.getMonth() - 1);
-		$('#minR').val(maxR.toDateInputValue());
 	    
-	    $('#minR, #maxR').change( function() {
-	    	alert("change");
-	        receivablesTable.draw();
-	    } );
 	    $('#searchReceivables').keyup(function(){
 	          receivablesTable.search($(this).val()).draw() ;
 	    })
@@ -423,12 +423,13 @@
 			"pageLength": $('#payablesNumEntries').val(),
 			"order": [[4, "asc"]]
 		});
-	  
+
 	    new $.fn.dataTable.Buttons(payablesTable, {
 	        buttons: [
 				{
 				    extend: 'collection',
 				    text: 'Export',
+				    className: 'ui button teal',
 				    buttons: [
 						{
 						    extend: 'copyHtml5',
@@ -482,6 +483,7 @@
 		var max = new Date();
 		max.setMonth(max.getMonth() - 1);
 		$('#min').val(max.toDateInputValue());
+		payablesTable.draw();
 	    function setPayablesTotalAmt(){
 		    var payablesAmounts = $("#payablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
 			var payablesTotal=0;
@@ -531,11 +533,11 @@
 	}
 	
 	function editPayable(id, or_no, transactor_id, amount, date){
-		alert(date);
-		$('#epcustomer_name').val(transactor_id);
+		$('#epsupplier_name').val(transactor_id);
 		$('#epor_no').val(or_no);
 		$('#epamount').val(amount);
 		$('#eptransaction_date').val(date.toString().split(' ')[0]);
+		$('#payable_id').val(id);
 		$('#editPayableModal').modal('show');
 	}
 	
