@@ -334,7 +334,7 @@
 		//receivables
 		var num = $('#receivablesNumEntries').val();
 	    var receivablesTable = $('#receivablesTable').DataTable({
-			"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+	    	"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
 			"pageLength": $('#receivablesNumEntries').val(),
 			"order": [[4, "asc"]]
 		});
@@ -344,6 +344,7 @@
 				{
 				    extend: 'collection',
 				    text: 'Export',
+				    className: 'ui button teal',
 				    buttons: [
 						{
 						    extend: 'copyHtml5',
@@ -423,12 +424,13 @@
 			"pageLength": $('#payablesNumEntries').val(),
 			"order": [[4, "asc"]]
 		});
-	  
+
 	    new $.fn.dataTable.Buttons(payablesTable, {
 	        buttons: [
 				{
 				    extend: 'collection',
 				    text: 'Export',
+				    className: 'ui button teal',
 				    buttons: [
 						{
 						    extend: 'copyHtml5',
