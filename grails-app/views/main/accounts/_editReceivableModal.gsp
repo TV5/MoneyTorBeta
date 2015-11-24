@@ -7,12 +7,19 @@
 		      <label>Customer Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <select id="ercustomer_name" class="ui dropdown">
+		      <!-- <select id="ercustomer_name" class="ui dropdown">
 			      <g:each in="${customerList}" var="customer">
 			      	<option value="${customer.id}">${customer.name}</option>	
 			      </g:each>
-		      </select>
-		    </div>
+		      </select> -->
+		      <g:select name="ercustomer_name"
+		     		from="${customerList }"
+		     		value="${account?.transactor_id }"
+		     		optionKey="id"
+		     		optionValue="${it?.name }"
+		     		valueMessagePrefix="${it?.name }"
+		     	/>
+		    </div>	
 		</div>
 		
     	<div class="inline fields">
@@ -38,7 +45,7 @@
 		      <label>Transaction Date</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="date" id="ertransaction_date">
+		      <input type="date" id="ertransaction_date" name="ertransaction_date">
 		      <%--<g:datePicker name="eptransaction_date" precision="day"/>
 		    --%></div>
 		</div>
