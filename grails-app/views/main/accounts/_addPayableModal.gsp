@@ -7,12 +7,16 @@
 		    <div class="two wide field">
 		      <label>Supplier Name</label>      
 		    </div>
-		    <div class="fourteen wide field">
-		      <select name="transactor_id" class="ui dropdown" id="payablesNumEntries">
-			      <g:each in="${supplierList}" var="supplier">
-			      	<option value="${supplier.id}">${supplier.name}</option>	
-			      </g:each>
-		      </select>
+		    <div class="nine wide field">
+			      <select name="transactor_id" class="ui dropdown" id="payabaleSupplierList">
+			      	  <option disabled selected> ---- Select a supplier ---- </option>
+				      <g:each in="${supplierList}" var="supplier">
+				      	<option value="${supplier.id}">${supplier.name}</option>	
+				      </g:each>
+			      </select>
+		    </div>
+		    <div class="five wide field">
+		    	<span>Not found in list? <a href="#">Create new record.</a></span>
 		    </div>
 		</div>
 		
