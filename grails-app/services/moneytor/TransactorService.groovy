@@ -22,6 +22,11 @@ class TransactorService {
 		return supplierList
 	}
 	
+	def getCustomerList() {
+		def customerList = Transactor.findAllByType("C")
+		return customerList
+	}
+	
 	def saveName(text){
 		return text
 	}

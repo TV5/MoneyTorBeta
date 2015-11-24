@@ -25,12 +25,12 @@
 			  <tbody>
 	  	        <g:each in="${transactorList}" var="transactor">
         		<tr>			  	
-					<th>${transactor.name}</th>
-					<th>${transactor.address}</th>	
-					<th>${transactor.telephone_no}</th>
-					<th>${transactor.mobile_no}</th>
-					<th>${transactor.terms}</th>
-					<th><a href="#"><i class="edit icon editCustomerBtn"></i></a></th>
+					<td>${transactor.name}</td>
+					<td>${transactor.address}</td>
+					<td>${transactor.telephone_no}</td>
+					<td>${transactor.mobile_no}</td>
+					<td>${transactor.terms}</td>
+					<td><a href="#"><i class="edit icon editCustomerBtn"></i></a></td>
 			</tr>	
         		</g:each>
 			  </tbody>

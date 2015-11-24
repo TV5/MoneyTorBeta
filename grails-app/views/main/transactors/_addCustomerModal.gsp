@@ -48,16 +48,20 @@
 		    <div class="seven wide field">
 		       <g:field id="cterms" type="number" name="cterms" value="${cterms}" required="true"/>
 		    </div>
-		    
-		    
 		    <div class="seven wide field">
+		    <g:select id="cselect" name="cselect" value="${cselect}"
+          from="${['d': 'days', 'w': 'weeks', 'm': 'months', 'y':'years']}"
+          optionKey="key" optionValue="value" />
+          </div>
+        		    
+		  <!-- <div class="seven wide field">
 		      <select id="cselect" class="ui fluid dropdown">
     			<option value="">days</option>
     			<option value="">weeks</option>
     			<option value="">months</option>
     			<option value="">years</option>
     		  </select>
-		    </div>
+		    </div> -->  
 		</div>    	
 		<g:hiddenField name="ctype" value="C" />
 		<g:hiddenField name="cstatus" value="A" />
@@ -67,7 +71,6 @@
 		<input id="aff" type="button"/>
 		
     	<div class="actions">
-    		
     		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addCustomer']"  update="csaveBtn" class="ui teal button" value="Save" id="csaveBtn" onComplete="csaved()" />
 			<g:submitToRemote  url="" update="csaveBtn" class="ui button" value="Add More" id="caddMoreBtn" onComplete="caddmoreClick()" />
 			<!--<g:field id="addmore" class="ui button" type="reset" name="myReset"  update="saveBtn" value="Add More" url="" onComplete="addmoreClick()"/> -->

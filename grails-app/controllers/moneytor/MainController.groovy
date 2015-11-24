@@ -1,11 +1,18 @@
 package moneytor
 
 class MainController {
+	def beforeInterceptor = [action:this.&auth]
 	def userService
 	def accountService
 	def transactorService
 	
 	def index(){}
+	def auth(){
+		if(!session.user){
+			redirect(uri: "/")
+			return false
+		}
+	}
 	def login() {
 		def user = userService.login(params.username, params.password)
 		if(user){
@@ -38,9 +45,10 @@ class MainController {
 			def receivableList = accountService.getReceivableList()
 			def transactorList = transactorService.getTransactorList()
 			def supplierList = transactorService.getSupplierList()
+			def customerList = transactorService.getCustomerList()
 			def saveName = transactorService.saveName("Save")
 			[user: session.user, payableList: payableList, receivableList: receivableList, 
-				transactorList: transactorList, supplierList: supplierList, saveName: saveName]
+				transactorList: transactorList, supplierList: supplierList, customerList: customerList,saveName: saveName]
 			
 		}else{
 			redirect(uri: "/")
