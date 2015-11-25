@@ -30,7 +30,6 @@
 	    </div>
 	    </div>
 	  </div>
-	  
 	  <table id="payablesTable" class="display ui celled padded table"  cellspacing="0" width="100%">
 	  <thead>
 	    <tr>
