@@ -19,7 +19,9 @@
 		    	<span>Not found in list? <a href="#">Create new record.</a></span>
 		    </div>
 		</div>
+		<div class="">
 		
+		</div>
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Official Receipt Number</label>      

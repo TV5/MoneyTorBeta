@@ -331,6 +331,8 @@
 
 	$(document).ready(function() {
 		
+		$(".payableNewSupplier").hide();
+		
 		//receivables
 		var num = $('#receivablesNumEntries').val();
 	    var receivablesTable = $('#receivablesTable').DataTable({
