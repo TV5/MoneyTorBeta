@@ -506,6 +506,13 @@
 			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
 		});
 	} );
+	
+	function psaved(){
+		//document.getElementById('caddMoreBtn').className = 'ui teal button'; 
+		$('#savePayableBtn').val('Saved');
+		$('#savePayableBtn').attr("disabled", "disabled");
+		payablesTable.draw();
+	} 
 
 	Date.prototype.toDateInputValue = (function() {
 	    var local = new Date(this);
@@ -622,7 +629,6 @@
 
 		$('#editadministrator').modal('show');
 	}
-	
 
 	function csaved(){
 	

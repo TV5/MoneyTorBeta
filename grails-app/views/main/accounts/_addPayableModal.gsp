@@ -1,8 +1,7 @@
 <div id="addPayable" class="ui modal">
   <div class="header">Account Payable</div>
   <div class="content">
-    <g:form class="ui form" controller="account" action="addPayable">
-    	
+    <g:form class="ui form" id="addPayableForm">
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Supplier Name</label>      
@@ -25,7 +24,7 @@
 		      <label>Official Receipt Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField name="por_no" value="${por_no}"/>
+		      <g:textField name="por_no" id="por_no" value="${por_no}"/>
 		    </div>
 		</div>
 		
@@ -34,7 +33,7 @@
 		      <label>Amount</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:field type="number" name="pamount" value="${pamount}"/>
+		      <g:field type="number" name="pamount" id="pamount" value="${pamount}"/>
 		    </div>
 		</div>
 		
@@ -43,14 +42,22 @@
 		      <label>Transaction Date</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:datePicker name="pdate" value="${pdate}" precision="day"/>
+		      <g:datePicker name="pdate" id="pdate" value="${pdate}" precision="day"/>
 		    </div>
 		</div>
+		  <div class="actions">
+		    <g:submitToRemote 
+		    	url="[controller: 'Account' ,action: 'addPayable']" 
+		    	value="Save" 
+		    	class="ui teal button" 
+		    	id="savePayableBtn" 
+		    	update="savePayableBtn" 
+		    	onComplete="psaved()"/> 
+		    <!-- <g:actionSubmit class="ui approve teal submit button" value="Save" action="addPayable"/>-->
+		    <div class="ui button teal">Add More</div>
+		    <div class="ui cancel button teal">Cancel</div>
+		  </div>
+		</g:form>
 	  </div>
-	  <div class="actions">
-	    <g:actionSubmit class="ui approve teal submit button" value="Save" action="addPayable"/>
-	    <div class="ui button teal">Add More</div>
-	    <div class="ui cancel button teal">Cancel</div>
-	  </div>
-    </g:form>
+    
 </div> 
