@@ -31,8 +31,6 @@
 	    </div>
 	  </div>
 	  
-	  
-	  
 	  <table id="payablesTable" class="display ui celled padded table"  cellspacing="0" width="100%">
 	  <thead>
 	    <tr>
@@ -46,7 +44,8 @@
 	  	</tr>
 	  </thead>
 	  <tbody>
-	  	<g:each in="${payableList}" var="payable">
+	  	<g:remoteLink action="show" id="P">Test 1</g:remoteLink>
+	  	<%--<g:each in="${payableList}" var="payable">
 		  	<tr>
 		    <td>${payable.or_no}</td>
 		    <td>
@@ -63,7 +62,7 @@
 		    <td><a href="#" onClick="editPayable('${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
 		    <td> <button class="ui button teal" onClick="addPayment('${payable.transactor_id}')">View</button></td>
 		  	</tr>	  		
-	  	</g:each>
+	  	</g:each>--%>
 	  </tbody>
 	  </table>
 	
