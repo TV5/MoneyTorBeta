@@ -1,5 +1,6 @@
 package moneytor
 
+import grails.converters.JSON
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Formatter.DateTime
@@ -16,6 +17,15 @@ class AccountController {
 	def getReceivableList() {
 		def receivableList = accountService.getReceivableList()
 		return receivableList
+	}
+	
+	def show() {
+		[accountList: Account.findAllByType(params.id)]
+	}
+	
+	def payableList() {
+		def payables = getPayableList()
+		render payables as JSON
 	}
 	
 	def addPayable() {
