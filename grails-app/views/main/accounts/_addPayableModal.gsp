@@ -15,7 +15,7 @@
 			      </select>
 		    </div>
 		    <div class="five wide field">
-		    	<span>Not found in list? <a href="#">Create new record.</a></span>
+		    	<span>Not found in list? <a onCLick="toggleNewSupplier()">Create new record.</a></span>
 		    </div>
 		</div>
 		<div class="payableNewSupplier">
