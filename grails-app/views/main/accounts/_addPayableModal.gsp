@@ -15,10 +15,54 @@
 			      </select>
 		    </div>
 		    <div class="five wide field">
-		    	<span>Not found in list? <a href="#">Create new record.</a></span>
+		    	<span>Not found in list? <a onCLick="toggleNewSupplier()">Create new record.</a></span>
 		    </div>
 		</div>
-		
+		<div class="payableNewSupplier">
+			<div class="inline fields">
+			    <div class="two wide field">
+			      <label>Name</label>      
+			    </div>
+			    <div class="fourteen wide field">
+			      <input type="text">
+			    </div>
+			</div>
+			
+	    	<div class="inline fields">
+			    <div class="two wide field">
+			      <label>Address</label>      
+			    </div>
+			    <div class="fourteen wide field">
+			      <input type="text">
+			    </div>
+			</div>
+			
+	    	<div class="inline fields">
+			    <div class="two wide field">
+			      <label>Contact Number</label>      
+			    </div>
+			    <div class="fourteen wide field">
+			      <input type="text">
+			    </div>
+			</div>
+			
+	    	<div class="inline fields">
+			    <div class="two wide field">
+			      <label>Terms</label>      
+			    </div>
+			    <div class="seven wide field">
+			      <input type="number">
+			    </div>
+			    <div class="seven wide field">
+			      <select class="ui fluid dropdown">
+	    			<option value="">days</option>
+	    			<option value="">weeks</option>
+	    			<option value="">months</option>
+	    			<option value="">years</option>
+	    		  </select>
+			    </div>
+			</div>
+		</div>
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Official Receipt Number</label>      
