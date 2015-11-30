@@ -8,6 +8,7 @@ import java.util.Formatter.DateTime
 class AccountController {
 
 	def accountService
+	def transactorService
 	
 	def getPayableList() {
 		def payableList = accountService.getPayableList() 
@@ -44,7 +45,7 @@ class AccountController {
 	
 	def addReceivable() {
 		def account = new Account(
-				or_no: params.ror_no,
+				or_no: params.ror_no,  
 				transactor_id: params.rtransactor_id,
 				amount: params.ramount,
 				transaction_date: params.rdate,
@@ -53,6 +54,28 @@ class AccountController {
 				)
 		accountService.addAccount(account)
 		redirect(action: "main", controller: "main")
+	}
+	
+	def addReceivableCustomer() {
+		def transactor = new Transactor(
+			name: params.name,
+			address: params.address,
+			telephone_no: params.telephone_no,
+			mobile_no: params.mobile_no,
+			terms: params.terms,
+			type: params.type
+			)
+		transactorService.addTransactor(transactor)
+		def transactorHolder = transactorService.getTransactorIDByName(params.name, 'C') 
+		def account = new Account(
+			or_no: params.ror_no,
+			transactor_id: transactorHolder.id,
+			amount: params.ramount,
+			transaction_date: params.rdate,
+			type: 'R',
+			updated_by: session.user.id
+			)
+		accountService.addAccount(account)
 	}
 	
 	def editReceivable() {
