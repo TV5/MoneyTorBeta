@@ -335,7 +335,7 @@
 	
 	function toggleNewCustomer(){
 		$(".receivableNewCustomer").toggle();
-		$(".rSubmit").action('addReceivableCustomer');
+		//$(".rSubmit").action('addReceivableCustomer');
 	}
 
 	$(document).ready(function() {

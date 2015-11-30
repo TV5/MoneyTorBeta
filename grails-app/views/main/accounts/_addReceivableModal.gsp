@@ -19,7 +19,7 @@
 		    	<span>Not found in list? <a onClick="toggleNewCustomer()">Create new record.</a></span>
 		    </div>
 		</div>
-		<div class="receivableNewCustomer">
+<%--		<div class="receivableNewCustomer">
 			<div class="inline fields">
 			    <div class="two wide field">
 			      <label>Name</label>      
@@ -79,7 +79,7 @@
 	    		  </select>
 			    </div> -->  
 			</div>  
-		</div>
+		</div>--%>
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Official Receipt Number</label>      

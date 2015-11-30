@@ -58,12 +58,12 @@ class AccountController {
 	
 	def addReceivableCustomer() {
 		def transactor = new Transactor(
-			name: params.name,
-			address: params.address,
-			telephone_no: params.telephone_no,
-			mobile_no: params.mobile_no,
-			terms: params.terms,
-			type: params.type
+			name: params.rname,
+			address: params.raddress,
+			telephone_no: params.rtelephone_no,
+			mobile_no: params.rmobile_no,
+			terms: params.rterms,
+			type: params.rtype
 			)
 		transactorService.addTransactor(transactor)
 		def transactorHolder = transactorService.getTransactorIDByName(params.name, 'C') 
