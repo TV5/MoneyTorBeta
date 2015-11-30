@@ -19,13 +19,13 @@
 		    	<span>Not found in list? <a onClick="toggleNewCustomer()">Create new record.</a></span>
 		    </div>
 		</div>
-<%--		<div class="receivableNewCustomer">
+		<div class="receivableNewCustomer">
 			<div class="inline fields">
 			    <div class="two wide field">
 			      <label>Name</label>      
 			    </div>
 			    <div class="fourteen wide field">
-			      <g:textField id="rname" name="rname" value="${cname}" required="true"/>
+			      <g:textField id="rname" name="rname" value="${rname}" required="true"/>
 			    </div>
 			</div>
 			
@@ -34,7 +34,7 @@
 			      <label>Address</label>      
 			    </div>
 			    <div class="fourteen wide field">
-			        <g:textField id="raddress" name="raddress" value="${caddress}" required="true"/>
+			        <g:textField id="raddress" name="raddress" value="${raddress}" required="true"/>
 			    </div>
 			</div>
 			
@@ -43,7 +43,7 @@
 			      <label>Telephone Number</label>      
 			    </div>
 			    <div class="fourteen wide field">
-			      <g:textField id="rtelephone_no" name="rtelephone_no" value="${ctelephone_no}" required="true"/>
+			      <g:textField id="rtelephone_no" name="rtelephone_no" value="${rtelephone_no}" required="true"/>
 			    </div>
 			</div>
 			
@@ -52,7 +52,7 @@
 			      <label>Mobile Number</label>      
 			    </div>
 			    <div class="fourteen wide field">
-			      <g:textField id="rmobile_no" name="rmobile_no" value="${cmobile_no}" required="true"/>
+			      <g:textField id="rmobile_no" name="rmobile_no" value="${rmobile_no}" required="true"/>
 			    </div>
 			</div>
 			
@@ -62,10 +62,10 @@
 			      <label>Terms</label>      
 			    </div>
 			    <div class="seven wide field">
-			       <g:field id="rterms" type="number" name="rterms" value="${cterms}" required="true"/>
+			       <g:field id="rterms" type="number" name="rterms" value="${rterms}" required="true"/>
 			    </div>
 			    <div class="seven wide field">
-			    <g:select id="rselect" name="rselect" value="${cselect}"
+			    <g:select id="rselect" name="rselect" value="${rselect}"
 	          from="${['d': 'days', 'w': 'weeks', 'm': 'months', 'y':'years']}"
 	          optionKey="key" optionValue="value" />
 	          </div>
@@ -79,7 +79,7 @@
 	    		  </select>
 			    </div> -->  
 			</div>  
-		</div>--%>
+		</div>
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Official Receipt Number</label>      
