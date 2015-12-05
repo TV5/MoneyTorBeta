@@ -17,7 +17,7 @@ class MainController {
 		def user = userService.login(params.username, params.password)
 		if(user){
 			session.user=user
-			redirect(action:"main")
+			redirect(action:"payables")
 		}else{
 			flash.error ="invalid username/password"
 			redirect (uri: "/")
@@ -39,7 +39,7 @@ class MainController {
 		response.contentType = "application/json"
 		render """{"available":${available}}"""
 	}
-	def main(){
+	def payables(){
 		if(session.user){
 			def payableList = accountService.getPayableList()
 			def receivableList = accountService.getReceivableList()

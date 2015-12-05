@@ -1,7 +1,8 @@
-<div id="addPayable" class="ui small modal">
+<div id="addPayable" class="ui small modal" >
   <div class="header">Account Payable</div>
   <div class="content">
-    <g:form class="ui form" id="addPayableForm" action="">
+    <g:form class="ui form" id="addPayableForm" action="" >
+    	<div style="overflow-y:scroll;max-height:300px">
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Supplier Name</label>      
@@ -88,6 +89,7 @@
 		    <div class="fourteen wide field">
 		      <g:datePicker name="pdate" id="pdate" value="${pdate}" precision="day"/>
 		    </div>
+		</div>
 		</div>
 		  <div class="actions">
 		    <g:submitToRemote 

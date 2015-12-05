@@ -16,7 +16,7 @@
 			      </select>
 		    </div>
 		    <div class="five wide field">
-		    	<span>Not found in list? <a onClick="toggleNewCustomer()">Create new record.</a></span>
+		    	<span>Not found in list? <a onClick="addNewCustomer()">Create new record.</a></span>
 		    </div>
 		</div>
 		<div class="receivableNewCustomer">

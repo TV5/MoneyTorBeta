@@ -44,6 +44,10 @@
 		$('#addCustomer').modal('show');
 	});
 	
+	function addNewCustomer() {
+		$('#addCustomerBtn').click();
+	}
+	
 	function addPayment(account_id){
 		document.getElementById("pmAccount_id").value=account_id;
 		$('#payments').modal('show');
