@@ -16,7 +16,7 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <!-- Site Properities -->
-<title>Main Page</title>
+<title>Suppliers</title>
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'datatables/media/css', file: 'jquery.dataTables.min.css')}" type="text/css">
@@ -70,7 +70,7 @@
 
 	<g:render template="../header/header" />
 	<div class="ui top attached tabular menu">
-	  <a href="main" class="item" >
+	  <a href="payables" class="item" >
 	    PAYABLES
 	  </a>
 	  <a href="receivables" class="item">
