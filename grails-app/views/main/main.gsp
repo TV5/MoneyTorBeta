@@ -70,7 +70,20 @@
 
 	<g:render template="../header/header" />
 	<div class="ui top attached tabular menu">
-	  <a data-tab="payablesTab" class="item active" >
+	  <a data-tab="receivablesTab" class="item active" >
+	    PAYABLES
+	  </a>
+	  <a href="receivables" class="item">
+	    RECEIVABLES
+	  </a>
+	  <a href="suppliers" class="item">
+	    SUPPLIERS
+	  </a>
+	  <a href="customers" class="item">
+	    CUSTOMERS
+	  </a>
+	  
+	  <!-- <a data-tab="receivablesTab" class="item active" >
 	    PAYABLES
 	  </a>
 	  <a data-tab="receivablesTab" class="item">
@@ -81,7 +94,8 @@
 	  </a>
 	  <a data-tab="customersTab" class="item">
 	    CUSTOMERS
-	  </a>
+	  </a>-->
+	  
 	</div>
 	<g:render template="accounts/payablesTab" />
 	<g:render template="accounts/receivablesTab" />

@@ -17,24 +17,35 @@
 	});
 	
 	$('#addPayableBtn').click(function(){
+		$('#addPayable').modal({
+			closable: false
+		})
 		$('#addPayable').modal('show');
 	});
 	
 	$('#addReceivableBtn').click(function(){
+		$('#addReceivable').modal({
+			closable: false
+		})
 		$('#addReceivable').modal('show');
 	});
 	
 	$('#addSupplierBtn').click(function(){
+		$('#addSupplier').modal({
+			closable: false
+		})
 		$('#addSupplier').modal('show');
 	});
 	
 	$('#addCustomerBtn').click(function(){
+		$('#addCustomer').modal({
+			closable: false
+		})
 		$('#addCustomer').modal('show');
 	});
 	
 	function addPayment(account_id){
 		document.getElementById("pmAccount_id").value=account_id;
-		
 		$('#payments').modal('show');
 	}
 	
@@ -519,11 +530,11 @@
 		$('#pdone').click(function() {
 		    location.reload();
 		});
-		$('#rdone').click(function() {
-		    location.reload();
-		});
+//		$('#rdone').click(function() {
+//		    location.reload();
+//		});
+//		$('#raddMoreBtn').attr("disabled", true);	
 		$('#paddMoreBtn').attr("disabled", true);	
-		$('#raddMoreBtn').attr("disabled", true);	
 	} );
 	
 	function psaved(){
