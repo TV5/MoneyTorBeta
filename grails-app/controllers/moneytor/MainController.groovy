@@ -56,49 +56,6 @@ class MainController {
 		}
 	}
 	
-	def receivables(){
-		if(session.user){
-			def receivableList = accountService.getReceivableList()
-			def customerList = transactorService.getCustomerList()
-			def saveName = transactorService.saveName("Save")
-			[user: session.user, receivableList: receivableList,
-				customerList: customerList,saveName: saveName]
-			
-		}else{
-			redirect(uri: "/")
-			return false
-		}
-	}
-	
-	def customers() {
-		if(session.user){
-			def payableList = accountService.getPayableList()
-			def receivableList = accountService.getReceivableList()
-			def transactorList = transactorService.getTransactorList()
-			def supplierList = transactorService.getSupplierList()
-			def customerList = transactorService.getCustomerList()
-			def saveName = transactorService.saveName("Save")
-			[user: session.user, payableList: payableList, receivableList: receivableList, 
-				transactorList: transactorList, supplierList: supplierList, customerList: customerList,saveName: saveName]
-			
-		}else{
-			redirect(uri: "/")
-			return false
-		}
-	}
-	
-	def suppliers() {
-		if(session.user){
-			def supplierList = transactorService.getSupplierList()
-			def saveName = transactorService.saveName("Save")
-			[user: session.user, supplierList: supplierList, saveName: saveName]
-			
-		}else{
-			redirect(uri: "/")
-			return false
-		}
-	}
-	
 	def addTransactor(){
 		def transactor = new Transactor(
 			name: params.name,
