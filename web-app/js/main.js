@@ -1,3 +1,4 @@
+	
 	$('.top.menu .item').tab();
 
 	$('#addemployeeBtn').click(function(){
@@ -354,6 +355,13 @@
 
 	$(document).ready(function() {
 		
+		if(window.location.href.indexOf("?")!=-1){
+			var tabId = window.location.href.split("?")[1].split("=")[1];
+			var tabId = '#'+tabId;
+			$(tabId).click();		
+		}
+
+		
 		$(".payableNewSupplier").hide();
 		$(".receivableNewCustomer").hide();
 		
@@ -534,11 +542,15 @@
 		$('#pdone').click(function() {
 		    location.reload();
 		});
-//		$('#rdone').click(function() {
-//		    location.reload();
-//		});
-//		$('#raddMoreBtn').attr("disabled", true);	
+		$('#rdone').click(function() {
+		    window.location.replace("main?tab=receivablesTabLink");
+		});
+		$('#raddMoreBtn').attr("disabled", true);	
 		$('#paddMoreBtn').attr("disabled", true);	
+		$('#pcancel').on('click',function(){
+			$('#addPayableForm').form('reset');
+			$('#addPayable').modal('hide');
+		});
 	} );
 	
 	function psaved(){
