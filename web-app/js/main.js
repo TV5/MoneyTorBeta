@@ -328,8 +328,19 @@
 		document.getElementById("uNewPass").value=password;
 		document.getElementById("uCurrentPass").value=password;
 	}
+	
+	function toggleNewSupplier(){
+		$(".payableNewSupplier").toggle();
+	}
+	
+	function toggleNewCustomer(){
+		$(".receivableNewCustomer").toggle();
+	}
 
 	$(document).ready(function() {
+		
+		$(".payableNewSupplier").hide();
+		$(".receivableNewCustomer").hide();
 		
 		//receivables
 		var num = $('#receivablesNumEntries').val();
