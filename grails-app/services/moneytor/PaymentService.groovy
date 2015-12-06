@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 class PaymentService {
 
     def getPaymentList() {
-		return Payment.findAllByAccount(99)
+		return Payment.findAllByAccount('11')
 	}
 	
 	def addPayment(payment){
