@@ -1,3 +1,4 @@
+	
 	$('.top.menu .item').tab();
 
 	$('#addemployeeBtn').click(function(){
@@ -17,24 +18,39 @@
 	});
 	
 	$('#addPayableBtn').click(function(){
+		$('#addPayable').modal({
+			closable: false
+		})
 		$('#addPayable').modal('show');
 	});
 	
 	$('#addReceivableBtn').click(function(){
+		$('#addReceivable').modal({
+			closable: false
+		})
 		$('#addReceivable').modal('show');
 	});
 	
 	$('#addSupplierBtn').click(function(){
+		$('#addSupplier').modal({
+			closable: false
+		})
 		$('#addSupplier').modal('show');
 	});
 	
 	$('#addCustomerBtn').click(function(){
+		$('#addCustomer').modal({
+			closable: false
+		})
 		$('#addCustomer').modal('show');
 	});
 	
+	function addNewCustomer() {
+		$('#addCustomerBtn').click();
+	}
+	
 	function addPayment(account_id){
 		document.getElementById("pmAccount_id").value=account_id;
-		
 		$('#payments').modal('show');
 	}
 	
@@ -328,8 +344,26 @@
 		document.getElementById("uNewPass").value=password;
 		document.getElementById("uCurrentPass").value=password;
 	}
+	
+	function toggleNewSupplier(){
+		$(".payableNewSupplier").toggle();
+	}
+	
+	function toggleNewCustomer(){
+		$(".receivableNewCustomer").toggle();
+	}
 
 	$(document).ready(function() {
+		
+		if(window.location.href.indexOf("?")!=-1){
+			var tabId = window.location.href.split("?")[1].split("=")[1];
+			var tabId = '#'+tabId;
+			$(tabId).click();		
+		}
+
+		
+		$(".payableNewSupplier").hide();
+		$(".receivableNewCustomer").hide();
 		
 		//receivables
 		var num = $('#receivablesNumEntries').val();
@@ -505,8 +539,55 @@
 		$('#payablesNumEntries').change(function(){
 			 payablesTable.page.len($('#payablesNumEntries').val()).draw();
 		});
+		$('#pdone').click(function() {
+		    location.reload();
+		});
+		$('#rdone').click(function() {
+		    window.location.replace("main?tab=receivablesTabLink");
+		});
+		$('#raddMoreBtn').attr("disabled", true);	
+		$('#paddMoreBtn').attr("disabled", true);	
+		$('#pcancel').on('click',function(){
+			$('#addPayableForm').form('reset');
+			$('#addPayable').modal('hide');
+		});
 	} );
+	
+	function psaved(){
+		$('#paddMoreBtn').attr("disabled", false);	
+		$('#savePayableBtn').val('Saved');
+		$('#savePayableBtn').attr("disabled", "disabled");
+	} 
 
+	function paddmore(){
+		$('#pdate').val('');
+		$('#pamount').val('');
+		$('#por_no').val('');
+		$('#payabaleSupplierList').val('0');
+		$('#savePayableBtn').val('Save');
+		document.getElementById('paddMoreBtn').className = 'ui button'; 
+		$('#savePayableBtn').removeAttr("disabled");
+		$("#paddMoreBtn").attr("disabled", "disabled");
+		
+	}
+	
+	function rsaved(){
+		$('#raddMoreBtn').attr("disabled", false);	
+		$('#saveReceivableBtn').val('Saved');
+		$('#saveReceivableBtn').attr("disabled", "disabled");
+	}
+	
+	function raddmore(){
+		$('#rdate').val('');
+		$('#ramount').val('');
+		$('#ror_no').val('');
+		$('#receivableCustomerList').val('0');
+		$('#saveReceivableBtn').val('Save');
+		document.getElementById('raddMoreBtn').className = 'ui button'; 
+		$('#saveReceivableBtn').removeAttr("disabled");
+		$("#raddMoreBtn").attr("disabled", "disabled");
+	}
+	
 	Date.prototype.toDateInputValue = (function() {
 	    var local = new Date(this);
 	    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -565,34 +646,6 @@
 	}
 	
 
-	$.fn.dataTable.ext.search.push(
-			function( settings, data, dataIndex ) {
-		  		var min = Date.parse($('#min').val(),10);
-		  		var max = Date.parse($('#max').val());
-		  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
-		        if ( ( isNaN( min ) && isNaN( max ) ) ||
-		             ( isNaN( min ) && date <= max ) ||
-		             ( min <= date   && isNaN( max ) ) ||
-		             ( min <= date   && date <= max ) )
-		        {
-		            return true;
-		        }
-		        return false;
-		    }
-	);
-	
-	$.fn.dataTable.Api.register( 'sum()', function ( ) {
-	    return this.flatten().reduce( function ( a, b ) {
-	        if ( typeof a === 'string' ) {
-	            a = a.replace(/[^\d.-]/g, '') * 1;
-	        }
-	        if ( typeof b === 'string' ) {
-	            b = b.replace(/[^\d.-]/g, '') * 1;
-	        }
-	 
-	        return a + b;
-	    }, 0 );
-	} );
 
 	$(document).ready(function() {
 	    $('#employeesTable').DataTable();
@@ -622,7 +675,6 @@
 
 		$('#editadministrator').modal('show');
 	}
-	
 
 	function csaved(){
 	
@@ -700,5 +752,35 @@
 			
 		}	
 	}
+	
+
+	$.fn.dataTable.ext.search.push(
+			function( settings, data, dataIndex ) {
+		  		var min = Date.parse($('#min').val(),10);
+		  		var max = Date.parse($('#max').val());
+		  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
+		        if ( ( isNaN( min ) && isNaN( max ) ) ||
+		             ( isNaN( min ) && date <= max ) ||
+		             ( min <= date   && isNaN( max ) ) ||
+		             ( min <= date   && date <= max ) )
+		        {
+		            return true;
+		        }
+		        return false;
+		    }
+	);
+	
+	$.fn.dataTable.Api.register( 'sum()', function ( ) {
+	    return this.flatten().reduce( function ( a, b ) {
+	        if ( typeof a === 'string' ) {
+	            a = a.replace(/[^\d.-]/g, '') * 1;
+	        }
+	        if ( typeof b === 'string' ) {
+	            b = b.replace(/[^\d.-]/g, '') * 1;
+	        }
+	 
+	        return a + b;
+	    }, 0 );
+	} );
 	
 
