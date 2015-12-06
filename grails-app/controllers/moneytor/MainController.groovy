@@ -75,6 +75,7 @@ class MainController {
 			return false
 		}
 	}
+	
 	def addTransactor(){
 		def transactor = new Transactor(
 			name: params.name,

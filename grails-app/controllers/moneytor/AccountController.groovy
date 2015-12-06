@@ -1,5 +1,10 @@
 package moneytor
 
+import grails.converters.JSON
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Formatter.DateTime
+
 class AccountController {
 
 	def accountService
@@ -12,6 +17,15 @@ class AccountController {
 	def getReceivableList() {
 		def receivableList = accountService.getReceivableList()
 		return receivableList
+	}
+	
+	def show() {
+		[accountList: Account.findAllByType(params.id)]
+	}
+	
+	def payableList() {
+		def payables = getPayableList()
+		render payables as JSON
 	}
 	
 	def addPayable() {
@@ -41,34 +55,34 @@ class AccountController {
 		redirect(action: "main", controller: "main")
 	}
 	
-	def editAccount() {
-		def account = new Account(
-			id: params.ep_id,
-			or_no: params.epor_no,
-			transactor_id: params.epsuplier_name,
-			amount: params.epamount,
-			transaction_date: params.eptransaction_date,
-			type: params.type,
-			updated_by: session.user.id
-			)
-		//print 'controller' + params.payable_id
-		//accountService.editAccount(params.payable_id.toString(),account)
-		redirect(action: "main", controller: "main")
-	}
-	
 	def editReceivable() {
-		print 'or ' + params.eror_no
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
+		Date trans_date = formatter.parse(params.ertransaction_date)
 		def account = new Account(
 			or_no: params.eror_no,
 			transactor_id: params.int('ercustomer_name'),
 			amount: params.eramount,
-			transaction_date: params.ertransaction_date,
+			transaction_date: trans_date,
 			type: params.type,
 			updated_by: session.user.id
 			)
-		print 'controller trans' + account.transactor_id
-		print 'id' + params.int('receivable_id') + ' ' + account.id
 		accountService.editAccount(params.int('receivable_id'),account)
+		redirect(action: "main", controller: "main")
+	}
+	
+	def editPayable() {
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
+		Date trans_date = formatter.parse(params.eptransaction_date)
+		print 'trans date ' + trans_date
+		def account = new Account(
+			or_no: params.epor_no,
+			transactor_id: params.int('epsupplier_name'),
+			amount: params.epamount,
+			transaction_date: trans_date,
+			type: params.type,
+			updated_by: session.user.id
+			)
+		accountService.editAccount(params.int('payable_id'),account)
 		redirect(action: "main", controller: "main")
 	}
 	
