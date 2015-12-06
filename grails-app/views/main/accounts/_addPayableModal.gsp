@@ -1,14 +1,15 @@
-<div id="addPayable" class="ui modal">
+<div id="addPayable" class="ui small modal" >
   <div class="header">Account Payable</div>
   <div class="content">
-    <g:form class="ui form" id="addPayableForm">
+    <g:form class="ui form" id="addPayableForm" action="" >
+    	<div style="overflow-y:scroll;max-height:300px">
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Supplier Name</label>      
 		    </div>
 		    <div class="nine wide field">
 			      <select name="transactor_id" class="ui dropdown" id="payabaleSupplierList">
-			      	  <option disabled selected> ---- Select a supplier ---- </option>
+			      	  <option value='0' disabled selected> ---- Select a supplier ---- </option>
 				      <g:each in="${supplierList}" var="supplier">
 				      	<option value="${supplier.id}">${supplier.name}</option>	
 				      </g:each>
@@ -89,17 +90,20 @@
 		      <g:datePicker name="pdate" id="pdate" value="${pdate}" precision="day"/>
 		    </div>
 		</div>
+		</div>
 		  <div class="actions">
 		    <g:submitToRemote 
 		    	url="[controller: 'Account' ,action: 'addPayable']" 
 		    	value="Save" 
 		    	class="ui teal button" 
 		    	id="savePayableBtn" 
-		    	update="savePayableBtn" 
-		    	onComplete="psaved()"/> 
-		    <!-- <g:actionSubmit class="ui approve teal submit button" value="Save" action="addPayable"/>-->
-		    <div class="ui button teal">Add More</div>
-		    <div class="ui cancel button teal">Cancel</div>
+		    	onComplete="psaved()"
+		    	/> 
+		    <!--<g:submitToRemote update="savePayableBtn" class="ui button" value="Add More" id="paddMoreBtn" onComplete="paddmore()">  </g:submitToRemote>-->
+		   
+			<button class="ui button" value="Add More" id="paddMoreBtn" onClick="paddmore()">Add More</button>	   
+		    <div class="ui button" id="pdone">Done</div>
+		    <div class="ui button reset" >Cancel</div>
 		  </div>
 		</g:form>
 	  </div>

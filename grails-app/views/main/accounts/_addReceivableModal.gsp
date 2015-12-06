@@ -9,14 +9,14 @@
 		    </div>
 		    <div class="nine wide field">
 			      <select name="rtransactor_id" class="ui dropdown" id="receivableCustomerList">
-			      	  <option disabled selected> ---- Select a customer ---- </option>
+			      	  <option value='0'  disabled selected> ---- Select a customer ---- </option>
 				      <g:each in="${customerList}" var="customer">
 				      	<option value="${customer.id}">${customer.name}</option>	
 				      </g:each>
 			      </select>
 		    </div>
 		    <div class="five wide field">
-		    	<span>Not found in list? <a onClick="toggleNewCustomer()">Create new record.</a></span>
+		    	<span>Not found in list? <a onClick="addNewCustomer()">Create new record.</a></span>
 		    </div>
 		</div>
 		<div class="receivableNewCustomer">
@@ -106,11 +106,18 @@
 		      <g:datePicker name="rdate" value="${rdate}" precision="day"/>
 		    </div>
 		</div>
-	  </div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve teal submit button" value="Save" action="addReceivable"/>
-	    <div class="ui button teal">Add More</div>
-	    <div class="ui cancel button teal">Cancel</div>
+	    <g:submitToRemote 
+		    	url="[controller: 'Account' ,action: 'addReceivable']" 
+		    	value="Save" 
+		    	class="ui teal button" 
+		    	id="saveReceivableBtn" 
+		    	onComplete="rsaved()"
+		    	/> 
+		<!--<g:submitToRemote  url="" update="saveReceivableBtn" class="ui button" value="Add More" id="raddMoreBtn" onComplete="raddmoreClick()" />-->
+	    <button class="ui button" value="Add More" id="raddMoreBtn" onClick="raddmore()">Add More</button>
+	    <div class="ui button" id="rdone">Done</div>
 	  </div>
     </g:form>
+	  </div>
 </div> 
