@@ -26,26 +26,34 @@ class TransactorController {
 	}
 	
 	def addCustomer() {
-		System.out.println("add customer")
-		System.out.println("hehe")
-		def calculatedTerms
-		//if(params.cterms == )
+		def ret = 0
+		def needValidation = String.list()
 		
-		def transactor = new Transactor(
-			name: params.cname,
-			address: params.caddress,
-			telephone_no: params.ctelephone_no,
-			mobile_no: params.cmobile_no,
-			terms: convertTerms(),
-			type: params.ctype,
-			status: params.cstatus
-			)
-		transactorService.addTransactor(transactor)
-		System.out.println(params.cselect)
-		System.out.println("added!")
+		if(!validateName(params.cname)){
+			needValidation.push("name")
+		}
+			System.out.println("add customer")
+			System.out.println("hehe")
+			def calculatedTerms
+			
+			def transactor = new Transactor(
+				name: params.cname,
+				address: params.caddress,
+				telephone_no: params.ctelephone_no,
+				mobile_no: params.cmobile_no,
+				terms: params.terms,
+				type: params.ctype,
+				status: params.cstatus
+				)
+			transactorService.addTransactor(transactor)
+			System.out.println(params.cselect)
+			System.out.println("added!")
+			return true
+		
+		
 			
 	}
-	
+	/*
 	def convertTerms(){
 		int value = params.cterms.toInteger()
 		if(params.cselect == 'w'){
@@ -56,11 +64,15 @@ class TransactorController {
 			return value * 365
 		}else
 			return value
-	}
+	}*/
 	
 	def getTransactorList() {
 		def transactorList = transactorService.getTransactorList()
 		return transactorList
 	}
+	def validateName(def name){
+		return name.matches( "[A-Z][a-zA-Z]*" )
+	}
+	
 	
 }

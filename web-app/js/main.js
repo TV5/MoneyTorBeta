@@ -338,6 +338,8 @@
 			"pageLength": $('#receivablesNumEntries').val(),
 			"order": [[4, "asc"]]
 		});
+	    $('#hehe').hide();
+	    
 	    
 	    new $.fn.dataTable.Buttons(receivablesTable, {
 	        buttons: [
@@ -692,11 +694,23 @@
 		        }
 		          return true;
 		  }
-
-	function convertTerms(days){
-		if(days > 7 && days < 30)	{
+	
+	function covertFromDays(days){
+		if(days % 7 == 0)	{
+			ret = days/7 + " day(s)";
 			
-		}	
+		}else if(days % 30 == 0){
+			ret = days/30 + " month(s)";
+		}else if(days % 365 == 0){
+			ret =  days/365 + " year(s)";
+		}
+		return ret;
 	}
+	
+	function showw(){
+		 $('#hehe').show();
+	}
+
+
 	
 

@@ -30,4 +30,30 @@ class TransactorService {
 	def saveName(text){
 		return text
 	}
+	
+	def days(){
+		def list = getTransactorList()
+		list.toList()
+		def ret =" "
+		def str = []
+		assert str.size() == 0
+		str.toList()
+		list.each{
+			def days = it.terms
+				if(days % 7 == 0)	{
+					ret = days/7 + " week(s)"
+					
+				}else if(days % 30 == 0){
+					ret = days/30 + " month(s)"
+				}else if(days % 365 == 0){
+					ret =  days/365 + " year(s)"
+				}else{
+				ret = days +" week(s)"
+				}
+				str.add(ret)
+		}
+		return str;
+	}
+	
+	
 }
