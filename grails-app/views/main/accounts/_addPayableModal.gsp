@@ -111,7 +111,7 @@
 		   
 			<button class="ui button" value="Add More" id="paddMoreBtn" onClick="paddmore()">Add More</button>	   
 		    <div class="ui button" id="pdone">Done</div>
-		    <div class="ui button reset" >Cancel</div>
+		    <div class="ui cancel button" >Cancel</div>
 		  </div>
 		</g:form>
 	  </div>
