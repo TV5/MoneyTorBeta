@@ -372,6 +372,16 @@
 			"pageLength": $('#receivablesNumEntries').val(),
 			"order": [[4, "asc"]]
 		});
+	    function setreceivablesTotalAmt(){
+		    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+			var receivablesTotal=0;
+			for (var i = 0; i<receivablesAmounts.length; i++){
+				receivablesAmounts[i] = receivablesAmounts[i].textContent;
+				receivablesTotal+=parseFloat(receivablesAmounts[i]);
+			}
+			$('#receivablesTotal').html("Php "+receivablesTotal);
+		}
+		setreceivablesTotalAmt();
 	    $('#maxR').val(new Date().toDateInputValue());
 		var maxR = new Date();
 		maxR.setMonth(maxR.getMonth() - 1);
@@ -379,6 +389,7 @@
 		receivablesTable.draw();
 	    $('#minR, #maxR').change( function() {
 	        receivablesTable.draw();
+	        setreceivablesTotalAmt();
 	    } );
 	    new $.fn.dataTable.Buttons(receivablesTable, {
 	        buttons: [
@@ -554,9 +565,38 @@
 	} );
 	
 	function psaved(){
-		$('#paddMoreBtn').attr("disabled", false);	
-		$('#savePayableBtn').val('Saved');
-		$('#savePayableBtn').attr("disabled", "disabled");
+		$('#addPayableErrorList').empty();
+		var por_no = $('#por_no').val();
+		if($('#payabaleSupplierList').val()==null||por_no==""||$('#pamount').val()==""||$('#pamount').val()<1||/[^a-zA-Z0-9]/.test( por_no)){
+			$('#addPayableErrorDiv').show();
+			
+			if($('#payabaleSupplierList').val()==null){
+				$('#addPayableErrorList').append('<li>Please select a supplier from the list provided.'+
+						' If you cannot find the supplier you are looking for, please click <b>Create new record</b>'+
+				' to add a new supplier.</li>');
+			}
+			
+			if(por_no==""){
+				$('#addPayableErrorList').append('<li>Please enter an official receipt number.</li>');
+			}
+			else if( /[^a-zA-Z0-9]/.test( por_no) ){
+				$('#addPayableErrorList').append('<li>Official receipt number must be alphanumeric.</li>');
+			}
+			
+			if ($('#pamount').val()==""){
+				$('#addPayableErrorList').append('<li>Please enter an amount.</li>');
+			}
+			else if($('#pamount').val()<1){
+				$('#addPayableErrorList').append('<li>Amount must be greater than zero.</li>');
+			}
+		}
+		else {
+			$('#addPayableErrorDiv').hide();
+			$('#paddMoreBtn').attr("disabled", false);	
+			$('#savePayableBtn').val('Saved');
+			$('#savePayableBtn').attr("disabled", "disabled");	
+			$('#addPayableForm :input').attr('readonly','readonly');
+		}
 	} 
 
 	function paddmore(){
@@ -572,9 +612,37 @@
 	}
 	
 	function rsaved(){
-		$('#raddMoreBtn').attr("disabled", false);	
-		$('#saveReceivableBtn').val('Saved');
-		$('#saveReceivableBtn').attr("disabled", "disabled");
+		$('#addReceivableErrorList').empty();
+		var ror_no = $('#ror_no').val();
+		if($('#receivableCustomerList').val()==null||ror_no==""||$('#ramount').val()==""||$('#ramount').val()<1||/[^a-zA-Z0-9]/.test( ror_no)){
+			$('#addReceivableErrorDiv').show();
+			
+			if($('#receivableCustomerList').val()==null){
+				$('#addReceivableErrorList').append('<li>Please select a customer from the list provided.'+
+						' If you cannot find the customer you are looking for, please click <b>Create new record</b>'+
+				' to add a new customer.</li>');
+			}
+			
+			if(ror_no==""){
+				$('#addReceivableErrorList').append('<li>Please enter an official receipt number.</li>');
+			}
+			else if( /[^a-zA-Z0-9]/.test( ror_no) ){
+				$('#addReceivableErrorList').append('<li>Official receipt number must be alphanumeric.</li>');
+			}
+			
+			if ($('#ramount').val()==""){
+				$('#addReceivableErrorList').append('<li>Please enter an amount.</li>');
+			}
+			else if($('#ramount').val()<1){
+				$('#addReceivableErrorList').append('<li>Amount must be greater than zero.</li>');
+			}
+		}
+		else {
+			$('#addReceivableErrorDiv').hide();
+			$('#raddMoreBtn').attr("disabled", false);	
+			$('#saveReceivableBtn').val('Saved');
+			$('#saveReceivableBtn').attr("disabled", "disabled");			
+		}
 	}
 	
 	function raddmore(){

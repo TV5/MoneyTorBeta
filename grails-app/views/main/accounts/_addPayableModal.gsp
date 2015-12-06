@@ -1,6 +1,7 @@
 <div id="addPayable" class="ui small modal" >
   <div class="header">Account Payable</div>
   <div class="content">
+  <g:renderErrors bean="${account}" />
     <g:form class="ui form" id="addPayableForm" action="" >
     	<div style="overflow-y:scroll;max-height:300px">
     	<div class="inline fields">
@@ -90,6 +91,13 @@
 		      <g:datePicker name="pdate" id="pdate" value="${pdate}" precision="day"/>
 		    </div>
 		</div>
+		</div>
+		<div class="ui negative small message" id="addPayableErrorDiv" style="display:none;">
+		  <div class="header">
+		    There were some errors with your submission.
+		  </div>	
+		  <ul class="list" id="addPayableErrorList">
+		  </ul>
 		</div>
 		  <div class="actions">
 		    <g:submitToRemote 
