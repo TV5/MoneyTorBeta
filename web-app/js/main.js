@@ -1,4 +1,3 @@
-	
 	$('.top.menu .item').tab();
 
 	$('#addemployeeBtn').click(function(){
@@ -92,7 +91,7 @@
                   prompt : 'Please enter current password'
                 },                
                 {
-                    type   : 'matched[uCurrentPass]',
+                    type   : 'match[uCurrentPass]',
                     prompt : 'The current password entered is incorrect.'
                   }
                   
@@ -124,7 +123,7 @@
         });
 	}
 	
-	function validation() {
+	$(document).ready(function() {
       $('.ui.form')
         .form({
           fields: {
@@ -335,13 +334,12 @@
               }
           }
         });
-    }
+    })
 	
 	function editUserAccount(id, f_name, l_name, password){
 		document.getElementById("uId").value=id;
 		document.getElementById("uF_name").value=f_name;
 		document.getElementById("uL_name").value=l_name;
-		document.getElementById("uNewPass").value=password;
 		document.getElementById("uCurrentPass").value=password;
 	}
 	

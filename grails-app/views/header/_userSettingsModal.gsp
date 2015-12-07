@@ -1,6 +1,6 @@
 <div id="userSettings" class="ui modal">
 	<div class="header">User Settings</div>
-	<div class="content">
+	<div class="content" id="">
 		<g:form class="ui form" controller="user">
 		    <div class="ui error message"></div>		
 		    <div class="inline fields">
@@ -46,7 +46,7 @@
 						<label>Current Password</label>      
 					</div>
 					<div class="eight wide field">
-					    <g:textField name="uCurrPass"/>
+					    <g:passwordField name="uCurrPass"/>
 					</div>
 				</div>
 				<div class="inline fields">
