@@ -48,9 +48,32 @@
 		$('#addCustomerBtn').click();
 	}
 	
+	//used to check if input is a number with 2 decimal places
+	function checkDec(el){
+		 var ex = /^[0-9]+\.?[0-9]*$/;
+		 if(ex.test(el.value)==false){
+		   el.value = el.value.substring(0,el.value.length - 1);
+		 }
+	}
+	
 	function addPayment(account_id){
 		document.getElementById("pmAccount_id").value=account_id;
+		$('#paymentsTable_filter').hide();
 		$('#payments').modal('show');
+		$('.ui.form')
+        .form({
+          fields: {
+            pmAmount: {
+              identifier  : 'pmAmount',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter amount.'
+                }                
+              ]
+            }
+          }
+        });
 	}
 	
 	$('#logoutLink').click(function(){
@@ -335,6 +358,10 @@
           }
         });
     })
+	
+    function pymntAdded(){
+		document.getElementById("pmAmount").value="";
+	}
 	
 	function editUserAccount(id, f_name, l_name, password){
 		document.getElementById("uId").value=id;
