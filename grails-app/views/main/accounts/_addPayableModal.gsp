@@ -1,6 +1,7 @@
 <div id="addPayable" class="ui small modal" >
   <div class="header">Account Payable</div>
   <div class="content">
+  <g:renderErrors bean="${account}" />
     <g:form class="ui form" id="addPayableForm" action="" >
     	<div style="overflow-y:scroll;max-height:300px">
     	<div class="inline fields">
@@ -91,6 +92,13 @@
 		    </div>
 		</div>
 		</div>
+		<div class="ui negative small message" id="addPayableErrorDiv" style="display:none;">
+		  <div class="header">
+		    There were some errors with your submission.
+		  </div>	
+		  <ul class="list" id="addPayableErrorList">
+		  </ul>
+		</div>
 		  <div class="actions">
 		    <g:submitToRemote 
 		    	url="[controller: 'Account' ,action: 'addPayable']" 
@@ -103,7 +111,7 @@
 		   
 			<button class="ui button" value="Add More" id="paddMoreBtn" onClick="paddmore()">Add More</button>	   
 		    <div class="ui button" id="pdone">Done</div>
-		    <div class="ui button reset" >Cancel</div>
+		    <div class="ui cancel button" >Cancel</div>
 		  </div>
 		</g:form>
 	  </div>
