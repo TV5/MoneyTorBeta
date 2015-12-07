@@ -53,8 +53,8 @@
 		<g:hiddenField name="type" value="R" />
 	  </div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve button" value="Save" action="editReceivable"/>
-	    <div class="ui cancel button teal">Done</div>
+	    <g:actionSubmit class="ui approve button teal" value="Save" action="editReceivable"/>
+	    <div class="ui cancel button">Cancel</div>
 	  </div>
     </g:form>
 </div> 
