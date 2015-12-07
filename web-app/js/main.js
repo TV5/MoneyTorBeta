@@ -564,40 +564,62 @@
 		});
 	} );
 	
-	function psaved(){
-		$('#addPayableErrorList').empty();
-		var por_no = $('#por_no').val();
-		if($('#payabaleSupplierList').val()==null||por_no==""||$('#pamount').val()==""||$('#pamount').val()<1||/[^a-zA-Z0-9]/.test( por_no)){
-			$('#addPayableErrorDiv').show();
+	function validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs) {
+		errorList.empty();
+		if(transactorList==null||or_no==""||amount==""||amount<1||/[^a-zA-Z0-9]/.test( or_no)){
+			errorDiv.show();
 			
-			if($('#payabaleSupplierList').val()==null){
-				$('#addPayableErrorList').append('<li>Please select a supplier from the list provided.'+
+			if(transactorList==null){
+				errorList.append('<li>Please select a supplier from the list provided.'+
 						' If you cannot find the supplier you are looking for, please click <b>Create new record</b>'+
 				' to add a new supplier.</li>');
 			}
 			
-			if(por_no==""){
-				$('#addPayableErrorList').append('<li>Please enter an official receipt number.</li>');
+			if(or_no==""){
+				errorList.append('<li>Please enter an official receipt number.</li>');
 			}
-			else if( /[^a-zA-Z0-9]/.test( por_no) ){
-				$('#addPayableErrorList').append('<li>Official receipt number must be alphanumeric.</li>');
+			else if( /[^a-zA-Z0-9]/.test( or_no) ){
+				errorList.append('<li>Official receipt number must be alphanumeric.</li>');
 			}
 			
-			if ($('#pamount').val()==""){
-				$('#addPayableErrorList').append('<li>Please enter an amount.</li>');
+			if (amount==""){
+				errorList.append('<li>Please enter an amount.</li>');
 			}
-			else if($('#pamount').val()<1){
-				$('#addPayableErrorList').append('<li>Amount must be greater than zero.</li>');
+			else if(amount<1){
+				errorList.append('<li>Amount must be greater than zero.</li>');
 			}
 		}
 		else {
-			$('#addPayableErrorDiv').hide();
-			$('#paddMoreBtn').attr("disabled", false);	
-			$('#savePayableBtn').val('Saved');
-			$('#savePayableBtn').attr("disabled", "disabled");	
-			$('#addPayableForm :input').attr('readonly','readonly');
+			errorDiv.hide();
+			addMoreBtn.attr("disabled", false);	
+			saveBtn.val('Saved');
+			saveBtn.attr("disabled", "disabled");	
+			formInputs.attr('readonly','readonly');
 		}
+	}
+	
+	function psaved(){
+		var errorList = $('#addPayableErrorList');
+		var errorDiv = $('#addPayableErrorDiv');
+		var transactorList = $('#payabaleSupplierList').val();
+		var or_no = $('#por_no').val();
+		var amount = $('#pamount').val();
+		var transactorType = "supplier";
+		var addMoreBtn = $('#paddMoreBtn');
+		var saveBtn = $('#savePayableBtn');
+		var formInputs = $('#addPayableForm :input');
+		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	} 
+	
+	/*function epsaved() {
+		var errorList = $('#editPayableErrorList');
+		var errorDiv = $('#editPayableErrorDiv');
+		var transactorList = $('#epsupplier_name').val();
+		var or_no = $('#epor_no').val();
+		var amount = $('#epamount').val();
+		var transactorType = "supplier";
+		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, null, null, null);
+	}*/
 
 	function paddmore(){
 		$('#pdate').val('');
@@ -612,37 +634,16 @@
 	}
 	
 	function rsaved(){
-		$('#addReceivableErrorList').empty();
-		var ror_no = $('#ror_no').val();
-		if($('#receivableCustomerList').val()==null||ror_no==""||$('#ramount').val()==""||$('#ramount').val()<1||/[^a-zA-Z0-9]/.test( ror_no)){
-			$('#addReceivableErrorDiv').show();
-			
-			if($('#receivableCustomerList').val()==null){
-				$('#addReceivableErrorList').append('<li>Please select a customer from the list provided.'+
-						' If you cannot find the customer you are looking for, please click <b>Create new record</b>'+
-				' to add a new customer.</li>');
-			}
-			
-			if(ror_no==""){
-				$('#addReceivableErrorList').append('<li>Please enter an official receipt number.</li>');
-			}
-			else if( /[^a-zA-Z0-9]/.test( ror_no) ){
-				$('#addReceivableErrorList').append('<li>Official receipt number must be alphanumeric.</li>');
-			}
-			
-			if ($('#ramount').val()==""){
-				$('#addReceivableErrorList').append('<li>Please enter an amount.</li>');
-			}
-			else if($('#ramount').val()<1){
-				$('#addReceivableErrorList').append('<li>Amount must be greater than zero.</li>');
-			}
-		}
-		else {
-			$('#addReceivableErrorDiv').hide();
-			$('#raddMoreBtn').attr("disabled", false);	
-			$('#saveReceivableBtn').val('Saved');
-			$('#saveReceivableBtn').attr("disabled", "disabled");			
-		}
+		var errorList = $('#addReceivableErrorList');
+		var errorDiv = $('#addReceivableErrorDiv');
+		var transactorList = $('#receivableCustomerList').val();
+		var or_no = $('#ror_no').val();
+		var amount = $('#ramount').val();
+		var transactorType = "customer";
+		var addMoreBtn = $('#raddMoreBtn');
+		var saveBtn = $('#saveReceivableBtn');
+		var formInputs = $('#addReceivableForm :input');
+		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	}
 	
 	function raddmore(){
