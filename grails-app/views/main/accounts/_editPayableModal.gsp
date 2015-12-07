@@ -49,8 +49,8 @@
 		<g:hiddenField name="type" value="P" />
 	  </div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve button" value="Save" action="editPayable"/>
-	    <div class="ui cancel button teal">Done</div>
+	    <g:actionSubmit class="ui approve button teal" value="Save" action="editPayable"/>
+	    <div class="ui cancel button">Cancel</div>
 	  </div>
     </g:form>
 </div> 

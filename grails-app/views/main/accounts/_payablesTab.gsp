@@ -44,7 +44,7 @@
 	  </thead>
 	  <tbody>
 	  	<g:each in="${payableList}" var="payable">
-		  	<tr>
+		  	<tr title="Last updated on ${payable.updated_on}">
 		    <td>${payable.or_no}</td>
 		    <td>
 			<g:findAll in="${supplierList}" expr="it.id == payable.transactor_id">
