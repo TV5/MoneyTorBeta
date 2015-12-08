@@ -25,7 +25,7 @@ class UserService {
 		}
 	}
 	def editUser(userId, user){
-
+		def ret = "User information has been saved."
 		def userCheck = User.findByUsername(user.username)
 		if(userCheck==null || userCheck.id==user.id){
 			def updateUser = User.get(userId)
@@ -38,8 +38,9 @@ class UserService {
 			updateUser.save()
 
 		}else{
-			return "username already exists"
+			ret = "Username is already in use."
 		}
+		return ret
 	}
 	
 	def editUserAccount(userId, user){

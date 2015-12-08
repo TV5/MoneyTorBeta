@@ -1,383 +1,9 @@
-	$('.top.menu .item').tab();
-
-	$('#addemployeeBtn').click(function(){
-		$('#addemployee').modal('show');
-	});
-	
-	$('#addadministratorBtn').click(function(){
-		$('#addadministrator').modal('show');
-	});
-
-	$('#editemployeeBtn').click(function() {
-		$('#editemployee').modal('show');
-	});
-
-	$('#editadministratorBtn').click(function() {
-		$('#editadministrator').modal('show');
-	});
-	
-	$('#addPayableBtn').click(function(){
-		$('#addPayable').modal({
-			closable: false
-		})
-		$('#addPayable').modal('show');
-	});
-	
-	$('#addReceivableBtn').click(function(){
-		$('#addReceivable').modal({
-			closable: false
-		})
-		$('#addReceivable').modal('show');
-	});
-	
-	$('#addSupplierBtn').click(function(){
-		$('#addSupplier').modal({
-			closable: false
-		})
-		$('#addSupplier').modal('show');
-	});
-	
-	$('#addCustomerBtn').click(function(){
-		$('#addCustomer').modal({
-			closable: false
-		})
-		$('#addCustomer').modal('show');
-	});
-	
-	function addNewCustomer() {
-		$('#addCustomerBtn').click();
-	}
-	
-	//used to check if input is a number with 2 decimal places
-	function checkDec(el){
-		 var ex = /^[0-9]+\.?[0-9]*$/;
-		 if(ex.test(el.value)==false){
-		   el.value = el.value.substring(0,el.value.length - 1);
-		 }
-	}
-	
-	function addPayment(account_id){
-		document.getElementById("pmAccount_id").value=account_id;
-		$('#paymentsTable_filter').hide();
-		$('#payments').modal('show');
-		$('.ui.form')
-        .form({
-          fields: {
-            pmAmount: {
-              identifier  : 'pmAmount',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter amount.'
-                }                
-              ]
-            }
-          }
-        });
-	}
-	
-	$('#logoutLink').click(function(){
-		$('#logout').modal('show');
-	});
-
-	function edit(){
-		$('#saveBtn').show();
-		$('.displayFirst').hide();
-		$('.displaySec').show();
-		$('#editBtn').hide();
-	}
-	
-	function save(){
-		$('#saveBtn').hide();
-		$('.displayFirst').show();
-		$('.displaySec').hide();
-		$('#editBtn').show();
-		$('#newPass').hide();
-		$('.oldPass').show();
-	}
-
-	function changePassword(){		
-		$('.oldPass').hide();
-		$('#newPass').show();
-		
-		$('.ui.form')
-        .form({
-          fields: {
-              uCurrentPass: {
-                identifier  : 'uCurrentPass'         
-              },
-            uCurrPass: {
-              identifier  : 'uCurrPass',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter current password'
-                },                
-                {
-                    type   : 'match[uCurrentPass]',
-                    prompt : 'The current password entered is incorrect.'
-                  }
-                  
-              ]
-            },
-            uNewPass: {
-              identifier  : 'uNewPass',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your new password'
-                },
-                {
-                  type   : 'length[8]',
-                  prompt : 'Your new password must be at least 8 characters'
-                }
-              ]              
-            },
-            uCNewPass: {
-              identifier  : 'uCNewPass',
-              rules: [
-                {
-                  type   : 'match[uNewPass]',
-                  prompt : 'Password does not match'
-                }
-              ]              
-            }
-          }
-        });
-	}
-	
+//document ready functions
 	$(document).ready(function() {
-      $('.ui.form')
-        .form({
-          fields: {
-            eusername: {
-              identifier  : 'eusername',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your username'
-                },                
-                {
-                    type   : 'length[8]',
-                    prompt : 'Your username must be at least 8 characters'
-                  }
-                  
-              ]
-            },
-            epassword: {
-              identifier  : 'epassword',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[8]',
-                  prompt : 'Your password must be at least 8 characters'
-                }
-              ]              
-            },
-            ecpassword: {
-              identifier  : 'ecpassword',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please confirm your password'
-                },
-                {
-                  type   : 'match[epassword]',
-                  prompt : 'Password does not match'
-                }
-              ]              
-            },
-            ausername: {
-              identifier  : 'ausername',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your username'
-                },                
-                {
-                    type   : 'length[8]',
-                    prompt : 'Your username must be at least 8 characters'
-                 }
-                  
-              ]
-            },
-            apassword: {
-              identifier  : 'apassword',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[8]',
-                  prompt : 'Your password must be at least 8 characters'
-                }
-              ]              
-            },
-            acpassword: {
-              identifier  : 'acpassword',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'match[apassword]',
-                  prompt : 'Password does not match'
-                }
-              ]              
-            },
-            empUsername: {
-              identifier  : 'empUsername',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your username'
-                },                
-                {
-                    type   : 'length[8]',
-                    prompt : 'Your username must be at least 8 characters'
-                  }
-                  
-              ]
-            },
-            empPassword: {
-              identifier  : 'empPassword',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[8]',
-                  prompt : 'Your password must be at least 8 characters'
-                }
-              ]              
-            },
-            empCpassword: {
-              identifier  : 'empCpassword',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'match[empPassword]',
-                  prompt : 'Password does not match'
-                }
-              ]              
-            },
-            adminUsername: {
-              identifier  : 'adminUsername',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your username'
-                },                
-                {
-                    type   : 'length[8]',
-                    prompt : 'Your username must be at least 8 characters'
-                  }
-                  
-              ]
-            },
-            adminPassword: {
-              identifier  : 'adminPassword',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[8]',
-                  prompt : 'Your password must be at least 8 characters'
-                }
-              ]              
-            },
-            adminCpassword: {
-              identifier  : 'adminCpassword',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'match[adminPassword]',
-                  prompt : 'Password does not match'
-                }
-              ]              
-            },
-            uF_name: {
-              identifier  : 'uF_name',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your First Name'
-                }
-              ]
-            },
-            uL_name: {
-              identifier  : 'uL_name',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your Last Name'
-                }
-              ]
-            },
-            username: {
-                identifier  : 'username',
-                rules: [
-                  {
-                    type   : 'empty',
-                    prompt : 'Please enter your username'
-                  },                
-                  {
-                      type   : 'length[8]',
-                      prompt : 'Your username must be at least 8 characters'
-                    }
-                    
-                ]
-              },
-              password: {
-                identifier  : 'password',
-                rules: [
-                  {
-                    type   : 'empty',
-                    prompt : 'Please enter your password'
-                  },
-                  {
-                    type   : 'length[8]',
-                    prompt : 'Your password must be at least 8 characters'
-                  }
-                ]
-              }
-          }
-        });
-    })
-	
-    function pymntAdded(){
-		document.getElementById("pmAmount").value="";
-	}
-	
-	function editUserAccount(id, f_name, l_name, password){
-		document.getElementById("uId").value=id;
-		document.getElementById("uF_name").value=f_name;
-		document.getElementById("uL_name").value=l_name;
-		document.getElementById("uCurrentPass").value=password;
-	}
-	
-	function toggleNewSupplier(){
-		$(".payableNewSupplier").toggle();
-	}
-	
-	function toggleNewCustomer(){
-		$(".receivableNewCustomer").toggle();
-	}
-
+	    $('#employeesTable').DataTable();
+	    $('#administratorsTable').DataTable();
+	    $("#caddMoreBtn").attr("disabled", "disabled");	    
+	});
 	$(document).ready(function() {
 		
 		if(window.location.href.indexOf("?")!=-1){
@@ -588,7 +214,424 @@
 			$('#addPayable').modal('hide');
 		});
 	} );
+	$(document).ready(function() {
+
+      $('.ui.form')
+        .form({
+          fields: {
+            eusername: {
+              identifier  : 'eusername',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your username must be at least 8 characters'
+                  }
+                  
+              ]
+            },
+            epassword: {
+              identifier  : 'epassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]              
+            },
+            ecpassword: {
+              identifier  : 'ecpassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please confirm your password'
+                },
+                {
+                  type   : 'match[epassword]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            },
+            ausername: {
+              identifier  : 'ausername',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your username must be at least 8 characters'
+                 }
+                  
+              ]
+            },
+            apassword: {
+              identifier  : 'apassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]              
+            },
+            acpassword: {
+              identifier  : 'acpassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'match[apassword]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            },
+            empUsername: {
+              identifier  : 'empUsername',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your username must be at least 8 characters'
+                  }
+                  
+              ]
+            },
+            empPassword: {
+              identifier  : 'empPassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]              
+            },
+            empCpassword: {
+              identifier  : 'empCpassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'match[empPassword]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            },
+            adminUsername: {
+              identifier  : 'adminUsername',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your username'
+                },                
+                {
+                    type   : 'length[8]',
+                    prompt : 'Your username must be at least 8 characters'
+                  }
+                  
+              ]
+            },
+            adminPassword: {
+              identifier  : 'adminPassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your password must be at least 8 characters'
+                }
+              ]              
+            },
+            adminCpassword: {
+              identifier  : 'adminCpassword',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'match[adminPassword]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            },
+            uF_name: {
+              identifier  : 'uF_name',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your First Name'
+                }
+              ]
+            },
+            uL_name: {
+              identifier  : 'uL_name',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your Last Name'
+                }
+              ]
+            },
+            username: {
+                identifier  : 'username',
+                rules: [
+                  {
+                    type   : 'empty',
+                    prompt : 'Please enter your username'
+                  },                
+                  {
+                      type   : 'length[8]',
+                      prompt : 'Your username must be at least 8 characters'
+                    }
+                    
+                ]
+              },
+              password: {
+                identifier  : 'password',
+                rules: [
+                  {
+                    type   : 'empty',
+                    prompt : 'Please enter your password'
+                  },
+                  {
+                    type   : 'length[8]',
+                    prompt : 'Your password must be at least 8 characters'
+                  }
+                ]
+              }
+          }
+        });
+
+
+    });
+
+	//MODALS
+	$('.top.menu .item').tab();
+	$('#addemployeeBtn').click(function(){
+		$('#addemployee').modal('show');
+	});	
+	$('#addadministratorBtn').click(function(){
+		$('#addadministrator').modal('show');
+	});
+	$('#editemployeeBtn').click(function() {
+		$('#editemployee').modal('show');
+	});
+	$('#editadministratorBtn').click(function() {
+		$('#editadministrator').modal('show');
+	});
+	$('#addPayableBtn').click(function(){
+		$('#addPayable').modal({
+			closable: false
+		})
+		$('#addPayable').modal('show');
+	});
+	$('#addReceivableBtn').click(function(){
+		$('#addReceivable').modal({
+			closable: false
+		})
+		$('#addReceivable').modal('show');
+	});	
+	$('#addSupplierBtn').click(function(){
+		$('#addSupplier').modal({
+			closable: false
+		})
+		$('#addSupplier').modal('show');
+	});	
+	$('#addCustomerBtn').click(function(){
+		$('#addCustomer').modal({
+			closable: false
+		})
+		$('#addCustomer').modal('show');
+	});	
+	$('.paymentsBtn').click(function(){
+		$('#payments').modal('show');
+	});
+	$('#logoutLink').click(function(){
+		$('#logout').modal('show');
+	});
 	
+
+//edit stuffs
+	function editAdmin(id, username, f_name, l_name, password, status){
+		document.getElementById("adminId").value=id;
+		document.getElementById("adminUsername").value=username;
+		document.getElementById("adminF_name").value=f_name;
+		document.getElementById("adminL_name").value=l_name;
+		document.getElementById("adminPassword").value=password;
+		document.getElementById("adminCpassword").value=password;
+
+		$('#editadministrator').modal('show');
+	}
+	function editEmployee(id, username, f_name, l_name, password, status){
+		document.getElementById("empId").value=id;
+		document.getElementById("empUsername").value=username;
+		document.getElementById("empF_name").value=f_name;
+		document.getElementById("empL_name").value=l_name;
+		document.getElementById("empPassword").value=password;
+		document.getElementById("empCpassword").value=password;
+
+		$('#editemployee').modal('show');
+	}
+	function editReceivable(id, or_no, transactor_id, amount, date){
+		$('#ercustomer_name').val(transactor_id);
+		$('#eror_no').val(or_no);
+		$('#eramount').val(amount);
+		$('#ertransaction_date').val(date.toString().split(' ')[0]);
+		$('#receivable_id').val(id);
+		$('#editReceivableModal').modal('show');
+	}
+	function editPayable(id, or_no, transactor_id, amount, date){
+		$('#epsupplier_name').val(transactor_id);
+		$('#epor_no').val(or_no);
+		$('#epamount').val(amount);
+		$('#eptransaction_date').val(date.toString().split(' ')[0]);
+		$('#payable_id').val(id);
+		$('#editPayableModal').modal('show');
+	}
+	function editTransactor(name, address, telephone_no, mobile_no, terms){
+		document.getElementById("empId").value=id;
+		document.getElementById("empUsername").value=username;
+		document.getElementById("empF_name").value=f_name;
+		document.getElementById("empL_name").value=l_name;
+		document.getElementById("empPassword").value=password;
+		document.getElementById("empCpassword").value=password;
+
+		$('#editemployee').modal('show');
+		
+	}
+	function editUserAccount(id, f_name, l_name, password){
+		document.getElementById("uId").value=id;
+		document.getElementById("uF_name").value=f_name;
+		document.getElementById("uL_name").value=l_name;
+		document.getElementById("uCurrentPass").value=password;
+	}
+	//unsorted
+	function edit(){
+		$('#saveBtn').show();
+		$('.displayFirst').hide();
+		$('.displaySec').show();
+		$('#editBtn').hide();
+	}
+	function save(){
+		$('#saveBtn').hide();
+		$('.displayFirst').show();
+		$('.displaySec').hide();
+		$('#editBtn').show();
+		$('#newPass').hide();
+		$('.oldPass').show();
+	}	
+	function changePassword(){		
+		$('.oldPass').hide();
+		$('#newPass').show();
+		
+		$('.ui.form')
+        .form({
+          fields: {
+              uCurrentPass: {
+                identifier  : 'uCurrentPass'         
+              },
+            uCurrPass: {
+              identifier  : 'uCurrPass',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter current password'
+                },                
+                {
+                    type   : 'match[uCurrentPass]',
+                    prompt : 'The current password entered is incorrect.'
+                  }
+                  
+              ]
+            },
+            uNewPass: {
+              identifier  : 'uNewPass',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your new password'
+                },
+                {
+                  type   : 'length[8]',
+                  prompt : 'Your new password must be at least 8 characters'
+                }
+              ]              
+            },
+            uCNewPass: {
+              identifier  : 'uCNewPass',
+              rules: [
+                {
+                  type   : 'match[uNewPass]',
+                  prompt : 'Password does not match'
+                }
+              ]              
+            }
+          }
+        });
+	}
+	function pymntAdded(){
+		document.getElementById("pmAmount").value="";
+	}
+	function toggleNewSupplier(){
+		$(".payableNewSupplier").toggle();
+	}
+	function toggleNewCustomer(){
+		$(".receivableNewCustomer").toggle();
+	}
+	function addNewCustomer() {
+		$('#addCustomerBtn').click();
+	}
+	//used to check if input is a number with 2 decimal places
+	function checkDec(el){
+		 var ex = /^[0-9]+\.?[0-9]*$/;
+		 if(ex.test(el.value)==false){
+		   el.value = el.value.substring(0,el.value.length - 1);
+		 }
+	}
+	function addPayment(account_id){
+		document.getElementById("pmAccount_id").value=account_id;
+		$('#paymentsTable_filter').hide();
+		$('#payments').modal('show');
+		$('.ui.form')
+        .form({
+          fields: {
+            pmAmount: {
+              identifier  : 'pmAmount',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter amount.'
+                }                
+              ]
+            }
+          }
+        });
+	}
 	function validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs) {
 		errorList.empty();
 		if(transactorList==null||or_no==""||amount==""||amount<1||/[^a-zA-Z0-9]/.test( or_no)){
@@ -622,7 +665,6 @@
 			formInputs.attr('readonly','readonly');
 		}
 	}
-	
 	function psaved(){
 		var errorList = $('#addPayableErrorList');
 		var errorDiv = $('#addPayableErrorDiv');
@@ -635,7 +677,6 @@
 		var formInputs = $('#addPayableForm :input');
 		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	} 
-	
 	/*function epsaved() {
 		var errorList = $('#editPayableErrorList');
 		var errorDiv = $('#editPayableErrorDiv');
@@ -645,7 +686,6 @@
 		var transactorType = "supplier";
 		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, null, null, null);
 	}*/
-
 	function paddmore(){
 		$('#pdate').val('');
 		$('#pamount').val('');
@@ -657,7 +697,6 @@
 		$("#paddMoreBtn").attr("disabled", "disabled");
 		
 	}
-	
 	function rsaved(){
 		var errorList = $('#addReceivableErrorList');
 		var errorDiv = $('#addReceivableErrorDiv');
@@ -670,7 +709,6 @@
 		var formInputs = $('#addReceivableForm :input');
 		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	}
-	
 	function raddmore(){
 		$('#rdate').val('');
 		$('#ramount').val('');
@@ -681,13 +719,11 @@
 		$('#saveReceivableBtn').removeAttr("disabled");
 		$("#raddMoreBtn").attr("disabled", "disabled");
 	}
-	
 	Date.prototype.toDateInputValue = (function() {
 	    var local = new Date(this);
 	    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
 	    return local.toJSON().slice(0,10);
 	});
-
 	$('#settingsLink').click(function(){
 		$('#userSettings').modal('show');
 		$('.displaySec').hide();
@@ -697,79 +733,6 @@
 		$('#newPass').hide();
 		$('.oldPass').show();
 	});	
-
-	function editReceivable(id, or_no, transactor_id, amount, date){
-		$('#ercustomer_name').val(transactor_id);
-		$('#eror_no').val(or_no);
-		$('#eramount').val(amount);
-		$('#ertransaction_date').val(date.toString().split(' ')[0]);
-		$('#receivable_id').val(id);
-		$('#editReceivableModal').modal('show');
-	}
-	
-	function editPayable(id, or_no, transactor_id, amount, date){
-		$('#epsupplier_name').val(transactor_id);
-		$('#epor_no').val(or_no);
-		$('#epamount').val(amount);
-		$('#eptransaction_date').val(date.toString().split(' ')[0]);
-		$('#payable_id').val(id);
-		$('#editPayableModal').modal('show');
-	}
-	
-	function editAdmin(id, username, f_name, l_name, password, status){
-		document.getElementById("adminId").value=id;
-		document.getElementById("adminUsername").value=username;
-		document.getElementById("adminF_name").value=f_name;
-		document.getElementById("adminL_name").value=l_name;
-		document.getElementById("adminPassword").value=password;
-		document.getElementById("adminCpassword").value=password;
-
-		$('#editadministrator').modal('show');
-	}
-
-	function editTransactor(name, address, telephone_no, mobile_no, terms){
-		document.getElementById("empId").value=id;
-		document.getElementById("empUsername").value=username;
-		document.getElementById("empF_name").value=f_name;
-		document.getElementById("empL_name").value=l_name;
-		document.getElementById("empPassword").value=password;
-		document.getElementById("empCpassword").value=password;
-
-		$('#editemployee').modal('show');
-		
-	}
-	
-
-
-	$(document).ready(function() {
-	    $('#employeesTable').DataTable();
-	    $('#administratorsTable').DataTable();
-	    $("#caddMoreBtn").attr("disabled", "disabled");
-	    
-	} );
-	
-	function editEmployee(id, username, f_name, l_name, password, status){
-		document.getElementById("empId").value=id;
-		document.getElementById("empUsername").value=username;
-		document.getElementById("empF_name").value=f_name;
-		document.getElementById("empL_name").value=l_name;
-		document.getElementById("empPassword").value=password;
-		document.getElementById("empCpassword").value=password;
-
-		$('#editemployee').modal('show');
-	}
-
-	function editAdmin(id, username, f_name, l_name, password, status){
-		document.getElementById("adminId").value=id;
-		document.getElementById("adminUsername").value=username;
-		document.getElementById("adminF_name").value=f_name;
-		document.getElementById("adminL_name").value=l_name;
-		document.getElementById("adminPassword").value=password;
-		document.getElementById("adminCpassword").value=password;
-
-		$('#editadministrator').modal('show');
-	}
-
 	function csaved(){
 	
 		document.getElementById('caddMoreBtn').className = 'ui teal button'; 
@@ -782,8 +745,7 @@
 		$('#cmobile_no').prop('readonly', true);
 		$('#cterms').prop('readonly', true);
 		$('#cselect').prop('disabled', true);
-		} 
-
+	}
 	function addedEmployee(){
 		alert("Employee has been added!");		
 		alert("added");
@@ -813,8 +775,7 @@
 		$('#mobile_no').prop('readonly', false);
 		$('#terms').prop('readonly', false);
 		$('#select').prop('disabled', false);
-	}
-	
+	}	
 	function caddmoreClick(){
 		document.getElementById('csaveBtn').value = 'Save';
 		document.getElementById('caddMoreBtn').className = 'ui button'; 
@@ -827,9 +788,7 @@
 		$('#cmobile_no').prop('readonly', false);
 		$('#cterms').prop('readonly', false);
 		$('#cselect').prop('disabled', false);
-
-		} 
-	
+	} 
 	function validateForm() {
 		var form = document.getElementById('addCustomerForm');
 		  if(form.validate()) {
@@ -840,14 +799,11 @@
 		        }
 		          return true;
 		  }
-
 	function convertTerms(days){
 		if(days > 7 && days < 30)	{
 			
 		}	
 	}
-	
-
 	$.fn.dataTable.ext.search.push(
 			function( settings, data, dataIndex ) {
 		  		var min = Date.parse($('#min').val(),10);
@@ -863,7 +819,6 @@
 		        return false;
 		    }
 	);
-	
 	$.fn.dataTable.Api.register( 'sum()', function ( ) {
 	    return this.flatten().reduce( function ( a, b ) {
 	        if ( typeof a === 'string' ) {
@@ -876,5 +831,3 @@
 	        return a + b;
 	    }, 0 );
 	} );
-	
-
