@@ -4,7 +4,7 @@ class UserController {
 	def beforeInterceptor = [action:this.&auth]
 	def scaffold=true
 	def userService
-    def index() { 
+	def index() {
 		
 	}
 	def auth(){
@@ -12,7 +12,7 @@ class UserController {
 			redirect(uri: "/")
 			return false
 		}
-	}	
+	}
 	
 	def checkUsername(){
 		def username
@@ -27,17 +27,19 @@ class UserController {
 			username=params.empUsername
 		}
 		user = userService.checkUser(username)
-		render user
+		return user
 	}
 	def listEmployees(){
-		def empList=userService.listEmployees()	
+		def empList=userService.listEmployees()
 		return empList
-	}	
+	}
 	def listAdmins(){
 		def adminList=userService.listAdmins()
 		return adminList
 	}
 	def addEmployee() {
+		def username = checkUsername();
+		if(username == "available"){
 		if(params.ecpassword==params.epassword){
 			def user =new User(
 					f_name: params.ef_name,
@@ -50,8 +52,12 @@ class UserController {
 					updated_by: session.user.id
 				)
 			if(user!=null){
-				userService.addUser(user)			
+				userService.addUser(user)
+				render "User has been saved."
 			}
+		}
+		}else{
+			render "username unavailable"
 		}
 	}
 	def addAdmin() {
@@ -63,28 +69,30 @@ class UserController {
 			password:params.apassword,
 			type:params.atype,
 			status:1,
-			updated_on:new Date(), 
+			updated_on:new Date(),
 			updated_by:session.user.id
-		)	
+		)
 		if(user!=null){
-				userService.addUser(user)			
+				userService.addUser(user)
 			}
 		}
 	}
 	
 	def editEmployee(){
-		if(params.empCpassword==params.empPassword){
-			def user =new User()
-			user.id = params.int('empId')
-			user.f_name=params.empF_name
-			user.l_name=params.empL_name
-			user.username=params.empUsername
-			user.password=params.empPassword
-			user.updated_on=new Date()
-			user.updated_by=params.int('userId')
-			userService.editUser(user.id, user)
-			
-			redirect(action: "users")
+			if(params.empCpassword==params.empPassword){
+				def user =new User(
+				f_name:params.empF_name,
+				l_name:params.empL_name,
+				username:params.empUsername,
+				password:params.empPassword,
+				updated_on:new Date(),
+				updated_by:session.user.id
+			)
+			user.id=params.int('empId')
+			if(user!=null){
+				def ret = userService.editUser(user.id, user)
+				render ret
+			}
 		}
 
 	}
@@ -102,17 +110,16 @@ class UserController {
 	
 	def editAdmin(){
 		if(params.adminCpassword==params.adminPassword){
-			def user =new User()
+			def user =new User(
+			f_name:params.adminF_name,
+			l_name:params.adminL_name,
+			username:params.adminUsername,
+			password:params.adminPassword,
+			updated_on:new Date(),
+			updated_by:session.user.id
+			)
 			user.id = params.int('adminId')
-			user.f_name=params.adminF_name
-			user.l_name=params.adminL_name
-			user.username=params.adminUsername
-			user.password=params.adminPassword
-			user.updated_on=new Date()
-			user.updated_by=params.int('userId')
 			userService.editUser(user.id, user)
-			
-			redirect(action: "users")
 		}
 
 	}
@@ -134,10 +141,11 @@ class UserController {
 	}
 
 	def users(){
+		if(session.user){
 		def empList=listEmployees()
 		def adminList=listAdmins()
 
 		[user:session.user, empList:empList, adminList:adminList]
-		
+		}
 	}
 }
