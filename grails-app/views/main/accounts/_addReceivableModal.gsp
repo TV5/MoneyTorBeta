@@ -125,6 +125,7 @@
 		<!--<g:submitToRemote  url="" update="saveReceivableBtn" class="ui button" value="Add More" id="raddMoreBtn" onComplete="raddmoreClick()" />-->
 	    <button class="ui button" value="Add More" id="raddMoreBtn" onClick="raddmore()">Add More</button>
 	    <div class="ui button" id="rdone">Done</div>
+	    <div class="ui cancel button" >Cancel</div>
 	  </div>
     </g:form>
 	  </div>
