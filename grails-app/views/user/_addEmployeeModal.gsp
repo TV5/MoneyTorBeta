@@ -3,6 +3,7 @@
 		
 		<div class="content">
 			<g:form class="ui form" id="addEmployeeForm">
+				<div id="usernameTakene"></div>	
     			<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>
@@ -28,10 +29,6 @@
 						<div class="seven wide field">
 				            <g:textField name="eusername"required="true"/>
 						</div>
-		    			<div class="three wide field">
-		    			<g:submitToRemote url="[controller: 'User' ,action: 'checkUsername']"  class="ui button" value="Check Username" update="usernameTakene"/>
-		    			</div>
-						<div id="usernameTakene"></div>	
 				</div>
 				
 				<div class="inline fields">
@@ -54,7 +51,7 @@
 				<g:hiddenField name="etype" value="E" />
 			
 			<div class="actions">				
-    			<g:submitToRemote url="[controller: 'User' ,action: 'addEmployee']"  class="ui teal large button" value="Save" onSuccess="addEmployee()"/>
+    			<g:submitToRemote url="[controller: 'User' ,action: 'addEmployee']"  class="ui teal button" value="Save" update="usernameTakene" onSuccess="addedEmployee()"/>
     			<div class="ui cancel button">Cancel</div>
 			</div>
 			</g:form>
