@@ -316,6 +316,10 @@
                 {
                   type   : 'empty',
                   prompt : 'Please enter your First Name'
+                },
+                {
+                    type   : 'regExp[/^[a-zA-Z ]+$/]',
+                    prompt : 'Invalid input.'
                 }
               ]
             },
@@ -325,6 +329,10 @@
                 {
                   type   : 'empty',
                   prompt : 'Please enter your Last Name'
+                },
+                {
+                    type   : 'regExp[/^[a-zA-Z ]+$/]',
+                    prompt : 'Invalid input.'
                 }
               ]
             },
@@ -379,7 +387,6 @@
 	}
 
 	$(document).ready(function() {
-		
 		if(window.location.href.indexOf("?")!=-1){
 			var tabId = window.location.href.split("?")[1].split("=")[1];
 			var tabId = '#'+tabId;
