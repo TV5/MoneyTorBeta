@@ -56,9 +56,10 @@
 		 }
 	}
 	
-	function addPayment(account_id){
+	function addPayment(account_id, acct_name){
 		document.getElementById("pmAccount_id").value=account_id;
-		$('#paymentsTable_filter').hide();
+		$('#pmAccountName').html(acct_name);
+		
 		$('#payments').modal('show');
 		$('.ui.form')
         .form({
@@ -69,7 +70,11 @@
                 {
                   type   : 'empty',
                   prompt : 'Please enter amount.'
-                }                
+                },
+                {
+                    type   : 'regExp[/^\\d+\.?\\d{0,2}$/]',
+                    prompt : 'Invalid input.'
+                }  
               ]
             }
           }
@@ -368,7 +373,8 @@
     })
 	
     function pymntAdded(){
-		document.getElementById("pmAmount").value="";
+		setTimeout(1000);
+		$("#paymentsTable").load(location.href + " #paymentsTable>*","");
 	}
 	
 	function editUserAccount(id, f_name, l_name, password){
@@ -488,7 +494,6 @@
 			 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 		});
 	    
-	    $('#paymentsTable').DataTable();
 	    $('#customersTable').DataTable();
 	    $('#suppliersTable').DataTable();
 
