@@ -98,13 +98,16 @@ class UserController {
 	}
 	
 	def editUserAccount(){
-			def user =new User()
+			def user = new User()
 			user.id = params.int('uId')
-			user.f_name=params.uF_name
-			user.l_name=params.uL_name
-			user.password=params.uNewPass
+			user.f_name = params.uF_name
+			user.l_name = params.uL_name
+			
+			user.password = params.uNewPass == "" ? params.uCurrentPass : params.uNewPass;
+			
 			userService.editUserAccount(user.id, user)
 			session.user=userService.getUser(user.id)
+			
 			redirect(uri: request.getHeader('referer'))
 	}
 	

@@ -48,9 +48,16 @@
 		<g:hiddenField name="payable_id"/>
 		<g:hiddenField name="type" value="P" />
 	  </div>
+	  <div class="ui negative small message" id="editPayableErrorDiv" style="display:none;">
+		  <div class="header">
+		    There were some errors with your submission.
+		  </div>	
+		  <ul class="list" id="editPayableErrorList">
+		  </ul>
+	  </div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve button" value="Save" action="editPayable"/>
-	    <div class="ui cancel button teal">Done</div>
+	    <g:actionSubmit class="ui approve button teal" value="Save" action="editPayable"/>
+		<div class="ui cancel button" >Cancel</div>
 	  </div>
     </g:form>
 </div> 
