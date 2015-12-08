@@ -10,7 +10,6 @@
 		    </div>
 		    <div class="fourteen wide field">
 		      <g:textField id="cname" name="cname" value="${cname}" required="true"/>
-		      <p id="cerrorName">Invalid!</p>
 		    </div>
 		</div>
 		
@@ -54,28 +53,30 @@
           from="${['d': 'days', 'w': 'weeks', 'm': 'months', 'y':'years']}"
           optionKey="key" optionValue="value" />
           </div>
-        		    
-		  <!-- <div class="seven wide field">
-		      <select id="cselect" class="ui fluid dropdown">
-    			<option value="">days</option>
-    			<option value="">weeks</option>
-    			<option value="">months</option>
-    			<option value="">years</option>
-    		  </select>
-		    </div> -->  
+        		 
 		</div>    	
 		<g:hiddenField name="ctype" value="C" />
 		<g:hiddenField name="cstatus" value="A" />
 		<input type='reset' id="cresetBtn" value='Reset' hidden />
 		
-		<input id="af" type="submit"/>
-		<input id="aff" type="button"/>
 		
     	<div class="actions">
-    		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addCustomer']"  update="hehe" class="ui teal button" value="Save" id="csaveBtn" onFailure="showw()" onSuccess="csaved()" />
-			<g:submitToRemote  url="" update="csaveBtn" class="ui button" value="Add More" id="caddMoreBtn" onComplete="caddmoreClick()" />
+    		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addCustomer']"  
+    		class="ui teal button"
+    		id="csaveBtn"  
+    		update="caddMoreBtn"
+    		value="Save" 
+    		onComplete ="csaved()" />
+			
+			<g:submitToRemote  url="" 
+			update="csaveBtn" 
+			class="ui button" 
+			value="Add More" 
+			id="caddMoreBtn" 
+			onComplete="caddmoreClick()"
+			/>
+			
 			<!--<g:field id="addmore" class="ui button" type="reset" name="myReset"  update="saveBtn" value="Add More" url="" onComplete="addmoreClick()"/> -->
-			<input type='reset' id="cresetBtn" value='Reset' hidden />
 			<div class="ui cancel button"  " >Cancel</div>
 		</div>
    </g:form>

@@ -355,6 +355,12 @@
 
 	$(document).ready(function() {
 		
+		    $('#employeesTable').DataTable();
+		    $('#administratorsTable').DataTable();
+		    $("#caddMoreBtn").attr("disabled", true);
+		    $("#saddMoreBtn").attr("disabled", true);
+	
+		
 		if(window.location.href.indexOf("?")!=-1){
 			var tabId = window.location.href.split("?")[1].split("=")[1];
 			var tabId = '#'+tabId;
@@ -649,12 +655,7 @@
 	
 
 
-	$(document).ready(function() {
-	    $('#employeesTable').DataTable();
-	    $('#administratorsTable').DataTable();
-	    $("#caddMoreBtn").attr("disabled", "disabled");
-	    
-	} );
+
 	
 	function editEmployee(id, username, f_name, l_name, password, status){
 		document.getElementById("empId").value=id;
@@ -679,11 +680,10 @@
 	}
 
 	function csaved(){
-	
 		document.getElementById('caddMoreBtn').className = 'ui teal button'; 
 		document.getElementById('csaveBtn').value = 'Saved';
-		$("#csaveBtn").attr("disabled", "disabled");
-		$("#caddMoreBtn").removeAttr("disabled");
+		$("#csaveBtn").attr("disabled", true);
+		$('#caddMoreBtn').removeAttr("disabled")
 		$('#cname').prop('readonly', true);
 		$('#caddress').prop('readonly', true);
 		$('#ctelephone_no').prop('readonly', true);
@@ -691,6 +691,21 @@
 		$('#cterms').prop('readonly', true);
 		$('#cselect').prop('disabled', true);
 		} 
+	
+	function ssaved(){
+		
+		document.getElementById('saddMoreBtn').className = 'ui teal button'; 
+		document.getElementById('ssaveBtn').value = 'Saved';
+		$("#ssaveBtn").attr("disabled", true);
+		$('#saddMoreBtn').removeAttr("disabled")
+		$('#sname').prop('readonly', true);
+		$('#saddress').prop('readonly', true);
+		$('#stelephone_no').prop('readonly', true);
+		$('#smobile_no').prop('readonly', true);
+		$('#sterms').prop('readonly', true);
+		$('#sselect').prop('disabled', true);
+		
+		}
 
 	function addedEmployee(){
 		alert("Employee has been added!");		
@@ -726,15 +741,29 @@
 	function caddmoreClick(){
 		document.getElementById('csaveBtn').value = 'Save';
 		document.getElementById('caddMoreBtn').className = 'ui button'; 
+		$("#cresetBtn").click();
 		$("#csaveBtn").removeAttr("disabled");
 		$("#caddMoreBtn").attr("disabled", "disabled");
-		document.getElementById('cresetBtn').click();
 		$('#cname').prop('readonly', false);
 		$('#caddress').prop('readonly', false);
 		$('#ctelephone_no').prop('readonly', false);
 		$('#cmobile_no').prop('readonly', false);
 		$('#cterms').prop('readonly', false);
 		$('#cselect').prop('disabled', false);
+		} 
+	
+	function saddmoreClick(){
+		document.getElementById('ssaveBtn').value = 'Save';
+		document.getElementById('saddMoreBtn').className = 'ui button'; 
+		$("#sresetBtn").click();
+		$("#ssaveBtn").removeAttr("disabled");
+		$("#saddMoreBtn").attr("disabled", "disabled");
+		$('#sname').prop('readonly', false);
+		$('#saddress').prop('readonly', false);
+		$('#stelephone_no').prop('readonly', false);
+		$('#smobile_no').prop('readonly', false);
+		$('#sterms').prop('readonly', false);
+		$('#sselect').prop('disabled', false);
 
 		} 
 	

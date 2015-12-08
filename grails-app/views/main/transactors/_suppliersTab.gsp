@@ -23,7 +23,16 @@
 			  	</tr>
 			  </thead>
 			  <tbody>
-			  	
+			  	<g:each in="${supplierList}" var="transactor">
+        		<tr>			  	
+					<td>${transactor.name}</td>
+					<td>${transactor.address}</td>
+					<td>${transactor.telephone_no}</td>
+					<td>${transactor.mobile_no}</td>
+					<td>${transactor.terms}</td>
+					<td><a href="#"><i class="edit icon editCustomerBtn"></i></a></td>
+				</tr>	
+        		</g:each>
 			  </tbody>
 			  </table>
 		</div>

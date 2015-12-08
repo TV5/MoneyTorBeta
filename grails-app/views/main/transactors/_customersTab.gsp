@@ -23,17 +23,16 @@
 			  	</tr>
 			  </thead>
 			  <tbody>
-	  	        <g:each in="${transactorList}" var="transactor">
+	  	        <g:each in="${customerList}" var="customer">
         		<tr>			  	
-					<td>${transactor.name}</td>
-					<td>${transactor.address}</td>
-					<td>${transactor.telephone_no}</td>
-					<td>${transactor.mobile_no}</td>
-					<td>${transactor.terms}</td>
+					<td>${customer.name}</td>
+					<td>${customer.address}</td>
+					<td>${customer.telephone_no}</td>
+					<td>${customer.mobile_no}</td>
+					<td>${customer.terms}</td>
 					<td><a href="#"><i class="edit icon editCustomerBtn"></i></a></td>
-			</tr>	
+				</tr>	
         		</g:each>
 			  </tbody>
 			  </table>
 		</div>
-	</div>
