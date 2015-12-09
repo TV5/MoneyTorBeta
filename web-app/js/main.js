@@ -600,6 +600,7 @@
 	}
 	function toggleNewSupplier(){
 		$(".payableNewSupplier").toggle();
+		$(".ptransactorId").addClass("disabled");
 	}
 	function toggleNewCustomer(){
 		$(".receivableNewCustomer").toggle();
