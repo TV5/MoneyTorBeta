@@ -47,7 +47,8 @@ class AccountController {
 				telephone_no: params.ptelephone_no,
 				mobile_no: params.pmobile_no,
 				terms: params.pterms,
-				type: 'S'
+				type: 'S',
+				status: 'A'
 				)
 			transactorService.addTransactor(transactor)
 		}
