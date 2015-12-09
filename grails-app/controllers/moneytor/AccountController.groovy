@@ -40,6 +40,18 @@ class AccountController {
 				updated_by: session.user.id
 				)
 		accountService.addAccount(account)
+		if (params.pcategory) {
+			def transactor = new Transactor(
+				name: params.pname,
+				address: params.paddress,
+				telephone_no: params.ptelephone_no,
+				mobile_no: params.pmobile_no,
+				terms: params.pterms,
+				type: 'S'
+				)
+			transactorService.addTransactor(transactor)
+		}
+		
 		redirect(action: "main", controller: "main")
 	}
 	
