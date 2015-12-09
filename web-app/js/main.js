@@ -1,4 +1,3 @@
-	
 	$('.top.menu .item').tab();
 
 	$('#addemployeeBtn').click(function(){
@@ -49,9 +48,32 @@
 		$('#addCustomerBtn').click();
 	}
 	
+	//used to check if input is a number with 2 decimal places
+	function checkDec(el){
+		 var ex = /^[0-9]+\.?[0-9]*$/;
+		 if(ex.test(el.value)==false){
+		   el.value = el.value.substring(0,el.value.length - 1);
+		 }
+	}
+	
 	function addPayment(account_id){
 		document.getElementById("pmAccount_id").value=account_id;
+		$('#paymentsTable_filter').hide();
 		$('#payments').modal('show');
+		$('.ui.form')
+        .form({
+          fields: {
+            pmAmount: {
+              identifier  : 'pmAmount',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter amount.'
+                }                
+              ]
+            }
+          }
+        });
 	}
 	
 	$('#logoutLink').click(function(){
@@ -92,7 +114,7 @@
                   prompt : 'Please enter current password'
                 },                
                 {
-                    type   : 'matched[uCurrentPass]',
+                    type   : 'match[uCurrentPass]',
                     prompt : 'The current password entered is incorrect.'
                   }
                   
@@ -124,7 +146,7 @@
         });
 	}
 	
-	function validation() {
+	$(document).ready(function() {
       $('.ui.form')
         .form({
           fields: {
@@ -335,13 +357,16 @@
               }
           }
         });
-    }
+    })
+	
+    function pymntAdded(){
+		document.getElementById("pmAmount").value="";
+	}
 	
 	function editUserAccount(id, f_name, l_name, password){
 		document.getElementById("uId").value=id;
 		document.getElementById("uF_name").value=f_name;
 		document.getElementById("uL_name").value=l_name;
-		document.getElementById("uNewPass").value=password;
 		document.getElementById("uCurrentPass").value=password;
 	}
 	
@@ -379,6 +404,16 @@
 			"order": [[4, "asc"]]
 		});
 
+	    function setreceivablesTotalAmt(){
+		    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+			var receivablesTotal=0;
+			for (var i = 0; i<receivablesAmounts.length; i++){
+				receivablesAmounts[i] = receivablesAmounts[i].textContent;
+				receivablesTotal+=parseFloat(receivablesAmounts[i]);
+			}
+			$('#receivablesTotal').html("Php "+receivablesTotal);
+		}
+		setreceivablesTotalAmt();
 	    $('#maxR').val(new Date().toDateInputValue());
 		var maxR = new Date();
 		maxR.setMonth(maxR.getMonth() - 1);
@@ -386,6 +421,7 @@
 		receivablesTable.draw();
 	    $('#minR, #maxR').change( function() {
 	        receivablesTable.draw();
+	        setreceivablesTotalAmt();
 	    } );
 
 	    new $.fn.dataTable.Buttons(receivablesTable, {
@@ -561,11 +597,62 @@
 		});
 	} );
 	
+	function validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs) {
+		errorList.empty();
+		if(transactorList==null||or_no==""||amount==""||amount<1||/[^a-zA-Z0-9]/.test( or_no)){
+			errorDiv.show();
+			
+			if(transactorList==null){
+				errorList.append('<li>Please select a supplier from the list provided.'+
+						' If you cannot find the supplier you are looking for, please click <b>Create new record</b>'+
+				' to add a new supplier.</li>');
+			}
+			
+			if(or_no==""){
+				errorList.append('<li>Please enter an official receipt number.</li>');
+			}
+			else if( /[^a-zA-Z0-9]/.test( or_no) ){
+				errorList.append('<li>Official receipt number must be alphanumeric.</li>');
+			}
+			
+			if (amount==""){
+				errorList.append('<li>Please enter an amount.</li>');
+			}
+			else if(amount<1){
+				errorList.append('<li>Amount must be greater than zero.</li>');
+			}
+		}
+		else {
+			errorDiv.hide();
+			addMoreBtn.attr("disabled", false);	
+			saveBtn.val('Saved');
+			saveBtn.attr("disabled", "disabled");	
+			formInputs.attr('readonly','readonly');
+		}
+	}
+	
 	function psaved(){
-		$('#paddMoreBtn').attr("disabled", false);	
-		$('#savePayableBtn').val('Saved');
-		$('#savePayableBtn').attr("disabled", "disabled");
+		var errorList = $('#addPayableErrorList');
+		var errorDiv = $('#addPayableErrorDiv');
+		var transactorList = $('#payabaleSupplierList').val();
+		var or_no = $('#por_no').val();
+		var amount = $('#pamount').val();
+		var transactorType = "supplier";
+		var addMoreBtn = $('#paddMoreBtn');
+		var saveBtn = $('#savePayableBtn');
+		var formInputs = $('#addPayableForm :input');
+		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	} 
+	
+	/*function epsaved() {
+		var errorList = $('#editPayableErrorList');
+		var errorDiv = $('#editPayableErrorDiv');
+		var transactorList = $('#epsupplier_name').val();
+		var or_no = $('#epor_no').val();
+		var amount = $('#epamount').val();
+		var transactorType = "supplier";
+		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, null, null, null);
+	}*/
 
 	function paddmore(){
 		$('#pdate').val('');
@@ -580,9 +667,16 @@
 	}
 	
 	function rsaved(){
-		$('#raddMoreBtn').attr("disabled", false);	
-		$('#saveReceivableBtn').val('Saved');
-		$('#saveReceivableBtn').attr("disabled", "disabled");
+		var errorList = $('#addReceivableErrorList');
+		var errorDiv = $('#addReceivableErrorDiv');
+		var transactorList = $('#receivableCustomerList').val();
+		var or_no = $('#ror_no').val();
+		var amount = $('#ramount').val();
+		var transactorType = "customer";
+		var addMoreBtn = $('#raddMoreBtn');
+		var saveBtn = $('#saveReceivableBtn');
+		var formInputs = $('#addReceivableForm :input');
+		validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	}
 	
 	function raddmore(){

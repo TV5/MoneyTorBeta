@@ -106,6 +106,13 @@
 		      <g:datePicker name="rdate" value="${rdate}" precision="day"/>
 		    </div>
 		</div>
+	  <div class="ui negative small message" id="addReceivableErrorDiv" style="display:none;">
+		  <div class="header">
+		    There were some errors with your submission.
+		  </div>	
+		  <ul class="list" id="addReceivableErrorList">
+		  </ul>
+	  </div>
 	  <div class="actions">
 	    <g:submitToRemote 
 		    	url="[controller: 'Account' ,action: 'addReceivable']" 
@@ -117,6 +124,7 @@
 		<!--<g:submitToRemote  url="" update="saveReceivableBtn" class="ui button" value="Add More" id="raddMoreBtn" onComplete="raddmoreClick()" />-->
 	    <button class="ui button" value="Add More" id="raddMoreBtn" onClick="raddmore()">Add More</button>
 	    <div class="ui button" id="rdone">Done</div>
+	    <div class="ui cancel button" >Cancel</div>
 	  </div>
     </g:form>
 	  </div>

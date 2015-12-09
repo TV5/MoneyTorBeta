@@ -17,7 +17,7 @@
 
 	
   <!-- Site Properities -->
-  <title>Login</title>
+  <title>MoneyTor | Login</title>
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
   <link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <g:actionSubmit class="ui fluid large teal submit button" value="login" action="login"/>
+        <g:actionSubmit class="ui fluid large teal submit button" value="Log in" action="login"/>
       </div>
 
     	    <div class="ui error message"></div>  

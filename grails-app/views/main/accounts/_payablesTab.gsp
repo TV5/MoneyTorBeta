@@ -44,7 +44,7 @@
 	  </thead>
 	  <tbody>
 	  	<g:each in="${payableList}" var="payable">
-		  	<tr>
+		  	<tr title="Last updated on ${payable.updated_on}">
 		    <td>${payable.or_no}</td>
 		    <td>
 			<g:findAll in="${supplierList}" expr="it.id == payable.transactor_id">
@@ -58,7 +58,9 @@
 		    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 		    </td>
 		    <td><a href="#" onClick="editPayable('${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
-		    <td> <button class="ui button teal" onClick="addPayment('${payable.transactor_id}')">View</button></td>
+		    <td> 
+		    <button class="ui button teal" onClick="addPayment('${payable.id}')">View</button>
+		    </td>
 		  	</tr>	  		
 	  	</g:each>
 	  </tbody>

@@ -47,7 +47,7 @@
 		</thead>
 		<tbody>
 			<g:each in="${receivableList}" var="receivable">
-			  	<tr>
+			  	<tr title="Last updated on ${receivable.updated_on}">
 			    <td>${receivable.or_no}</td>
 			    <td>
 					<g:findAll in="${customerList}" expr="it.id == receivable.transactor_id">
@@ -66,6 +66,6 @@
 	  		</g:each>
 		</tbody>
 	</table>
-	<b>Total Amount: </b> P79,300.00
+	<b>Total Amount:</b><p id="receivablesTotal"></p>
 	</p>
 </div>
