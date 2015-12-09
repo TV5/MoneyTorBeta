@@ -60,6 +60,25 @@ class UserController {
 			render "username unavailable"
 		}
 	}
+	def addMoreEmployee() {
+		def ret
+		if(params.ecpassword==params.epassword){
+			def user =new User(
+					f_name: params.ef_name,
+					l_name: params.el_name,
+					username: params.eusername,
+					password: params.epassword,
+					type: params.etype,
+					status: 1,
+					updated_on: new Date(),
+					updated_by: session.user.id
+				)
+			if(user!=null){
+				ret = userService.addMoreUser(user)
+				render ret
+			}
+		}
+	}
 	def addAdmin() {
 		if(params.acpassword==params.apassword){
 			def user =new User(

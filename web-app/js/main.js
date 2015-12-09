@@ -3,6 +3,7 @@
 	    $('#employeesTable').DataTable();
 	    $('#administratorsTable').DataTable();
 	    $("#caddMoreBtn").attr("disabled", "disabled");	    
+	    $("#eaddMoreB").attr("disabled", "disabled");	    
 	});
 	$(document).ready(function() {
 		
@@ -747,14 +748,29 @@
 		$('#cselect').prop('disabled', true);
 	}
 	function addedEmployee(){
-		alert("Employee has been added!");		
-		alert("added");
-		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
-		document.getElementById('saveBtn').value = 'Saved';
-		$("#saveBtn").attr("disabled", "disabled");
-		$("#addMoreBtn").removeAttr("disabled");*/
-
-		} 
+		document.getElementById('usernameTakene').setAttribute("class", "");
+		var status = document.getElementById('usernameTakene').innerText;
+		if(status == "User has been saved."){
+			document.getElementById('usernameTakene').setAttribute("class","ui message");
+			alert("Employee has been added!");
+			$("#eaddMoreB").removeAttr("disabled");
+			document.getElementById('esaveB').setAttribute("disabled","disabled");
+		}else{
+			document.getElementById('usernameTakene').setAttribute("class","ui negative small message");
+		}
+	}
+	function addedMoreEmployee(){
+		alert("addmore");
+		var status = document.getElementById('euserSaved').innerText;
+		if(status == "true"){
+			$("#esaveB").removeAttr("disabled");
+			document.getElementById('eaddMoreB').setAttribute("disabled","disabled");
+			document.getElementById('usernameTakene').innerText = null;
+			document.getElementById('euserSaved').innerText = null;
+			document.getElementById('usernameTakene').setAttribute("class", "")
+			document.getElementById('eresetBtn').click();
+		}
+	}
 	function addedAdmin(){
 		alert("added");
 		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
