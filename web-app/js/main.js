@@ -3,6 +3,7 @@
 	    $('#employeesTable').DataTable();
 	    $('#administratorsTable').DataTable();
 	    $("#caddMoreBtn").attr("disabled", "disabled");	    
+	    $("#eaddMoreB").attr("disabled", "disabled");	    
 	});
 	$(document).ready(function() {
 		
@@ -427,131 +428,7 @@
           }
         });
 
-    }
-	
-	function editUserAccount(id, f_name, l_name, password){
-		document.getElementById("uId").value=id;
-		document.getElementById("uF_name").value=f_name;
-		document.getElementById("uL_name").value=l_name;
-		document.getElementById("uNewPass").value=password;
-		document.getElementById("uCurrentPass").value=password;
-	}
-	
-	function toggleNewSupplier(){
-		$(".payableNewSupplier").toggle();
-	}
-	
-	function toggleNewCustomer(){
-		$(".receivableNewCustomer").toggle();
-		//$(".rSubmit").action('addReceivableCustomer');
-	}
 
-	$(document).ready(function() {
-		
-		if(window.location.href.indexOf("?")!=-1){
-			var tabId = window.location.href.split("?")[1].split("=")[1];
-			var tabId = '#'+tabId;
-			$(tabId).click();		
-		}
-
-		
-		$(".payableNewSupplier").hide();
-		$(".receivableNewCustomer").hide();
-		
-		//receivables
-		var num = $('#receivablesNumEntries').val();
-	    var receivablesTable = $('#receivablesTable').DataTable({
-	    	"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
-			"pageLength": $('#receivablesNumEntries').val(),
-			"order": [[4, "asc"]]
-		});
-	    function setreceivablesTotalAmt(){
-		    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
-			var receivablesTotal=0;
-			for (var i = 0; i<receivablesAmounts.length; i++){
-				receivablesAmounts[i] = receivablesAmounts[i].textContent;
-				receivablesTotal+=parseFloat(receivablesAmounts[i]);
-			}
-			$('#receivablesTotal').html("Php "+receivablesTotal);
-		}
-		setreceivablesTotalAmt();
-	    $('#maxR').val(new Date().toDateInputValue());
-		var maxR = new Date();
-		maxR.setMonth(maxR.getMonth() - 1);
-		$('#minR').val(maxR.toDateInputValue());
-		receivablesTable.draw();
-	    $('#minR, #maxR').change( function() {
-	        receivablesTable.draw();
-	        setreceivablesTotalAmt();
-	    } );
-	    new $.fn.dataTable.Buttons(receivablesTable, {
-	        buttons: [
-				{
-				    extend: 'collection',
-				    text: 'Export',
-				    className: 'ui button teal',
-				    buttons: [
-						{
-						    extend: 'copyHtml5',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'excelHtml5',
-						    title: 'Receivables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'csvHtml5',
-						    title: 'Receivables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'pdfHtml5',
-						    title: 'Receivables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						    	columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						},
-						{
-						    extend: 'print',
-						    title: 'Receivables Summary',
-						    orientation: 'portrait',
-						    pageSize: 'LETTER',
-						    exportOptions: {
-						        columns: [ 0, 1, 2, 3, 4 ]
-						    }
-						}
-				    ]
-				}
-	        ]
-	    });
-
-	    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
-
-	    
-	    $('#searchReceivables').keyup(function(){
-	          receivablesTable.search($(this).val()).draw() ;
-	    })
-	    var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
-		$('#receivablesNumEntries').change(function(){
-			 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
-		});
-	    
-	    $('#paymentsTable').DataTable();
-	    $('#customersTable').DataTable();
-	    $('#suppliersTable').DataTable();
     });
 
 	//MODALS
@@ -871,14 +748,29 @@
 		$('#cselect').prop('disabled', true);
 	}
 	function addedEmployee(){
-		alert("Employee has been added!");		
-		alert("added");
-		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
-		document.getElementById('saveBtn').value = 'Saved';
-		$("#saveBtn").attr("disabled", "disabled");
-		$("#addMoreBtn").removeAttr("disabled");*/
-
-		} 
+		document.getElementById('usernameTakene').setAttribute("class", "");
+		var status = document.getElementById('usernameTakene').innerText;
+		if(status == "User has been saved."){
+			document.getElementById('usernameTakene').setAttribute("class","ui message");
+			alert("Employee has been added!");
+			$("#eaddMoreB").removeAttr("disabled");
+			document.getElementById('esaveB').setAttribute("disabled","disabled");
+		}else{
+			document.getElementById('usernameTakene').setAttribute("class","ui negative small message");
+		}
+	}
+	function addedMoreEmployee(){
+		alert("addmore");
+		var status = document.getElementById('euserSaved').innerText;
+		if(status == "true"){
+			$("#esaveB").removeAttr("disabled");
+			document.getElementById('eaddMoreB').setAttribute("disabled","disabled");
+			document.getElementById('usernameTakene').innerText = null;
+			document.getElementById('euserSaved').innerText = null;
+			document.getElementById('usernameTakene').setAttribute("class", "")
+			document.getElementById('eresetBtn').click();
+		}
+	}
 	function addedAdmin(){
 		alert("added");
 		/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
