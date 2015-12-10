@@ -203,6 +203,7 @@ $(document).ready(function() {
   	});
   	$('#min').datepicker();
   	pUpdateStartDate($("#max"),$("#min"));
+  	$('#min').datepicker( "setDate", new Date(py, pm, pd));
   	
   	var pstart = $('#min').val();
   	var pdate2 = new Date(pstart);
@@ -217,6 +218,7 @@ $(document).ready(function() {
   	});
   	$('#max').datepicker();
   	pUpdateEndDate($("#min"),$("#max"));
+  	$('#max').datepicker( "setDate", new Date());
 	
 	
 	payablesTable.draw();
@@ -336,28 +338,28 @@ $(document).ready(function() {
 //  	pUpdateStartDate($("#max"),$("#min"));
 });
 
-function pUpdateStartDate(val1, val2) {
-	var maxVal =val1.val(); 
+function pUpdateStartDate(max, min) {
+	var maxVal =max.val(); 
     console.log(maxVal);
     var date = new Date(maxVal);
     console.log(date);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()-1;
     var currentYear = date.getFullYear();
-    val2.datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
-    val2.datepicker( "setDate", new Date(currentYear, currentMonth-1, currentDate));
+    min.datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
+    //min.datepicker( "setDate", new Date(currentYear, currentMonth-1, currentDate));
 }
 
-function pUpdateEndDate(val1, val2) {
-	var maxVal =val1.val(); 
+function pUpdateEndDate(min, max) {
+	var maxVal =min.val(); 
     console.log(maxVal);
     var date = new Date(maxVal);
     console.log(date);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();
-    val2.datepicker( "option", "minDate", new Date(currentYear, currentMonth, currentDate));
-    val2.datepicker( "setDate", new Date());
+    max.datepicker( "option", "minDate", new Date(currentYear, currentMonth, currentDate));
+    //max.datepicker( "setDate", new Date());
 }
 
 //MODALS
