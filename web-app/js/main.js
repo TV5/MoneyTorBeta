@@ -5,7 +5,7 @@ $(document).ready(function() {
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
     $("#max").datepicker();
-    $("#min" ).datepicker({ defaultDate: "-1m"});
+    
     
 	if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
@@ -188,6 +188,37 @@ $(document).ready(function() {
 
 	max.setMonth(max.getMonth() - 1);
 	$('#min').val(max.toDateInputValue());
+	
+
+  	var pend = $("#max").val();
+  	var pdate = new Date(pend);
+  	var py = pdate.getFullYear();
+  	var pd = pdate.getDate();
+  	var pm = pdate.getMonth()-1;
+  	var pNewDate = new Date(py,pm,pd);
+  	$('#min').datepicker( "setDate", pNewDate);
+  	pUpdateStartDate($("#max"),$("#min"));
+  	$("#max").on('change', function(){
+  		pUpdateStartDate($("#max"),$("#min"));
+  	});
+  	$('#min').datepicker();
+  	pUpdateStartDate($("#max"),$("#min"));
+  	
+  	var pstart = $('#min').val();
+  	var pdate2 = new Date(pstart);
+  	var py2 = pdate2.getFullYear();
+  	var pd2 = pdate2.getDate();
+  	var pm2 = pdate2.getMonth()-1;
+  	var pNewDate2 = new Date(py2,pm2,pd2);
+  	$('#max').datepicker( "setDate", pNewDate2);
+  	pUpdateEndDate($("#min"),$("#max"));
+  	$("#min").on('change', function(){
+  		pUpdateEndDate($("#min"),$("#max"));
+  	});
+  	$('#max').datepicker();
+  	pUpdateEndDate($("#min"),$("#max"));
+	
+	
 	payablesTable.draw();
     
     function setPayablesTotalAmt(){
@@ -289,17 +320,45 @@ $(document).ready(function() {
             }
         }
     });
-  	
-  	var maxVal =$("#max").val(); 
+//  	
+//  	var pend = $("#max").val();
+//  	var pdate = new Date(pend);
+//  	var py = pdate.getFullYear();
+//  	var pd = pdate.getDate();
+//  	var pm = pdate.getMonth()-1;
+//  	var pNewDate = new Date(py,pm,pd);
+//  	$('#min').datepicker( "setDate", pNewDate);
+//  	pUpdateStartDate($("#max"),$("#min"));
+//  	$("#max").on('change', function(){
+//  		pUpdateStartDate($("#max"),$("#min"));
+//  	});
+//  	$('#min').datepicker();
+//  	pUpdateStartDate($("#max"),$("#min"));
+});
+
+function pUpdateStartDate(val1, val2) {
+	var maxVal =val1.val(); 
     console.log(maxVal);
     var date = new Date(maxVal);
     console.log(date);
     var currentMonth = date.getMonth();
-    var currentDate = date.getDate();
+    var currentDate = date.getDate()-1;
     var currentYear = date.getFullYear();
-    $("#min" ).datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
-   
-});
+    val2.datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
+    val2.datepicker( "setDate", new Date(currentYear, currentMonth-1, currentDate));
+}
+
+function pUpdateEndDate(val1, val2) {
+	var maxVal =val1.val(); 
+    console.log(maxVal);
+    var date = new Date(maxVal);
+    console.log(date);
+    var currentMonth = date.getMonth();
+    var currentDate = date.getDate()+1;
+    var currentYear = date.getFullYear();
+    val2.datepicker( "option", "minDate", new Date(currentYear, currentMonth, currentDate));
+    val2.datepicker( "setDate", new Date());
+}
 
 //MODALS
 $('.top.menu .item').tab();
