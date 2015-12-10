@@ -75,7 +75,9 @@
 			/>
 			
 			<input type='reset' id="sresetBtn" value='Reset' hidden />
-			<div class="ui cancel button"  " >Cancel</div>
+			<div class="ui cancel button" id="sCancelBtn" >Cancel</div>
+			<div class="ui button" id="sDoneBtn" style="display: none;" onclick="location.href = '/Moneytor/main/main?tab=suppliersTabLink';" >Done</div>
+	 		
 		</div>
     	
     </g:form>

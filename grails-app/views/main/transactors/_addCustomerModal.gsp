@@ -77,7 +77,9 @@
 			/>
 			
 			<!--<g:field id="addmore" class="ui button" type="reset" name="myReset"  update="saveBtn" value="Add More" url="" onComplete="addmoreClick()"/> -->
-			<div class="ui cancel button"  " >Cancel</div>
+			<div class="ui cancel button" id="cCancelBtn" >Cancel</div>
+			<div class="ui button" id="cDoneBtn" style="display: none;" onclick="location.href = '/Moneytor/main/main?tab=customersTabLink';" >Done</div>
+	 		
 		</div>
    </g:form>
   </div>

@@ -48,12 +48,12 @@ class MainController {
 			def supplierList = transactorService.getSupplierList()
 			def customerList = transactorService.getCustomerList()
 			def paymentList = paymentService.getPaymentList()
-			def saveName = transactorService.saveName("Save")
-			def str = transactorService.days()
 			
 			
 			
-			[user: session.user, payableList: payableList, receivableList: receivableList,transactorList: transactorList, supplierList: supplierList, customerList: customerList,saveName: saveName,paymentList:paymentList]
+			
+			
+			[user: session.user, payableList: payableList, receivableList: receivableList,transactorList: transactorList, supplierList: supplierList, customerList: customerList,paymentList:paymentList]
 
 			
 		}else{
