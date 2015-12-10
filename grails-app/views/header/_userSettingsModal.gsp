@@ -1,8 +1,7 @@
 <div id="userSettings" class="ui modal">
 	<div class="header">User Settings</div>
 	<div class="content" id="">
-		<g:form class="ui form" controller="user">
-		    <div class="ui error message"></div>		
+		<g:form class="ui form" id="userSet" controller="user">		
 		    <div class="inline fields">
 				<div class="two wide field">
 					<label>Username</label>      
@@ -66,12 +65,12 @@
 					</div>
 				</div>
 			</div>
+			<div class="ui error message"></div>
 		    <g:hiddenField name="uId" />
 			<g:hiddenField name="uCurrentPass" />
-		  
 			<div class="actions">
 				<div id="editBtn" class="ui button teal displayFirst" onclick="edit()">Edit</div>
-				<g:actionSubmit class="ui approve button teal displaySec" onClick="save()" value="Save" action="editUserAccount"/>
+				<g:actionSubmit class="ui button teal displaySec" value="Save" action="editUserAccount"/>
 				<div class="ui cancel button teal" onclick="cancelEdit()">Cancel</div>
 			</div>
 		</g:form>
