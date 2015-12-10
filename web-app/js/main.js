@@ -322,20 +322,6 @@ $(document).ready(function() {
             }
         }
     });
-//  	
-//  	var pend = $("#max").val();
-//  	var pdate = new Date(pend);
-//  	var py = pdate.getFullYear();
-//  	var pd = pdate.getDate();
-//  	var pm = pdate.getMonth()-1;
-//  	var pNewDate = new Date(py,pm,pd);
-//  	$('#min').datepicker( "setDate", pNewDate);
-//  	pUpdateStartDate($("#max"),$("#min"));
-//  	$("#max").on('change', function(){
-//  		pUpdateStartDate($("#max"),$("#min"));
-//  	});
-//  	$('#min').datepicker();
-//  	pUpdateStartDate($("#max"),$("#min"));
 });
 
 function pUpdateStartDate(max, min) {
@@ -347,7 +333,6 @@ function pUpdateStartDate(max, min) {
     var currentDate = date.getDate()-1;
     var currentYear = date.getFullYear();
     min.datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
-    //min.datepicker( "setDate", new Date(currentYear, currentMonth-1, currentDate));
 }
 
 function pUpdateEndDate(min, max) {
@@ -359,7 +344,6 @@ function pUpdateEndDate(min, max) {
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();
     max.datepicker( "option", "minDate", new Date(currentYear, currentMonth, currentDate));
-    //max.datepicker( "setDate", new Date());
 }
 
 //MODALS
