@@ -326,9 +326,7 @@ $(document).ready(function() {
 
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
-    console.log(maxVal);
     var date = new Date(maxVal);
-    console.log(date);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()-1;
     var currentYear = date.getFullYear();
@@ -337,9 +335,7 @@ function pUpdateStartDate(max, min) {
 
 function pUpdateEndDate(min, max) {
 	var maxVal =min.val(); 
-    console.log(maxVal);
     var date = new Date(maxVal);
-    console.log(date);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();
@@ -811,17 +807,3 @@ $.fn.dataTable.Api.register( 'sum()', function () {
         return a + b;
     }, 0 );
 });
-
-//var pstart = $("#min").val().split("-");
-//var pend = $("#max").val().split("-");
-//var pYrEnd = pend[0];
-//var pMoEnd = pend[1];
-//var pDayEnd = pend[2];
-////var pminStartDate = new Date(pYrEnd,pMoEnd,pDayEnd);
-//var pminStartDate = pYrEnd+"-"+pMoEnd+"-"+pDayEnd;
-//console.log(pminStartDate);
-//
-//	
-//	var a = $("#max").val();
-//$( "#min" ).datepicker();
-////$( "#min" ).datepicker({ maxDate: pminStartDate, dateFormat:"yyyy-mm-dd" });

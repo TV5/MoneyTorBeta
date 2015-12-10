@@ -18,6 +18,7 @@
 		<title>MoneyTor</title>
 		<link rel="icon" type="image/png" href="${resource(dir: 'images', file: 'icon.png')}" />
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.min.css')}" type="text/css">
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.theme.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.css')}" type="text/css">
   		<link rel="stylesheet" href="${resource(dir: 'dist', file: 'semantic.min.css')}" type="text/css">
   		<link rel="stylesheet" href="${resource(dir: 'datatables/media/css', file: 'jquery.dataTables.min.css')}" type="text/css">
