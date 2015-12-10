@@ -33,7 +33,7 @@ class AccountController {
 		System.out.println("add payable" + params.ptransaction_date.toString())
 
 		def transId = params.transactor_id
-		if (params.pcategory) {
+		if (params.transactor_id) {
 			def transactor = new Transactor(
 					name: params.pname,
 					address: params.paddress,
