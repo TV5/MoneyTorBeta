@@ -5,7 +5,7 @@ class PaymentController {
     def paymentService
 	
 	def getPaymentList() {
-		def paymentList = paymentService.getPaymentList() 
+		def paymentList = paymentService.getPaymentList(params.acct_id) 
 		return paymentList
 	}
 	

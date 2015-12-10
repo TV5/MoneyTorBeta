@@ -5,8 +5,8 @@ import grails.transaction.Transactional
 @Transactional
 class PaymentService {
 
-    def getPaymentList() {
-		return Payment.getAll()
+    def getPaymentList(acct_id) {
+		return Payment.findAllByAccount(acct_id)
 	}
 	
 	def addPayment(payment){
