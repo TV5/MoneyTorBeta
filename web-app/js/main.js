@@ -5,7 +5,7 @@ $(document).ready(function() {
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
     $("#max").datepicker();
-    
+    $("#maxR").datepicker();
     
 	if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
@@ -41,6 +41,37 @@ $(document).ready(function() {
 
 	maxR.setMonth(maxR.getMonth() - 1);
 	$('#minR').val(maxR.toDateInputValue());
+	
+	
+	var rend = $("#maxR").val();
+  	var rdate = new Date(rend);
+  	var ry = rdate.getFullYear();
+  	var rd = rdate.getDate();
+  	var rm = rdate.getMonth()-1;
+  	var rNewDate = new Date(py,pm,pd);
+  	$('#minR').datepicker( "setDate", rNewDate);
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$("#maxR").on('change', function(){
+  		pUpdateStartDate($("#maxR"),$("#minR"));
+  	});
+  	$('#minR').datepicker();
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
+  	
+  	var rstart = $('#minR').val();
+  	var rdate2 = new Date(rstart);
+  	var ry2 = rdate2.getFullYear();
+  	var rd2 = rdate2.getDate();
+  	var rm2 = rdate2.getMonth()-1;
+  	var rNewDate2 = new Date(ry2,rm2,rd2);
+  	$('#maxR').datepicker( "setDate", rNewDate2);
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$("#minR").on('change', function(){
+  		pUpdateEndDate($("#minR"),$("#maxR"));
+  	});
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$('#maxR').datepicker( "setDate", new Date());
+	
 	receivablesTable.draw();
 
     $('#minR, #maxR').change( function() {
@@ -218,8 +249,7 @@ $(document).ready(function() {
   	});
   	$('#max').datepicker();
   	pUpdateEndDate($("#min"),$("#max"));
-	
-	
+  	$('#max').datepicker( "setDate", new Date());
 	payablesTable.draw();
     
     function setPayablesTotalAmt(){
@@ -321,36 +351,21 @@ $(document).ready(function() {
             }
         }
     });
-//  	
-//  	var pend = $("#max").val();
-//  	var pdate = new Date(pend);
-//  	var py = pdate.getFullYear();
-//  	var pd = pdate.getDate();
-//  	var pm = pdate.getMonth()-1;
-//  	var pNewDate = new Date(py,pm,pd);
-//  	$('#min').datepicker( "setDate", pNewDate);
-//  	pUpdateStartDate($("#max"),$("#min"));
-//  	$("#max").on('change', function(){
-//  		pUpdateStartDate($("#max"),$("#min"));
-//  	});
-//  	$('#min').datepicker();
-//  	pUpdateStartDate($("#max"),$("#min"));
 });
 
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
-    console.log(maxVal);
     var date = new Date(maxVal);
-    console.log(date);
+    var date = new Date(maxVal);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()-1;
     var currentYear = date.getFullYear();
     min.datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
-    //min.datepicker( "setDate", new Date(currentYear, currentMonth-1, currentDate));
 }
 
 function pUpdateEndDate(min, max) {
 	var maxVal =min.val(); 
+    var date = new Date(maxVal);
     console.log(maxVal);
     var date = new Date(maxVal);
     console.log(date);
@@ -358,7 +373,6 @@ function pUpdateEndDate(min, max) {
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();
     max.datepicker( "option", "minDate", new Date(currentYear, currentMonth, currentDate));
-    //max.datepicker( "setDate", new Date());
 }
 
 //MODALS
@@ -826,17 +840,3 @@ $.fn.dataTable.Api.register( 'sum()', function () {
         return a + b;
     }, 0 );
 });
-
-//var pstart = $("#min").val().split("-");
-//var pend = $("#max").val().split("-");
-//var pYrEnd = pend[0];
-//var pMoEnd = pend[1];
-//var pDayEnd = pend[2];
-////var pminStartDate = new Date(pYrEnd,pMoEnd,pDayEnd);
-//var pminStartDate = pYrEnd+"-"+pMoEnd+"-"+pDayEnd;
-//console.log(pminStartDate);
-//
-//	
-//	var a = $("#max").val();
-//$( "#min" ).datepicker();
-////$( "#min" ).datepicker({ maxDate: pminStartDate, dateFormat:"yyyy-mm-dd" });
