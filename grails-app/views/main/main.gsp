@@ -95,6 +95,8 @@
 			<g:render template="accounts/editReceivableModal" />
 			<g:render template="transactors/addSupplierModal" />
 			<g:render template="transactors/addCustomerModal" />
+			<g:render template="transactors/editSupplierModal" />
+			<g:render template="transactors/editCustomerModal" />
 			<g:render template="../header/logout" />
 		</div>
 	</body>

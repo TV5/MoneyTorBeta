@@ -4,16 +4,18 @@ $(document).ready(function() {
     $('#administratorsTable').DataTable();
     $('#customersTable').DataTable();
     $('#suppliersTable').DataTable();
+    if(window.location.href.indexOf("?")!=-1){
+		var tabId = window.location.href.split("?")[1].split("=")[1];
+		var tabId = '#'+tabId;
+		$(tabId).click();		
+	}
+    
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
     $("#max").datepicker();
     
     
-	if(window.location.href.indexOf("?")!=-1){
-		var tabId = window.location.href.split("?")[1].split("=")[1];
-		var tabId = '#'+tabId;
-		$(tabId).click();		
-	}
+	
 	
 	$(".payableNewSupplier").hide();
 	$(".receivableNewCustomer").hide();
@@ -259,11 +261,18 @@ $(document).ready(function() {
 	    window.location.replace("main?tab=receivablesTabLink");
 	});
 	
-	$('#cdone').click(function() {
-	    window.location.replace("main?tab=receivablesTabLink");
+	$('#addCustDoneBtn').click(function() {
+	    window.location.replace("main?tab=customersTabLink");
 	});
 	$('#sdone').click(function() {
-	    window.location.replace("main?tab=receivablesTabLink");
+	    window.location.replace("main?tab=suppliersTabLink");
+	});
+	
+	$('#ecsave').click(function() {
+	    window.location.replace("main?tab=customersTabLink");
+	});
+	$('#essave').click(function() {
+	    window.location.replace("main?tab=suppliersTabLink");
 	});
 	
 	$('#raddMoreBtn').attr("disabled", true);	
@@ -449,6 +458,59 @@ function editEmployee(id, username, f_name, l_name, password, status){
 
 	$('#editemployee').modal('show');
 }
+
+function editSupplier(esname,esaddress,estelephone_no, esmobile_no,esterms,esid){
+	$('#editSupplierModal').modal('show');
+	$('#esname').val(esname);
+	$('#esaddress').val(esaddress);
+	$('#estelephone_no').val(estelephone_no);
+	$('#esmobile_no').val(esmobile_no);
+	var days = esterms;
+	var esselect = "d";
+	if (days % 7 == 0) {
+		days = days / 7;
+		esselect = "w";
+	} else if (days % 30 == 0) {
+		days = days / 30;
+		esselect = "m";
+	} else if (days % 365 == 0) {
+		days = days / 365;
+		esselect = "y";
+	} else {
+		days = days;
+	}
+	$('#esterms').val(days);
+	$("#esselect").val(esselect);
+	$("#esid").val(esid);
+}
+
+function editCustomer(ecname,ecaddress,ectelephone_no, ecmobile_no,ecterms,ecid){
+	$('#editCustomerModal').modal('show');
+	$('#ecname').val(ecname);
+	$('#ecaddress').val(ecaddress);
+	$('#ectelephone_no').val(ectelephone_no);
+	$('#ecmobile_no').val(ecmobile_no);
+	var days = ecterms;
+	var ecselect = "d";
+	if (days % 7 == 0) {
+		days = days / 7;
+		ecselect = "w";
+	} else if (days % 30 == 0) {
+		days = days / 30;
+		ecselect = "m";
+	} else if (days % 365 == 0) {
+		days = days / 365;
+		ecselect = "y";
+	} else {
+		days = days;
+	}
+	$('#ecterms').val(days);
+	$("#ecselect").val(ecselect);
+	$("#ecid").val(ecid);
+}
+
+
+
 
 function editReceivable(id, or_no, transactor_id, amount, date){
 	$('#ercustomer_name').val(transactor_id);
@@ -713,7 +775,8 @@ $('#settingsLink').click(function(){
 function csaved(){	
 	document.getElementById('caddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('csaveBtn').value = 'Saved';
-
+	$("#cDoneBtn").show();
+	$("#cCancelBtn").hide();
 	$("#csaveBtn").attr("disabled", "disabled");
 	$("#caddMoreBtn").removeAttr("disabled");
 	$('#cname').prop('readonly', true);
@@ -727,7 +790,8 @@ function csaved(){
 function ssaved(){	
 	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('ssaveBtn').value = 'Saved';
-
+	$("#sDoneBtn").show();
+	$("#sCancelBtn").hide();
 	$("#ssaveBtn").attr("disabled", "disabled");
 	$("#saddMoreBtn").removeAttr("disabled");
 	$('#sname').prop('readonly', true);

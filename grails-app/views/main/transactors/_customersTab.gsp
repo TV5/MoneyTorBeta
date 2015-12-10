@@ -43,7 +43,8 @@
 						}
 						</script>
 					 </td>
-					<td><a href="#"><i class="edit icon editCustomerBtn"></i></a></td>
+					<td><a href="#" onClick="editCustomer('${customer.name}','${customer.address}','${customer.telephone_no}','${customer.mobile_no}','${customer.terms}','${customer.id}')" ><i class="edit icon editCustomerBtn"></i></a></td>
+				
 				</tr>	
         		</g:each>
 			  </tbody>
