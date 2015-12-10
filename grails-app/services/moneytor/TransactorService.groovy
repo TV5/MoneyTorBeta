@@ -30,4 +30,8 @@ class TransactorService {
 	def saveName(text){
 		return text
 	}
+	
+	def getTransactorIDByName(name, type){
+		return Transactor.findAllByNameAndStatusAndType(name, "A", type)
+	}
 }

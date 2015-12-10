@@ -25,7 +25,7 @@
 			      <label>Name</label>      
 			    </div>
 			    <div class="fourteen wide field">
-			      <g:textField id="cname" name="cname" value="${cname}" required="true"/>
+			      <g:textField id="rname" name="rname" value="${rname}" required="true"/>
 			    </div>
 			</div>
 			
@@ -34,7 +34,7 @@
 			      <label>Address</label>      
 			    </div>
 			    <div class="fourteen wide field">
-			        <g:textField id="caddress" name="caddress" value="${caddress}" required="true"/>
+			        <g:textField id="raddress" name="raddress" value="${raddress}" required="true"/>
 			    </div>
 			</div>
 			
@@ -43,7 +43,7 @@
 			      <label>Telephone Number</label>      
 			    </div>
 			    <div class="fourteen wide field">
-			      <g:textField id="ctelephone_no" name="ctelephone_no" value="${ctelephone_no}" required="true"/>
+			      <g:textField id="rtelephone_no" name="rtelephone_no" value="${rtelephone_no}" required="true"/>
 			    </div>
 			</div>
 			
@@ -52,7 +52,7 @@
 			      <label>Mobile Number</label>      
 			    </div>
 			    <div class="fourteen wide field">
-			      <g:textField id="cmobile_no" name="cmobile_no" value="${cmobile_no}" required="true"/>
+			      <g:textField id="rmobile_no" name="rmobile_no" value="${rmobile_no}" required="true"/>
 			    </div>
 			</div>
 			
@@ -62,10 +62,10 @@
 			      <label>Terms</label>      
 			    </div>
 			    <div class="seven wide field">
-			       <g:field id="cterms" type="number" name="cterms" value="${cterms}" required="true"/>
+			       <g:field id="rterms" type="number" name="rterms" value="${rterms}" required="true"/>
 			    </div>
 			    <div class="seven wide field">
-			    <g:select id="cselect" name="cselect" value="${cselect}"
+			    <g:select id="rselect" name="rselect" value="${rselect}"
 	          from="${['d': 'days', 'w': 'weeks', 'm': 'months', 'y':'years']}"
 	          optionKey="key" optionValue="value" />
 	          </div>
@@ -114,6 +114,7 @@
 		  </ul>
 	  </div>
 	  <div class="actions">
+
 	    <g:submitToRemote 
 		    	url="[controller: 'Account' ,action: 'addReceivable']" 
 		    	value="Save" 
@@ -124,6 +125,7 @@
 		<!--<g:submitToRemote  url="" update="saveReceivableBtn" class="ui button" value="Add More" id="raddMoreBtn" onComplete="raddmoreClick()" />-->
 	    <button class="ui button" value="Add More" id="raddMoreBtn" onClick="raddmore()">Add More</button>
 	    <div class="ui button" id="rdone">Done</div>
+	    <div class="ui cancel button" >Cancel</div>
 	  </div>
     </g:form>
 	  </div>
