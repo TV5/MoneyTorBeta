@@ -5,6 +5,7 @@ class MainController {
 	def userService
 	def accountService
 	def transactorService
+	def paymentService
 	
 	def index(){}
 	def auth(){
@@ -46,6 +47,7 @@ class MainController {
 			def transactorList = transactorService.getTransactorList()
 			def supplierList = transactorService.getSupplierList()
 			def customerList = transactorService.getCustomerList()
+			def paymentList = paymentService.getPaymentList()
 			def saveName = transactorService.saveName("Save")
 			def str = transactorService.days()
 			
@@ -67,8 +69,8 @@ class MainController {
 			}*/
 			
 			
-			[user: session.user, payableList: payableList, receivableList: receivableList, 
-				transactorList: transactorList, str: str ,supplierList: supplierList, customerList: customerList,saveName: saveName]
+			[user: session.user, payableList: payableList, receivableList: receivableList,transactorList: transactorList, supplierList: supplierList, customerList: customerList,saveName: saveName,paymentList:paymentList]
+
 			
 		}else{
 			redirect(uri: "/")

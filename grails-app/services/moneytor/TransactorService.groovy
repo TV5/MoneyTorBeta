@@ -31,6 +31,7 @@ class TransactorService {
 		return text
 	}
 	
+
 	def days(){
 		def list = getTransactorList()
 		list.toList()
@@ -56,4 +57,10 @@ class TransactorService {
 	}
 	
 	
+
+	def getTransactorIDByName(name, type){
+		def transactor = Transactor.findAllByNameAndStatusAndType(name, "A", type)
+		return transactor.id
+	}
+
 }
