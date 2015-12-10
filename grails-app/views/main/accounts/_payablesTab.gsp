@@ -13,11 +13,11 @@
 		    </div>
 		  	<div class="four wide field">
 		      <label>Start Date</label>
-		      <input type="date" id="min">
+		      <input type="text" id="min">
 		    </div>
 		    <div class="four wide field">
 		      <label>End Date</label>
-		      <input type="date" id="max">
+		      <input type="text" id="max">
 		    </div>
 		    <div class="four wide field">
 		      <label>Search</label>

@@ -3,8 +3,10 @@ $(document).ready(function() {
     $('#employeesTable').DataTable();
     $('#administratorsTable').DataTable();
     $("#caddMoreBtn").attr("disabled", "disabled");	    
-    $("#eaddMoreB").attr("disabled", "disabled");	    
-
+    $("#eaddMoreB").attr("disabled", "disabled");	
+    $("#max").datepicker({ defaultDate: "+1m"});
+    $("#min" ).datepicker();
+    
 	if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
 		var tabId = '#'+tabId;
@@ -287,6 +289,16 @@ $(document).ready(function() {
             }
         }
     });
+  	
+  	var maxVal =$("#max").val(); 
+    console.log(maxVal);
+    var date = new Date(maxVal);
+    console.log(date);
+    var currentMonth = date.getMonth();
+    var currentDate = date.getDate();
+    var currentYear = date.getFullYear();
+    $("#min" ).datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
+   
 });
 
 //MODALS
@@ -754,3 +766,17 @@ $.fn.dataTable.Api.register( 'sum()', function () {
         return a + b;
     }, 0 );
 });
+
+//var pstart = $("#min").val().split("-");
+//var pend = $("#max").val().split("-");
+//var pYrEnd = pend[0];
+//var pMoEnd = pend[1];
+//var pDayEnd = pend[2];
+////var pminStartDate = new Date(pYrEnd,pMoEnd,pDayEnd);
+//var pminStartDate = pYrEnd+"-"+pMoEnd+"-"+pDayEnd;
+//console.log(pminStartDate);
+//
+//	
+//	var a = $("#max").val();
+//$( "#min" ).datepicker();
+////$( "#min" ).datepicker({ maxDate: pminStartDate, dateFormat:"yyyy-mm-dd" });
