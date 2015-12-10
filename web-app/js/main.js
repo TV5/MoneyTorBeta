@@ -4,8 +4,8 @@ $(document).ready(function() {
     $('#administratorsTable').DataTable();
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
-    $("#max").datepicker({ defaultDate: "+1m"});
-    $("#min" ).datepicker();
+    $("#max").datepicker();
+    $("#min" ).datepicker({ defaultDate: "+1m"});
     
 	if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
