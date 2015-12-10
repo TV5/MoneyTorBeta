@@ -2,6 +2,8 @@
 $(document).ready(function() {
     $('#employeesTable').DataTable();
     $('#administratorsTable').DataTable();
+    $('#customersTable').DataTable();
+    $('#suppliersTable').DataTable();
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
     $("#max").datepicker();
@@ -256,7 +258,14 @@ $(document).ready(function() {
 	$('#rdone').click(function() {
 	    window.location.replace("main?tab=receivablesTabLink");
 	});
-
+	
+	$('#cdone').click(function() {
+	    window.location.replace("main?tab=receivablesTabLink");
+	});
+	$('#sdone').click(function() {
+	    window.location.replace("main?tab=receivablesTabLink");
+	});
+	
 	$('#raddMoreBtn').attr("disabled", true);	
 	$('#paddMoreBtn').attr("disabled", true);	
 	
@@ -715,6 +724,21 @@ function csaved(){
 	$('#cselect').prop('disabled', true);
 }
 
+function ssaved(){	
+	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
+	document.getElementById('ssaveBtn').value = 'Saved';
+
+	$("#ssaveBtn").attr("disabled", "disabled");
+	$("#saddMoreBtn").removeAttr("disabled");
+	$('#sname').prop('readonly', true);
+	$('#saddress').prop('readonly', true);
+	$('#stelephone_no').prop('readonly', true);
+	$('#smobile_no').prop('readonly', true);
+	$('#sterms').prop('readonly', true);
+	$('#sselect').prop('disabled', true);
+}
+
+
 function addedEmployee(){
 	document.getElementById('usernameTakene').setAttribute("class", "");
 	var status = document.getElementById('usernameTakene').innerText;
@@ -778,6 +802,21 @@ function caddmoreClick(){
 	$('#cselect').prop('disabled', false);
 } 
 
+function saddmoreClick(){
+	document.getElementById('ssaveBtn').value = 'Save';
+	document.getElementById('saddMoreBtn').className = 'ui button'; 
+	$("#ssaveBtn").removeAttr("disabled");
+	$("#saddMoreBtn").attr("disabled", "disabled");
+	document.getElementById('sresetBtn').click();
+	$('#sname').prop('readonly', false);
+	$('#saddress').prop('readonly', false);
+	$('#stelephone_no').prop('readonly', false);
+	$('#smobile_no').prop('readonly', false);
+	$('#sterms').prop('readonly', false);
+	$('#sselect').prop('disabled', false);
+} 
+
+
 function validateForm() {
 	var form = document.getElementById('addCustomerForm');
 
@@ -792,11 +831,6 @@ function validateForm() {
 	return true;
 }
 
-function convertTerms(days){
-	if(days > 7 && days < 30)	{
-		
-	}	
-}
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
