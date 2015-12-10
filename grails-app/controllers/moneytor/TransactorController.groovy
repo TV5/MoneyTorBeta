@@ -5,7 +5,9 @@ class TransactorController {
 	def transactorService
     def index() { 
 		def tList = getTransactorList()
-		[transactorList:tList]
+		def sList = getSupplierList()
+		def cList = getCustomerList()
+		[transactorList:tList, supplierList: sList, customerList: cList]
 		
 	}
 	
@@ -26,26 +28,46 @@ class TransactorController {
 	}
 	
 	def addCustomer() {
-		System.out.println("add customer")
-		System.out.println("hehe")
-		def calculatedTerms
-		//if(params.cterms == )
-		
-		def transactor = new Transactor(
-			name: params.cname,
-			address: params.caddress,
-			telephone_no: params.ctelephone_no,
-			mobile_no: params.cmobile_no,
-			terms: convertTerms(),
-			type: params.ctype,
-			status: params.cstatus
-			)
-		transactorService.addTransactor(transactor)
-		System.out.println(params.cselect)
-		System.out.println("added!")
+			System.out.println("add customer")
+			System.out.println("hehe")
 			
+			def transactor = new Transactor(
+				name: params.cname,
+				address: params.caddress,
+				telephone_no: params.ctelephone_no,
+				mobile_no: params.cmobile_no,
+				terms: params.cterms,
+				type: params.ctype,
+				status: params.cstatus
+				)
+			transactorService.addTransactor(transactor)
+			System.out.println(params.cselect)
+			System.out.println("added!")
 	}
 	
+	def addSupplier() {
+		System.out.println("add supplier")
+		System.out.println("hehe")
+		
+		def transactor = new Transactor(
+			name: params.sname,
+			address: params.saddress,
+			telephone_no: params.stelephone_no,
+			mobile_no: params.smobile_no,
+			terms: params.sterms,
+			type: params.stype,
+			status: params.sstatus
+			)
+		transactorService.addTransactor(transactor)
+		System.out.println(params.sselect)
+		System.out.println("added!")
+}
+
+	
+	
+	
+	
+	/*
 	def convertTerms(){
 		int value = params.cterms.toInteger()
 		if(params.cselect == 'w'){
@@ -56,11 +78,23 @@ class TransactorController {
 			return value * 365
 		}else
 			return value
-	}
+	}*/
 	
 	def getTransactorList() {
 		def transactorList = transactorService.getTransactorList()
 		return transactorList
 	}
+	
+	def getSupplierList() {
+		def SupplierList = transactorService.getSupplierList()
+		return SupplierList
+	}
+	
+	def getCustomerList() {
+		def customerList = transactorService.getCustomerList()
+		return customerList
+	}
+
+	
 	
 }

@@ -250,7 +250,6 @@ $(document).ready(function() {
   	$('#max').datepicker();
   	pUpdateEndDate($("#min"),$("#max"));
   	$('#max').datepicker( "setDate", new Date());
-  	
 	payablesTable.draw();
     
     function setPayablesTotalAmt(){
@@ -357,6 +356,7 @@ $(document).ready(function() {
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
     var date = new Date(maxVal);
+    var date = new Date(maxVal);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()-1;
     var currentYear = date.getFullYear();
@@ -366,6 +366,9 @@ function pUpdateStartDate(max, min) {
 function pUpdateEndDate(min, max) {
 	var maxVal =min.val(); 
     var date = new Date(maxVal);
+    console.log(maxVal);
+    var date = new Date(maxVal);
+    console.log(date);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();

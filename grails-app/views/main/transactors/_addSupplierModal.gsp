@@ -8,7 +8,7 @@
 		      <label>Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="text">
+		       <g:textField id="sname" name="sname" value="${sname}" required="true"/>
 		    </div>
 		</div>
 		
@@ -17,41 +17,68 @@
 		      <label>Address</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="text">
+		      <g:textField id="saddress" name="saddress" value="${saddress}" required="true"/>
 		    </div>
 		</div>
 		
     	<div class="inline fields">
 		    <div class="two wide field">
-		      <label>Contact Number</label>      
+		      <label>Telephone Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <input type="text">
+		      <g:textField id="stelephone_no" name="stelephone_no" value="${stelephone_no}" required="true"/>
 		    </div>
 		</div>
+		
+		<div class="inline fields">
+		    <div class="two wide field">
+		      <label>Mobile Number</label>      
+		    </div>
+		    <div class="fourteen wide field">
+		      <g:textField id="smobile_no" name="smobile_no" value="${smobile_no}" required="true"/>
+		    </div>
+		</div>
+		
 		
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Terms</label>      
 		    </div>
 		    <div class="seven wide field">
-		      <input type="number">
+		       <g:field id="sterms" type="number" name="sterms" value="${sterms}" required="true"/>
 		    </div>
 		    <div class="seven wide field">
-		      <select class="ui fluid dropdown">
-    			<option value="">days</option>
-    			<option value="">weeks</option>
-    			<option value="">months</option>
-    			<option value="">years</option>
-    		  </select>
-		    </div>
+		    <g:select id="sselect" name="sselect" value="${sselect}"
+          from="${['d': 'days', 'w': 'weeks', 'm': 'months', 'y':'years']}"
+          optionKey="key" optionValue="value" />
+          </div>
+        		    
 		</div>    	
+		<g:hiddenField name="stype" value="S" />
+		<g:hiddenField name="sstatus" value="A" />
+		<input type='reset' id="sresetBtn" value='Reset' hidden />
+		
+		<div class="actions">
+    		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addSupplier']"  
+    		class="ui teal button"
+    		id="ssaveBtn"  
+    		update="saddMoreBtn"
+    		value="Save" 
+    		onComplete ="ssaved()" />
+			
+			<g:submitToRemote  url="" 
+			update="ssaveBtn" 
+			class="ui button" 
+			value="Add More" 
+			id="saddMoreBtn" 
+			onComplete="saddmoreClick()"
+			/>
+			
+			<input type='reset' id="sresetBtn" value='Reset' hidden />
+			<div class="ui cancel button"  " >Cancel</div>
+		</div>
     	
     </g:form>
   </div>
-  <div class="actions">
-    <div class="ui approve button">Save</div>
-    <div class="ui button">Add More</div>
-    <div class="ui cancel button">Cancel</div>
-  </div>
+
 </div>
