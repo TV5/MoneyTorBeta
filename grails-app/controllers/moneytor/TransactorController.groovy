@@ -36,7 +36,7 @@ class TransactorController {
 				address: params.caddress,
 				telephone_no: params.ctelephone_no,
 				mobile_no: params.cmobile_no,
-				terms: params.cterms,
+				terms: cconvertTerms(),
 				type: params.ctype,
 				status: params.cstatus
 				)
@@ -54,7 +54,7 @@ class TransactorController {
 			address: params.saddress,
 			telephone_no: params.stelephone_no,
 			mobile_no: params.smobile_no,
-			terms: params.sterms,
+			terms: sconvertTerms(),
 			type: params.stype,
 			status: params.sstatus
 			)
@@ -63,22 +63,30 @@ class TransactorController {
 		System.out.println("added!")
 }
 
-	
-	
-	
-	
-	/*
-	def convertTerms(){
-		int value = params.cterms.toInteger()
-		if(params.cselect == 'w'){
+
+	def sconvertTerms(){
+		int value = params.sterms.toInteger()
+		if(params.sselect == 'w'){
 			return value * 7
-		}else if(params.cselect == 'm'){
+		}else if(params.sselect == 'm'){
 			return value * 30
-		}else if(params.cselect == 'y'){
+		}else if(params.sselect == 'y'){
 			return value * 365
 		}else
 			return value
-	}*/
+	}
+	
+	def cconvertTerms(){
+		int value = params.sterms.toInteger()
+		if(params.sselect == 'w'){
+			return value * 7
+		}else if(params.sselect == 'm'){
+			return value * 30
+		}else if(params.sselect == 'y'){
+			return value * 365
+		}else
+			return value
+	}
 	
 	def getTransactorList() {
 		def transactorList = transactorService.getTransactorList()
