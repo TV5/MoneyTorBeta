@@ -52,6 +52,7 @@
 			    <td>
 					<g:findAll in="${customerList}" expr="it.id == receivable.transactor_id">
 					    ${it.name}
+					    <g:set var="supplierName" value="${it.name}"/>
 					</g:findAll>
 				</td>
 			    <td class="sum">${receivable.amount }</td>
@@ -61,7 +62,9 @@
 				    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 			    </td>
 			    <td><a href="#" onClick="editReceivable('${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i class="edit icon"></i></a></td>
-			    <td> <button class="ui button teal paymentsBtn">View</button></td>
+			    <td>
+			     	<button class="ui button teal" onClick="addPayment('${receivable.id}','${supplierName}')">View</button>
+			     </td>
 			  	</tr>	  		
 	  		</g:each>
 		</tbody>
