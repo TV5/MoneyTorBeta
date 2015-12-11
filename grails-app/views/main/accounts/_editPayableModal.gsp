@@ -7,14 +7,7 @@
 		      <label>Supplier Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		     
-		      <g:select name="epsupplier_name"
-		     		from="${supplierList }"
-		     		value="${account?.transactor_id }"
-		     		optionKey="id"
-		     		optionValue="${it?.name }"
-		     		valueMessagePrefix="${it?.name }"
-		     	/>
+		      <g:textField name="epsupplier_name" disabled="true"/>
 		    </div>
 		</div>
 		
