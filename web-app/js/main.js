@@ -56,6 +56,7 @@ $(document).ready(function() {
   	$('#minR').datepicker( "setDate", rNewDate);
   	pUpdateStartDate($("#maxR"),$("#minR"));
   	$("#maxR").on('change', function(){
+  		notifyDue();
   		pUpdateStartDate($("#maxR"),$("#minR"));
   	});
   	$('#minR').datepicker();
@@ -71,6 +72,7 @@ $(document).ready(function() {
   	$('#maxR').datepicker( "setDate", rNewDate2);
   	pUpdateEndDate($("#minR"),$("#maxR"));
   	$("#minR").on('change', function(){
+  		notifyDue();
   		pUpdateEndDate($("#minR"),$("#maxR"));
   	});
   	pUpdateEndDate($("#minR"),$("#maxR"));
@@ -79,6 +81,7 @@ $(document).ready(function() {
 	receivablesTable.draw();
 
     $('#minR, #maxR').change( function() {
+    	notifyDue();
         receivablesTable.draw();
         setreceivablesTotalAmt();
     });
@@ -146,6 +149,7 @@ $(document).ready(function() {
     var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#receivablesNumEntries').change(function(){
+		notifyDue();
 		 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 	});
     
@@ -234,6 +238,7 @@ $(document).ready(function() {
   	$('#min').datepicker( "setDate", pNewDate);
   	pUpdateStartDate($("#max"),$("#min"));
   	$("#max").on('change', function(){
+  		notifyDue();
   		pUpdateStartDate($("#max"),$("#min"));
   	});
   	$('#min').datepicker();
@@ -249,6 +254,7 @@ $(document).ready(function() {
   	$('#max').datepicker( "setDate", pNewDate2);
   	pUpdateEndDate($("#min"),$("#max"));
   	$("#min").on('change', function(){
+  		notifyDue();
   		pUpdateEndDate($("#min"),$("#max"));
   	});
   	$('#max').datepicker();
@@ -269,18 +275,21 @@ $(document).ready(function() {
 	setPayablesTotalAmt();
 
     $('#min, #max').change( function() {
+    	notifyDue();
         payablesTable.draw();
     	setPayablesTotalAmt();
     });
 
     $('#searchPayables').keyup(function(){
+    	notifyDue();
           payablesTable.search($(this).val()).draw() ;
     })
 
     var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#payablesNumEntries').change(function(){
-		 payablesTable.page.len($('#payablesNumEntries').val()).draw();
+		notifyDue();
+		payablesTable.page.len($('#payablesNumEntries').val()).draw();
 	});
 
 	$('#pdone').click(function() {
@@ -369,7 +378,25 @@ $(document).ready(function() {
             }
         }
     });
+  	
+  	notifyDue();
+  	
 });
+
+function notifyDue(){
+	var today = new Date();
+  	today.setHours(0,0,0,0);
+  	var overdue = '<div class="ui left red pointing label">Overdue</div>';
+  	var dueToday = '<div class="ui left orange pointing label">Due today</div>';
+  	$('.dueDate').each(function(){
+  		var due = new Date (this.innerHTML);
+  		due.setHours(0,0,0,0);
+  		if(today.getTime() == due.getTime())
+  			this.innerHTML += dueToday;
+  		else if (today>due)
+  			this.innerHTML += overdue;
+  	});
+}
 
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
@@ -384,9 +411,7 @@ function pUpdateStartDate(max, min) {
 function pUpdateEndDate(min, max) {
 	var maxVal =min.val(); 
     var date = new Date(maxVal);
-    console.log(maxVal);
     var date = new Date(maxVal);
-    console.log(date);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();
@@ -646,11 +671,21 @@ function changePassword(){
 }
 
 function toggleNewSupplier(){
-	$(".payableNewSupplier").toggle();
+	var selectedValue = document.getElementById("payabaleSupplierList").value;
+	if(selectedValue == -1) {
+		$(".payableNewSupplier").show();
+	} else {
+		$(".payableNewSupplier").hide();
+	}
 }
 
 function toggleNewCustomer(){
-	$(".receivableNewCustomer").toggle();
+	var selectedValue = document.getElementById("receivableCustomerList").value;
+	if(selectedValue == -1) {
+		$(".receivableNewCustomer").show();
+	} else {
+		$(".receivableNewCustomer").hide();
+	}
 }
 
 function addNewCustomer() {
@@ -756,9 +791,12 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		addMoreBtn.attr("disabled", false);	
 		saveBtn.val('Saved');
 		saveBtn.attr("disabled", "disabled");	
-		formInputs.attr('readonly','readonly');
+		formInputs.attr('readonly',true);
+		
 	}
-}
+
+}	
+
 
 function psaved() {
 	var errorList = $('#addPayableErrorList');
@@ -899,7 +937,7 @@ function addedAdmin(){
 	$("#saveBtn").attr("disabled", "disabled");
 	$("#addMoreBtn").removeAttr("disabled");*/
 } 
-
+ 
 function addmoreClick(){
 	document.getElementById('saveBtn').value = 'Save';
 	document.getElementById('addMoreBtn').className = 'ui button'; 
@@ -914,22 +952,8 @@ function addmoreClick(){
 	$('#select').prop('disabled', false);
 }	
 
-function caddmoreClick(){
-	document.getElementById('csaveBtn').value = 'Save';
-	document.getElementById('caddMoreBtn').className = 'ui button'; 
-	$("#csaveBtn").removeAttr("disabled");
-	$("#caddMoreBtn").attr("disabled", "disabled");
-	document.getElementById('cresetBtn').click();
-	$('#cname').prop('readonly', false);
-	$('#caddress').prop('readonly', false);
-	$('#ctelephone_no').prop('readonly', false);
-	$('#cmobile_no').prop('readonly', false);
-	$('#cterms').prop('readonly', false);
-	$('#cselect').prop('disabled', false);
-} 
-
 function saddmoreClick(){
-	document.getElementById('sresetBtn').click();
+	document.getElementById('saddResetBtn').click();
 	document.getElementById('ssaveBtn').value = 'Save';
 	document.getElementById('saddMoreBtn').className = 'ui button'; 
 	$("#ssaveBtn").removeAttr("disabled");
@@ -942,6 +966,19 @@ function saddmoreClick(){
 	$('#sselect').prop('disabled', false);
 } 
 
+function caddmoreClick(){
+	document.getElementById('cresetBtn').click();
+	document.getElementById('csaveBtn').value = 'Save';
+	document.getElementById('caddMoreBtn').className = 'ui button'; 
+	$("#csaveBtn").removeAttr("disabled");
+	$("#caddMoreBtn").attr("disabled", "disabled");
+	$('#cname').prop('readonly', false);
+	$('#caddress').prop('readonly', false);
+	$('#ctelephone_no').prop('readonly', false);
+	$('#cmobile_no').prop('readonly', false);
+	$('#cterms').prop('readonly', false);
+	$('#cselect').prop('disabled', false);
+} 
 
 function validateForm() {
 	var form = document.getElementById('addCustomerForm');
