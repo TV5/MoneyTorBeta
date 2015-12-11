@@ -337,14 +337,9 @@ $('#addCustomerBtn').click(function(){
 	$('#addCustomer').modal('show');
 });	
 
-$('.paymentsBtn').click(function(){
-	$('#payments').modal('show');
-});
-
 $('#logoutLink').click(function(){
 	$('#logout').modal('show');
 });
-
 
 //edit stuffs
 function editAdmin(id, username, f_name, l_name, password, status){
@@ -357,6 +352,29 @@ function editAdmin(id, username, f_name, l_name, password, status){
 
 	$('#editadministrator').modal('show');
 }
+
+$('table.paginated').each(function() {
+    var currentPage = 0;
+    var numPerPage = 5;
+    var $table = $(this);
+    $table.bind('repaginate', function() {
+        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+    });
+    $table.trigger('repaginate');
+    var numRows = $table.find('tbody tr').length;
+    var numPages = Math.ceil(numRows / numPerPage);
+    var $pager = $('<div class="ui pagination menu pager" style="float:right"></div>');
+    for (var page = 0; page < numPages; page++) {
+        $('<span class="ui item page-number"></span>').text(page + 1).bind('click', {
+            newPage: page
+        }, function(event) {
+            currentPage = event.data['newPage'];
+            $table.trigger('repaginate');
+            $(this).addClass('active').siblings().removeClass('active');
+        }).appendTo($pager).addClass('clickable');
+    }
+    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+});
 
 function editEmployee(id, username, f_name, l_name, password, status){
 	document.getElementById("empId").value = id;
@@ -472,8 +490,8 @@ function changePassword(){
 }
 
 function pymntAdded(){
-	setTimeout(1000);
 	$("#paymentsTable").load(location.href + " #paymentsTable>*","");
+	setTimeout(1000);
 }
 
 function toggleNewSupplier(){
@@ -497,9 +515,20 @@ function checkDec(el){
 }
 
 function addPayment(account_id, acct_name) {
+	var totalP = 0;
+	   
+    var rowsP = $("#paymentsTable tr:gt(0)");
+    rowsP.children("td:nth-child(2)").each(function() {
+    	totalP += parseInt($(this).html());
+    });
+    $("#totalpymnt").html(totalP);
+    
 	document.getElementById("pmAccount_id").value = account_id;
 
 	$('#pmAccountName').html(acct_name);
+	$('#payments').modal({
+		closable: false
+	});
 	$('#payments').modal('show');
 	$('.ui.form').form({
       	fields: {
