@@ -696,7 +696,7 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		saveBtn.attr("disabled", "disabled");	
 		formInputs.attr('readonly','readonly');
 	}
-}
+}	
 
 function psaved() {
 	var errorList = $('#addPayableErrorList');
@@ -852,22 +852,8 @@ function addmoreClick(){
 	$('#select').prop('disabled', false);
 }	
 
-function caddmoreClick(){
-	document.getElementById('csaveBtn').value = 'Save';
-	document.getElementById('caddMoreBtn').className = 'ui button'; 
-	$("#csaveBtn").removeAttr("disabled");
-	$("#caddMoreBtn").attr("disabled", "disabled");
-	document.getElementById('cresetBtn').click();
-	$('#cname').prop('readonly', false);
-	$('#caddress').prop('readonly', false);
-	$('#ctelephone_no').prop('readonly', false);
-	$('#cmobile_no').prop('readonly', false);
-	$('#cterms').prop('readonly', false);
-	$('#cselect').prop('disabled', false);
-} 
-
 function saddmoreClick(){
-	document.getElementById('sresetBtn').click();
+	document.getElementById('saddResetBtn').click();
 	document.getElementById('ssaveBtn').value = 'Save';
 	document.getElementById('saddMoreBtn').className = 'ui button'; 
 	$("#ssaveBtn").removeAttr("disabled");
@@ -880,6 +866,19 @@ function saddmoreClick(){
 	$('#sselect').prop('disabled', false);
 } 
 
+function caddmoreClick(){
+	document.getElementById('cresetBtn').click();
+	document.getElementById('csaveBtn').value = 'Save';
+	document.getElementById('caddMoreBtn').className = 'ui button'; 
+	$("#csaveBtn").removeAttr("disabled");
+	$("#caddMoreBtn").attr("disabled", "disabled");
+	$('#cname').prop('readonly', false);
+	$('#caddress').prop('readonly', false);
+	$('#ctelephone_no').prop('readonly', false);
+	$('#cmobile_no').prop('readonly', false);
+	$('#cterms').prop('readonly', false);
+	$('#cselect').prop('disabled', false);
+} 
 
 function validateForm() {
 	var form = document.getElementById('addCustomerForm');
