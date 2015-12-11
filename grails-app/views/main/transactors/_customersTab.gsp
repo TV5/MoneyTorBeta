@@ -5,7 +5,21 @@
 		      <label>Entries per page</label>
 		      <input type="number" value="10">
 		    </div>
-		  	
+		  		  	<div class="inline fields thirteen wide" style="float:left">
+		    <div class="three wide field">
+		      <label>Entries per page</label>
+		      <select class="ui dropdown" id="customerNumEntries">
+				  <option value="10">10</option>
+				  <option value="15">15</option>
+				  <option value="30">30</option>
+				  <option value="100">100</option>
+			  </select>
+		    </div>
+		    <div class="four wide field">
+		      <label>Search</label>
+		      <input type="text" id="searchCustomers">
+		    </div>
+	    </div>
 		    </div>
 		    <div class="three wide feild" style="float:right">
 			    <button class="ui button teal" id="addCustomerBtn">Add Customers</button>

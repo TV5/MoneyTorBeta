@@ -153,8 +153,8 @@ $(document).ready(function() {
 		 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 	});
     
-    $('#customersTable').DataTable();
-    $('#suppliersTable').DataTable();
+   // $('#customersTable').DataTable();
+   // $('#suppliersTable').DataTable();
 
     // payables
 	var num = $('#payablesNumEntries').val();
@@ -291,6 +291,8 @@ $(document).ready(function() {
 		notifyDue();
 		payablesTable.page.len($('#payablesNumEntries').val()).draw();
 	});
+	
+	
 
 	$('#pdone').click(function() {
 	    location.reload();
@@ -775,7 +777,7 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		formInputs.attr('readonly',true);
 		
 	}
-
+	
 }	
 
 
