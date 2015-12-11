@@ -386,8 +386,8 @@ $(document).ready(function() {
 function notifyDue(){
 	var today = new Date();
   	today.setHours(0,0,0,0);
-  	var overdue = '<a class="ui red label small">Red</a>';
-  	var dueToday = "Due today";
+  	var overdue = '<div class="ui left red pointing label">Overdue</div>';
+  	var dueToday = '<div class="ui left orange pointing label">Due today</div>';
   	$('.dueDate').each(function(){
   		var due = new Date (this.innerHTML);
   		due.setHours(0,0,0,0);
@@ -677,12 +677,7 @@ function pymntAdded(){
 }
 
 function toggleNewSupplier(){
-	var selectedValue = document.getElementById("payabaleSupplierList").value;
-	if(selectedValue == -1) {
-		$(".payableNewSupplier").show();
-	} else {
-		$(".payableNewSupplier").hide();
-	}
+	$(".payableNewSupplier").toggle();
 }
 
 function toggleNewCustomer(){
@@ -743,7 +738,7 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		
 		if(transactorList == null){
 			errorList.append('<li>Please select a supplier from the list provided.'+
-					' If you cannot find the supplier you are looking for, please click <b>Create new supplier</b>'+
+					' If you cannot find the supplier you are looking for, please click <b>Create new record</b>'+
 			' to add a new supplier.</li>');
 		}
 		
@@ -910,7 +905,7 @@ function addedAdmin(){
 	$("#saveBtn").attr("disabled", "disabled");
 	$("#addMoreBtn").removeAttr("disabled");*/
 } 
-
+ 
 function addmoreClick(){
 	document.getElementById('saveBtn').value = 'Save';
 	document.getElementById('addMoreBtn').className = 'ui button'; 
@@ -995,4 +990,5 @@ $.fn.dataTable.Api.register( 'sum()', function () {
         }
  
         return a + b;
-    }, 0 )});
+    }, 0 );
+});
