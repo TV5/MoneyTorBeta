@@ -50,7 +50,7 @@
 		    </div>
 		    <div class="seven wide field">
 		    <g:select id="ecselect" name="ecselect" value="${ecselect}"
-          from="${['d': 'days', 'w': 'weeks', 'm': 'months', 'y':'years']}"
+          from="${['d': 'day(s)', 'w': 'week(s)', 'm': 'month(s)', 'y':'year(s)']}"
           optionKey="key" optionValue="value" />
           </div>
         		 
