@@ -386,7 +386,7 @@ $(document).ready(function() {
 function notifyDue(){
 	var today = new Date();
   	today.setHours(0,0,0,0);
-  	var overdue = '<a class="ui red label">Red</a>';
+  	var overdue = '<a class="ui red label small">Red</a>';
   	var dueToday = "Due today";
   	$('.dueDate').each(function(){
   		var due = new Date (this.innerHTML);
