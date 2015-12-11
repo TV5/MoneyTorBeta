@@ -2,7 +2,7 @@
   <div class="header">Supplier</div>
   <div class="content">
     
-      <g:form class="ui form" controller="transactor" action="addTransactor">	
+      <g:form id="saddform" class="ui form" controller="transactor" action="addSupplier">	
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Name</label>      
@@ -56,7 +56,7 @@
 		</div>    	
 		<g:hiddenField name="stype" value="S" />
 		<g:hiddenField name="sstatus" value="A" />
-		<input type='reset' id="sresetBtn" value='Reset' hidden />
+		<input type='reset' id="saddResetBtn" value='Reset' hidden />
 		
 		<div class="actions">
     		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addSupplier']"  
@@ -65,6 +65,8 @@
     		update="saddMoreBtn"
     		value="Save" 
     		onComplete ="ssaved()" />
+    		
+    		
 			
 			<g:submitToRemote  url="" 
 			update="ssaveBtn" 
@@ -74,7 +76,6 @@
 			onComplete="saddmoreClick()"
 			/>
 			
-			<input type='reset' id="sresetBtn" value='Reset' hidden />
 			<div class="ui cancel button" id="sCancelBtn" >Cancel</div>
 			<div class="ui button" id="sDoneBtn" style="display: none;" onclick="location.href = '/Moneytor/main/main?tab=suppliersTabLink';" >Done</div>
 	 		
