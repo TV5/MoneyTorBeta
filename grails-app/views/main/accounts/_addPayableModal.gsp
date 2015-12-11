@@ -9,19 +9,20 @@
 						<label>Supplier Name</label>
 					</div>
 					<div class="nine wide field">
-						<select name="transactor_id" class="ui dropdown" id="payabaleSupplierList">
-							<option value='0' disabled selected>---- Select a
+						<select name="transactor_id" class="ui dropdown"
+							id="payabaleSupplierList" onChange="toggleNewSupplier()">
+							<option value='-1' disabled selected>---- Select a
 								supplier ----</option>
 							<g:each in="${supplierList}" var="supplier">
 								<option value="${supplier.id}">
 									${supplier.name}
 								</option>
 							</g:each>
+							<option value='-1'>---- Create new supplier ----</option>
 						</select>
 					</div>
 					<div class="five wide field">
-						<span>Not found in list? <a onCLick="toggleNewSupplier()">Create
-								new record.</a></span>
+						<span>Not found in list? Choose "Create new supplier".</a></span>
 					</div>
 				</div>
 				<div class="payableNewSupplier">

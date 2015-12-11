@@ -14,11 +14,11 @@
 		    </div>
 		  	<div class="four wide field">
 		      <label>Start Date</label>
-		      <input type="date" id="minR">
+		      <input type="text" id="minR">
 		    </div>
 		    <div class="four wide field">
 		      <label>End Date</label>
-		      <input type="date" id="maxR">
+		      <input type="text" id="maxR">
 		    </div>
 		    <div class="four wide field">
 		      <label>Search</label>
@@ -36,13 +36,13 @@
 		cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th>OR No.</th>
-				<th>Customer</th>
-				<th>Amount</th>
-				<th>Transaction Date</th>
-				<th>Due Date</th>
-				<th>Edit</th>
-				<th>Payments</th>
+				<th class="two wide">OR No.</th>
+			    <th class="two wide">Customer</th>
+			    <th class="two wide">Amount</th>
+			    <th class="three wide">Transaction Date</th>
+			    <th class="three wide">Due Date</th>
+			    <th class="two wide">Edit</th>
+			    <th class="two wide">Payments</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -52,16 +52,19 @@
 			    <td>
 					<g:findAll in="${customerList}" expr="it.id == receivable.transactor_id">
 					    ${it.name}
+					    <g:set var="supplierName" value="${it.name}"/>
 					</g:findAll>
 				</td>
 			    <td class="sum">${receivable.amount }</td>
 			    <td><g:formatDate format="MM/dd/yyyy" date="${receivable.transaction_date}"/></td>
-			    <td>
-				    <% def dueDate = receivable.transaction_date+it.terms %>
-				    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
-			    </td>
+			    <td class="dueDate">
+			    	<% def dueDate = receivable.transaction_date+it.terms  %>
+			    	<g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
+				</td>  
 			    <td><a href="#" onClick="editReceivable('${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i class="edit icon"></i></a></td>
-			    <td> <button class="ui button teal paymentsBtn">View</button></td>
+			    <td>
+			     	<button class="ui button teal" onClick="addPayment('${receivable.id}','${supplierName}')">View</button>
+			     </td>
 			  	</tr>	  		
 	  		</g:each>
 		</tbody>

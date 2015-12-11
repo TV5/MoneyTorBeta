@@ -13,7 +13,7 @@ $(document).ready(function() {
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
     $("#max").datepicker();
-    
+    $("#maxR").datepicker();
     
 	
 	
@@ -45,9 +45,43 @@ $(document).ready(function() {
 
 	maxR.setMonth(maxR.getMonth() - 1);
 	$('#minR').val(maxR.toDateInputValue());
+	
+	
+	var rend = $("#maxR").val();
+  	var rdate = new Date(rend);
+  	var ry = rdate.getFullYear();
+  	var rd = rdate.getDate();
+  	var rm = rdate.getMonth()-1;
+  	var rNewDate = new Date(py,pm,pd);
+  	$('#minR').datepicker( "setDate", rNewDate);
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$("#maxR").on('change', function(){
+  		notifyDue();
+  		pUpdateStartDate($("#maxR"),$("#minR"));
+  	});
+  	$('#minR').datepicker();
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
+  	
+  	var rstart = $('#minR').val();
+  	var rdate2 = new Date(rstart);
+  	var ry2 = rdate2.getFullYear();
+  	var rd2 = rdate2.getDate();
+  	var rm2 = rdate2.getMonth()-1;
+  	var rNewDate2 = new Date(ry2,rm2,rd2);
+  	$('#maxR').datepicker( "setDate", rNewDate2);
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$("#minR").on('change', function(){
+  		notifyDue();
+  		pUpdateEndDate($("#minR"),$("#maxR"));
+  	});
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$('#maxR').datepicker( "setDate", new Date());
+	
 	receivablesTable.draw();
 
     $('#minR, #maxR').change( function() {
+    	notifyDue();
         receivablesTable.draw();
         setreceivablesTotalAmt();
     });
@@ -115,6 +149,7 @@ $(document).ready(function() {
     var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#receivablesNumEntries').change(function(){
+		notifyDue();
 		 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 	});
     
@@ -203,6 +238,7 @@ $(document).ready(function() {
   	$('#min').datepicker( "setDate", pNewDate);
   	pUpdateStartDate($("#max"),$("#min"));
   	$("#max").on('change', function(){
+  		notifyDue();
   		pUpdateStartDate($("#max"),$("#min"));
   	});
   	$('#min').datepicker();
@@ -218,12 +254,12 @@ $(document).ready(function() {
   	$('#max').datepicker( "setDate", pNewDate2);
   	pUpdateEndDate($("#min"),$("#max"));
   	$("#min").on('change', function(){
+  		notifyDue();
   		pUpdateEndDate($("#min"),$("#max"));
   	});
   	$('#max').datepicker();
   	pUpdateEndDate($("#min"),$("#max"));
-	
-	
+  	$('#max').datepicker( "setDate", new Date());
 	payablesTable.draw();
     
     function setPayablesTotalAmt(){
@@ -239,18 +275,21 @@ $(document).ready(function() {
 	setPayablesTotalAmt();
 
     $('#min, #max').change( function() {
+    	notifyDue();
         payablesTable.draw();
     	setPayablesTotalAmt();
     });
 
     $('#searchPayables').keyup(function(){
+    	notifyDue();
           payablesTable.search($(this).val()).draw() ;
     })
 
     var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#payablesNumEntries').change(function(){
-		 payablesTable.page.len($('#payablesNumEntries').val()).draw();
+		notifyDue();
+		payablesTable.page.len($('#payablesNumEntries').val()).draw();
 	});
 
 	$('#pdone').click(function() {
@@ -339,44 +378,44 @@ $(document).ready(function() {
             }
         }
     });
-//  	
-//  	var pend = $("#max").val();
-//  	var pdate = new Date(pend);
-//  	var py = pdate.getFullYear();
-//  	var pd = pdate.getDate();
-//  	var pm = pdate.getMonth()-1;
-//  	var pNewDate = new Date(py,pm,pd);
-//  	$('#min').datepicker( "setDate", pNewDate);
-//  	pUpdateStartDate($("#max"),$("#min"));
-//  	$("#max").on('change', function(){
-//  		pUpdateStartDate($("#max"),$("#min"));
-//  	});
-//  	$('#min').datepicker();
-//  	pUpdateStartDate($("#max"),$("#min"));
+  	
+  	notifyDue();
+  	
 });
+
+function notifyDue(){
+	var today = new Date();
+  	today.setHours(0,0,0,0);
+  	var overdue = '<div class="ui left red pointing label">Overdue</div>';
+  	var dueToday = '<div class="ui left orange pointing label">Due today</div>';
+  	$('.dueDate').each(function(){
+  		var due = new Date (this.innerHTML);
+  		due.setHours(0,0,0,0);
+  		if(today.getTime() == due.getTime())
+  			this.innerHTML += dueToday;
+  		else if (today>due)
+  			this.innerHTML += overdue;
+  	});
+}
 
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
-    console.log(maxVal);
     var date = new Date(maxVal);
-    console.log(date);
+    var date = new Date(maxVal);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()-1;
     var currentYear = date.getFullYear();
     min.datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
-    //min.datepicker( "setDate", new Date(currentYear, currentMonth-1, currentDate));
 }
 
 function pUpdateEndDate(min, max) {
 	var maxVal =min.val(); 
-    console.log(maxVal);
     var date = new Date(maxVal);
-    console.log(date);
+    var date = new Date(maxVal);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();
     max.datepicker( "option", "minDate", new Date(currentYear, currentMonth, currentDate));
-    //max.datepicker( "setDate", new Date());
 }
 
 //MODALS
@@ -427,14 +466,9 @@ $('#addCustomerBtn').click(function(){
 	$('#addCustomer').modal('show');
 });	
 
-$('.paymentsBtn').click(function(){
-	$('#payments').modal('show');
-});
-
 $('#logoutLink').click(function(){
 	$('#logout').modal('show');
 });
-
 
 //edit stuffs
 function editAdmin(id, username, f_name, l_name, password, status){
@@ -447,6 +481,29 @@ function editAdmin(id, username, f_name, l_name, password, status){
 
 	$('#editadministrator').modal('show');
 }
+
+$('table.paginated').each(function() {
+    var currentPage = 0;
+    var numPerPage = 5;
+    var $table = $(this);
+    $table.bind('repaginate', function() {
+        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+    });
+    $table.trigger('repaginate');
+    var numRows = $table.find('tbody tr').length;
+    var numPages = Math.ceil(numRows / numPerPage);
+    var $pager = $('<div class="ui pagination menu pager" style="float:right"></div>');
+    for (var page = 0; page < numPages; page++) {
+        $('<span class="ui item page-number"></span>').text(page + 1).bind('click', {
+            newPage: page
+        }, function(event) {
+            currentPage = event.data['newPage'];
+            $table.trigger('repaginate');
+            $(this).addClass('active').siblings().removeClass('active');
+        }).appendTo($pager).addClass('clickable');
+    }
+    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+});
 
 function editEmployee(id, username, f_name, l_name, password, status){
 	document.getElementById("empId").value = id;
@@ -615,16 +672,26 @@ function changePassword(){
 }
 
 function pymntAdded(){
-	setTimeout(1000);
 	$("#paymentsTable").load(location.href + " #paymentsTable>*","");
+	setTimeout(1000);
 }
 
 function toggleNewSupplier(){
-	$(".payableNewSupplier").toggle();
+	var selectedValue = document.getElementById("payabaleSupplierList").value;
+	if(selectedValue == -1) {
+		$(".payableNewSupplier").show();
+	} else {
+		$(".payableNewSupplier").hide();
+	}
 }
 
 function toggleNewCustomer(){
-	$(".receivableNewCustomer").toggle();
+	var selectedValue = document.getElementById("receivableCustomerList").value;
+	if(selectedValue == -1) {
+		$(".receivableNewCustomer").show();
+	} else {
+		$(".receivableNewCustomer").hide();
+	}
 }
 
 function addNewCustomer() {
@@ -640,9 +707,20 @@ function checkDec(el){
 }
 
 function addPayment(account_id, acct_name) {
+	var totalP = 0;
+	   
+    var rowsP = $("#paymentsTable tr:gt(0)");
+    rowsP.children("td:nth-child(2)").each(function() {
+    	totalP += parseInt($(this).html());
+    });
+    $("#totalpymnt").html(totalP);
+    
 	document.getElementById("pmAccount_id").value = account_id;
 
 	$('#pmAccountName').html(acct_name);
+	$('#payments').modal({
+		closable: false
+	});
 	$('#payments').modal('show');
 	$('.ui.form').form({
       	fields: {
@@ -694,9 +772,12 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		addMoreBtn.attr("disabled", false);	
 		saveBtn.val('Saved');
 		saveBtn.attr("disabled", "disabled");	
-		formInputs.attr('readonly','readonly');
+		formInputs.attr('readonly',true);
+		
 	}
+
 }	
+
 
 function psaved() {
 	var errorList = $('#addPayableErrorList');
@@ -837,7 +918,7 @@ function addedAdmin(){
 	$("#saveBtn").attr("disabled", "disabled");
 	$("#addMoreBtn").removeAttr("disabled");*/
 } 
-
+ 
 function addmoreClick(){
 	document.getElementById('saveBtn').value = 'Save';
 	document.getElementById('addMoreBtn').className = 'ui button'; 
@@ -923,17 +1004,3 @@ $.fn.dataTable.Api.register( 'sum()', function () {
         return a + b;
     }, 0 );
 });
-
-//var pstart = $("#min").val().split("-");
-//var pend = $("#max").val().split("-");
-//var pYrEnd = pend[0];
-//var pMoEnd = pend[1];
-//var pDayEnd = pend[2];
-////var pminStartDate = new Date(pYrEnd,pMoEnd,pDayEnd);
-//var pminStartDate = pYrEnd+"-"+pMoEnd+"-"+pDayEnd;
-//console.log(pminStartDate);
-//
-//	
-//	var a = $("#max").val();
-//$( "#min" ).datepicker();
-////$( "#min" ).datepicker({ maxDate: pminStartDate, dateFormat:"yyyy-mm-dd" });
