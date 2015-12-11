@@ -56,6 +56,7 @@ $(document).ready(function() {
   	$('#minR').datepicker( "setDate", rNewDate);
   	pUpdateStartDate($("#maxR"),$("#minR"));
   	$("#maxR").on('change', function(){
+  		notifyDue();
   		pUpdateStartDate($("#maxR"),$("#minR"));
   	});
   	$('#minR').datepicker();
@@ -71,6 +72,7 @@ $(document).ready(function() {
   	$('#maxR').datepicker( "setDate", rNewDate2);
   	pUpdateEndDate($("#minR"),$("#maxR"));
   	$("#minR").on('change', function(){
+  		notifyDue();
   		pUpdateEndDate($("#minR"),$("#maxR"));
   	});
   	pUpdateEndDate($("#minR"),$("#maxR"));
@@ -79,6 +81,7 @@ $(document).ready(function() {
 	receivablesTable.draw();
 
     $('#minR, #maxR').change( function() {
+    	notifyDue();
         receivablesTable.draw();
         setreceivablesTotalAmt();
     });
@@ -146,6 +149,7 @@ $(document).ready(function() {
     var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#receivablesNumEntries').change(function(){
+		notifyDue();
 		 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 	});
     
@@ -234,6 +238,7 @@ $(document).ready(function() {
   	$('#min').datepicker( "setDate", pNewDate);
   	pUpdateStartDate($("#max"),$("#min"));
   	$("#max").on('change', function(){
+  		notifyDue();
   		pUpdateStartDate($("#max"),$("#min"));
   	});
   	$('#min').datepicker();
@@ -249,6 +254,7 @@ $(document).ready(function() {
   	$('#max').datepicker( "setDate", pNewDate2);
   	pUpdateEndDate($("#min"),$("#max"));
   	$("#min").on('change', function(){
+  		notifyDue();
   		pUpdateEndDate($("#min"),$("#max"));
   	});
   	$('#max').datepicker();
@@ -269,18 +275,21 @@ $(document).ready(function() {
 	setPayablesTotalAmt();
 
     $('#min, #max').change( function() {
+    	notifyDue();
         payablesTable.draw();
     	setPayablesTotalAmt();
     });
 
     $('#searchPayables').keyup(function(){
+    	notifyDue();
           payablesTable.search($(this).val()).draw() ;
     })
 
     var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#payablesNumEntries').change(function(){
-		 payablesTable.page.len($('#payablesNumEntries').val()).draw();
+		notifyDue();
+		payablesTable.page.len($('#payablesNumEntries').val()).draw();
 	});
 
 	$('#pdone').click(function() {
@@ -369,7 +378,25 @@ $(document).ready(function() {
             }
         }
     });
+  	
+  	notifyDue();
+  	
 });
+
+function notifyDue(){
+	var today = new Date();
+  	today.setHours(0,0,0,0);
+  	var overdue = '<a class="ui red label small">Red</a>';
+  	var dueToday = "Due today";
+  	$('.dueDate').each(function(){
+  		var due = new Date (this.innerHTML);
+  		due.setHours(0,0,0,0);
+  		if(today.getTime() == due.getTime())
+  			this.innerHTML += dueToday;
+  		else if (today>due)
+  			this.innerHTML += overdue;
+  	});
+}
 
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
@@ -384,9 +411,7 @@ function pUpdateStartDate(max, min) {
 function pUpdateEndDate(min, max) {
 	var maxVal =min.val(); 
     var date = new Date(maxVal);
-    console.log(maxVal);
     var date = new Date(maxVal);
-    console.log(date);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();
@@ -652,7 +677,12 @@ function pymntAdded(){
 }
 
 function toggleNewSupplier(){
-	$(".payableNewSupplier").toggle();
+	var selectedValue = document.getElementById("payabaleSupplierList").value;
+	if(selectedValue == -1) {
+		$(".payableNewSupplier").show();
+	} else {
+		$(".payableNewSupplier").hide();
+	}
 }
 
 function toggleNewCustomer(){
@@ -713,7 +743,7 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		
 		if(transactorList == null){
 			errorList.append('<li>Please select a supplier from the list provided.'+
-					' If you cannot find the supplier you are looking for, please click <b>Create new record</b>'+
+					' If you cannot find the supplier you are looking for, please click <b>Create new supplier</b>'+
 			' to add a new supplier.</li>');
 		}
 		
@@ -965,5 +995,4 @@ $.fn.dataTable.Api.register( 'sum()', function () {
         }
  
         return a + b;
-    }, 0 );
-});
+    }, 0 )});

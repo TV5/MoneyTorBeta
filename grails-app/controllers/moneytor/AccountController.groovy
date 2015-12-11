@@ -33,7 +33,43 @@ class AccountController {
 		System.out.println("add payable" + params.ptransaction_date.toString())
 
 		def transId = params.transactor_id
-		if (params.transactor_id == -1) {
+		System.out.println("1:" +transId)
+		if (transId == "-1") {
+			System.out.println("2:" +transId)
+			def transactor = new Transactor(
+					name: params.pname,
+					address: params.paddress,
+					telephone_no: params.ptelephone_no,
+					mobile_no: params.pmobile_no,
+					terms: params.pterms,
+					type: 'S',
+					status: 'A'
+					)
+			transactorService.addTransactor(transactor)
+			transId = transactorService.getTransactorIDByName(params.pname, 'S')
+			System.out.println("3:" +transId)
+		} else {
+			System.out.println("False" + transId)
+		}
+		System.out.println("4:" +transId)
+		def account = new Account(
+				or_no: params.por_no,
+				transactor_id: transId,
+				amount: params.pamount,
+				transaction_date: params.pdate,
+				type: 'P',
+				updated_by: session.user.id
+				)
+		accountService.addAccount(account)
+
+		redirect(action: "main", controller: "main")
+	}
+
+	def addPayableSupplier() {
+		System.out.println("add payable" + params.ptransaction_date.toString())
+
+		def transId = params.transactor_id
+		if (transId == 0) {
 			def transactor = new Transactor(
 					name: params.pname,
 					address: params.paddress,
@@ -55,8 +91,20 @@ class AccountController {
 				updated_by: session.user.id
 				)
 		accountService.addAccount(account)
+	}
 
-		redirect(action: "main", controller: "main")
+	def addPayableOnly() {
+		System.out.println("add payable" + params.ptransaction_date.toString())
+
+		def account = new Account(
+				or_no: params.por_no,
+				transactor_id: params.transactor_id,
+				amount: params.pamount,
+				transaction_date: params.pdate,
+				type: 'P',
+				updated_by: session.user.id
+				)
+		accountService.addAccount(account)
 	}
 
 	def addReceivable() {
