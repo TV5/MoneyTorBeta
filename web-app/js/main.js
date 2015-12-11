@@ -905,7 +905,7 @@ function addedAdmin(){
 	$("#saveBtn").attr("disabled", "disabled");
 	$("#addMoreBtn").removeAttr("disabled");*/
 } 
-
+ 
 function addmoreClick(){
 	document.getElementById('saveBtn').value = 'Save';
 	document.getElementById('addMoreBtn').className = 'ui button'; 
