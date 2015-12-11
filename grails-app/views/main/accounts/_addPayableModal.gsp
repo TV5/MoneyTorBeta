@@ -9,8 +9,8 @@
 						<label>Supplier Name</label>
 					</div>
 					<div class="nine wide field">
-						<select name="transactor_id" class="ui dropdown" id="ptransactorId">
-							<option value='0' disabled selected>---- Select a
+						<select name="transactor_id" class="ui dropdown" id="payabaleSupplierList">
+							<option value='-1' disabled selected>---- Select a
 								supplier ----</option>
 							<g:each in="${supplierList}" var="supplier">
 								<option value="${supplier.id}">
@@ -118,7 +118,6 @@
 					<ul class="list" id="addPayableErrorList">
 					</ul>
 				</div>
-				<g:hiddenField id="pcategory" name="pcategory" value="1" />
 				<div class="actions">
 					<g:submitToRemote
 						url="[controller: 'Account' ,action: 'addPayable']" value="Save"

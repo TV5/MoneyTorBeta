@@ -48,9 +48,13 @@ class MainController {
 			def supplierList = transactorService.getSupplierList()
 			def customerList = transactorService.getCustomerList()
 			def paymentList = paymentService.getPaymentList()
-			def saveName = transactorService.saveName("Save")
-			[user: session.user, payableList: payableList, receivableList: receivableList, 
-				transactorList: transactorList, supplierList: supplierList, customerList: customerList,saveName: saveName,paymentList:paymentList]
+			
+			
+			
+			
+			
+			[user: session.user, payableList: payableList, receivableList: receivableList,transactorList: transactorList, supplierList: supplierList, customerList: customerList,paymentList:paymentList]
+
 			
 		}else{
 			redirect(uri: "/")
@@ -69,8 +73,7 @@ class MainController {
 			)
 		transactorService.addTransactor(transactor)
 		System.out.println("added2!")
-		def saveName = transactorService.saveName("Saved")
-		[saveName: saveName]
+		
 	}
 
 	

@@ -2,14 +2,20 @@
 $(document).ready(function() {
     $('#employeesTable').DataTable();
     $('#administratorsTable').DataTable();
-    $("#caddMoreBtn").attr("disabled", "disabled");	    
-    $("#eaddMoreB").attr("disabled", "disabled");	    
-
-	if(window.location.href.indexOf("?")!=-1){
+    $('#customersTable').DataTable();
+    $('#suppliersTable').DataTable();
+    if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
 		var tabId = '#'+tabId;
 		$(tabId).click();		
 	}
+    
+    $("#caddMoreBtn").attr("disabled", "disabled");	    
+    $("#eaddMoreB").attr("disabled", "disabled");	
+    $("#max").datepicker();
+    $("#maxR").datepicker();
+    
+	
 	
 	$(".payableNewSupplier").hide();
 	$(".receivableNewCustomer").hide();
@@ -39,6 +45,37 @@ $(document).ready(function() {
 
 	maxR.setMonth(maxR.getMonth() - 1);
 	$('#minR').val(maxR.toDateInputValue());
+	
+	
+	var rend = $("#maxR").val();
+  	var rdate = new Date(rend);
+  	var ry = rdate.getFullYear();
+  	var rd = rdate.getDate();
+  	var rm = rdate.getMonth()-1;
+  	var rNewDate = new Date(py,pm,pd);
+  	$('#minR').datepicker( "setDate", rNewDate);
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$("#maxR").on('change', function(){
+  		pUpdateStartDate($("#maxR"),$("#minR"));
+  	});
+  	$('#minR').datepicker();
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
+  	
+  	var rstart = $('#minR').val();
+  	var rdate2 = new Date(rstart);
+  	var ry2 = rdate2.getFullYear();
+  	var rd2 = rdate2.getDate();
+  	var rm2 = rdate2.getMonth()-1;
+  	var rNewDate2 = new Date(ry2,rm2,rd2);
+  	$('#maxR').datepicker( "setDate", rNewDate2);
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$("#minR").on('change', function(){
+  		pUpdateEndDate($("#minR"),$("#maxR"));
+  	});
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$('#maxR').datepicker( "setDate", new Date());
+	
 	receivablesTable.draw();
 
     $('#minR, #maxR').change( function() {
@@ -186,6 +223,37 @@ $(document).ready(function() {
 
 	max.setMonth(max.getMonth() - 1);
 	$('#min').val(max.toDateInputValue());
+	
+
+  	var pend = $("#max").val();
+  	var pdate = new Date(pend);
+  	var py = pdate.getFullYear();
+  	var pd = pdate.getDate();
+  	var pm = pdate.getMonth()-1;
+  	var pNewDate = new Date(py,pm,pd);
+  	$('#min').datepicker( "setDate", pNewDate);
+  	pUpdateStartDate($("#max"),$("#min"));
+  	$("#max").on('change', function(){
+  		pUpdateStartDate($("#max"),$("#min"));
+  	});
+  	$('#min').datepicker();
+  	pUpdateStartDate($("#max"),$("#min"));
+  	$('#min').datepicker( "setDate", new Date(py, pm, pd));
+  	
+  	var pstart = $('#min').val();
+  	var pdate2 = new Date(pstart);
+  	var py2 = pdate2.getFullYear();
+  	var pd2 = pdate2.getDate();
+  	var pm2 = pdate2.getMonth()-1;
+  	var pNewDate2 = new Date(py2,pm2,pd2);
+  	$('#max').datepicker( "setDate", pNewDate2);
+  	pUpdateEndDate($("#min"),$("#max"));
+  	$("#min").on('change', function(){
+  		pUpdateEndDate($("#min"),$("#max"));
+  	});
+  	$('#max').datepicker();
+  	pUpdateEndDate($("#min"),$("#max"));
+  	$('#max').datepicker( "setDate", new Date());
 	payablesTable.draw();
     
     function setPayablesTotalAmt(){
@@ -222,7 +290,21 @@ $(document).ready(function() {
 	$('#rdone').click(function() {
 	    window.location.replace("main?tab=receivablesTabLink");
 	});
-
+	
+	$('#addCustDoneBtn').click(function() {
+	    window.location.replace("main?tab=customersTabLink");
+	});
+	$('#sdone').click(function() {
+	    window.location.replace("main?tab=suppliersTabLink");
+	});
+	
+	$('#ecsave').click(function() {
+	    window.location.replace("main?tab=customersTabLink");
+	});
+	$('#essave').click(function() {
+	    window.location.replace("main?tab=suppliersTabLink");
+	});
+	
 	$('#raddMoreBtn').attr("disabled", true);	
 	$('#paddMoreBtn').attr("disabled", true);	
 	
@@ -288,6 +370,28 @@ $(document).ready(function() {
         }
     });
 });
+
+function pUpdateStartDate(max, min) {
+	var maxVal =max.val(); 
+    var date = new Date(maxVal);
+    var date = new Date(maxVal);
+    var currentMonth = date.getMonth();
+    var currentDate = date.getDate()-1;
+    var currentYear = date.getFullYear();
+    min.datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
+}
+
+function pUpdateEndDate(min, max) {
+	var maxVal =min.val(); 
+    var date = new Date(maxVal);
+    console.log(maxVal);
+    var date = new Date(maxVal);
+    console.log(date);
+    var currentMonth = date.getMonth();
+    var currentDate = date.getDate()+1;
+    var currentYear = date.getFullYear();
+    max.datepicker( "option", "minDate", new Date(currentYear, currentMonth, currentDate));
+}
 
 //MODALS
 $('.top.menu .item').tab();
@@ -386,6 +490,59 @@ function editEmployee(id, username, f_name, l_name, password, status){
 
 	$('#editemployee').modal('show');
 }
+
+function editSupplier(esname,esaddress,estelephone_no, esmobile_no,esterms,esid){
+	$('#editSupplierModal').modal('show');
+	$('#esname').val(esname);
+	$('#esaddress').val(esaddress);
+	$('#estelephone_no').val(estelephone_no);
+	$('#esmobile_no').val(esmobile_no);
+	var days = esterms;
+	var esselect = "d";
+	if (days % 7 == 0) {
+		days = days / 7;
+		esselect = "w";
+	} else if (days % 30 == 0) {
+		days = days / 30;
+		esselect = "m";
+	} else if (days % 365 == 0) {
+		days = days / 365;
+		esselect = "y";
+	} else {
+		days = days;
+	}
+	$('#esterms').val(days);
+	$("#esselect").val(esselect);
+	$("#esid").val(esid);
+}
+
+function editCustomer(ecname,ecaddress,ectelephone_no, ecmobile_no,ecterms,ecid){
+	$('#editCustomerModal').modal('show');
+	$('#ecname').val(ecname);
+	$('#ecaddress').val(ecaddress);
+	$('#ectelephone_no').val(ectelephone_no);
+	$('#ecmobile_no').val(ecmobile_no);
+	var days = ecterms;
+	var ecselect = "d";
+	if (days % 7 == 0) {
+		days = days / 7;
+		ecselect = "w";
+	} else if (days % 30 == 0) {
+		days = days / 30;
+		ecselect = "m";
+	} else if (days % 365 == 0) {
+		days = days / 365;
+		ecselect = "y";
+	} else {
+		days = days;
+	}
+	$('#ecterms').val(days);
+	$("#ecselect").val(ecselect);
+	$("#ecid").val(ecid);
+}
+
+
+
 
 function editReceivable(id, or_no, transactor_id, amount, date){
 	$('#ercustomer_name').val(transactor_id);
@@ -661,7 +818,8 @@ $('#settingsLink').click(function(){
 function csaved(){	
 	document.getElementById('caddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('csaveBtn').value = 'Saved';
-
+	$("#cDoneBtn").show();
+	$("#cCancelBtn").hide();
 	$("#csaveBtn").attr("disabled", "disabled");
 	$("#caddMoreBtn").removeAttr("disabled");
 	$('#cname').prop('readonly', true);
@@ -671,6 +829,22 @@ function csaved(){
 	$('#cterms').prop('readonly', true);
 	$('#cselect').prop('disabled', true);
 }
+
+function ssaved(){	
+	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
+	document.getElementById('ssaveBtn').value = 'Saved';
+	$("#sDoneBtn").show();
+	$("#sCancelBtn").hide();
+	$("#ssaveBtn").attr("disabled", "disabled");
+	$("#saddMoreBtn").removeAttr("disabled");
+	$('#sname').prop('readonly', true);
+	$('#saddress').prop('readonly', true);
+	$('#stelephone_no').prop('readonly', true);
+	$('#smobile_no').prop('readonly', true);
+	$('#sterms').prop('readonly', true);
+	$('#sselect').prop('disabled', true);
+}
+
 
 function addedEmployee(){
 	document.getElementById('usernameTakene').setAttribute("class", "");
@@ -735,6 +909,21 @@ function caddmoreClick(){
 	$('#cselect').prop('disabled', false);
 } 
 
+function saddmoreClick(){
+	document.getElementById('sresetBtn').click();
+	document.getElementById('ssaveBtn').value = 'Save';
+	document.getElementById('saddMoreBtn').className = 'ui button'; 
+	$("#ssaveBtn").removeAttr("disabled");
+	$("#saddMoreBtn").attr("disabled", "disabled");
+	$('#sname').prop('readonly', false);
+	$('#saddress').prop('readonly', false);
+	$('#stelephone_no').prop('readonly', false);
+	$('#smobile_no').prop('readonly', false);
+	$('#sterms').prop('readonly', false);
+	$('#sselect').prop('disabled', false);
+} 
+
+
 function validateForm() {
 	var form = document.getElementById('addCustomerForm');
 
@@ -749,11 +938,6 @@ function validateForm() {
 	return true;
 }
 
-function convertTerms(days){
-	if(days > 7 && days < 30)	{
-		
-	}	
-}
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {

@@ -23,17 +23,30 @@
 			  	</tr>
 			  </thead>
 			  <tbody>
-	  	        <g:each in="${transactorList}" var="transactor">
+	  	        <g:each in="${customerList}" var="customer">
         		<tr>			  	
-					<td>${transactor.name}</td>
-					<td>${transactor.address}</td>
-					<td>${transactor.telephone_no}</td>
-					<td>${transactor.mobile_no}</td>
-					<td>${transactor.terms}</td>
-					<td><a href="#"><i class="edit icon editCustomerBtn"></i></a></td>
-			</tr>	
+					<td>${customer.name}</td>
+					<td>${customer.address}</td>
+					<td>${customer.telephone_no}</td>
+					<td>${customer.mobile_no}</td>
+					<td> 
+						<script>
+						var days = ${customer.terms};
+						if(days%7 == 0)	{
+							document.write(days/7 + " week(s)");
+						}else if(days%30 == 0)	{
+							document.write(days/30 + " month(s)");
+						}else if(days%365 == 0){
+							document.write(days/365 + " year(s)");
+						}else{
+							document.write(days + " day(s)");
+						}
+						</script>
+					 </td>
+					<td><a href="#" onClick="editCustomer('${customer.name}','${customer.address}','${customer.telephone_no}','${customer.mobile_no}','${customer.terms}','${customer.id}')" ><i class="edit icon editCustomerBtn"></i></a></td>
+				
+				</tr>	
         		</g:each>
 			  </tbody>
 			  </table>
 		</div>
-	</div>
