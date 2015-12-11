@@ -78,7 +78,7 @@ class AccountController {
 					status: 'A'
 					)
 			transactorService.addTransactor(transactor)
-			transId = transactorService.getTransactorIDByName(params.pname, 'R')
+			transId = transactorService.getTransactorIDByName(params.rname, 'C')
 			System.out.println("3:" +transId)
 		} else {
 			System.out.println("False" + transId)
