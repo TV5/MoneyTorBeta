@@ -13,10 +13,11 @@
 				      <g:each in="${customerList}" var="customer">
 				      	<option value="${customer.id}">${customer.name}</option>	
 				      </g:each>
+				      <option value='-1'> ---- Create new customer ---- </option>
 			      </select>
 		    </div>
 		    <div class="five wide field">
-		    	<span>Not found in list? <a onClick="addNewCustomer()">Create new record.</a></span>
+		    	<span>Not found in list? Choose "Create new customer"".</a></span>
 		    </div>
 		</div>
 		<div class="receivableNewCustomer">

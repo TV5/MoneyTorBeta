@@ -677,11 +677,21 @@ function pymntAdded(){
 }
 
 function toggleNewSupplier(){
-	$(".payableNewSupplier").toggle();
+	var selectedValue = document.getElementById("payabaleSupplierList").value;
+	if(selectedValue == -1) {
+		$(".payableNewSupplier").show();
+	} else {
+		$(".payableNewSupplier").hide();
+	}
 }
 
 function toggleNewCustomer(){
-	$(".receivableNewCustomer").toggle();
+	var selectedValue = document.getElementById("receivableCustomerList").value;
+	if(selectedValue == -1) {
+		$(".receivableNewCustomer")show();
+	} else {
+		$(".receivableNewCustomer")hide();
+	}
 }
 
 function addNewCustomer() {
@@ -762,8 +772,11 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		addMoreBtn.attr("disabled", false);	
 		saveBtn.val('Saved');
 		saveBtn.attr("disabled", "disabled");	
-		formInputs.attr('readonly','readonly');
+		formInputs.attr('readonly',true);
+		
 	}
+	
+	
 }
 
 function psaved() {
