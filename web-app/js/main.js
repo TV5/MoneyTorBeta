@@ -762,8 +762,11 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		addMoreBtn.attr("disabled", false);	
 		saveBtn.val('Saved');
 		saveBtn.attr("disabled", "disabled");	
-		formInputs.attr('readonly','readonly');
+		formInputs.attr('readonly',true);
+		
 	}
+	
+	
 }
 
 function psaved() {
