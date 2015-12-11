@@ -33,9 +33,7 @@ class AccountController {
 		System.out.println("add payable" + params.ptransaction_date.toString())
 
 		def transId = params.transactor_id
-		System.out.println("1:" +transId)
 		if (transId == "-1") {
-			System.out.println("2:" +transId)
 			def transactor = new Transactor(
 					name: params.pname,
 					address: params.paddress,
@@ -47,11 +45,9 @@ class AccountController {
 					)
 			transactorService.addTransactor(transactor)
 			transId = transactorService.getTransactorIDByName(params.pname, 'S')
-			System.out.println("3:" +transId)
 		} else {
 			System.out.println("False" + transId)
 		}
-		System.out.println("4:" +transId)
 		def account = new Account(
 				or_no: params.por_no,
 				transactor_id: transId,
@@ -66,15 +62,38 @@ class AccountController {
 	}
 
 	def addReceivable() {
+		System.out.println("add receivable" + params.ptransaction_date.toString())
+
+		def transId = params.rtransactor_id
+		System.out.println("1:" +transId)
+		if (transId == "-1") {
+			System.out.println("2:" +transId)
+			def transactor = new Transactor(
+					name: params.rname,
+					address: params.raddress,
+					telephone_no: params.rtelephone_no,
+					mobile_no: params.rmobile_no,
+					terms: params.rterms,
+					type: 'C',
+					status: 'A'
+					)
+			transactorService.addTransactor(transactor)
+			transId = transactorService.getTransactorIDByName(params.pname, 'R')
+			System.out.println("3:" +transId)
+		} else {
+			System.out.println("False" + transId)
+		}
+		System.out.println("4:" +transId)
 		def account = new Account(
 				or_no: params.ror_no,
-				transactor_id: params.rtransactor_id,
+				transactor_id: transId,
 				amount: params.ramount,
 				transaction_date: params.rdate,
 				type: 'R',
 				updated_by: session.user.id
 				)
 		accountService.addAccount(account)
+		
 		redirect(action: "main", controller: "main")
 	}
 
