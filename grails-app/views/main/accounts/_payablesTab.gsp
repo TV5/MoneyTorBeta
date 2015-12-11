@@ -33,13 +33,13 @@
 	  <table id="payablesTable" class="display ui celled padded table"  cellspacing="0" width="100%">
 	  <thead>
 	    <tr>
-	    <th>OR No.</th>
-	    <th>Supplier</th>
-	    <th>Amount</th>
-	    <th>Transaction Date</th>
-	    <th>Due Date</th>
-	    <th>Edit</th>
-	    <th>Payments</th>
+	    <th class="two wide">OR No.</th>
+	    <th class="two wide">Supplier</th>
+	    <th class="two wide">Amount</th>
+	    <th class="three wide">Transaction Date</th>
+	    <th class="three wide">Due Date</th>
+	    <th class="two wide">Edit</th>
+	    <th class="two wide">Payments</th>
 	  	</tr>
 	  </thead>
 	  <tbody>
