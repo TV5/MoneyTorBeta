@@ -881,11 +881,11 @@ function caddmoreClick(){
 } 
 
 function saddmoreClick(){
+	document.getElementById('sresetBtn').click();
 	document.getElementById('ssaveBtn').value = 'Save';
 	document.getElementById('saddMoreBtn').className = 'ui button'; 
 	$("#ssaveBtn").removeAttr("disabled");
 	$("#saddMoreBtn").attr("disabled", "disabled");
-	document.getElementById('sresetBtn').click();
 	$('#sname').prop('readonly', false);
 	$('#saddress').prop('readonly', false);
 	$('#stelephone_no').prop('readonly', false);
