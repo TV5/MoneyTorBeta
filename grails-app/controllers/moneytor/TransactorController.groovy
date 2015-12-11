@@ -36,7 +36,7 @@ class TransactorController {
 				address: params.caddress,
 				telephone_no: params.ctelephone_no,
 				mobile_no: params.cmobile_no,
-				terms: params.cterms,
+				terms: convertTerms(params.cterms, params.cselect),
 				type: params.ctype,
 				status: params.cstatus
 				)
@@ -54,7 +54,7 @@ class TransactorController {
 			address: params.saddress,
 			telephone_no: params.stelephone_no,
 			mobile_no: params.smobile_no,
-			terms: params.sterms,
+			terms: convertTerms(params.sterms, params.sselect),
 			type: params.stype,
 			status: params.sstatus
 			)
@@ -62,23 +62,6 @@ class TransactorController {
 		System.out.println(params.sselect)
 		System.out.println("added!")
 }
-
-	
-	
-	
-	
-	/*
-	def convertTerms(){
-		int value = params.cterms.toInteger()
-		if(params.cselect == 'w'){
-			return value * 7
-		}else if(params.cselect == 'm'){
-			return value * 30
-		}else if(params.cselect == 'y'){
-			return value * 365
-		}else
-			return value
-	}*/
 	
 	def getTransactorList() {
 		def transactorList = transactorService.getTransactorList()
@@ -93,6 +76,49 @@ class TransactorController {
 	def getCustomerList() {
 		def customerList = transactorService.getCustomerList()
 		return customerList
+	}
+	
+	def editSupplier() {
+		def transactor = new Transactor(
+				name: params.esname,
+				address: params.esaddress,
+				telephone_no: params.estelephone_no,
+				mobile_no: params.esmobile_no,
+				terms: convertTerms(params.esterms, params.esselect),
+				type: params.estype,
+				status: params.esstatus
+				)
+		transactorService.editTransactor(params.int('esid'), transactor)
+		redirect(action: "main", controller: "main", params:[tab:"suppliersTabLink"])
+	}
+	
+	def editCustomer() {
+		def transactor = new Transactor(
+				name: params.ecname,
+				address: params.ecaddress,
+				telephone_no: params.ectelephone_no,
+				mobile_no: params.ecmobile_no,
+				terms: convertTerms(params.ecterms, params.ecselect),
+				type: params.ectype,
+				status: params.ecstatus
+				)
+		transactorService.editTransactor(params.int('ecid'), transactor)
+		redirect(action: "main", controller: "main", params:[tab:"customersTabLink"])
+	}
+	def convertTerms(String num, String terms ){
+		int value = num.toInteger()
+		if(terms == 'w'){
+			return value * 7
+		}else if(terms == 'm'){
+			return value * 30
+		}else if(terms == 'y'){
+			return value * 365
+		}else
+			return value
+	}
+	
+	def done(){
+		redirect(action: "main", controller: "main", params:[tab:"customersTabLink"])
 	}
 
 	

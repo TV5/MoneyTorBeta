@@ -29,8 +29,22 @@
 					<td>${customer.address}</td>
 					<td>${customer.telephone_no}</td>
 					<td>${customer.mobile_no}</td>
-					<td>${customer.terms}</td>
-					<td><a href="#"><i class="edit icon editCustomerBtn"></i></a></td>
+					<td> 
+						<script>
+						var days = ${customer.terms};
+						if(days%7 == 0)	{
+							document.write(days/7 + " week(s)");
+						}else if(days%30 == 0)	{
+							document.write(days/30 + " month(s)");
+						}else if(days%365 == 0){
+							document.write(days/365 + " year(s)");
+						}else{
+							document.write(days + " day(s)");
+						}
+						</script>
+					 </td>
+					<td><a href="#" onClick="editCustomer('${customer.name}','${customer.address}','${customer.telephone_no}','${customer.mobile_no}','${customer.terms}','${customer.id}')" ><i class="edit icon editCustomerBtn"></i></a></td>
+				
 				</tr>	
         		</g:each>
 			  </tbody>

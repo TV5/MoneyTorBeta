@@ -27,40 +27,22 @@ class TransactorService {
 		return customerList
 	}
 	
-	def saveName(text){
-		return text
-	}
 	
-
-	def days(){
-		def list = getTransactorList()
-		list.toList()
-		def ret =" "
-		def str = []
-		assert str.size() == 0
-		str.toList()
-		list.each{
-			def days = it.terms
-				if(days % 7 == 0)	{
-					ret = days/7 + " week(s)"
-					
-				}else if(days % 30 == 0){
-					ret = days/30 + " month(s)"
-				}else if(days % 365 == 0){
-					ret =  days/365 + " year(s)"
-				}else{
-				ret = days +" week(s)"
-				}
-				str.add(ret)
-		}
-		return str;
-	}
-	
-	
-
 	def getTransactorIDByName(name, type){
 		def transactor = Transactor.findAllByNameAndStatusAndType(name, "A", type)
 		return transactor.id
+	}
+	
+	def editTransactor(id, Transactor transactor) {
+		Transactor newTransactor = Transactor.get(id)
+		newTransactor.name = transactor.name
+		newTransactor.address = transactor.address
+		newTransactor.telephone_no = transactor.telephone_no
+		newTransactor.mobile_no = transactor.mobile_no
+		newTransactor.terms = transactor.terms 
+		newTransactor.type = transactor.type
+		newTransactor.status = transactor.status
+		newTransactor.save()
 	}
 
 }
