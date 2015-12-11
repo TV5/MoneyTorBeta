@@ -18,7 +18,7 @@
 									${supplier.name}
 								</option>
 							</g:each>
-							<option value='-1'>---- Create a new supplier ----</option>
+							<option value='-1'>---- Create new supplier ----</option>
 						</select>
 					</div>
 					<div class="five wide field">

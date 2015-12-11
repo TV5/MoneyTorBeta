@@ -65,48 +65,6 @@ class AccountController {
 		redirect(action: "main", controller: "main")
 	}
 
-	def addPayableSupplier() {
-		System.out.println("add payable" + params.ptransaction_date.toString())
-
-		def transId = params.transactor_id
-		if (transId == 0) {
-			def transactor = new Transactor(
-					name: params.pname,
-					address: params.paddress,
-					telephone_no: params.ptelephone_no,
-					mobile_no: params.pmobile_no,
-					terms: params.pterms,
-					type: 'S',
-					status: 'A'
-					)
-			transactorService.addTransactor(transactor)
-			transId = transactorService.getTransactorIDByName(params.pname, 'S')
-		}
-		def account = new Account(
-				or_no: params.por_no,
-				transactor_id: transId,
-				amount: params.pamount,
-				transaction_date: params.pdate,
-				type: 'P',
-				updated_by: session.user.id
-				)
-		accountService.addAccount(account)
-	}
-
-	def addPayableOnly() {
-		System.out.println("add payable" + params.ptransaction_date.toString())
-
-		def account = new Account(
-				or_no: params.por_no,
-				transactor_id: params.transactor_id,
-				amount: params.pamount,
-				transaction_date: params.pdate,
-				type: 'P',
-				updated_by: session.user.id
-				)
-		accountService.addAccount(account)
-	}
-
 	def addReceivable() {
 		def account = new Account(
 				or_no: params.ror_no,

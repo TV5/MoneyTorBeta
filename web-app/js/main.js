@@ -686,7 +686,12 @@ function toggleNewSupplier(){
 }
 
 function toggleNewCustomer(){
-	$(".receivableNewCustomer").toggle();
+	var selectedValue = document.getElementById("receivableCustomerList").value;
+	if(selectedValue == -1) {
+		$(".receivableNewCustomer")show();
+	} else {
+		$(".receivableNewCustomer")hide();
+	}
 }
 
 function addNewCustomer() {
