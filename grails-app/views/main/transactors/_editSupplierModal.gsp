@@ -1,14 +1,14 @@
-<div id="addSupplier" class="ui modal">
-  <div class="header">Supplier</div>
+<div id="editSupplierModal" class="ui modal">
+  <div class="header">Edit Supplier</div>
   <div class="content">
     
-      <g:form class="ui form" controller="transactor" action="addTransactor">	
+      <g:form class="ui form" controller="transactor" >	
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		       <g:textField id="sname" name="sname" value="${sname}" required="true"/>
+		       <g:textField id="esname" name="esname" value="${esname}" required="true"/>
 		    </div>
 		</div>
 		
@@ -17,7 +17,7 @@
 		      <label>Address</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField id="saddress" name="saddress" value="${saddress}" required="true"/>
+		      <g:textField id="esaddress" name="esaddress" value="${esaddress}" required="true"/>
 		    </div>
 		</div>
 		
@@ -26,7 +26,7 @@
 		      <label>Telephone Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField id="stelephone_no" name="stelephone_no" value="${stelephone_no}" required="true"/>
+		      <g:textField id="estelephone_no" name="estelephone_no" value="${estelephone_no}" required="true"/>
 		    </div>
 		</div>
 		
@@ -35,7 +35,7 @@
 		      <label>Mobile Number</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <g:textField id="smobile_no" name="smobile_no" value="${smobile_no}" required="true"/>
+		      <g:textField id="esmobile_no" name="esmobile_no" value="${esmobile_no}" required="true"/>
 		    </div>
 		</div>
 		
@@ -45,39 +45,25 @@
 		      <label>Terms</label>      
 		    </div>
 		    <div class="seven wide field">
-		       <g:field id="sterms" type="number" name="sterms" value="${sterms}" required="true"/>
+		       <g:field id="esterms" type="number" name="esterms" value="${esterms}" required="true"/>
 		    </div>
 		    <div class="seven wide field">
-		    <g:select id="sselect" name="sselect" value="${sselect}"
+		    <g:select id="esselect" name="esselect" value="${esselect}"
           from="${['d': 'day(s)', 'w': 'week(s)', 'm': 'month(s)', 'y':'year(s)']}"
           optionKey="key" optionValue="value" />
           </div>
         		    
 		</div>    	
-		<g:hiddenField name="stype" value="S" />
-		<g:hiddenField name="sstatus" value="A" />
+		<g:hiddenField name="estype" value="S" />
+		<g:hiddenField name="esstatus" value="A" />
+		<g:hiddenField name="esid" value="${esid}" />
 		<input type='reset' id="sresetBtn" value='Reset' hidden />
 		
 		<div class="actions">
-    		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addSupplier']"  
-    		class="ui teal button"
-    		id="ssaveBtn"  
-    		update="saddMoreBtn"
-    		value="Save" 
-    		onComplete ="ssaved()" />
-			
-			<g:submitToRemote  url="" 
-			update="ssaveBtn" 
-			class="ui button" 
-			value="Add More" 
-			id="saddMoreBtn" 
-			onComplete="saddmoreClick()"
-			/>
+		<g:actionSubmit id= "essave" class="ui approve button teal" value="Save" action="editSupplier"/>
 			
 			<input type='reset' id="sresetBtn" value='Reset' hidden />
-			<div class="ui cancel button" id="sCancelBtn" >Cancel</div>
-			<div class="ui button" id="sDoneBtn" style="display: none;" onclick="location.href = '/Moneytor/main/main?tab=suppliersTabLink';" >Done</div>
-	 		
+			<div class="ui cancel button"  " >Cancel</div>
 		</div>
     	
     </g:form>

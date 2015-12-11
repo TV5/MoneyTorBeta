@@ -5,7 +5,9 @@ class TransactorController {
 	def transactorService
     def index() { 
 		def tList = getTransactorList()
-		[transactorList:tList]
+		def sList = getSupplierList()
+		def cList = getCustomerList()
+		[transactorList:tList, supplierList: sList, customerList: cList]
 		
 	}
 	
@@ -26,41 +28,99 @@ class TransactorController {
 	}
 	
 	def addCustomer() {
-		System.out.println("add customer")
-		System.out.println("hehe")
-		def calculatedTerms
-		//if(params.cterms == )
-		
-		def transactor = new Transactor(
-			name: params.cname,
-			address: params.caddress,
-			telephone_no: params.ctelephone_no,
-			mobile_no: params.cmobile_no,
-			terms: convertTerms(),
-			type: params.ctype,
-			status: params.cstatus
-			)
-		transactorService.addTransactor(transactor)
-		System.out.println(params.cselect)
-		System.out.println("added!")
+			System.out.println("add customer")
+			System.out.println("hehe")
 			
+			def transactor = new Transactor(
+				name: params.cname,
+				address: params.caddress,
+				telephone_no: params.ctelephone_no,
+				mobile_no: params.cmobile_no,
+				terms: convertTerms(params.cterms, params.cselect),
+				type: params.ctype,
+				status: params.cstatus
+				)
+			transactorService.addTransactor(transactor)
+			System.out.println(params.cselect)
+			System.out.println("added!")
 	}
 	
-	def convertTerms(){
-		int value = params.cterms.toInteger()
-		if(params.cselect == 'w'){
-			return value * 7
-		}else if(params.cselect == 'm'){
-			return value * 30
-		}else if(params.cselect == 'y'){
-			return value * 365
-		}else
-			return value
-	}
+	def addSupplier() {
+		System.out.println("add supplier")
+		System.out.println("hehe")
+		
+		def transactor = new Transactor(
+			name: params.sname,
+			address: params.saddress,
+			telephone_no: params.stelephone_no,
+			mobile_no: params.smobile_no,
+			terms: convertTerms(params.sterms, params.sselect),
+			type: params.stype,
+			status: params.sstatus
+			)
+		transactorService.addTransactor(transactor)
+		System.out.println(params.sselect)
+		System.out.println("added!")
+}
 	
 	def getTransactorList() {
 		def transactorList = transactorService.getTransactorList()
 		return transactorList
 	}
+	
+	def getSupplierList() {
+		def SupplierList = transactorService.getSupplierList()
+		return SupplierList
+	}
+	
+	def getCustomerList() {
+		def customerList = transactorService.getCustomerList()
+		return customerList
+	}
+	
+	def editSupplier() {
+		def transactor = new Transactor(
+				name: params.esname,
+				address: params.esaddress,
+				telephone_no: params.estelephone_no,
+				mobile_no: params.esmobile_no,
+				terms: convertTerms(params.esterms, params.esselect),
+				type: params.estype,
+				status: params.esstatus
+				)
+		transactorService.editTransactor(params.int('esid'), transactor)
+		redirect(action: "main", controller: "main", params:[tab:"suppliersTabLink"])
+	}
+	
+	def editCustomer() {
+		def transactor = new Transactor(
+				name: params.ecname,
+				address: params.ecaddress,
+				telephone_no: params.ectelephone_no,
+				mobile_no: params.ecmobile_no,
+				terms: convertTerms(params.ecterms, params.ecselect),
+				type: params.ectype,
+				status: params.ecstatus
+				)
+		transactorService.editTransactor(params.int('ecid'), transactor)
+		redirect(action: "main", controller: "main", params:[tab:"customersTabLink"])
+	}
+	def convertTerms(String num, String terms ){
+		int value = num.toInteger()
+		if(terms == 'w'){
+			return value * 7
+		}else if(terms == 'm'){
+			return value * 30
+		}else if(terms == 'y'){
+			return value * 365
+		}else
+			return value
+	}
+	
+	def done(){
+		redirect(action: "main", controller: "main", params:[tab:"customersTabLink"])
+	}
+
+	
 	
 }

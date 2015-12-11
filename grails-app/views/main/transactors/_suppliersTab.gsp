@@ -16,14 +16,36 @@
 			     <tr>
 			    <th>Name</th>
 			    <th>Address</th>
-			    <th>Contact</th>
+			    <th>Telephone No</th>
+			    <th>Mobile No</th>
 			    <th>Terms</th>
-			    <th>Date Created</th>
-			    <th>Date Updated</th>
+			    <th>Edit</th>
 			  	</tr>
 			  </thead>
 			  <tbody>
-			  	
+			  	<g:each in="${supplierList}" var="supplier">
+        		<tr>			  	
+					<td>${supplier.name}</td>
+					<td>${supplier.address}</td>
+					<td>${supplier.telephone_no}</td>
+					<td>${supplier.mobile_no}</td>
+					<td> 
+						<script>
+						var days = ${supplier.terms};
+						if(days%7 == 0)	{
+							document.write(days/7 + " week(s)");
+						}else if(days%30 == 0)	{
+							document.write(days/30 + " month(s)");
+						}else if(days%365 == 0){
+							document.write(days/365 + " year(s)");
+						}else{
+							document.write(days + " day(s)");
+						}
+						</script>
+					 </td>
+					<td><a href="#" onClick="editSupplier('${supplier.name}','${supplier.address}','${supplier.telephone_no}','${supplier.mobile_no}','${supplier.terms}','${supplier.id}')" ><i class="edit icon editCustomerBtn"></i></a></td>
+				</tr>	
+        		</g:each>
 			  </tbody>
 			  </table>
 		</div>

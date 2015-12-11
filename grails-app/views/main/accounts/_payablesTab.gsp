@@ -13,11 +13,11 @@
 		    </div>
 		  	<div class="four wide field">
 		      <label>Start Date</label>
-		      <input type="date" id="min">
+		      <input type="text" id="min">
 		    </div>
 		    <div class="four wide field">
 		      <label>End Date</label>
-		      <input type="date" id="max">
+		      <input type="text" id="max">
 		    </div>
 		    <div class="four wide field">
 		      <label>Search</label>
@@ -49,6 +49,7 @@
 		    <td>
 			<g:findAll in="${supplierList}" expr="it.id == payable.transactor_id">
 			    ${it.name}
+			    <g:set var="supplierName" value="${it.name}"/>
 			</g:findAll>
 			</td>
 		    <td class="sum">${payable.amount }</td>
@@ -58,8 +59,8 @@
 		    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 		    </td>
 		    <td><a href="#" onClick="editPayable('${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
-		    <td> 
-		    <button class="ui button teal" onClick="addPayment('${payable.id}')">View</button>
+		    <td>
+		    	<button class="ui button teal" onClick="addPayment('${payable.id}','${supplierName}')">View</button>
 		    </td>
 		  	</tr>	  		
 	  	</g:each>

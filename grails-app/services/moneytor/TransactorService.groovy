@@ -27,7 +27,22 @@ class TransactorService {
 		return customerList
 	}
 	
-	def saveName(text){
-		return text
+	
+	def getTransactorIDByName(name, type){
+		def transactor = Transactor.findAllByNameAndStatusAndType(name, "A", type)
+		return transactor.id
 	}
+	
+	def editTransactor(id, Transactor transactor) {
+		Transactor newTransactor = Transactor.get(id)
+		newTransactor.name = transactor.name
+		newTransactor.address = transactor.address
+		newTransactor.telephone_no = transactor.telephone_no
+		newTransactor.mobile_no = transactor.mobile_no
+		newTransactor.terms = transactor.terms 
+		newTransactor.type = transactor.type
+		newTransactor.status = transactor.status
+		newTransactor.save()
+	}
+
 }
