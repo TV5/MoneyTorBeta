@@ -1,9 +1,9 @@
-<div id="payments" class="ui modal small">
+<div id="payments" class="ui modal small" style="padding-top:-50px!important;">
 	<div class="header" >Payment History
 		<h2 id="pmAccountName" class="ui teal large tag label" style="margin-left:25px;"></h2>
 	</div>
   	<div class="content" id="paymentsss">	  	  	
-		<table id="paymentsTable" class="ui  padded table">
+		<table id="paymentsTable" class="ui padded table">
       		<thead>
         		<tr>
     	  			<th>Date</th>	
@@ -14,13 +14,13 @@
         		<g:findAll in="${paymentList}" expr="it.account == 10">
 		  			<tr>
 		  				<td><g:formatDate format="MM/dd/yyyy" date="${it.received_date}"/></td>
-		    			<td>${it.amount}</td>
-		  			</tr>	  		
+		    			<td><g:formatNumber type="currency" number="${it.amount}" currencyCode="PHP"/></td>
+		  			</tr>	  
 	  			</g:findAll>
       		</tbody>
     	</table>
     	<g:formRemote name="subForm" url="[controller:'payment', action:'addPayment']" class="ui form">
-    		<div class="ui error message"></div>
+  			<div class="ui error message"></div> 		
 			<div class="inline fields">
 		    	<div class="thirteen wide field">
 		      		<g:textField name="pmAmount"/>

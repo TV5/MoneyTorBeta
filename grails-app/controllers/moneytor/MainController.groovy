@@ -48,28 +48,12 @@ class MainController {
 			def supplierList = transactorService.getSupplierList()
 			def customerList = transactorService.getCustomerList()
 			def paymentList = paymentService.getPaymentList()
-			def saveName = transactorService.saveName("Save")
-			def str = transactorService.days()
 			
 			
 			
-		/*	transactorList.each{
-				def days = it.terms
-				def ret
-					if(days % 7 == 0)	{
-						ret = days/7 + " day(s)"
-						
-					}else if(days % 30 == 0){
-						ret = days/30 + " month(s)"
-					}else if(days % 365 == 0){
-						ret =  days/365 + " year(s)"
-					}
-				System.out.print(ret)
-				
-			}*/
 			
 			
-			[user: session.user, payableList: payableList, receivableList: receivableList,transactorList: transactorList, supplierList: supplierList, customerList: customerList,saveName: saveName,paymentList:paymentList]
+			[user: session.user, payableList: payableList, receivableList: receivableList,transactorList: transactorList, supplierList: supplierList, customerList: customerList,paymentList:paymentList]
 
 			
 		}else{
