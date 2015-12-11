@@ -10,7 +10,7 @@
 					</div>
 					<div class="nine wide field">
 						<select name="transactor_id" class="ui dropdown"
-							id="payabaleSupplierList">
+							id="payabaleSupplierList" onChange="toggleNewSupplier()">
 							<option value='-1' disabled selected>---- Select a
 								supplier ----</option>
 							<g:each in="${supplierList}" var="supplier">
