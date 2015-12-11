@@ -677,11 +677,21 @@ function pymntAdded(){
 }
 
 function toggleNewSupplier(){
-	$(".payableNewSupplier").toggle();
+	var selectedValue = document.getElementById("payabaleSupplierList").value;
+	if(selectedValue == -1) {
+		$(".payableNewSupplier").show();
+	} else {
+		$(".payableNewSupplier").hide();
+	}
 }
 
 function toggleNewCustomer(){
-	$(".receivableNewCustomer").toggle();
+	var selectedValue = document.getElementById("receivableCustomerList").value;
+	if(selectedValue == -1) {
+		$(".receivableNewCustomer")show();
+	} else {
+		$(".receivableNewCustomer")hide();
+	}
 }
 
 function addNewCustomer() {
