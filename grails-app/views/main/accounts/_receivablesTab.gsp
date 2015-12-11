@@ -57,10 +57,10 @@
 				</td>
 			    <td class="sum">${receivable.amount }</td>
 			    <td><g:formatDate format="MM/dd/yyyy" date="${receivable.transaction_date}"/></td>
-			    <td>
-				    <% def dueDate = receivable.transaction_date+it.terms %>
-				    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
-			    </td>
+			    <td class="dueDate">
+			    	<% def dueDate = receivable.transaction_date+it.terms  %>
+			    	<g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
+				</td>  
 			    <td><a href="#" onClick="editReceivable('${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i class="edit icon"></i></a></td>
 			    <td>
 			     	<button class="ui button teal" onClick="addPayment('${receivable.id}','${supplierName}')">View</button>

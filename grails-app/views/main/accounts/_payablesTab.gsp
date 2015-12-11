@@ -54,7 +54,7 @@
 			</td>
 		    <td class="sum">${payable.amount }</td>
 		    <td><g:formatDate format="MM/dd/yyyy" date="${payable.transaction_date}"/></td>
-		    <td>
+		    <td class="dueDate">
 		    <% def dueDate = payable.transaction_date+it.terms %>
 		    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 		    </td>
