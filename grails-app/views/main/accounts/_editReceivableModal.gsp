@@ -7,19 +7,8 @@
 		      <label>Customer Name</label>      
 		    </div>
 		    <div class="fourteen wide field">
-		      <!-- <select id="ercustomer_name" class="ui dropdown">
-			      <g:each in="${customerList}" var="customer">
-			      	<option value="${customer.id}">${customer.name}</option>	
-			      </g:each>
-		      </select> -->
-		      <g:select name="ercustomer_name"
-		     		from="${customerList }"
-		     		value="${account?.transactor_id }"
-		     		optionKey="id"
-		     		optionValue="${it?.name }"
-		     		valueMessagePrefix="${it?.name }"
-		     	/>
-		    </div>	
+		      <g:textField name="ercustomer_name" disabled="true"/>
+		    </div>
 		</div>
 		
     	<div class="inline fields">
