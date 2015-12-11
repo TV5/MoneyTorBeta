@@ -688,9 +688,9 @@ function toggleNewSupplier(){
 function toggleNewCustomer(){
 	var selectedValue = document.getElementById("receivableCustomerList").value;
 	if(selectedValue == -1) {
-		$(".receivableNewCustomer")show();
+		$(".receivableNewCustomer").show();
 	} else {
-		$(".receivableNewCustomer")hide();
+		$(".receivableNewCustomer").hide();
 	}
 }
 
