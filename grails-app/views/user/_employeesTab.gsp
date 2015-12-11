@@ -26,8 +26,11 @@
 						<th>${emp.username }</th>
 						<th>${emp.f_name}</th>
 						<th>${emp.l_name }</th>
-						<th>${emp.updated_by}</th>
-						<th>${emp.updated_on }</th>
+						<th><g:findAll in="${allAdminList}" expr="it.id == emp.updated_by">
+			    			${it.username}
+							</g:findAll>
+						</th>
+						<th><g:formatDate format="MM/dd/yyyy" date="${emp.updated_on }"/></th>
 						<th><button class="ui button teal" onclick="editEmployee(${emp.id}, '${emp.username}', '${emp.f_name }', '${emp.l_name}', '${emp.password}', ${emp.status})" id="editemployeeBtn">edit</button></th>
 					</tr>
 

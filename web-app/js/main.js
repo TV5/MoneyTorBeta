@@ -754,9 +754,11 @@
 			document.getElementById('usernameTakene').setAttribute("class","ui message");
 			alert("Employee has been added!");
 			$("#eaddMoreB").removeAttr("disabled");
+			document.getElementById('esaveB').value = 'Saved';
 			document.getElementById('esaveB').setAttribute("disabled","disabled");
 		}else{
 			document.getElementById('usernameTakene').setAttribute("class","ui negative small message");
+			document.getElementById('usernameTakene').removeAttr("hidden");
 		}
 	}
 	function addedMoreEmployee(){

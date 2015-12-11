@@ -49,7 +49,7 @@
 			
 				<g:hiddenField name="etype" value="E" />
 				<div id="euserSaved" hidden/></div>
-				<div id="usernameTakene"></div>	
+				<div id="usernameTakene" hidden></div>	
 			<div class="actions">				
     			<g:submitToRemote url="[controller: 'User' ,action: 'addEmployee']"  id="esaveB" class="ui teal button" value="Save" update="usernameTakene" onSuccess="addedEmployee()"/>
     			<g:submitToRemote url="[controller: 'User' ,action: 'addMoreEmployee']" id="eaddMoreB" class="ui button" value="Add More" update="euserSaved" onSuccess="addedMoreEmployee()"/>

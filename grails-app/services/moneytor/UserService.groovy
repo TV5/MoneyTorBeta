@@ -92,6 +92,10 @@ class UserService {
 		return adminList
 	}
 	
+	def listAllAdmin(){
+		def allAdminList = User.findAllByType("A")
+		return allAdminList
+	}
 	def getUser(userId){
 		def user = User.get(userId)
 		return user

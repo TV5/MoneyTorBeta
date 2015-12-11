@@ -37,6 +37,10 @@ class UserController {
 		def adminList=userService.listAdmins()
 		return adminList
 	}
+	def listAllAdmin(){
+		def alladminList=userService.listAllAdmin()
+		return alladminList
+	}
 	def addEmployee() {
 		def username = checkUsername();
 		if(username == "available"){
@@ -166,8 +170,8 @@ class UserController {
 		if(session.user){
 		def empList=listEmployees()
 		def adminList=listAdmins()
-
-		[user:session.user, empList:empList, adminList:adminList]
+		def allAdminList = listAllAdmin()
+		[user:session.user, empList:empList, adminList:adminList, allAdminList:allAdminList]
 		}
 	}
 }
