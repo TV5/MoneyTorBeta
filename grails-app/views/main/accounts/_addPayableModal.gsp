@@ -8,21 +8,18 @@
 					<div class="two wide field">
 						<label>Supplier Name</label>
 					</div>
-					<div class="nine wide field">
+					<div class="fourteen wide field">
 						<select name="transactor_id" class="ui dropdown"
 							id="payabaleSupplierList" onChange="toggleNewSupplier()">
 							<option value='0' disabled selected>---- Select a
 								supplier ----</option>
+							<option value='-1'>---- Create new supplier ----</option>
 							<g:each in="${supplierList}" var="supplier">
 								<option value="${supplier.id}">
 									${supplier.name}
 								</option>
 							</g:each>
-							<option value='-1'>---- Create new supplier ----</option>
 						</select>
-					</div>
-					<div class="five wide field">
-						<span>Not found in list? Choose "Create new supplier".</a></span>
 					</div>
 				</div>
 				<div class="payableNewSupplier">
@@ -127,8 +124,8 @@
 
 					<button class="ui button" value="Add More" id="paddMoreBtn"
 						onClick="paddmore()">Add More</button>
-					<div class="ui button" id="pdone">Done</div>
-					<div class="ui cancel button">Cancel</div>
+					<div class="ui button" style="display: none;" id="pdone">Done</div>
+					<div class="ui cancel button" id="pcancel">Cancel</div>
 				</div>
 		</g:form>
 	</div>
