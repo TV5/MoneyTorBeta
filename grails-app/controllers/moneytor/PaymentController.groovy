@@ -15,6 +15,8 @@ class PaymentController {
 			amount: params.pmAmount,
 			received_date: new Date()
 		)
-		paymentService.addPayment(payment)
+		if(params.pmAmount > '0'){
+			paymentService.addPayment(payment)
+		}		
 	}
 }

@@ -8,7 +8,7 @@
 		      <label>Customer Name</label>      
 		    </div>
 		    <div class="nine wide field">
-			      <select name="rtransactor_id" class="ui dropdown" id="receivableCustomerList">
+			      <select name="rtransactor_id" class="ui dropdown" id="receivableCustomerList" onChange="toggleNewCustomer()">
 			      	  <option value='0'  disabled selected> ---- Select a customer ---- </option>
 				      <g:each in="${customerList}" var="customer">
 				      	<option value="${customer.id}">${customer.name}</option>	
