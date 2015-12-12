@@ -39,7 +39,7 @@
 				<th class="two wide">OR No.</th>
 			    <th class="two wide">Customer</th>
 			    <th class="two wide">Amount</th>
-			    <th class="three wide">Transaction Date</th>
+			    <th class="two wide">Transaction Date</th>
 			    <th class="three wide">Due Date</th>
 			    <th class="two wide">Edit</th>
 			    <th class="two wide">Payments</th>
@@ -61,7 +61,7 @@
 			    	<% def dueDate = receivable.transaction_date+it.terms  %>
 			    	<g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 				</td>  
-			    <td><a href="#" onClick="editReceivable('${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i class="edit icon"></i></a></td>
+			    <td><a href="#" onClick="editReceivable($(this),'${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i class="edit icon"></i></a></td>
 			    <td>
 			     	<button class="ui button teal" onClick="addPayment('${receivable.id}','${supplierName}')">View</button>
 			     </td>

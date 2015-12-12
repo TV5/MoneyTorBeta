@@ -870,7 +870,7 @@ function raddmore(){
 	$('#saveReceivableBtn').removeAttr("disabled");
 	$("#raddMoreBtn").attr("disabled", "disabled");
 	$('#rcancel').show();
-	$('#done').hide();
+	$('#rdone').hide();
 }
 
 Date.prototype.toDateInputValue = (function() {
