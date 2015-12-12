@@ -836,6 +836,13 @@ function paddmore(){
 	$('#pdate').val('');
 	$('#pamount').val('');
 	$('#por_no').val('');
+	$('#pname').val('');
+	$('#paddress').val('');
+	$('#ptelephone_no').val('');
+	$('#pmobile_no').val('');
+	$('#pterms').val('');
+	$('#pselect').val('d');
+	$('.payableNewSupplier').hide();
 	$('#payabaleSupplierList').val('0');
 	$('#savePayableBtn').val('Save');
 	document.getElementById('paddMoreBtn').className = 'ui button'; 
@@ -864,6 +871,13 @@ function raddmore(){
 	$('#rdate').val('');
 	$('#ramount').val('');
 	$('#ror_no').val('');
+	$('#rname').val('');
+	$('#raddress').val('');
+	$('#rtelephone_no').val('');
+	$('#rmobile_no').val('');
+	$('#rterms').val('');
+	$('#rselect').val('d');
+	$('.receivableNewCustomer').hide();
 	$('#receivableCustomerList').val('0');
 	$('#saveReceivableBtn').val('Save');
 	document.getElementById('raddMoreBtn').className = 'ui button'; 
