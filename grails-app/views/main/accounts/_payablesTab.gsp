@@ -36,7 +36,7 @@
 	    <th class="two wide">OR No.</th>
 	    <th class="two wide">Supplier</th>
 	    <th class="two wide">Amount</th>
-	    <th class="three wide">Transaction Date</th>
+	    <th class="two wide">Transaction Date</th>
 	    <th class="three wide">Due Date</th>
 	    <th class="two wide">Edit</th>
 	    <th class="two wide">Payments</th>

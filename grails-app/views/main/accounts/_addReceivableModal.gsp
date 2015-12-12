@@ -7,17 +7,14 @@
 		    <div class="two wide field">
 		      <label>Customer Name</label>      
 		    </div>
-		    <div class="nine wide field">
+		    <div class="fourteen wide field">
 			      <select name="rtransactor_id" class="ui dropdown" id="receivableCustomerList" onChange="toggleNewCustomer()">
 			      	  <option value='0'  disabled selected> ---- Select a customer ---- </option>
+				      <option value='-1'> ---- Create new customer ---- </option>
 				      <g:each in="${customerList}" var="customer">
 				      	<option value="${customer.id}">${customer.name}</option>	
 				      </g:each>
-				      <option value='-1'> ---- Create new customer ---- </option>
 			      </select>
-		    </div>
-		    <div class="five wide field">
-		    	<span>Not found in list? Choose "Create new customer"".</a></span>
 		    </div>
 		</div>
 		<div class="receivableNewCustomer">
@@ -125,8 +122,8 @@
 		    	/> 
 		<!--<g:submitToRemote  url="" update="saveReceivableBtn" class="ui button" value="Add More" id="raddMoreBtn" onComplete="raddmoreClick()" />-->
 	    <button class="ui button" value="Add More" id="raddMoreBtn" onClick="raddmore()">Add More</button>
-	    <div class="ui button" id="rdone">Done</div>
-	    <div class="ui cancel button" >Cancel</div>
+	    <div class="ui button" style="display: none;" id="rdone">Done</div>
+		<div class="ui cancel button" id="rcancel">Cancel</div>
 	  </div>
     </g:form>
 	  </div>
