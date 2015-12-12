@@ -818,6 +818,8 @@ function psaved() {
 	var saveBtn = $('#savePayableBtn');
 	var formInputs = $('#addPayableForm :input');
 	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
+	$('#pdone').show();
+	$('#pcancel').hide();
 } 
 
 /*function epsaved() {
@@ -839,6 +841,8 @@ function paddmore(){
 	document.getElementById('paddMoreBtn').className = 'ui button'; 
 	$('#savePayableBtn').removeAttr("disabled");
 	$("#paddMoreBtn").attr("disabled", "disabled");		
+	$('#pcancel').show();
+	$('#pdone').hide();
 }
 
 function rsaved(){
@@ -852,6 +856,8 @@ function rsaved(){
 	var saveBtn = $('#saveReceivableBtn');
 	var formInputs = $('#addReceivableForm :input');
 	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
+	$('#rdone').show();
+	$('#rcancel').hide();
 }
 
 function raddmore(){
@@ -863,6 +869,8 @@ function raddmore(){
 	document.getElementById('raddMoreBtn').className = 'ui button'; 
 	$('#saveReceivableBtn').removeAttr("disabled");
 	$("#raddMoreBtn").attr("disabled", "disabled");
+	$('#rcancel').show();
+	$('#rdone').hide();
 }
 
 Date.prototype.toDateInputValue = (function() {
