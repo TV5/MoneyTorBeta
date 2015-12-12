@@ -570,8 +570,10 @@ function editCustomer(ecname,ecaddress,ectelephone_no, ecmobile_no,ecterms,ecid)
 	$("#ecid").val(ecid);
 }
 
-function editReceivable(id, or_no, transactor_id, amount, date){
-	$('#ercustomer_name').val(transactor_id);
+function editReceivable(that, id, or_no, transactor_id, amount, date){
+	var transName = $(that).parent().parent().find(":nth-child(2)").html()
+	transName = $.trim(transName);
+	$('#ercustomer_name').val(transName);
 	$('#eror_no').val(or_no);
 	$('#eramount').val(amount);
 	$('#ertransaction_date').val(date.toString().split(' ')[0]);
@@ -579,8 +581,13 @@ function editReceivable(id, or_no, transactor_id, amount, date){
 	$('#editReceivableModal').modal('show');
 }
 
-function editPayable(id, or_no, transactor_id, amount, date){
-	$('#epsupplier_name').val(transactor_id);
+function editPayable(that,id, or_no, transactor_id, amount, date){
+	var t = this.find(":nth-child(2)");
+	console.log(t);
+	sample = that;
+	var transName = $(that).parent().parent().find(":nth-child(2)").html()
+	transName = $.trim(transName);
+	$('#epsupplier_name').val(transName);
 	$('#epor_no').val(or_no);
 	$('#epamount').val(amount);
 	$('#eptransaction_date').val(date.toString().split(' ')[0]);

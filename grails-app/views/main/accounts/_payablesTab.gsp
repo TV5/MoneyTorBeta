@@ -58,7 +58,7 @@
 		    <% def dueDate = payable.transaction_date+it.terms %>
 		    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 		    </td>
-		    <td><a href="#" onClick="editPayable('${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
+		    <td><a href="#" onClick="editPayable($(this),'${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
 		    <td>
 		    	<button class="ui button teal" onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}')">View</button>
 		    </td>
