@@ -69,14 +69,12 @@
 		    <g:hiddenField name="uId" />
 			<g:hiddenField name="uCurrentPass" />
 			<div class="actions">
-				<div id="editBtn" class="ui button teal displayFirst" onclick="edit()" style="padding-right:12px!important;">
-					Edit
-					<i class="edit basic icon" style="color:#FFF; margin-left:5px;"></i>
+				<div id="editBtn" class="ui right labeled icon button teal displayFirst" onclick="edit()">
+					<i class="edit basic icon"></i>Edit
 				</div>
 				<g:actionSubmit class="ui button teal displaySec" value="Save" action="editUserAccount"/>
-				<div class="ui cancel button teal" onclick="cancelEdit()" style="padding-right:12px!important;">
-					Cancel
-					<i class="cancel basic icon" style="color:#FFF; margin-left:5px;"></i>
+				<div class="ui right labeled icon cancel button teal" onclick="cancelEdit()">					
+					<i class="cancel basic icon"></i>Cancel
 				</div>
 			</div>
 		</g:form>
