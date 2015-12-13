@@ -16,73 +16,17 @@ $(document).ready(function() {
     $("#max").datepicker();
     $("#maxR").datepicker();
     
-	
-	
 	$(".payableNewSupplier").hide();
 	$(".receivableNewCustomer").hide();
 	
 	//receivables
 	var num = $('#receivablesNumEntries').val();
     var receivablesTable = $('#receivablesTable').DataTable({
-    	"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+    	"dom": '<"top"><"dateFilter">rt<"bottom"pB><"clear">',
 		"pageLength": $('#receivablesNumEntries').val(),
-		"order": [[4, "asc"]]
+		"buttons": ['excel', 'pdf', 'print'],
+		"order": [[3, "asc"]]
 	});
-
-    function setreceivablesTotalAmt() {
-	    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
-		var receivablesTotal = 0;
-		for (var i = 0; i<receivablesAmounts.length; i++){
-			receivablesAmounts[i] = receivablesAmounts[i].textContent;
-			receivablesTotal+=parseFloat(receivablesAmounts[i]);
-		}
-		$('#receivablesTotal').html("Php "+receivablesTotal);
-	}
-
-	setreceivablesTotalAmt();
-    $('#maxR').val(new Date().toDateInputValue());
-
-	var maxR = new Date();
-
-	maxR.setMonth(maxR.getMonth() - 1);
-	$('#minR').val(maxR.toDateInputValue());
-	
-	
-	var rend = $("#maxR").val();
-  	var rdate = new Date(rend);
-  	var ry = rdate.getFullYear();
-  	var rd = rdate.getDate();
-  	var rm = rdate.getMonth()-1;
-  	var rNewDate = new Date(py,pm,pd);
-  	$('#minR').datepicker( "setDate", rNewDate);
-  	pUpdateStartDate($("#maxR"),$("#minR"));
-  	$("#maxR").on('change', function(){
-  		pUpdateStartDate($("#maxR"),$("#minR"));
-  	});
-  	$('#minR').datepicker();
-  	pUpdateStartDate($("#maxR"),$("#minR"));
-  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
-  	
-  	var rstart = $('#minR').val();
-  	var rdate2 = new Date(rstart);
-  	var ry2 = rdate2.getFullYear();
-  	var rd2 = rdate2.getDate();
-  	var rm2 = rdate2.getMonth()-1;
-  	var rNewDate2 = new Date(ry2,rm2,rd2);
-  	$('#maxR').datepicker( "setDate", rNewDate2);
-  	pUpdateEndDate($("#minR"),$("#maxR"));
-  	$("#minR").on('change', function(){
-  		pUpdateEndDate($("#minR"),$("#maxR"));
-  	});
-  	pUpdateEndDate($("#minR"),$("#maxR"));
-  	$('#maxR').datepicker( "setDate", new Date());
-	
-	receivablesTable.draw();
-
-    $('#minR, #maxR').change( function() {
-        receivablesTable.draw();
-        setreceivablesTotalAmt();
-    });
 
     new $.fn.dataTable.Buttons(receivablesTable, {
         buttons: [
@@ -138,30 +82,92 @@ $(document).ready(function() {
         ]
     });
 
-    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
+    //receivablesTable.buttons(0, null).container().appendTo(receivablesTable.table().container());
+    
+    $('#maxR').val(new Date().toDateInputValue());
 
+	var maxR = new Date();
+
+	maxR.setMonth(maxR.getMonth() - 1);
+	$('#minR').val(maxR.toDateInputValue());
+	
+	
+	var rend = $("#maxR").val();
+  	var rdate = new Date(rend);
+  	var ry = rdate.getFullYear();
+  	var rd = rdate.getDate();
+  	var rm = rdate.getMonth()-1;
+  	var rNewDate = new Date(py,pm,pd);
+  	$('#minR').datepicker( "setDate", rNewDate);
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$("#maxR").on('change', function(){
+  		notifyDue();
+  		pUpdateStartDate($("#maxR"),$("#minR"));
+  	});
+  	$('#minR').datepicker();
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
+  	
+  	var rstart = $('#minR').val();
+  	var rdate2 = new Date(rstart);
+  	var ry2 = rdate2.getFullYear();
+  	var rd2 = rdate2.getDate();
+  	var rm2 = rdate2.getMonth()-1;
+  	var rNewDate2 = new Date(ry2,rm2,rd2);
+  	$('#maxR').datepicker( "setDate", rNewDate2);
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$("#minR").on('change', function(){
+  		alert('change minR');
+  		notifyDue();
+  		pUpdateEndDate($("#minR"),$("#maxR"));
+  	});
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$('#maxR').datepicker( "setDate", new Date());
+	receivablesTable.draw();
+
+	 function setreceivablesTotalAmt() {
+	    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+		var receivablesTotal = 0;
+		for (var i = 0; i<receivablesAmounts.length; i++){
+			receivablesAmounts[i] = receivablesAmounts[i].textContent;
+			receivablesTotal+=parseFloat(receivablesAmounts[i]);
+		}
+		$('#receivablesTotal').html("Php "+receivablesTotal);
+	}
+
+	setreceivablesTotalAmt();
+	
+    $('#minR, #maxR').change( function() {
+    	notifyDue();
+        receivablesTable.draw();
+        setreceivablesTotalAmt();
+        alert('change minR maxR');
+    });
+
+   
     $('#searchReceivables').keyup(function(){
-          receivablesTable.search($(this).val()).draw() ;
+        notifyDue();  
+    	receivablesTable.search($(this).val()).draw() ;
     })
 
     var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#receivablesNumEntries').change(function(){
+		notifyDue();
 		 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 	});
     
-    $('#customersTable').DataTable();
-    $('#suppliersTable').DataTable();
-
     // payables
+	//'<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
 	var num = $('#payablesNumEntries').val();
 	
     var payablesTable = $('#payablesTable').DataTable({
-		"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+    	"dom": 'tBp',
 		"pageLength": $('#payablesNumEntries').val(),
-		"order": [[4, "asc"]]
+		"buttons": ['excel', 'pdf', 'print'],
+		"order": [[3, "asc"]]
 	});
-
+   
     new $.fn.dataTable.Buttons(payablesTable, {
         buttons: [
 			{
@@ -216,7 +222,7 @@ $(document).ready(function() {
         ]
     });
 
-    payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
+   // payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
 	$('#max').val(new Date().toDateInputValue());
 
@@ -235,6 +241,7 @@ $(document).ready(function() {
   	$('#min').datepicker( "setDate", pNewDate);
   	pUpdateStartDate($("#max"),$("#min"));
   	$("#max").on('change', function(){
+  		notifyDue();
   		pUpdateStartDate($("#max"),$("#min"));
   	});
   	$('#min').datepicker();
@@ -250,6 +257,7 @@ $(document).ready(function() {
   	$('#max').datepicker( "setDate", pNewDate2);
   	pUpdateEndDate($("#min"),$("#max"));
   	$("#min").on('change', function(){
+  		notifyDue();
   		pUpdateEndDate($("#min"),$("#max"));
   	});
   	$('#max').datepicker();
@@ -264,25 +272,30 @@ $(document).ready(function() {
 			payablesAmounts[i] = payablesAmounts[i].textContent;
 			payablesTotal+=parseFloat(payablesAmounts[i]);
 		}
-		$('#payablesTotal').html("Php "+payablesTotal);
+		$('#payablesTotal').html("Php "+payablesTotal.toFixed(2));
 	}
 
 	setPayablesTotalAmt();
 
     $('#min, #max').change( function() {
+    	notifyDue();
         payablesTable.draw();
     	setPayablesTotalAmt();
     });
 
     $('#searchPayables').keyup(function(){
+    	notifyDue();
           payablesTable.search($(this).val()).draw() ;
     })
 
     var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#payablesNumEntries').change(function(){
-		 payablesTable.page.len($('#payablesNumEntries').val()).draw();
+		notifyDue();
+		payablesTable.page.len($('#payablesNumEntries').val()).draw();
 	});
+	
+	
 
 	$('#pdone').click(function() {
 	    location.reload();
@@ -369,9 +382,27 @@ $(document).ready(function() {
             }
         }
     });
-
+  	
+  	notifyDue();
+  	$('.dt-button').addClass("export-btn ui tiny teal button")
+  	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
 });
 
+function notifyDue(){
+	var today = new Date();
+  	today.setHours(0,0,0,0);
+  	var overdue = '<div class="ui left red pointing label">Overdue</div>';
+  	var dueToday = '<div class="ui left orange pointing label">Due today</div>';
+  	$('.dueDate').each(function(){
+  		var due = new Date (this.innerHTML);
+  		due.setHours(0,0,0,0);
+  		if(today.getTime() == due.getTime())
+  			this.innerHTML += dueToday;
+  		else if (today>due)
+  			this.innerHTML += overdue;
+  	});
+}
+>>>>>>> refs/remotes/origin/master
 
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
@@ -386,9 +417,7 @@ function pUpdateStartDate(max, min) {
 function pUpdateEndDate(min, max) {
 	var maxVal =min.val(); 
     var date = new Date(maxVal);
-    console.log(maxVal);
     var date = new Date(maxVal);
-    console.log(date);
     var currentMonth = date.getMonth();
     var currentDate = date.getDate()+1;
     var currentYear = date.getFullYear();
@@ -461,28 +490,30 @@ function editAdmin(id, username, f_name, l_name, password, status){
 	$('#editadministrator').modal('show');
 }
 
-$('table.paginated').each(function() {
-    var currentPage = 0;
-    var numPerPage = 5;
-    var $table = $(this);
-    $table.bind('repaginate', function() {
-        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
-    });
-    $table.trigger('repaginate');
-    var numRows = $table.find('tbody tr').length;
-    var numPages = Math.ceil(numRows / numPerPage);
-    var $pager = $('<div class="ui pagination menu pager" style="float:right"></div>');
-    for (var page = 0; page < numPages; page++) {
-        $('<span class="ui item page-number"></span>').text(page + 1).bind('click', {
-            newPage: page
-        }, function(event) {
-            currentPage = event.data['newPage'];
-            $table.trigger('repaginate');
-            $(this).addClass('active').siblings().removeClass('active');
-        }).appendTo($pager).addClass('clickable');
-    }
-    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
-});
+function paginate(){
+	$('table.paginated').each(function() {
+	    var currentPage = 0;
+	    var numPerPage = 4;
+	    var $table = $(this);
+	    $table.bind('repaginate', function() {
+	        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+	    });
+	    $table.trigger('repaginate');
+	    var numRows = $table.find('tbody tr').length;
+	    var numPages = Math.ceil(numRows / numPerPage);
+	    var $pager = $('<div class="ui pagination menu pager" style="float:right; margin-bottom:5px;"></div>');
+	    for (var page = 0; page < numPages; page++) {
+	        $('<span class="ui teal item page-number"></span>').text(page + 1).bind('click', {
+	            newPage: page
+	        }, function(event) {
+	            currentPage = event.data['newPage'];
+	            $table.trigger('repaginate');
+	            $(this).addClass('active').siblings().removeClass('active');
+	        }).appendTo($pager).addClass('clickable');
+	    }
+	    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+	});
+}
 
 function editEmployee(id, username, f_name, l_name, password, status){
 	document.getElementById("empId").value = id;
@@ -550,11 +581,10 @@ function editCustomer(ecname,ecaddress,ectelephone_no, ecmobile_no,ecterms,ecid)
 	$("#ecid").val(ecid);
 }
 
-
-
-
-function editReceivable(id, or_no, transactor_id, amount, date){
-	$('#ercustomer_name').val(transactor_id);
+function editReceivable(that, id, or_no, transactor_id, amount, date){
+	var transName = $(that).parent().parent().find(":nth-child(2)").html()
+	transName = $.trim(transName);
+	$('#ercustomer_name').val(transName);
 	$('#eror_no').val(or_no);
 	$('#eramount').val(amount);
 	$('#ertransaction_date').val(date.toString().split(' ')[0]);
@@ -562,8 +592,13 @@ function editReceivable(id, or_no, transactor_id, amount, date){
 	$('#editReceivableModal').modal('show');
 }
 
-function editPayable(id, or_no, transactor_id, amount, date){
-	$('#epsupplier_name').val(transactor_id);
+function editPayable(that,id, or_no, transactor_id, amount, date){
+	var t = this.find(":nth-child(2)");
+	console.log(t);
+	sample = that;
+	var transName = $(that).parent().parent().find(":nth-child(2)").html()
+	transName = $.trim(transName);
+	$('#epsupplier_name').val(transName);
 	$('#epor_no').val(or_no);
 	$('#epamount').val(amount);
 	$('#eptransaction_date').val(date.toString().split(' ')[0]);
@@ -655,17 +690,22 @@ function changePassword(){
     });
 }
 
-function pymntAdded(){
-	$("#paymentsTable").load(location.href + " #paymentsTable>*","");
-	setTimeout(1000);
-}
-
 function toggleNewSupplier(){
-	$(".payableNewSupplier").toggle();
+	var selectedValue = document.getElementById("payabaleSupplierList").value;
+	if(selectedValue == -1) {
+		$(".payableNewSupplier").show();
+	} else {
+		$(".payableNewSupplier").hide();
+	}
 }
 
 function toggleNewCustomer(){
-	$(".receivableNewCustomer").toggle();
+	var selectedValue = document.getElementById("receivableCustomerList").value;
+	if(selectedValue == -1) {
+		$(".receivableNewCustomer").show();
+	} else {
+		$(".receivableNewCustomer").hide();
+	}
 }
 
 function addNewCustomer() {
@@ -680,18 +720,35 @@ function checkDec(el){
 	 }
 }
 
-function addPayment(account_id, acct_name) {
-	var totalP = 0;
-	   
-    var rowsP = $("#paymentsTable tr:gt(0)");
-    rowsP.children("td:nth-child(2)").each(function() {
-    	totalP += parseInt($(this).html());
-    });
-    $("#totalpymnt").html(totalP);
+function tablePayment(acct_id){
+	document.getElementById("tablePymnt").innerHTML = ""
+	var d;
+	var datestring;
+	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
+	var boom = document.getElementById("yeah").innerHTML;
+	$(jQuery.parseJSON(boom)).each(function() {  
+        if(this.account == acct_id){
+        	d = new Date(this.received_date);
+
+        	myTable = myTable + '<tr><td>'+ d.toLocaleString() + '</td><td hidden>' + this.amount + '</td><td>PHP ' + (this.amount).toFixed(2) + '</td></tr>';
+        }
+		
+	});
+	myTable += '</tbody></table>';
+	document.getElementById("tablePymnt").innerHTML = myTable;
+	paginate();
+}
+
+function addPayment(account_id, acct_name, amt) {
+	accid = account_id;
+	tablePayment(account_id);
+	amtbal = amt;  
+	balance();
     
 	document.getElementById("pmAccount_id").value = account_id;
 
 	$('#pmAccountName').html(acct_name);
+	
 	$('#payments').modal({
 		closable: false
 	});
@@ -708,12 +765,40 @@ function addPayment(account_id, acct_name) {
 	                {
 	                    type   : 'regExp[/^\\d+\.?\\d{0,2}$/]',
 	                    prompt : 'Invalid input.'
-	                }                  
+	                },
+	                {
+	                    type   : 'notExactly[0]',
+	                    prompt : 'Please enter amount.'
+	                }                    
 	            ]
         	}
       	}
     });
 }
+
+function pymntAdded(){
+	$("#yeah").load(location.href + " #yeah","");
+	setTimeout(tablePayment(accid), 2000);
+	balance();
+}
+
+function balance(){	   
+	var rawr = 0;
+    var rowsP = $("#paymentsTable tr:gt(0)");
+    rowsP.children("td:nth-child(2)").each(function() {
+    	rawr += parseFloat($(this).html());
+    });
+    
+    if(rawr >= amtbal){
+    	document.getElementById("totalpymnt").style.color = "green";
+    }
+    else{
+    	document.getElementById("totalpymnt").style.color = "red";
+    }
+    
+    $("#totalpymnt").html("PHP " + rawr.toFixed(2));
+}
+
 
 function validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs) {
 	errorList.empty();
@@ -746,9 +831,12 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 		addMoreBtn.attr("disabled", false);	
 		saveBtn.val('Saved');
 		saveBtn.attr("disabled", "disabled");	
-		formInputs.attr('readonly','readonly');
+		formInputs.attr('readonly',true);
+		
 	}
-}
+	
+}	
+
 
 function psaved() {
 	var errorList = $('#addPayableErrorList');
@@ -761,27 +849,31 @@ function psaved() {
 	var saveBtn = $('#savePayableBtn');
 	var formInputs = $('#addPayableForm :input');
 	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
+	$('#pdone').show();
+	$('#pcancel').hide();
+	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);
 } 
-
-/*function epsaved() {
-	var errorList = $('#editPayableErrorList');
-	var errorDiv = $('#editPayableErrorDiv');
-	var transactorList = $('#epsupplier_name').val();
-	var or_no = $('#epor_no').val();
-	var amount = $('#epamount').val();
-	var transactorType = "supplier";
-	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, null, null, null);
-}*/
 
 function paddmore(){
 	$('#pdate').val('');
 	$('#pamount').val('');
 	$('#por_no').val('');
+	$('#pname').val('');
+	$('#paddress').val('');
+	$('#ptelephone_no').val('');
+	$('#pmobile_no').val('');
+	$('#pterms').val('');
+	$('#pselect').val('d');
+	$('.payableNewSupplier').hide();
 	$('#payabaleSupplierList').val('0');
 	$('#savePayableBtn').val('Save');
 	document.getElementById('paddMoreBtn').className = 'ui button'; 
 	$('#savePayableBtn').removeAttr("disabled");
 	$("#paddMoreBtn").attr("disabled", "disabled");		
+	$('#pcancel').show();
+	$('#pdone').hide();
+	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
+	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
 }
 
 function rsaved(){
@@ -795,17 +887,31 @@ function rsaved(){
 	var saveBtn = $('#saveReceivableBtn');
 	var formInputs = $('#addReceivableForm :input');
 	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
+	$('#rdone').show();
+	$('#rcancel').hide();
+	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);
 }
 
 function raddmore(){
 	$('#rdate').val('');
 	$('#ramount').val('');
 	$('#ror_no').val('');
+	$('#rname').val('');
+	$('#raddress').val('');
+	$('#rtelephone_no').val('');
+	$('#rmobile_no').val('');
+	$('#rterms').val('');
+	$('#rselect').val('d');
+	$('.receivableNewCustomer').hide();
 	$('#receivableCustomerList').val('0');
 	$('#saveReceivableBtn').val('Save');
 	document.getElementById('raddMoreBtn').className = 'ui button'; 
 	$('#saveReceivableBtn').removeAttr("disabled");
 	$("#raddMoreBtn").attr("disabled", "disabled");
+	$('#rcancel').show();
+	$('#rdone').hide();
+	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
+	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
 }
 
 Date.prototype.toDateInputValue = (function() {
@@ -923,6 +1029,7 @@ function addedAdmin(){
 		document.getElementById('usernameTakena').removeAttribute("hidden");
 	}
 } 
+<<<<<<< HEAD
 
 function addedMoreAdmin(){
 	alert("addmore");
@@ -938,6 +1045,9 @@ function addedMoreAdmin(){
 	}
 }
 
+=======
+ 
+>>>>>>> refs/remotes/origin/master
 function addmoreClick(){
 	document.getElementById('saveBtn').value = 'Save';
 	document.getElementById('addMoreBtn').className = 'ui button'; 
@@ -952,22 +1062,8 @@ function addmoreClick(){
 	$('#select').prop('disabled', false);
 }	
 
-function caddmoreClick(){
-	document.getElementById('csaveBtn').value = 'Save';
-	document.getElementById('caddMoreBtn').className = 'ui button'; 
-	$("#csaveBtn").removeAttr("disabled");
-	$("#caddMoreBtn").attr("disabled", "disabled");
-	document.getElementById('cresetBtn').click();
-	$('#cname').prop('readonly', false);
-	$('#caddress').prop('readonly', false);
-	$('#ctelephone_no').prop('readonly', false);
-	$('#cmobile_no').prop('readonly', false);
-	$('#cterms').prop('readonly', false);
-	$('#cselect').prop('disabled', false);
-} 
-
 function saddmoreClick(){
-	document.getElementById('sresetBtn').click();
+	document.getElementById('saddResetBtn').click();
 	document.getElementById('ssaveBtn').value = 'Save';
 	document.getElementById('saddMoreBtn').className = 'ui button'; 
 	$("#ssaveBtn").removeAttr("disabled");
@@ -980,6 +1076,19 @@ function saddmoreClick(){
 	$('#sselect').prop('disabled', false);
 } 
 
+function caddmoreClick(){
+	document.getElementById('cresetBtn').click();
+	document.getElementById('csaveBtn').value = 'Save';
+	document.getElementById('caddMoreBtn').className = 'ui button'; 
+	$("#csaveBtn").removeAttr("disabled");
+	$("#caddMoreBtn").attr("disabled", "disabled");
+	$('#cname').prop('readonly', false);
+	$('#caddress').prop('readonly', false);
+	$('#ctelephone_no').prop('readonly', false);
+	$('#cmobile_no').prop('readonly', false);
+	$('#cterms').prop('readonly', false);
+	$('#cselect').prop('disabled', false);
+} 
 
 function validateForm() {
 	var form = document.getElementById('addCustomerForm');

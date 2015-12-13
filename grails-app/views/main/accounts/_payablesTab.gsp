@@ -24,22 +24,21 @@
 		      <input type="text" id="searchPayables">
 		    </div>
 	    </div>
-	    <div class="inline fields three wide" style="float:right">
-	    	<button id="" class="ui button teal">Export</button>
-		    <button id="addPayableBtn" class="ui button teal">Add</button>
+	    <div class="inline fields three wide right">
+	    	<button id="addPayableBtn" class="ui button teal">Add Payables</button>
 	    </div>
 	    </div>
 	  </div>
 	  <table id="payablesTable" class="display ui celled padded table"  cellspacing="0" width="100%">
 	  <thead>
 	    <tr>
-	    <th>OR No.</th>
-	    <th>Supplier</th>
-	    <th>Amount</th>
-	    <th>Transaction Date</th>
-	    <th>Due Date</th>
-	    <th>Edit</th>
-	    <th>Payments</th>
+	    <th class="two wide">OR No.</th>
+	    <th class="two wide">Supplier</th>
+	    <th class="two wide">Amount</th>
+	    <th class="two wide">Transaction Date</th>
+	    <th class="three wide">Due Date</th>
+	    <th class="two wide">Edit</th>
+	    <th class="two wide">Payments</th>
 	  	</tr>
 	  </thead>
 	  <tbody>
@@ -52,15 +51,15 @@
 			    <g:set var="supplierName" value="${it.name}"/>
 			</g:findAll>
 			</td>
-		    <td class="sum">${payable.amount }</td>
+		    <td class="sum">${payable.amount}</td>
 		    <td><g:formatDate format="MM/dd/yyyy" date="${payable.transaction_date}"/></td>
-		    <td>
+		    <td class="dueDate">
 		    <% def dueDate = payable.transaction_date+it.terms %>
 		    <g:formatDate format="MM/dd/yyyy" date="${dueDate}"/>
 		    </td>
-		    <td><a href="#" onClick="editPayable('${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
+		    <td><a href="#" onClick="editPayable($(this),'${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
 		    <td>
-		    	<button class="ui button teal" onClick="addPayment('${payable.id}','${supplierName}')">View</button>
+		    	<button class="ui right labeled icon button teal" onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}')"><i class="search basic icon"></i>View</button>
 		    </td>
 		  	</tr>	  		
 	  	</g:each>

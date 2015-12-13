@@ -34,5 +34,4 @@
 					</g:each>				
 				</tbody>
 			</table>
-		</div>
-	</div>
+</div>
