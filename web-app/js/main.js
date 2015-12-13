@@ -820,17 +820,8 @@ function psaved() {
 	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	$('#pdone').show();
 	$('#pcancel').hide();
+	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);
 } 
-
-/*function epsaved() {
-	var errorList = $('#editPayableErrorList');
-	var errorDiv = $('#editPayableErrorDiv');
-	var transactorList = $('#epsupplier_name').val();
-	var or_no = $('#epor_no').val();
-	var amount = $('#epamount').val();
-	var transactorType = "supplier";
-	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, null, null, null);
-}*/
 
 function paddmore(){
 	$('#pdate').val('');
@@ -850,6 +841,8 @@ function paddmore(){
 	$("#paddMoreBtn").attr("disabled", "disabled");		
 	$('#pcancel').show();
 	$('#pdone').hide();
+	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
+	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
 }
 
 function rsaved(){
@@ -865,6 +858,7 @@ function rsaved(){
 	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	$('#rdone').show();
 	$('#rcancel').hide();
+	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);
 }
 
 function raddmore(){
@@ -885,6 +879,8 @@ function raddmore(){
 	$("#raddMoreBtn").attr("disabled", "disabled");
 	$('#rcancel').show();
 	$('#rdone').hide();
+	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
+	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
 }
 
 Date.prototype.toDateInputValue = (function() {
