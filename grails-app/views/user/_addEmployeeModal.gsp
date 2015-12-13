@@ -26,8 +26,9 @@
 							<label>Username</label>
 						</div>
 						<div class="fourteen wide field">
-				            <g:textField name="eusername"required="true"/>
+				            <g:textField name="eusername" required="true"/>
 						</div>
+
 				</div>
 				
 				<div class="inline fields">

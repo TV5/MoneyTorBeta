@@ -41,27 +41,86 @@ class UserController {
 		def alladminList=userService.listAllAdmin()
 		return alladminList
 	}
-	def addEmployee() {
-		def username = checkUsername();
-		if(username == "available"){
-		if(params.ecpassword==params.epassword){
-			def user =new User(
-					f_name: params.ef_name,
-					l_name: params.el_name,
-					username: params.eusername,
-					password: params.epassword,
-					type: params.etype,
-					status: 1,
-					updated_on: new Date(),
-					updated_by: session.user.id
-				)
-			if(user!=null){
-				userService.addUser(user)
-				render "User has been saved."
-			}
+	def validations(){
+		def validationList =[]
+		def username
+		if(params.eusername!=null){
+			username=params.eusername
+		}else if(params.ausername!=null){
+			username=params.ausername
+		}else if(params.adminUsername!=null){
+			username=params.adminUsername
+		}else if(params.empUsername){
+			username=params.empUsername
 		}
+		if(username.length()-1>7){
+			def invalid=false
+			for(def x=0; x<=username.length()-1; x++){
+				if(username[x]==' '){
+					invalid=true
+				}
+			}
+			if(invalid){
+				validationList.add("Username must not contain spaces.")
+			}
+
 		}else{
-			render "username unavailable"
+			validationList.add("Username must be at least 8 characters.")
+		}
+		def pass=false, lpass=false
+		if(params.epassword!=null && params.epassword==params.ecpassword){
+			pass=true
+			if(params.epassword.length()>7)
+				lpass=true
+		}else if(params.apassword!=null && params.apassword==params.acpassword){
+			pass=true
+			if(params.apassword.length()>7)
+				lpass=true
+		}else if(params.adminPassword!=null && params.adminPassword==params.adminCpassword){
+			pass=true
+			if(params.adminPassword.length()>7)
+				lpass=true
+		}else if(params.empPassword!=null && params.empPassword==params.empCpassword){
+			pass=true
+			if(params.empPassword.length()>7)
+				lpass=true
+		}
+		if(pass==false){
+			validationList.add("Password and Confirm Password must match.")
+		}
+		if(lpass==false){
+			validationList.add("Password must be at least 8 characters.")
+		}
+		return validationList
+	}
+def addEmployee() {
+		def validationList = validations()
+		if(validationList.isEmpty()){
+			def username = checkUsername()
+			if(username == "available"){
+				if(params.ecpassword==params.epassword){
+					def user =new User(
+							f_name: params.ef_name,
+							l_name: params.el_name,
+							username: params.eusername,
+							password: params.epassword,
+							type: params.etype,
+							status: 1,
+							updated_on: new Date(),
+							updated_by: session.user.id
+						)
+					if(user!=null){
+						userService.addUser(user)
+						render "User has been saved."
+					}
+				}
+			}else{
+				render "Username unavailable."
+			}
+		}else{
+			validationList.each{
+				render '<ul>'+it+'</ul>'
+			}
 		}
 	}
 	def addMoreEmployee() {
@@ -84,6 +143,10 @@ class UserController {
 		}
 	}
 	def addAdmin() {
+		def validationList = validations()
+		if(validationList.isEmpty()){
+		def username = checkUsername();
+		if(username == "available"){
 		if(params.acpassword==params.apassword){
 			def user =new User(
 			f_name:params.af_name,
@@ -94,15 +157,27 @@ class UserController {
 			status:1,
 			updated_on:new Date(),
 			updated_by:session.user.id
-		)
-		if(user!=null){
+			)
+			if(user!=null){
 				userService.addUser(user)
+				render "User has been saved."
 			}
 		}
+	}else{
+		render "Username unavailable."
 	}
+	}else{
+			validationList.each{
+				render '<ul>'+it+'</ul>'
+			}
+		}
+
+}
 	
 	def editEmployee(){
-			if(params.empCpassword==params.empPassword){
+		def validationList = validations()
+		if(validationList.isEmpty()){
+		if(params.empCpassword==params.empPassword){
 				def user =new User(
 				f_name:params.empF_name,
 				l_name:params.empL_name,
@@ -110,14 +185,18 @@ class UserController {
 				password:params.empPassword,
 				updated_on:new Date(),
 				updated_by:session.user.id
-			)
-			user.id=params.int('empId')
-			if(user!=null){
-				def ret = userService.editUser(user.id, user)
-				render ret
-			}
+				)
+				user.id=params.int('empId')
+				if(user!=null){
+					def ret = userService.editUser(user.id, user)
+					render ret
+				}
 		}
-
+		}else{
+		validationList.each{
+			render '<ul>'+it+'</ul>'
+		}
+	}
 	}
 	
 	def editUserAccount(){
@@ -135,6 +214,8 @@ class UserController {
 	}
 	
 	def editAdmin(){
+		def validationList = validations()
+		if(validationList.isEmpty()){
 		if(params.adminCpassword==params.adminPassword){
 			def user =new User(
 			f_name:params.adminF_name,
@@ -144,8 +225,16 @@ class UserController {
 			updated_on:new Date(),
 			updated_by:session.user.id
 			)
-			user.id = params.int('adminId')
-			userService.editUser(user.id, user)
+			user.id=params.int('adminId')
+				if(user!=null){
+					def ret = userService.editUser(user.id, user)
+					render ret
+				}
+		}	
+		}else{
+			validationList.each{
+				render '<ul>'+it+'</ul>'
+			}
 		}
 
 	}
@@ -160,10 +249,8 @@ class UserController {
 		user.updated_on=new Date()
 		user.updated_by=session.user.id
 		userService.changeUserStatus(user.id, user)
-			
-		redirect(action: "users")
 		
-
+		render "deactivated"
 	}
 
 	def users(){

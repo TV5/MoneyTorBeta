@@ -73,7 +73,7 @@ class UserService {
 		}
 		updateUser.updated_by=user.updated_by
 		updateUser.updated_on=user.updated_on
-		updateUser.save()
+		updateUser.save()	
 
 	}
 

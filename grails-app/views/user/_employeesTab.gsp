@@ -20,21 +20,24 @@
 						
 					</tr>
 				</thead>
+
 				<tbody>
+
 				<g:each var="emp" in="${empList}">
 					<tr>
-						<th>${emp.username }</th>
-						<th>${emp.f_name}</th>
-						<th>${emp.l_name }</th>
-						<th><g:findAll in="${allAdminList}" expr="it.id == emp.updated_by">
+						<td>${emp.username }</td>
+						<td>${emp.f_name}</td>
+						<td>${emp.l_name }</td>
+						<td><g:findAll in="${allAdminList}" expr="it.id == emp.updated_by">
 			    			${it.username}
 							</g:findAll>
-						</th>
-						<th><g:formatDate format="MM/dd/yyyy" date="${emp.updated_on }"/></th>
-						<th><button class="ui button teal" onclick="editEmployee(${emp.id}, '${emp.username}', '${emp.f_name }', '${emp.l_name}', '${emp.password}', ${emp.status})" id="editemployeeBtn">edit</button></th>
+						</td>
+						<td><g:formatDate format="MM/dd/yyyy" date="${emp.updated_on }"/></td>
+						<td><button class="ui button teal" onclick="editEmployee(${emp.id}, '${emp.username}', '${emp.f_name }', '${emp.l_name}', '${emp.password}', ${emp.status})" id="editemployeeBtn">edit</button></td>
 					</tr>
 
 					</g:each>
 				</tbody>
 			</table>	
+
 		</div>

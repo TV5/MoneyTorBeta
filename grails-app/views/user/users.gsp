@@ -1,3 +1,4 @@
+
 <!-- 
 /* -------------------------------------------------------------------------
  * Unauthorized copying of this file, via any medium is strictly prohibited
@@ -11,6 +12,9 @@
 <head>
 <!-- Standard Meta -->
 <meta charset="utf-8" />
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="EXPIRES" CONTENT="01 Jan 1970 00:00:00 GMT">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -23,7 +27,11 @@
   <script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
   <script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
   <script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
-  
+			<script>
+			window.onbeforeunload = function () {
+				   // stuff do do before the window is unloaded here.
+				}
+		</script>
 
 <style type="text/css">
 body {
@@ -81,9 +89,8 @@ a {
 <g:render template="../header/userSettingsModal" />
 <g:render template="../header/logout" />
 
-
 </body>
 <script src="${resource(dir: 'js', file: 'main.js')}"></script>
-
+<script src="${resource(dir: 'js', file: 'valiadtion.js')}"></script>
 </script>
 </html>

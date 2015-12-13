@@ -1,3 +1,4 @@
+
 <!-- 
 /* -------------------------------------------------------------------------
  * Unauthorized copying of this file, via any medium is strictly prohibited
@@ -12,6 +13,9 @@
 
   		<!-- Standard Meta -->
   		<meta charset="utf-8" />
+  		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+		<META HTTP-EQUIV="EXPIRES" CONTENT="01 Jan 1970 00:00:00 GMT">
+		<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
   		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
@@ -38,7 +42,11 @@
 		      	max-width: 450px;
 		    }
 	  	</style>
-
+				<script>
+			window.onbeforeunload = function () {
+				   // stuff do do before the window is unloaded here.
+				}
+		</script>
 	</head>
 	<body>
 		<div class="ui middle aligned center aligned grid">
@@ -67,7 +75,7 @@
 		
 		    	    <div class="ui error message"></div>  
 		    		<g:if test="${flash.error}">
-		    	    	<div class="ui message" style="color: #9f3a38; background-color: #fff6f6; ">${flash.error}</div>
+		    	    	<div class="ui negative message">${flash.error}</div>
 		    		</g:if>      
 		    	</g:form>
 	  		</div>
