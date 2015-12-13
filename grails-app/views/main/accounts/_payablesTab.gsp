@@ -59,7 +59,7 @@
 		    </td>
 		    <td><a href="#" onClick="editPayable($(this),'${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
 		    <td>
-		    	<button class="ui button teal" onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}')">View</button>
+		    	<button class="ui right labeled icon button teal" onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}')"><i class="search basic icon"></i>View</button>
 		    </td>
 		  	</tr>	  		
 	  	</g:each>

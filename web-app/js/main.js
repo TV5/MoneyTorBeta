@@ -711,13 +711,34 @@ function checkDec(el){
 	 }
 }
 
+function tablePayment(acct_id){
+	var d;
+	var datestring;
+	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
+	var boom = document.getElementById("yeah").innerHTML;
+	$(jQuery.parseJSON(boom)).each(function() {  
+        if(this.account == acct_id){
+        	d = new Date(this.received_date);
+
+        	myTable = myTable + '<tr><td>'+ d.toLocaleString() + '</td><td hidden>' + this.amount + '</td><td>PHP ' + (this.amount).toFixed(2) + '</td></tr>';
+        }
+		
+	});
+	myTable += '</tbody></table>';
+	document.getElementById("tablePymnt").innerHTML = myTable;
+	paginate();
+}
+
 function addPayment(account_id, acct_name, amt) {
+	accid = account_id;
+	tablePayment(account_id);
 	amtbal = amt;  
 	balance();
     
 	document.getElementById("pmAccount_id").value = account_id;
 
 	$('#pmAccountName').html(acct_name);
+	
 	$('#payments').modal({
 		closable: false
 	});
@@ -746,8 +767,9 @@ function addPayment(account_id, acct_name, amt) {
 }
 
 function pymntAdded(){
-	$("#paymentsTable").load(location.href + " #paymentsTable>*", balance());
-	setTimeout(500);
+	$("#yeah").load(location.href + " #yeah","");
+	setTimeout(tablePayment(accid), 2000);
+	balance();
 }
 
 function balance(){	   
@@ -756,9 +778,6 @@ function balance(){
     rowsP.children("td:nth-child(2)").each(function() {
     	rawr += parseFloat($(this).html());
     });
-    
-    console.log("AMT BAL " + amtbal);
-    console.log("rawr " + rawr);
     
     if(rawr >= amtbal){
     	document.getElementById("totalpymnt").style.color = "green";
