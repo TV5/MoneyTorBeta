@@ -26,8 +26,8 @@
 		    </div>
 	    </div>
 	    <div class="inline fields three wide" style="float:right">
-	    	<button id="" class="ui button teal">Export</button>
-		    <button id="addReceivableBtn" class="ui button teal">Add</button>
+
+		    <button id="addReceivableBtn" class="ui button teal">Add Receivable</button>
 	    </div>
 	    </div>
 	  </div>

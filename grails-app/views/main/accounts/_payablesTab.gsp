@@ -24,9 +24,8 @@
 		      <input type="text" id="searchPayables">
 		    </div>
 	    </div>
-	    <div class="inline fields three wide" style="float:right">
-	    	<button id="" class="ui button teal">Export</button>
-		    <button id="addPayableBtn" class="ui button teal">Add</button>
+	    <div class="inline fields three wide right">
+	    	<button id="addPayableBtn" class="ui button teal">Add Payables</button>
 	    </div>
 	    </div>
 	  </div>
