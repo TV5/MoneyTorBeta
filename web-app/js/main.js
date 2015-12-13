@@ -22,7 +22,7 @@ $(document).ready(function() {
     var receivablesTable = $('#receivablesTable').DataTable({
     	"dom": '<"top"><"dateFilter">rt<"bottom"pB><"clear">',
 		"pageLength": $('#receivablesNumEntries').val(),
-		"buttons": ['csv', 'excel', 'pdf', 'print'],
+		"buttons": ['excel', 'pdf', 'print'],
 		"order": [[3, "asc"]]
 	});
 
@@ -162,7 +162,7 @@ $(document).ready(function() {
     var payablesTable = $('#payablesTable').DataTable({
     	"dom": 'tBp',
 		"pageLength": $('#payablesNumEntries').val(),
-		"buttons": ['csv', 'excel', 'pdf', 'print'],
+		"buttons": ['excel', 'pdf', 'print'],
 		"order": [[3, "asc"]]
 	});
    
