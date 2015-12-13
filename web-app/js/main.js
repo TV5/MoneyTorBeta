@@ -35,7 +35,7 @@ $(document).ready(function() {
 			receivablesAmounts[i] = receivablesAmounts[i].textContent;
 			receivablesTotal+=parseFloat(receivablesAmounts[i]);
 		}
-		$('#receivablesTotal').html("Php "+receivablesTotal);
+		$('#receivablesTotal').html("Php "+receivablesTotal.toFixed(2));
 	}
 
 	setreceivablesTotalAmt();
@@ -269,7 +269,7 @@ $(document).ready(function() {
 			payablesAmounts[i] = payablesAmounts[i].textContent;
 			payablesTotal+=parseFloat(payablesAmounts[i]);
 		}
-		$('#payablesTotal').html("Php "+payablesTotal);
+		$('#payablesTotal').html("Php "+payablesTotal.toFixed(2));
 	}
 
 	setPayablesTotalAmt();
@@ -487,7 +487,7 @@ function editAdmin(id, username, f_name, l_name, password, status){
 function paginate(){
 	$('table.paginated').each(function() {
 	    var currentPage = 0;
-	    var numPerPage = 5;
+	    var numPerPage = 4;
 	    var $table = $(this);
 	    $table.bind('repaginate', function() {
 	        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
@@ -495,9 +495,9 @@ function paginate(){
 	    $table.trigger('repaginate');
 	    var numRows = $table.find('tbody tr').length;
 	    var numPages = Math.ceil(numRows / numPerPage);
-	    var $pager = $('<div class="ui pagination menu pager" style="float:right"></div>');
+	    var $pager = $('<div class="ui pagination menu pager" style="float:right; margin-bottom:5px;"></div>');
 	    for (var page = 0; page < numPages; page++) {
-	        $('<span class="ui item page-number"></span>').text(page + 1).bind('click', {
+	        $('<span class="ui teal item page-number"></span>').text(page + 1).bind('click', {
 	            newPage: page
 	        }, function(event) {
 	            currentPage = event.data['newPage'];
@@ -710,9 +710,10 @@ function checkDec(el){
 }
 
 function tablePayment(acct_id){
+	document.getElementById("tablePymnt").innerHTML = ""
 	var d;
 	var datestring;
-	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
+	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
 	var boom = document.getElementById("yeah").innerHTML;
 	$(jQuery.parseJSON(boom)).each(function() {  
         if(this.account == acct_id){
