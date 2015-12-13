@@ -1,8 +1,8 @@
-<div id="addReceivable" class="ui modal">
+<div id="addReceivable" class="ui small modal">
   <div class="header">Account Receivable</div>
   <div class="content">
-    <g:form class="ui form" controller="account" action="addReceivable">
-    	
+    <g:form class="ui form" name="addReceivableForm" controller="account" action="addReceivable">
+    	<div style="overflow-y: scroll; max-height: 300px">
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Customer Name</label>      
@@ -67,15 +67,6 @@
 	          from="${['d': 'days', 'w': 'weeks', 'm': 'months', 'y':'years']}"
 	          optionKey="key" optionValue="value" />
 	          </div>
-	        		    
-			  <!-- <div class="seven wide field">
-			      <select id="cselect" class="ui fluid dropdown">
-	    			<option value="">days</option>
-	    			<option value="">weeks</option>
-	    			<option value="">months</option>
-	    			<option value="">years</option>
-	    		  </select>
-			    </div> -->  
 			</div>  
 		</div>
     	<div class="inline fields">
@@ -111,6 +102,7 @@
 		  <ul class="list" id="addReceivableErrorList">
 		  </ul>
 	  </div>
+	  </div>
 	  <div class="actions">
 
 	    <g:submitToRemote 
@@ -121,7 +113,7 @@
 		    	onComplete="rsaved()"
 		    	/> 
 		<!--<g:submitToRemote  url="" update="saveReceivableBtn" class="ui button" value="Add More" id="raddMoreBtn" onComplete="raddmoreClick()" />-->
-	    <button class="ui button" value="Add More" id="raddMoreBtn" onClick="raddmore()">Add More</button>
+	    <button class="ui teal button" value="Add More" id="raddMoreBtn" onClick="raddmore()">Add More</button>
 	    <div class="ui button" style="display: none;" id="rdone">Done</div>
 		<div class="ui cancel button" id="rcancel">Cancel</div>
 	  </div>
