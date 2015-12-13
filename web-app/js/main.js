@@ -23,7 +23,7 @@ $(document).ready(function() {
     	"dom": '<"top"><"dateFilter">rt<"bottom"pB><"clear">',
 		"pageLength": $('#receivablesNumEntries').val(),
 		"buttons": ['excel', 'pdf', 'print'],
-		"order": [[3, "asc"]]
+		"order": [[3, "desc"]]
 	});
 
     new $.fn.dataTable.Buttons(receivablesTable, {
@@ -163,7 +163,7 @@ $(document).ready(function() {
     	"dom": 'tBp',
 		"pageLength": $('#payablesNumEntries').val(),
 		"buttons": ['excel', 'pdf', 'print'],
-		"order": [[3, "asc"]]
+		"order": [[3, "desc"]]
 	});
    
     new $.fn.dataTable.Buttons(payablesTable, {
