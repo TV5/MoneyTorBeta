@@ -2,7 +2,7 @@
 	<div class="header">Account Payable</div>
 	<div class="content">
 		<g:renderErrors bean="${account}" />
-		<g:form class="ui form" id="addPayableForm" action="">
+		<g:form class="ui form" id="addPayableForm" name="addPayableForm" action="">
 			<div style="overflow-y: scroll; max-height: 300px">
 				<div class="inline fields">
 					<div class="two wide field">
@@ -116,18 +116,19 @@
 					<ul class="list" id="addPayableErrorList">
 					</ul>
 				</div>
+				</div>
 				<div class="actions">
 					<g:submitToRemote
 						url="[controller: 'Account' ,action: 'addPayable']" value="Save"
 						class="ui teal button" id="savePayableBtn" onComplete="psaved()" />
 					<!--<g:submitToRemote update="savePayableBtn" class="ui button" value="Add More" id="paddMoreBtn" onComplete="paddmore()">  </g:submitToRemote>-->
 
-					<button class="ui button" value="Add More" id="paddMoreBtn"
+					<button class="ui teal button" value="Add More" id="paddMoreBtn"
 						onClick="paddmore()">Add More</button>
 					<div class="ui button" style="display: none;" id="pdone">Done</div>
 					<div class="ui cancel button" id="pcancel">Cancel</div>
 				</div>
 		</g:form>
-	</div>
+	
 
 </div>
