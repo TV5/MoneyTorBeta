@@ -14,77 +14,17 @@ $(document).ready(function() {
     $("#eaddMoreB").attr("disabled", "disabled");	
     $("#max").datepicker();
     $("#maxR").datepicker();
-    
-	
-	
 	$(".payableNewSupplier").hide();
 	$(".receivableNewCustomer").hide();
 	
 	//receivables
 	var num = $('#receivablesNumEntries').val();
     var receivablesTable = $('#receivablesTable').DataTable({
-    	"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+    	"dom": '<"top"><"dateFilter">rt<"bottom"pB><"clear">',
 		"pageLength": $('#receivablesNumEntries').val(),
-		"order": [[4, "asc"]]
+		"buttons": ['excel', 'pdf', 'print'],
+		"order": [[3, "asc"]]
 	});
-
-    function setreceivablesTotalAmt() {
-	    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
-		var receivablesTotal = 0;
-		for (var i = 0; i<receivablesAmounts.length; i++){
-			receivablesAmounts[i] = receivablesAmounts[i].textContent;
-			receivablesTotal+=parseFloat(receivablesAmounts[i]);
-		}
-		$('#receivablesTotal').html("Php "+receivablesTotal.toFixed(2));
-	}
-
-	setreceivablesTotalAmt();
-    $('#maxR').val(new Date().toDateInputValue());
-
-	var maxR = new Date();
-
-	maxR.setMonth(maxR.getMonth() - 1);
-	$('#minR').val(maxR.toDateInputValue());
-	
-	
-	var rend = $("#maxR").val();
-  	var rdate = new Date(rend);
-  	var ry = rdate.getFullYear();
-  	var rd = rdate.getDate();
-  	var rm = rdate.getMonth()-1;
-  	var rNewDate = new Date(py,pm,pd);
-  	$('#minR').datepicker( "setDate", rNewDate);
-  	pUpdateStartDate($("#maxR"),$("#minR"));
-  	$("#maxR").on('change', function(){
-  		notifyDue();
-  		pUpdateStartDate($("#maxR"),$("#minR"));
-  	});
-  	$('#minR').datepicker();
-  	pUpdateStartDate($("#maxR"),$("#minR"));
-  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
-  	
-  	var rstart = $('#minR').val();
-  	var rdate2 = new Date(rstart);
-  	var ry2 = rdate2.getFullYear();
-  	var rd2 = rdate2.getDate();
-  	var rm2 = rdate2.getMonth()-1;
-  	var rNewDate2 = new Date(ry2,rm2,rd2);
-  	$('#maxR').datepicker( "setDate", rNewDate2);
-  	pUpdateEndDate($("#minR"),$("#maxR"));
-  	$("#minR").on('change', function(){
-  		notifyDue();
-  		pUpdateEndDate($("#minR"),$("#maxR"));
-  	});
-  	pUpdateEndDate($("#minR"),$("#maxR"));
-  	$('#maxR').datepicker( "setDate", new Date());
-	
-	receivablesTable.draw();
-
-    $('#minR, #maxR').change( function() {
-    	notifyDue();
-        receivablesTable.draw();
-        setreceivablesTotalAmt();
-    });
 
     new $.fn.dataTable.Buttons(receivablesTable, {
         buttons: [
@@ -140,10 +80,72 @@ $(document).ready(function() {
         ]
     });
 
-    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
+    //receivablesTable.buttons(0, null).container().appendTo(receivablesTable.table().container());
+    
+    $('#maxR').val(new Date().toDateInputValue());
 
+	var maxR = new Date();
+
+	maxR.setMonth(maxR.getMonth() - 1);
+	$('#minR').val(maxR.toDateInputValue());
+	
+	
+	var rend = $("#maxR").val();
+  	var rdate = new Date(rend);
+  	var ry = rdate.getFullYear();
+  	var rd = rdate.getDate();
+  	var rm = rdate.getMonth()-1;
+  	var rNewDate = new Date(py,pm,pd);
+  	$('#minR').datepicker( "setDate", rNewDate);
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$("#maxR").on('change', function(){
+  		notifyDue();
+  		pUpdateStartDate($("#maxR"),$("#minR"));
+  	});
+  	$('#minR').datepicker();
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
+  	
+  	var rstart = $('#minR').val();
+  	var rdate2 = new Date(rstart);
+  	var ry2 = rdate2.getFullYear();
+  	var rd2 = rdate2.getDate();
+  	var rm2 = rdate2.getMonth()-1;
+  	var rNewDate2 = new Date(ry2,rm2,rd2);
+  	$('#maxR').datepicker( "setDate", rNewDate2);
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$("#minR").on('change', function(){
+  		alert('change minR');
+  		notifyDue();
+  		pUpdateEndDate($("#minR"),$("#maxR"));
+  	});
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$('#maxR').datepicker( "setDate", new Date());
+	receivablesTable.draw();
+
+	 function setreceivablesTotalAmt() {
+	    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+		var receivablesTotal = 0;
+		for (var i = 0; i<receivablesAmounts.length; i++){
+			receivablesAmounts[i] = receivablesAmounts[i].textContent;
+			receivablesTotal+=parseFloat(receivablesAmounts[i]);
+		}
+		$('#receivablesTotal').html("Php "+receivablesTotal);
+	}
+
+	setreceivablesTotalAmt();
+	
+    $('#minR, #maxR').change( function() {
+    	notifyDue();
+        receivablesTable.draw();
+        setreceivablesTotalAmt();
+        alert('change minR maxR');
+    });
+
+   
     $('#searchReceivables').keyup(function(){
-          receivablesTable.search($(this).val()).draw() ;
+        notifyDue();  
+    	receivablesTable.search($(this).val()).draw() ;
     })
 
     var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
@@ -153,18 +155,17 @@ $(document).ready(function() {
 		 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 	});
     
-   // $('#customersTable').DataTable();
-   // $('#suppliersTable').DataTable();
-
     // payables
+	//'<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
 	var num = $('#payablesNumEntries').val();
 	
     var payablesTable = $('#payablesTable').DataTable({
-		"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+    	"dom": 'tBp',
 		"pageLength": $('#payablesNumEntries').val(),
-		"order": [[4, "asc"]]
+		"buttons": ['excel', 'pdf', 'print'],
+		"order": [[3, "asc"]]
 	});
-
+   
     new $.fn.dataTable.Buttons(payablesTable, {
         buttons: [
 			{
@@ -219,7 +220,7 @@ $(document).ready(function() {
         ]
     });
 
-    payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
+   // payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
 	$('#max').val(new Date().toDateInputValue());
 
@@ -382,7 +383,8 @@ $(document).ready(function() {
     });
   	
   	notifyDue();
-  	
+  	$('.dt-button').addClass("export-btn ui tiny teal button")
+  	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
 });
 
 function notifyDue(){
