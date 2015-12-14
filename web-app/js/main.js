@@ -22,36 +22,11 @@ $(document).ready(function() {
 	//receivables
 	var num = $('#receivablesNumEntries').val();
     var receivablesTable = $('#receivablesTable').DataTable({
-    	"dom": '<"top"><"dateFilter">rt<"bottom"pB><"clear">',
+    	"dom": 'tBp',
 		"pageLength": $('#receivablesNumEntries').val(),
-		"buttons": ['excel', 'pdf', 'print'],
-		"order": [[3, "desc"]]
-	});
-
-    new $.fn.dataTable.Buttons(receivablesTable, {
-        buttons: [
-			{
-			    extend: 'collection',
-			    text: 'Export',
-			    className: 'ui button teal',
-			    buttons: [
-					{
-					    extend: 'copyHtml5',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
+		"buttons": [
 					{
 					    extend: 'excelHtml5',
-					    title: 'Receivables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
-					{
-					    extend: 'csvHtml5',
 					    title: 'Receivables Summary',
 					    orientation: 'portrait',
 					    pageSize: 'LETTER',
@@ -77,11 +52,10 @@ $(document).ready(function() {
 					        columns: [ 0, 1, 2, 3, 4 ]
 					    }
 					}
-			    ]
-			}
-        ]
-    });
-	
+			    ],
+		"order": [[3, "desc"]]
+	});
+
     //receivablesTable.buttons(0, null).container().appendTo(receivablesTable.table().container());
     
     $('#maxR').val(new Date().toDateInputValue());
@@ -117,7 +91,7 @@ $(document).ready(function() {
   	$('#maxR').datepicker( "setDate", rNewDate2);
   	pUpdateEndDate($("#minR"),$("#maxR"));
   	$("#minR").on('change', function(){
-  		alert('change minR');
+  		//alert('change minR');
   		notifyDue();
   		pUpdateEndDate($("#minR"),$("#maxR"));
   	});
@@ -141,7 +115,7 @@ $(document).ready(function() {
     	notifyDue();
         receivablesTable.draw();
         setreceivablesTotalAmt();
-        alert('change minR maxR');
+        //alert('change minR maxR');
     });
 
    
@@ -160,38 +134,12 @@ $(document).ready(function() {
     // payables
 	//'<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
 	var num = $('#payablesNumEntries').val();
-	
     var payablesTable = $('#payablesTable').DataTable({
     	"dom": 'tBp',
 		"pageLength": $('#payablesNumEntries').val(),
-		"buttons": ['excel', 'pdf', 'print'],
-		"order": [[3, "desc"]]
-	});
-   
-    new $.fn.dataTable.Buttons(payablesTable, {
-        buttons: [
-			{
-			    extend: 'collection',
-			    text: 'Export',
-			    className: 'ui button teal',
-			    buttons: [
-					{
-					    extend: 'copyHtml5',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
+		"buttons": [
 					{
 					    extend: 'excelHtml5',
-					    title: 'Payables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
-					{
-					    extend: 'csvHtml5',
 					    title: 'Payables Summary',
 					    orientation: 'portrait',
 					    pageSize: 'LETTER',
@@ -217,10 +165,9 @@ $(document).ready(function() {
 					        columns: [ 0, 1, 2, 3, 4 ]
 					    }
 					}
-			    ]
-			}
-        ]
-    });
+			    ],
+		"order": [[3, "desc"]]
+	});
 
    // payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
@@ -382,7 +329,7 @@ $(document).ready(function() {
     });
   	
   	notifyDue();
-  	$('.dt-button').addClass("export-btn ui tiny teal button")
+  	$('.dt-button').addClass("export-btn ui tiny teal button");
   	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
 });
 
