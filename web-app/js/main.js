@@ -22,36 +22,11 @@ $(document).ready(function() {
 	//receivables
 	var num = $('#receivablesNumEntries').val();
     var receivablesTable = $('#receivablesTable').DataTable({
-    	"dom": '<"top"><"dateFilter">rt<"bottom"pB><"clear">',
+    	"dom": 'tBp',
 		"pageLength": $('#receivablesNumEntries').val(),
-		"buttons": ['excel', 'pdf', 'print'],
-		"order": [[3, "desc"]]
-	});
-
-    new $.fn.dataTable.Buttons(receivablesTable, {
-        buttons: [
-			{
-			    extend: 'collection',
-			    text: 'Export',
-			    className: 'ui button teal',
-			    buttons: [
-					{
-					    extend: 'copyHtml5',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
+		"buttons": [
 					{
 					    extend: 'excelHtml5',
-					    title: 'Receivables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
-					{
-					    extend: 'csvHtml5',
 					    title: 'Receivables Summary',
 					    orientation: 'portrait',
 					    pageSize: 'LETTER',
@@ -77,11 +52,10 @@ $(document).ready(function() {
 					        columns: [ 0, 1, 2, 3, 4 ]
 					    }
 					}
-			    ]
-			}
-        ]
-    });
-	
+			    ],
+		"order": [[3, "desc"]]
+	});
+
     //receivablesTable.buttons(0, null).container().appendTo(receivablesTable.table().container());
     
     $('#maxR').val(new Date().toDateInputValue());
@@ -117,7 +91,7 @@ $(document).ready(function() {
   	$('#maxR').datepicker( "setDate", rNewDate2);
   	pUpdateEndDate($("#minR"),$("#maxR"));
   	$("#minR").on('change', function(){
-  		alert('change minR');
+  		//alert('change minR');
   		notifyDue();
   		pUpdateEndDate($("#minR"),$("#maxR"));
   	});
@@ -141,7 +115,7 @@ $(document).ready(function() {
     	notifyDue();
         receivablesTable.draw();
         setreceivablesTotalAmt();
-        alert('change minR maxR');
+        //alert('change minR maxR');
     });
 
    
@@ -160,38 +134,12 @@ $(document).ready(function() {
     // payables
 	//'<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
 	var num = $('#payablesNumEntries').val();
-	
     var payablesTable = $('#payablesTable').DataTable({
     	"dom": 'tBp',
 		"pageLength": $('#payablesNumEntries').val(),
-		"buttons": ['excel', 'pdf', 'print'],
-		"order": [[3, "desc"]]
-	});
-   
-    new $.fn.dataTable.Buttons(payablesTable, {
-        buttons: [
-			{
-			    extend: 'collection',
-			    text: 'Export',
-			    className: 'ui button teal',
-			    buttons: [
-					{
-					    extend: 'copyHtml5',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
+		"buttons": [
 					{
 					    extend: 'excelHtml5',
-					    title: 'Payables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
-					{
-					    extend: 'csvHtml5',
 					    title: 'Payables Summary',
 					    orientation: 'portrait',
 					    pageSize: 'LETTER',
@@ -217,52 +165,51 @@ $(document).ready(function() {
 					        columns: [ 0, 1, 2, 3, 4 ]
 					    }
 					}
-			    ]
-			}
-        ]
-    });
+			    ],
+		"order": [[3, "desc"]]
+	});
 
    // payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
-	$('#max').val(new Date().toDateInputValue());
+	$('#maxP').val(new Date().toDateInputValue());
 
 	var max = new Date();
 
 	max.setMonth(max.getMonth() - 1);
-	$('#min').val(max.toDateInputValue());
+	$('#minP').val(max.toDateInputValue());
 	
 
-  	var pend = $("#max").val();
+  	var pend = $("#maxP").val();
   	var pdate = new Date(pend);
   	var py = pdate.getFullYear();
   	var pd = pdate.getDate();
   	var pm = pdate.getMonth()-1;
   	var pNewDate = new Date(py,pm,pd);
-  	$('#min').datepicker( "setDate", pNewDate);
-  	pUpdateStartDate($("#max"),$("#min"));
-  	$("#max").on('change', function(){
+  	$('#minP').datepicker( "setDate", pNewDate);
+  	pUpdateStartDate($("#maxP"),$("#minP"));
+  	$("#maxP").on('change', function(){
   		notifyDue();
-  		pUpdateStartDate($("#max"),$("#min"));
+  		pUpdateStartDate($("#maxP"),$("#minP"));
   	});
-  	$('#min').datepicker();
-  	pUpdateStartDate($("#max"),$("#min"));
-  	$('#min').datepicker( "setDate", new Date(py, pm, pd));
+  	$('#minP').datepicker();
+  	pUpdateStartDate($("#maxP"),$("#minP"));
+  	$('#minP').datepicker( "setDate", new Date(py, pm, pd));
   	
-  	var pstart = $('#min').val();
+  	var pstart = $('#minP').val();
   	var pdate2 = new Date(pstart);
   	var py2 = pdate2.getFullYear();
   	var pd2 = pdate2.getDate();
   	var pm2 = pdate2.getMonth()-1;
   	var pNewDate2 = new Date(py2,pm2,pd2);
-  	$('#max').datepicker( "setDate", pNewDate2);
+  	$('#maxP').datepicker( "setDate", pNewDate2);
   	pUpdateEndDate($("#min"),$("#max"));
-  	$("#min").on('change', function(){
+  	$("#minP").on('change', function(){
   		notifyDue();
-  		pUpdateEndDate($("#min"),$("#max"));
+  		pUpdateEndDate($("#minP"),$("#maxP"));
   	});
-  	$('#max').datepicker();
-  	pUpdateEndDate($("#min"),$("#max"));
-  	$('#max').datepicker( "setDate", new Date());
+  	$('#maxP').datepicker();
+  	pUpdateEndDate($("#minP"),$("#maxP"));
+  	$('#maxP').datepicker( "setDate", new Date());
 	payablesTable.draw();
     
     function setPayablesTotalAmt(){
@@ -277,7 +224,7 @@ $(document).ready(function() {
 
 	setPayablesTotalAmt();
 
-    $('#min, #max').change( function() {
+    $('#minP, #maxP').change( function() {
     	notifyDue();
         payablesTable.draw();
     	setPayablesTotalAmt();
@@ -382,7 +329,7 @@ $(document).ready(function() {
     });
   	
   	notifyDue();
-  	$('.dt-button').addClass("export-btn ui tiny teal button")
+  	$('.dt-button').addClass("export-btn ui tiny teal button");
   	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
 });
 
@@ -1096,8 +1043,24 @@ function validateForm() {
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
-	  		var min = Date.parse($('#min').val(),10);
-	  		var max = Date.parse($('#max').val());
+	  		var min = Date.parse($('#minR').val(),10);
+	  		var max = Date.parse($('#maxR').val());
+	  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
+	        if ( ( isNaN( min ) && isNaN( max ) ) ||
+	             ( isNaN( min ) && date <= max ) ||
+	             ( min <= date   && isNaN( max ) ) ||
+	             ( min <= date   && date <= max ) )
+	        {
+	            return true;
+	        }
+	        return false;
+	    }
+);
+
+$.fn.dataTable.ext.search.push(
+		function( settings, data, dataIndex ) {
+	  		var min = Date.parse($('#minP').val(),10);
+	  		var max = Date.parse($('#maxP').val());
 	  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
 	        if ( ( isNaN( min ) && isNaN( max ) ) ||
 	             ( isNaN( min ) && date <= max ) ||
