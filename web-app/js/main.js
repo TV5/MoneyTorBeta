@@ -1043,6 +1043,9 @@ function validateForm() {
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
+			if ( settings.nTable != document.getElementById('receivablesTable')) {
+			    return true;
+			}
 	  		var min = Date.parse($('#minR').val(),10);
 	  		var max = Date.parse($('#maxR').val());
 	  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
@@ -1059,6 +1062,9 @@ $.fn.dataTable.ext.search.push(
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
+			if ( settings.nTable != document.getElementById('payablesTable')) {
+			    return true;
+			}
 	  		var min = Date.parse($('#minP').val(),10);
 	  		var max = Date.parse($('#maxP').val());
 	  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
