@@ -900,10 +900,11 @@ function csaved(){
 }
 
 function ssaved(){	
+	alert("GI ATAY");
 	document.getElementById('svalidations').setAttribute("hidden", "hidden");
 	var status = document.getElementById('svalidations').innerText;
 	if(status==""){
-
+alert("yawa");
 	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('ssaveBtn').value = 'Saved';
 	$("#sDoneBtn").show();
@@ -917,6 +918,7 @@ function ssaved(){
 	$('#sterms').prop('readonly', true);
 	$('#sselect').prop('disabled', true);
 	}else{
+		alert("pakshit");
 		document.getElementById('svalidations').removeAttribute("hidden");
 	}
 }

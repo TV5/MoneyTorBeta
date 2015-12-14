@@ -54,10 +54,13 @@ class TransactorController {
 	def addSupplier() {
 		System.out.println("add supplier")
 		System.out.println("hehe")
-		def validationList = transactorService.validate(params.sname,params.saddress,params.stelephone_no, params.smobile_no, params.sterms)
-		
-		if(validationList.isEmpty()){
-			System.out.println("asdas")
+		System.out.println("hehasfjash")
+		System.out.println("shit"+params.sname)
+		def validationsList = transactorService.validate("", "piste", 1,1,1)
+		//def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
+		System.out.println(validatonsList)
+		if(validationsList.isEmpty()){
+		/*	System.out.println("asdas")
 				def transactor = new Transactor(
 					name: params.sname,
 					address: params.saddress,
@@ -71,8 +74,8 @@ class TransactorController {
 				System.out.println(params.sselect)
 				System.out.println("added!")
 				render ""
-		}else{
-		validationList.each{ render '<li>'+it+'</li>' }
+		}else{*/
+		validationsList.each{ render '<li>'+it+'</li>' }
 	}
 
 }
