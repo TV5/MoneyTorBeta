@@ -94,9 +94,7 @@ class AccountController {
 		def errorList = getErrorList(params.ror_no, params.rtransactor_id, params.ramount)
 		if(errorList.isEmpty()){
 			def transId = params.int('rtransactor_id')
-			System.out.println("1:" +transId)
 			if (transId == "-1") {
-				System.out.println("2:" +transId)
 				def transactor = new Transactor(
 						name: params.rname,
 						address: params.raddress,
@@ -108,11 +106,9 @@ class AccountController {
 						)
 				transactorService.addTransactor(transactor)
 				transId = transactorService.getTransactorIDByName(params.rname, 'C')
-				System.out.println("3:" +transId)
 			} else {
 				System.out.println("False" + transId)
 			}
-			System.out.println("4:" +transId)
 			def account = new Account(
 					or_no: params.ror_no,
 					transactor_id: transId,
