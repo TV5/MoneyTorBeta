@@ -85,6 +85,7 @@ class AccountController {
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
+			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
@@ -118,6 +119,7 @@ class AccountController {
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
+			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
@@ -129,7 +131,6 @@ class AccountController {
 		Date trans_date = formatter.parse(params.ertransaction_date)
 		def account = new Account(
 				or_no: params.eror_no,
-				transactor_id: params.int('ercustomer_name'),
 				amount: params.eramount,
 				transaction_date: trans_date,
 				type: params.type,

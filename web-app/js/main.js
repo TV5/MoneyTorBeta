@@ -744,7 +744,7 @@ function balance(){
 }
 
 function psaved() {
-	document.getElementById('addPayableErrorList').removeAttribute("hidden");
+	$('#addPayableErrorList').show();
 	$('#pdone').show();
 	$('#pcancel').hide();
 	if(document.getElementById('addPayableErrorList').innerText==""){
@@ -752,6 +752,13 @@ function psaved() {
 		$('#paddMoreBtn').attr("disabled", false);	
 		$('#savePayableBtn').val('Saved');
 		$('#savePayableBtn').attr("disabled", "disabled");	
+		$('#addPayableErrorList').hide();
+	}
+} 
+
+function pesaved() {
+	document.getElementById('editPayableErrorList').removeAttribute("hidden");
+	if(document.getElementById('addPayableErrorList').innerText==""){
 		$('#addPayableErrorList').hide();
 	}
 } 
@@ -774,10 +781,12 @@ function paddmore(){
 	$("#paddMoreBtn").attr("disabled", "disabled");		
 	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
 	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
+	document.getElementById('addPayableErrorList').innerText==null;
+	$('#addPayableErrorList').hide();
 }
 
 function rsaved(){
-	document.getElementById('addReceivableErrorList').removeAttribute("hidden");
+	$('#addReceivableErrorList').show();
 	$('#rdone').show();
 	$('#rcancel').hide();
 	if(document.getElementById('addReceivableErrorList').innerText==""){
@@ -807,6 +816,8 @@ function raddmore(){
 	$("#raddMoreBtn").attr("disabled", "disabled");
 	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
 	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
+	document.getElementById('addReceivableErrorList').innerText==null;
+	$('#addReceivableErrorList').hide();
 }
 
 Date.prototype.toDateInputValue = (function() {

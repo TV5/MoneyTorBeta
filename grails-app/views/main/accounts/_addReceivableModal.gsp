@@ -95,15 +95,8 @@
 		      <g:datePicker name="rdate" value="${rdate}" precision="day"/>
 		    </div>
 		</div>
-	  <%--<div class="ui negative small message" id="addReceivableErrorDiv" style="display:none;">
-		  <div class="header">
-		    There were some errors with your submission.
-		  </div>	
-		  <ul class="list" id="addReceivableErrorList">
-		  </ul>
-	  </div>
-	  --%></div>
-	  <div id="addReceivableErrorList" class="ui negative small message" hidden></div>
+		</div>
+	  <div id="addReceivableErrorList" class="ui negative small message" style="display:none;"></div>
 	  <div class="actions">
 
 	    <g:submitToRemote 
