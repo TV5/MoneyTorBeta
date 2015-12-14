@@ -1,3 +1,4 @@
+
 <!-- 
 /* -------------------------------------------------------------------------
  * Unauthorized copying of this file, via any medium is strictly prohibited
@@ -8,11 +9,15 @@
  
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-- Standard Meta -->
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<head>
+<!-- Standard Meta -->
+<meta charset="utf-8" />
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="EXPIRES" CONTENT="01 Jan 1970 00:00:00 GMT">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 		<!-- Site Properities -->
 		<title>User Management</title>
@@ -23,7 +28,6 @@
 	  	<script src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
 	  	<script src="${resource(dir: 'datatables/media/js', file: 'jquery.dataTables.min.js')}"></script>
 	  	<script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
-  
 		<style type="text/css">
 			body {
 				background-color: #DADADA;

@@ -1,7 +1,6 @@
 package moneytor
 
 class MainController {
-	//def beforeInterceptor = [action:this.&auth]
 	def userService
 	def accountService
 	def transactorService
@@ -20,13 +19,14 @@ class MainController {
 			session.user=user
 			redirect(action:"main")
 		}else{
-			flash.error ="invalid username/password"
+			flash.error ="The username and password you entered did not match our records. Please double-check and try again."
 			redirect (uri: "/")
 		}
 	}
 	def logout() {
 		if(session.user){
-			session.user = null
+			session.user=null
+			session.invalidate()
 			redirect(uri:"/")
 		}
 	}
