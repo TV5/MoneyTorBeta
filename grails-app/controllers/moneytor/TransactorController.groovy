@@ -97,6 +97,9 @@ class TransactorController {
 	}
 	
 	def editSupplier() {
+		def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
+		System.out.println(validationsList)
+		if(validationsList.isEmpty()){
 		def transactor = new Transactor(
 				name: params.esname,
 				address: params.esaddress,
@@ -108,7 +111,12 @@ class TransactorController {
 				)
 		transactorService.editTransactor(params.int('esid'), transactor)
 		redirect(action: "main", controller: "main", params:[tab:"suppliersTabLink"])
+		}else{
+		System.out.println("errors")
+		validationsList.each{ render '<li>'+it+'</li>' }
 	}
+
+}
 	
 	def editCustomer() {
 		def transactor = new Transactor(
