@@ -1,7 +1,8 @@
 //document ready functions
+
 $(document).ready(function() {
-	$('#employeesTable').DataTable();
-    $('#administratorsTable').DataTable();
+	var empt = $('#employeesTable').DataTable();
+    $('#administratorsTable').DataTable({"order":[[0,"asc"]]});
     if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
 		var tabId = '#'+tabId;
@@ -48,7 +49,10 @@ $(document).ready(function() {
 
     var filterS = suppliersTable.rows( { search:'applied' } ).data().each(function(value, index) {});
     
+  
 	
+ 
+    
 	//receivables
 	var num = $('#receivablesNumEntries').val();
     var receivablesTable = $('#receivablesTable').DataTable({
@@ -361,6 +365,9 @@ $(document).ready(function() {
   	notifyDue();
   	$('.dt-button').addClass("export-btn ui tiny teal button");
   	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
+  	
+  	$('#payablesNumEntries').on('change',notifyDue);
+  	$('#receivablesNumEntries').on('change',notifyDue);
 });
 
 function notifyDue(){
@@ -775,63 +782,33 @@ function balance(){
     $("#totalpymnt").html("PHP " + rawr.toFixed(2));
 }
 
-
-function validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs) {
-	errorList.empty();
-	if(transactorList == null || or_no == "" || amount == "" || amount < 1 || /[^a-zA-Z0-9]/.test( or_no)){
-		errorDiv.show();
-		
-		if(transactorList == null){
-			errorList.append('<li>Please select a supplier from the list provided.'+
-					' If you cannot find the supplier you are looking for, please click <b>Create new record</b>'+
-			' to add a new supplier.</li>');
-		}
-		
-		if(or_no == ""){
-			errorList.append('<li>Please enter an official receipt number.</li>');
-		}
-
-		else if( /[^a-zA-Z0-9]/.test( or_no) ){
-			errorList.append('<li>Official receipt number must be alphanumeric.</li>');
-		}
-		
-		if (amount == ""){
-			errorList.append('<li>Please enter an amount.</li>');
-		}
-		else if(amount < 1){
-			errorList.append('<li>Amount must be greater than zero.</li>');
-		}
-	}
-	else {
-		errorDiv.hide();
-		addMoreBtn.attr("disabled", false);	
-		saveBtn.val('Saved');
-		saveBtn.attr("disabled", "disabled");	
-		formInputs.attr('readonly',true);
-		
-	}
-	
-}	
-
-
 function psaved() {
-	document.getElementById('addPayableErrorList').removeAttribute("hidden");
-	var errorList = $('#addPayableErrorList');
-	var errorDiv = $('#addPayableErrorDiv');
-	var transactorList = $('#payabaleSupplierList').val();
-	var or_no = $('#por_no').val();
-	var amount = $('#pamount').val();
-	var transactorType = "supplier";
-	var addMoreBtn = $('#paddMoreBtn');
-	var saveBtn = $('#savePayableBtn');
-	var formInputs = $('#addPayableForm :input');
+	$('#addPayableErrorList').show();
 	$('#pdone').show();
 	$('#pcancel').hide();
-	if($('#addPayableErrorList').html()==""){
+	if(document.getElementById('addPayableErrorList').innerText==""){
 		$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		$('#paddMoreBtn').attr("disabled", false);	
+		$('#savePayableBtn').val('Saved');
+		$('#savePayableBtn').attr("disabled", "disabled");	
+		$('#addPayableErrorList').hide();
 	}
 } 
 
+function pesaved() {
+	$('#editPayableErrorList').show();
+	if(document.getElementById('editPayableErrorList').innerText==""){
+		$('#editPayableErrorList').hide();
+		window.location.replace("main?tab=payablesTabLink");
+	}
+} 
+function resaved() {
+	$('#editReceivableErrorList').show();
+	if(document.getElementById('editReceivableErrorList').innerText==""){
+		$('#editReceivableErrorList').hide();
+		window.location.replace("main?tab=receivablesTabLink");
+	}
+} 
 function paddmore(){
 	$('#pdate').val('');
 	$('#pamount').val('');
@@ -850,24 +827,20 @@ function paddmore(){
 	$("#paddMoreBtn").attr("disabled", "disabled");		
 	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
 	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
+	document.getElementById('addPayableErrorList').innerText==null;
+	$('#addPayableErrorList').hide();
 }
 
 function rsaved(){
-	document.getElementById('addReceivableErrorList').removeAttribute("hidden");
-	//var errorList = $('#addReceivableErrorList');
-	//var errorDiv = $('#addReceivableErrorDiv');
-	var transactorList = $('#receivableCustomerList').val();
-	var or_no = $('#ror_no').val();
-	var amount = $('#ramount').val();
-	var transactorType = "customer";
-	var addMoreBtn = $('#raddMoreBtn');
-	var saveBtn = $('#saveReceivableBtn');
-	var formInputs = $('#addReceivableForm :input');
-	//validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
+	$('#addReceivableErrorList').show();
 	$('#rdone').show();
 	$('#rcancel').hide();
-	if($('#addReceivableErrorList').html()==""){
+	if(document.getElementById('addReceivableErrorList').innerText==""){
 		$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		$('#raddMoreBtn').attr("disabled", false);	
+		$('#saveReceivableBtn').val('Saved');
+		$('#saveReceivableBtn').attr("disabled", "disabled");	
+		$('#addReceivableErrorList').hide();
 	}
 }
 
@@ -889,6 +862,8 @@ function raddmore(){
 	$("#raddMoreBtn").attr("disabled", "disabled");
 	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
 	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
+	document.getElementById('addReceivableErrorList').innerText==null;
+	$('#addReceivableErrorList').hide();
 }
 
 Date.prototype.toDateInputValue = (function() {
@@ -908,6 +883,9 @@ $('#settingsLink').click(function(){
 });	
 
 function csaved(){	
+	document.getElementById('Validations').setAttribute("hidden", "hidden");
+	var status = document.getElementById('Validations').innerText;
+	if(status==""){
 	document.getElementById('caddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('csaveBtn').value = 'Saved';
 	$("#cDoneBtn").show();
@@ -920,9 +898,15 @@ function csaved(){
 	$('#cmobile_no').prop('readonly', true);
 	$('#cterms').prop('readonly', true);
 	$('#cselect').prop('disabled', true);
+	}else{
+		document.getElementById('Validations').removeAttribute("hidden");
+	}
 }
 
 function ssaved(){	
+	document.getElementById('svalidations').setAttribute("hidden", "hidden");
+	var status = document.getElementById('svalidations').innerText;
+	if(status==""){
 	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('ssaveBtn').value = 'Saved';
 	$("#sDoneBtn").show();
@@ -935,6 +919,9 @@ function ssaved(){
 	$('#smobile_no').prop('readonly', true);
 	$('#sterms').prop('readonly', true);
 	$('#sselect').prop('disabled', true);
+	}else{
+		document.getElementById('svalidations').removeAttribute("hidden");
+	}
 }
 
 
@@ -944,8 +931,10 @@ function addedEmployee(){
 		$("#eaddMoreB").removeAttr("disabled");
 		document.getElementById('esaveB').value = 'Saved';
 		document.getElementById('esaveB').setAttribute("disabled","disabled");
-		$("#employeesTable").load(document.URL +  ' #employeesTable');
-//		$("#employeesTable").DataTable();
+		document.getElementById('usernameTakene').setAttribute("hidden","hidden");
+		$('#addEmployeeForm').find('input[type="text"],input[type="password"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		$("#eDoneBtn").show();
+		$("#eCancelBtn").hide();
 	}else{
 		document.getElementById('usernameTakene').removeAttribute("hidden");
 		document.getElementById('usernameTakene').setAttribute("class", "");
@@ -956,20 +945,15 @@ function addedEmployee(){
 	function changeUserStatus(){
 		var status = document.getElementById('deactivated').innerText;
 		if(status="deactivated"){
-			$("#employeesTable").load(document.URL +  ' #employeesTable');
-//			$("#employeesTable").DataTable();
-			$("#administratorsTable").load(document.URL +  ' #administratorsTable');
-//		$("#administratorsTable").DataTable();
 			$('#editemployee').modal('hide');
 			$('#editadministrator').modal('hide');		
 		}
 	}
 	function editedEmployee(){
+		document.getElementById('eusernameTaken').setAttribute("hidden","hidden");
 		document.getElementById('eusernameTaken').setAttribute("class", "");
 		var status = document.getElementById('eusernameTaken').innerText;
 		if(status == "User information has been saved."){
-			$("#employeesTable").load(document.URL +  ' #employeesTable');
-//			$("#employeesTable").DataTable();
 			$('#editemployee').modal('hide');
 		}else{
 			document.getElementById('eusernameTaken').setAttribute("class","ui negative small message");
@@ -980,8 +964,6 @@ function addedEmployee(){
 		document.getElementById('eusernameTaken').setAttribute("class", "");		
 		var status = document.getElementById('ausernameTaken').innerText;
 		if(status == "User information has been saved."){
-			$("#administratorsTable").load(document.URL +  ' #administratorsTable');
-//			$("#administratorsTable").DataTable();
 			$('#editadministrator').modal('hide');
 		}else{
 			document.getElementById('ausernameTaken').setAttribute("class","ui negative small message");
@@ -989,7 +971,7 @@ function addedEmployee(){
 		}
 	}
 	function addedMoreEmployee(){
-	alert("addmore");
+	
 	var status = document.getElementById('euserSaved').innerText;
 	if(status == "true"){
 		document.getElementById('esaveB').value = 'Save';
@@ -999,6 +981,7 @@ function addedEmployee(){
 		document.getElementById('euserSaved').innerText = null;
 		document.getElementById('usernameTakene').setAttribute("class", "")
 		document.getElementById('eresetBtn').click();
+		
 
 	}
 }
@@ -1011,9 +994,11 @@ function addedAdmin(){
 		$("#aaddMoreB").removeAttr("disabled");
 		document.getElementById('asaveB').value = 'Saved';
 		document.getElementById('asaveB').setAttribute("disabled","disabled");
-		$("#administratorsTable").load(document.URL +  ' #administratosTable');
-//		$("#administratorsTable").DataTable();
-
+		document.getElementById('usernameTakena').setAttribute("hidden","hidden");
+		$("#aDoneBtn").show();
+		$("#aCancelBtn").hide();
+		$('#addAdminForm').find('input[type="text"],input[type="password"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		
 	}else{
 		document.getElementById('usernameTakena').setAttribute("class","ui negative small message");
 		document.getElementById('usernameTakena').removeAttribute("hidden");
@@ -1021,7 +1006,6 @@ function addedAdmin(){
 }  
 
 function addedMoreAdmin(){
-	alert("addmore");
 	var status = document.getElementById('auserSaved').innerText;
 	if(status == "true"){
 		$("#asaveB").removeAttr("disabled");
@@ -1075,19 +1059,7 @@ function caddmoreClick(){
 	$('#cselect').prop('disabled', false);
 } 
 
-function validateForm() {
-	var form = document.getElementById('addCustomerForm');
 
-	if(form.validate()) {
-		return true;
-	}
-	else {
-		alert('Form contains invalid data.  Please correct first');
-		return false;
-	}
-
-	return true;
-}
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {

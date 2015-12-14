@@ -1,11 +1,34 @@
 <div class="ui bottom attached tab segment active" data-tab="employeesTab" style="padding-bottom: 50px">
 	<div class="ui form">
-		<div class="three wide feild" style="float: right">
-			<button class="ui labeled icon button teal" id="addemployeeBtn">
-				<i class="add user basic icon"></i>Add Employees
-			</button>
+			<div class="inline fields">
+			<div class="inline fields thirteen wide" style="float: left">
+				<div class="three wide field">
+					<label>Entries per page</label> <select class="ui dropdown" id="employeesNumEntries">
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="30">30</option>
+						<option value="100">100</option>
+					</select>
+				</div>
+				<div class="three wide field">
+					<label>Start Date</label> <input type="text" id="minR">
+				</div>
+				<div class="three wide field">
+					<label>End Date</label> <input type="text" id="maxR">
+				</div>
+				<div class="four wide field">
+					<label>Search</label> <input type="text" id="searchEmployees">
+				</div>
+							<div class="three wide feild" style="float: right">
+								<button class="ui labeled icon button teal" id="addemployeeBtn">
+								<i class="add user basic icon"></i>Add Employees
+								</button>
+							</div>
+			</div>
 		</div>
 	</div>
+	
+	
 	</br></br></br>
 	<table id="employeesTable" class="ui celled padded table display" cellspacing="0" width="100%">
 		<thead>

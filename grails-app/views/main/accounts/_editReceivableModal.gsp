@@ -1,7 +1,7 @@
 <div id="editReceivableModal" class="ui modal">
 	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
-		<i class="circular teal edit icon"
-			style="margin-right: 10px;"></i>Edit Account Receivable
+		<i class="circular teal edit icon" style="margin-right: 10px;"></i>Edit
+		Account Receivable
 	</div>
 	<div class="content">
 		<g:form class="ui form" controller="account">
@@ -45,11 +45,17 @@
 			</div>
 			<g:hiddenField name="receivable_id" />
 			<g:hiddenField name="type" value="R" />
-		</g:form>
+		</g:form>		`
 	</div>
+	<div id="editReceivableErrorList" class="ui negative small message"
+		style="display: none;"></div>
 	<div class="actions">
-		<g:actionSubmit class="ui approve button teal" value="Save"
-			action="editReceivable" />
-		<div class="ui right labeled icon cancel button"><i class="cancel basic icon"></i>Cancel</div>
+		<g:submitToRemote
+			url="[controller: 'Account' ,action: 'editReceivable']" value="Save"
+			class="ui teal button" id="saveEditReceivableBtn"
+			onComplete="resaved()" update="editReceivableErrorList" />
+		<div class="ui right labeled icon cancel button">
+			<i class="cancel basic icon"></i>Cancel
+		</div>
 	</div>
 </div>

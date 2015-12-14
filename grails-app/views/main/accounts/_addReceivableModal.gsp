@@ -1,12 +1,12 @@
 <div id="addReceivable" class="ui small modal">
 	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
-		<i class="circular teal money icon"
-			style="margin-right: 10px;"></i>Account Receivable
+		<i class="circular teal money icon" style="margin-right: 10px;"></i>Account
+		Receivable
 	</div>
 	<div class="content">
 		<g:form class="ui form" name="addReceivableForm" controller="account"
 			action="addReceivable">
-			<div style="overflow-y: scroll; max-height: 300px">
+			<div style="overflow-y: scroll; max-height: 200px">
 				<div class="inline fields">
 					<div class="two wide field">
 						<label>Customer Name</label>
@@ -108,27 +108,24 @@
 						<g:datePicker name="rdate" value="${rdate}" precision="day" />
 					</div>
 				</div>
-				<%--<div class="ui negative small message" id="addReceivableErrorDiv" style="display:none;">
-		  <div class="header">
-		    There were some errors with your submission.
-		  </div>	
-		  <ul class="list" id="addReceivableErrorList">
-		  </ul>
-	  </div>
-	  --%>
 			</div>
 			<div class="ui divider"></div>
 			<div id="addReceivableErrorList" class="ui negative small message"
-				hidden></div>
-			<div class="actions" style="float:right; margin-bottom:14px;">
+				style="overflow-y: scroll; max-height: 100px; display: none;"></div>
+			<div class="actions" style="float: right; margin-bottom: 14px;">
 				<g:submitToRemote
 					url="[controller: 'Account' ,action: 'addReceivable']" value="Save"
 					class="ui teal button" id="saveReceivableBtn"
 					update="addReceivableErrorList" onSuccess="rsaved()" />
-				<button class="ui right labeled icon teal button" value="Add More" id="raddMoreBtn"
-					onClick="raddmore()">Add More</button>
-				<div class="ui right labeled icon button" style="display: none;" id="rdone"><i class="checkmark icon"></i>Done</div>
-				<div class="ui right labeled icon cancel button" id="rcancel"><i class="cancel basic icon"></i>Cancel</div>
+				<button class="ui right labeled icon teal button" value="Add More"
+					id="raddMoreBtn" onClick="raddmore()">Add More</button>
+				<div class="ui right labeled icon button" style="display: none;"
+					id="rdone">
+					<i class="checkmark icon"></i>Done
+				</div>
+				<div class="ui right labeled icon cancel button" id="rcancel">
+					<i class="cancel basic icon"></i>Cancel
+				</div>
 			</div>
 		</g:form>
 	</div>

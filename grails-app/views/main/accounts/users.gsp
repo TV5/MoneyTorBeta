@@ -64,7 +64,7 @@
 			<g:render template="../header/header" />
 			<div class="ui top attached tabular menu">
 				<a data-tab="employeesTab" class="item active"> EMPLOYEES </a> 
-				<a data-tab="administratorsTab" class="item"> ADMINISTRATORS </a>
+				<a id="administratorsTab" data-tab="administratorsTab" class="item"> ADMINISTRATORS </a>
 			</div>
 	
 			<g:render template="employeesTab" />

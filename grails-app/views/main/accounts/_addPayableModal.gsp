@@ -7,7 +7,7 @@
 		<g:renderErrors bean="${account}" />
 		<g:form class="ui form" id="addPayableForm" name="addPayableForm"
 			action="">
-			<div style="overflow-y: scroll; max-height: 300px">
+			<div style="overflow-y: scroll; max-height: 200px">
 				<div class="inline fields">
 					<div class="two wide field">
 						<label>Supplier Name</label>
@@ -114,14 +114,13 @@
 				</div>
 			</div>
 			<div class="ui divider"></div>
-			<div id="addPayableErrorList" class="ui negative small message"
-				hidden></div>
-			<div class="actions" style="float:right; margin-bottom:14px;">
+			<div id="addPayableErrorList"  style="overflow-y: scroll; max-height: 100px; display:none;" class="ui negative small message"></div>
+			<div class="actions"  style="float:right; margin-bottom:14px;">
 				<g:submitToRemote
 					url="[controller: 'Account' ,action: 'addPayable']" value="Save"
-					class="ui teal button" id="savePayableBtn" onSuccess="psaved()"
-					update="addPayableErrorList" />
-				<button class="ui right labeled icon button" value="Add More" id="paddMoreBtn"
+					class="ui teal button" id="savePayableBtn" onComplete="psaved()"
+					update="addPayableErrorList"/>
+				<button class="ui right labeled icon teal button" value="Add More" id="paddMoreBtn"
 					onClick="paddmore()"><i class="add icon"></i>Add More</button>
 				<div class="ui right labeled icon button" style="display: none;" id="pdone"><i class="checkmark icon"></i>Done</div>
 				<div class="ui right labeled icon cancel button" id="pcancel"><i class="cancel basic icon"></i>Cancel</div>

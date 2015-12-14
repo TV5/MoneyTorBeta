@@ -30,37 +30,55 @@ class TransactorController {
 	def addCustomer() {
 			System.out.println("add customer")
 			System.out.println("hehe")
-			
-			def transactor = new Transactor(
-				name: params.cname,
-				address: params.caddress,
-				telephone_no: params.ctelephone_no,
-				mobile_no: params.cmobile_no,
-				terms: convertTerms(params.cterms, params.cselect),
-				type: params.ctype,
-				status: params.cstatus
-				)
-			transactorService.addTransactor(transactor)
-			System.out.println(params.cselect)
-			System.out.println("added!")
+			def validationList = transactorService.validate(params.cname,params.caddress,params.ctelephone_no, params.cmobile_no, params.cterms)
+			 if(validationList.isEmpty()){
+				 System.out.println("EMPTY VALIDATIONS!")
+				 def transactor = new Transactor(
+					 name: params.cname,
+					 address: params.caddress,
+					 telephone_no: params.ctelephone_no,
+					 mobile_no: params.cmobile_no,
+					 terms: convertTerms(params.cterms, params.cselect),
+					 type: params.ctype,
+					 status: params.cstatus
+					 )
+				 transactorService.addTransactor(transactor)
+				 System.out.println(params.cselect)
+				 System.out.println("added!")
+				 render ""
+			 }else{
+			validationList.each{ render '<li>'+it+'</li>' }
+		}
 	}
 	
 	def addSupplier() {
 		System.out.println("add supplier")
 		System.out.println("hehe")
-		
-		def transactor = new Transactor(
-			name: params.sname,
-			address: params.saddress,
-			telephone_no: params.stelephone_no,
-			mobile_no: params.smobile_no,
-			terms: convertTerms(params.sterms, params.sselect),
-			type: params.stype,
-			status: params.sstatus
-			)
-		transactorService.addTransactor(transactor)
-		System.out.println(params.sselect)
-		System.out.println("added!")
+		System.out.println("hehasfjash")
+		System.out.println("shit"+params.sname)
+		def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
+		System.out.println(validationsList)
+		if(validationsList.isEmpty()){
+			System.out.println("empty");
+			System.out.println("asdas")
+				def transactor = new Transactor(
+					name: params.sname,
+					address: params.saddress,
+					telephone_no: params.stelephone_no,
+					mobile_no: params.smobile_no,
+					terms: convertTerms(params.sterms, params.sselect),
+					type: params.stype,
+					status: params.sstatus
+					)
+				transactorService.addTransactor(transactor)
+				System.out.println(params.sselect)
+				System.out.println("added!")
+				render ""
+		}else{
+		System.out.println("errors")
+		validationsList.each{ render '<li>'+it+'</li>' }
+	}
+
 }
 	
 	def getTransactorList() {
@@ -79,6 +97,9 @@ class TransactorController {
 	}
 	
 	def editSupplier() {
+		def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
+		System.out.println(validationsList)
+		if(validationsList.isEmpty()){
 		def transactor = new Transactor(
 				name: params.esname,
 				address: params.esaddress,
@@ -90,7 +111,12 @@ class TransactorController {
 				)
 		transactorService.editTransactor(params.int('esid'), transactor)
 		redirect(action: "main", controller: "main", params:[tab:"suppliersTabLink"])
+		}else{
+		System.out.println("errors")
+		validationsList.each{ render '<li>'+it+'</li>' }
 	}
+
+}
 	
 	def editCustomer() {
 		def transactor = new Transactor(
