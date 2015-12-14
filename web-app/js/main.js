@@ -754,6 +754,10 @@ function pymntAdded(){
 	});
 }
 
+function loadPayment(){
+	window.location.reload(true);
+}
+
 function balance(){	   
 	var rawr = 0;
     var rowsP = $("#paymentsTable tr:gt(0)");
