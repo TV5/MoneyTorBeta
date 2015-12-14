@@ -38,6 +38,7 @@
   		<script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.print.min.js')}"></script>
   		<script src="${resource(dir: 'datatables/extensions/Buttons/js', file: 'buttons.colVis.min.js')}"></script>
   		<script src="${resource(dir: 'dist', file: 'semantic.js')}"></script>
+  		
   		<style type="text/css">
     		body {
       			background-color: #DADADA;
@@ -68,15 +69,37 @@
     		tr:hover th  #eicon{
     			visibility: visible;
     		}
+    		.ui.pointing.label:before{
+    			z-index: 0!important;
+    		}
+    		.ui-widget-header{
+    			background-color: #00b5ad!important;
+    			border: 1px solid #00b5ad!important;
+    		}
+    		.ui-state-hover{
+    			border: 1px solid #006A65!important;
+    			background-color: #E4FFFE!important;
+    		}
+    		.ui-state-default{
+    			color: #006A65!important;
+    		}
+    		.ui-state-active{
+    			color: #00b5ad!important;
+    			border: 1px solid #00b5ad!important;
+    		}
+    		.ui-state-highlight{
+    			border: 1px solid #00b5ad!important;
+    			background-color: #ffffff!important;
+    		}
   		</style>
-  					<script>
+  		
+  		<script>
 			window.onbeforeunload = function () {
 				   // stuff do do before the window is unloaded here.
 				}
 		</script>
 	</head>
-	<body onload="document.refresh();">
-
+	<body>
 		<div class="ui container">
 			<g:render template="../header/header" />
 			<div class="ui top attached tabular menu">	  
@@ -113,5 +136,4 @@
 	</body>
 
 	<script src="${resource(dir: 'js', file: 'main.js')}"></script>
-
 </html>
