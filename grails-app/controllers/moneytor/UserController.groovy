@@ -52,16 +52,12 @@ class UserController {
 			username=params.adminUsername
 		}else if(params.empUsername){
 			username=params.empUsername
+		}else{
+			validationList.add("Username is required.")
 		}
-		if(username.length()-1>7){
-			def invalid=false
-			for(def x=0; x<=username.length()-1; x++){
-				if(username[x]==' '){
-					invalid=true
-				}
-			}
-			if(invalid){
-				validationList.add("Username must not contain spaces.")
+		if(username.length()-1>7){			
+			if(!username.matches("[A-Za-z0-9],-+")){
+				validationList.add("Username can only contain alphanumeric characters and underscore(_).")
 			}
 
 		}else{
@@ -119,7 +115,7 @@ def addEmployee() {
 			}
 		}else{
 			validationList.each{
-				render '<ul>'+it+'</ul>'
+				render '<li>'+it+'</li>'
 			}
 		}
 	}
@@ -168,7 +164,7 @@ def addEmployee() {
 	}
 	}else{
 			validationList.each{
-				render '<ul>'+it+'</ul>'
+				render '<li>'+it+'</li>'
 			}
 		}
 
@@ -194,7 +190,7 @@ def addEmployee() {
 		}
 		}else{
 		validationList.each{
-			render '<ul>'+it+'</ul>'
+			render '<li>'+it+'</li>'
 		}
 	}
 	}
