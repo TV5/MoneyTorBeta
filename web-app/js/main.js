@@ -1,7 +1,7 @@
 //document ready functions
 
 $(document).ready(function() {
-	var empt = $('#employeesTable').DataTable({"order":[[0,"asc"]]});
+	var empt = $('#employeesTable').DataTable();
     $('#administratorsTable').DataTable({"order":[[0,"asc"]]});
     if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
@@ -49,7 +49,10 @@ $(document).ready(function() {
 
     var filterS = suppliersTable.rows( { search:'applied' } ).data().each(function(value, index) {});
     
+  
 	
+ 
+    
 	//receivables
 	var num = $('#receivablesNumEntries').val();
     var receivablesTable = $('#receivablesTable').DataTable({
