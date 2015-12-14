@@ -75,7 +75,7 @@
 				}
 		</script>
 	</head>
-	<body onload="document.refresh();">
+	<body>
 
 		<div class="ui container">
 			<g:render template="../header/header" />

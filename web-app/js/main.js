@@ -837,6 +837,7 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 
 
 function psaved() {
+	document.getElementById('addPayableErrorList').removeAttribute("hidden");
 	var errorList = $('#addPayableErrorList');
 	var errorDiv = $('#addPayableErrorDiv');
 	var transactorList = $('#payabaleSupplierList').val();
@@ -846,10 +847,11 @@ function psaved() {
 	var addMoreBtn = $('#paddMoreBtn');
 	var saveBtn = $('#savePayableBtn');
 	var formInputs = $('#addPayableForm :input');
-	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	$('#pdone').show();
 	$('#pcancel').hide();
-	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);
+	if($('#addPayableErrorList').html()==""){
+		$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+	}
 } 
 
 function paddmore(){
@@ -868,15 +870,14 @@ function paddmore(){
 	document.getElementById('paddMoreBtn').className = 'ui button'; 
 	$('#savePayableBtn').removeAttr("disabled");
 	$("#paddMoreBtn").attr("disabled", "disabled");		
-	$('#pcancel').show();
-	$('#pdone').hide();
 	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
 	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
 }
 
 function rsaved(){
-	var errorList = $('#addReceivableErrorList');
-	var errorDiv = $('#addReceivableErrorDiv');
+	document.getElementById('addReceivableErrorList').removeAttribute("hidden");
+	//var errorList = $('#addReceivableErrorList');
+	//var errorDiv = $('#addReceivableErrorDiv');
 	var transactorList = $('#receivableCustomerList').val();
 	var or_no = $('#ror_no').val();
 	var amount = $('#ramount').val();
@@ -884,10 +885,12 @@ function rsaved(){
 	var addMoreBtn = $('#raddMoreBtn');
 	var saveBtn = $('#saveReceivableBtn');
 	var formInputs = $('#addReceivableForm :input');
-	validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
+	//validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	$('#rdone').show();
 	$('#rcancel').hide();
-	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);
+	if($('#addReceivableErrorList').html()==""){
+		$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+	}
 }
 
 function raddmore(){
@@ -906,8 +909,6 @@ function raddmore(){
 	document.getElementById('raddMoreBtn').className = 'ui button'; 
 	$('#saveReceivableBtn').removeAttr("disabled");
 	$("#raddMoreBtn").attr("disabled", "disabled");
-	$('#rcancel').show();
-	$('#rdone').hide();
 	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
 	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
 }
@@ -1096,7 +1097,6 @@ function validateForm() {
 
 	return true;
 }
-
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
