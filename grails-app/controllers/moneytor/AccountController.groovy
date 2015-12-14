@@ -30,7 +30,7 @@ class AccountController {
 		def validationList = []
 		try {
 			if(or_no==null || or_no=="") {
-				validationList.add("Please enter official receipt number.")
+				validationList.add("Official receipt number is required.")
 			} else if(!or_no.matches("[A-Za-z0-9]+")) {
 				validationList.add("Official receipt number must be alphanumeric.")
 			}			
@@ -39,13 +39,13 @@ class AccountController {
 		}
 		if(transactor_id!="edit"){
 			if(transactor_id==null) {
-				validationList.add("Please enter customer/supplier.")
+				validationList.add("Customer/supplier is required.")
 			} else if (Integer.parseInt(transactor_id) < 1 && Integer.parseInt(transactor_id) != -1) {
-				validationList.add("Please enter customer/supplier.")
+				validationList.add("Customer/supplier is required.")
 			}
 		}
 		if(amount==null ||  amount=="") {
-			validationList.add("Please enter amount.")
+			validationList.add("Amount is required.")
 		} else if (amount==0 || amount=="0") {
 			validationList.add("Amount must be greater than zero.")
 		}
