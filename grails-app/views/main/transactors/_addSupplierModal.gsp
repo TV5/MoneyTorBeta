@@ -2,7 +2,7 @@
   <div class="header">Supplier</div>
   <div class="content">
     
-      <g:form id="saddform" class="ui form" controller="transactor" action="addSupplier">	
+      <g:form id="saddform" class="ui form">	
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Name</label>      

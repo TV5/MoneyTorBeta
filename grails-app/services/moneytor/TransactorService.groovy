@@ -63,13 +63,13 @@ class TransactorService {
 		if(terms==""){
 			validationList.add("Terms is required.")
 		}
-		if(!telephone_no.matches("[0-9]+")){
+		if(telephone_no.matches("[0-9]+")){
 			validationList.add("Telephone Number must only contain numeric characters")
 		}
-		if(!mobile_no.matches("[0-9]+")){
+		if(mobile_no.matches("[0-9]+")){
 			validationList.add("Mobile Number must only contain numeric characters")
 		}
-		if(!terms.matches("[0-9]+")){
+		if(terms.matches("[0-9]+")){
 			validationList.add("Terms must only contain numeric character/s")
 		}
 		return validationList
