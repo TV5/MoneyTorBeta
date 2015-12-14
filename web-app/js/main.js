@@ -331,6 +331,9 @@ $(document).ready(function() {
   	notifyDue();
   	$('.dt-button').addClass("export-btn ui tiny teal button");
   	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
+  	
+  	$('#payablesNumEntries').on('change',notifyDue);
+  	$('#receivablesNumEntries').on('change',notifyDue);
 });
 
 function notifyDue(){
@@ -781,19 +784,14 @@ function validateAccount(errorList, errorDiv, transactorList, or_no, amount, tra
 
 function psaved() {
 	document.getElementById('addPayableErrorList').removeAttribute("hidden");
-	var errorList = $('#addPayableErrorList');
-	var errorDiv = $('#addPayableErrorDiv');
-	var transactorList = $('#payabaleSupplierList').val();
-	var or_no = $('#por_no').val();
-	var amount = $('#pamount').val();
-	var transactorType = "supplier";
-	var addMoreBtn = $('#paddMoreBtn');
-	var saveBtn = $('#savePayableBtn');
-	var formInputs = $('#addPayableForm :input');
 	$('#pdone').show();
 	$('#pcancel').hide();
-	if($('#addPayableErrorList').html()==""){
+	if(document.getElementById('addPayableErrorList').innerText==""){
 		$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		$('#paddMoreBtn').attr("disabled", false);	
+		$('#savePayableBtn').val('Saved');
+		$('#savePayableBtn').attr("disabled", "disabled");	
+		$('#addPayableErrorList').hide();
 	}
 } 
 
