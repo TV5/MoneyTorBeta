@@ -79,7 +79,7 @@ $(document).ready(function() {
 			}
         ]
     });
-
+	
     //receivablesTable.buttons(0, null).container().appendTo(receivablesTable.table().container());
     
     $('#maxR').val(new Date().toDateInputValue());
@@ -130,7 +130,7 @@ $(document).ready(function() {
 			receivablesAmounts[i] = receivablesAmounts[i].textContent;
 			receivablesTotal+=parseFloat(receivablesAmounts[i]);
 		}
-		$('#receivablesTotal').html("Php "+receivablesTotal);
+		$('#receivablesTotal').html("Php "+receivablesTotal.toFixed(2));
 	}
 
 	setreceivablesTotalAmt();
@@ -291,9 +291,7 @@ $(document).ready(function() {
 	$('#payablesNumEntries').change(function(){
 		notifyDue();
 		payablesTable.page.len($('#payablesNumEntries').val()).draw();
-	});
-	
-	
+	});	
 
 	$('#pdone').click(function() {
 	    location.reload();
@@ -605,8 +603,7 @@ function editTransactor(name, address, telephone_no, mobile_no, terms){
 	document.getElementById("empPassword").value = password;
 	document.getElementById("empCpassword").value = password;
 
-	$('#editemployee').modal('show');
-	
+	$('#editemployee').modal('show');	
 }
 
 function editUserAccount(id, f_name, l_name, password){
@@ -712,7 +709,6 @@ function checkDec(el){
 }
 
 function tablePayment(acct_id){
-	document.getElementById("tablePymnt").innerHTML = ""
 	var d;
 	var datestring;
 	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
@@ -769,7 +765,7 @@ function addPayment(account_id, acct_name, amt) {
 
 function pymntAdded(){
 	$("#yeah").load(location.href + " #yeah","");
-	setTimeout(tablePayment(accid), 2000);
+	tablePayment(11);	
 	balance();
 }
 
