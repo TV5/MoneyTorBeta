@@ -13,10 +13,10 @@
 					</select>
 				</div>
 				<div class="three wide field">
-					<label>Start Date</label> <input type="text" id="" class="minP">
+					<label>Start Date</label> <input type="text" id="minP">
 				</div>
 				<div class="three wide field">
-					<label>End Date</label> <input type="text" id="" class="maxP">
+					<label>End Date</label> <input type="text" id="maxP">
 				</div>
 				<div class="four wide field">
 					<label>Search</label> <input type="text" id="searchPayables">
