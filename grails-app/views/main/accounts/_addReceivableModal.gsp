@@ -2,7 +2,7 @@
   <div class="header">Account Receivable</div>
   <div class="content">
     <g:form class="ui form" name="addReceivableForm" controller="account" action="addReceivable">
-    	<div style="overflow-y: scroll; max-height: 300px">
+    	<div style="overflow-y: scroll; max-height: 200px">
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Customer Name</label>      
@@ -96,7 +96,7 @@
 		    </div>
 		</div>
 		</div>
-	  <div id="addReceivableErrorList" class="ui negative small message" style="display:none;"></div>
+	  <div id="addReceivableErrorList" class="ui negative small message"  style="overflow-y: scroll; max-height: 100px; display:none;" ></div>
 	  <div class="actions">
 
 	    <g:submitToRemote 

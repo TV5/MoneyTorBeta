@@ -4,7 +4,7 @@
 		<g:renderErrors bean="${account}" />
 		<g:form class="ui form" id="addPayableForm" name="addPayableForm"
 			action="">
-			<div style="overflow-y: scroll; max-height: 300px">
+			<div style="overflow-y: scroll; max-height: 200px">
 				<div class="inline fields">
 					<div class="two wide field">
 						<label>Supplier Name</label>
@@ -110,8 +110,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="addPayableErrorList" class="ui negative small message"
-				style="display:none;"></div>
+			<div id="addPayableErrorList"  style="overflow-y: scroll; max-height: 100px; display:none;" class="ui negative small message"></div>
 			<div class="actions">
 				<g:submitToRemote
 					url="[controller: 'Account' ,action: 'addPayable']" value="Save"

@@ -48,28 +48,28 @@ class TransactorService {
 	def validate(name, address, telephone_no,mobile_no,terms){
 		System.out.println("Validating..")
 		def validationList =[]
-		if(name==""){
+		if(name==null||name==""){
 			validationList.add("Name is required.")
 		}
-		if(address==""){
+		if(address==null||address==""){
 			validationList.add("Address is required.")
 		}
 		
-		if(telephone_no==""){
+		if(telephone_no==null||telephone_no==""){
 			validationList.add("Telephone Number name is required.")
 		}else if(!telephone_no.matches("[0-9]+")){
 			validationList.add("Telephone Number must only contain numeric characters")
 		}
 
-		if(mobile_no==""){
+		if(mobile_no==null||mobile_no==""){
 			validationList.add("Mobile Number is required.")
 		}else if(!mobile_no.matches("[0-9]+")){
 			validationList.add("Mobile Number must only contain numeric characters")
 		}
 
-		if(terms==""){
+		if(terms==null||terms==""){
 			validationList.add("Terms is required.")
-		}else if(terms.matches("[0-9]+")){
+		}else if(!terms.matches("[0-9]+")){
 			validationList.add("Terms must only contain numeric character/s")
 		}
 		

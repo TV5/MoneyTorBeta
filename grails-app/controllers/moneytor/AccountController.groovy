@@ -30,7 +30,7 @@ class AccountController {
 		def validationList = []
 		try {
 			if(or_no==null || or_no=="") {
-				validationList.add("Please enter official receipt number.")
+				validationList.add("Official receipt number is required.")
 			} else if(!or_no.matches("[A-Za-z0-9]+")) {
 				validationList.add("Official receipt number must be alphanumeric.")
 			}			
@@ -39,13 +39,13 @@ class AccountController {
 		}
 		if(transactor_id!="edit"){
 			if(transactor_id==null) {
-				validationList.add("Please enter customer/supplier.")
-			} else if (Integer.parseInt(transactor_id) < 1) {
-				validationList.add("Please enter customer/supplier.")
+				validationList.add("Customer/supplier is required.")
+			} else if (Integer.parseInt(transactor_id) < 1 && Integer.parseInt(transactor_id) != -1) {
+				validationList.add("Customer/supplier is required.")
 			}
 		}
 		if(amount==null ||  amount=="") {
-			validationList.add("Please enter amount.")
+			validationList.add("Amount is required.")
 		} else if (amount==0 || amount=="0") {
 			validationList.add("Amount must be greater than zero.")
 		}
@@ -59,23 +59,32 @@ class AccountController {
 
 	def addPayable() {
 		def errorList = getErrorList(params.por_no,params.transactor_id,params.pamount)
-		if(errorList.isEmpty()){
-			def transId = params.transactor_id
-					if (transId == "-1") {
-						def transactor = new Transactor(
-								name: params.pname,
-								address: params.paddress,
-								telephone_no: params.ptelephone_no,
-								mobile_no: params.pmobile_no,
-								terms: params.pterms,
-								type: 'S',
-								status: 'A'
-								)
-						transactorService.addTransactor(transactor)
-						transId = transactorService.getTransactorIDByName(params.pname, 'S')
-					} else {
-						System.out.println("False" + transId)
-					}
+		def transErrorsList = transactorService.validate(params.pname, params.paddress, params.ptelephone_no,params.pmobile_no, params.pterms)
+		def transId = params.transactor_id
+		if (transId == "-1") {
+			if(transErrorsList.isEmpty()){
+				def transactor = new Transactor(
+						name: params.pname,
+						address: params.paddress,
+						telephone_no: params.ptelephone_no,
+						mobile_no: params.pmobile_no,
+						terms: params.pterms,
+						type: 'S',
+						status: 'A'
+						)
+				
+				transactorService.addTransactor(transactor)
+				transId = transactorService.getTransactorIDByName(params.pname, 'S')
+				print params.pname
+				
+			} else {
+				transErrorsList.each{ render '<li class="list">'+it+'</li>' }
+			}
+		}else {
+			System.out.println("False" + transId)
+		}
+			
+			if(errorList.isEmpty()){
 			def account = new Account(
 					or_no: params.por_no,
 					transactor_id: transId,
@@ -92,10 +101,11 @@ class AccountController {
 	}
 
 	def addReceivable() {
-		def errorList = getErrorList(params.ror_no, params.rtransactor_id, params.ramount)
-		if(errorList.isEmpty()){
-			def transId = params.int('rtransactor_id')
-			if (transId == "-1") {
+		def errorList = getErrorList(params.ror_no,params.rtransactor_id,params.ramount)
+		def transErrorsList = transactorService.validate(params.rname, params.raddress, params.rtelephone_no,params.rmobile_no, params.rterms)
+		def transId = params.rtransactor_id
+		if (transId == "-1") {
+			if(transErrorsList.isEmpty()){
 				def transactor = new Transactor(
 						name: params.rname,
 						address: params.raddress,
@@ -105,11 +115,18 @@ class AccountController {
 						type: 'C',
 						status: 'A'
 						)
+				
 				transactorService.addTransactor(transactor)
-				transId = transactorService.getTransactorIDByName(params.rname, 'C')
+				transId = transactorService.getTransactorIDByName(params.pname, 'C')
+				
 			} else {
-				System.out.println("False" + transId)
+				transErrorsList.each{ render '<li class="list">'+it+'</li>' }
 			}
+		}else {
+			System.out.println("False" + transId)
+		}
+			
+			if(errorList.isEmpty()){
 			def account = new Account(
 					or_no: params.ror_no,
 					transactor_id: transId,
@@ -123,9 +140,8 @@ class AccountController {
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
-		
 	}
-
+	
 	def editReceivable() {
 		def errorList = getErrorList(params.eror_no, "edit", params.eramount)
 		if(errorList.isEmpty()){
@@ -163,6 +179,7 @@ class AccountController {
 		render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
+			transErrorList.each{ render '<li class="list">'+it+'</li>' }
 		}
 	}
 
