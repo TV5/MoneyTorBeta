@@ -108,21 +108,13 @@
 							precision="day" />
 					</div>
 				</div>
-
-				<div class="ui negative small message" id="addPayableErrorDiv"
-					style="display: none;">
-					<div class="header">There were some errors with your
-						submission.</div>
-					<ul class="list" id="addPayableErrorList">
-					</ul>
 				</div>
-				</div>
+				<div id="addPayableErrorList" class="ui negative small message" hidden></div>	
 				<div class="actions">
 					<g:submitToRemote
 						url="[controller: 'Account' ,action: 'addPayable']" value="Save"
-						class="ui teal button" id="savePayableBtn" onComplete="psaved()" />
-					<!--<g:submitToRemote update="savePayableBtn" class="ui button" value="Add More" id="paddMoreBtn" onComplete="paddmore()">  </g:submitToRemote>-->
-
+						class="ui teal button" id="savePayableBtn" onSuccess="psaved()" 
+						update="addPayableErrorList"/>
 					<button class="ui teal button" value="Add More" id="paddMoreBtn"
 						onClick="paddmore()">Add More</button>
 					<div class="ui button" style="display: none;" id="pdone">Done</div>
