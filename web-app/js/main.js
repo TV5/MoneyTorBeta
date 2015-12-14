@@ -402,8 +402,6 @@ function notifyDue(){
   			this.innerHTML += overdue;
   	});
 }
->>>>>>> refs/remotes/origin/master
-
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
     var date = new Date(maxVal);
@@ -1029,7 +1027,6 @@ function addedAdmin(){
 		document.getElementById('usernameTakena').removeAttribute("hidden");
 	}
 } 
-<<<<<<< HEAD
 
 function addedMoreAdmin(){
 	alert("addmore");
@@ -1041,13 +1038,9 @@ function addedMoreAdmin(){
 		document.getElementById('auserSaved').innerText = null;
 		document.getElementById('usernameTakena').setAttribute("class", "")
 		document.getElementById('aresetBtn').click();
-
 	}
 }
 
-=======
- 
->>>>>>> refs/remotes/origin/master
 function addmoreClick(){
 	document.getElementById('saveBtn').value = 'Save';
 	document.getElementById('addMoreBtn').className = 'ui button'; 
