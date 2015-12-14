@@ -26,8 +26,8 @@
 		    </div>
 	    </div>
 	    <div class="inline fields three wide" style="float:right">
-	    	<button id="" class="ui button teal">Export</button>
-		    <button id="addReceivableBtn" class="ui button teal">Add</button>
+
+		    <button id="addReceivableBtn" class="ui button teal">Add Receivable</button>
 	    </div>
 	    </div>
 	  </div>
@@ -52,7 +52,7 @@
 			    <td>
 					<g:findAll in="${customerList}" expr="it.id == receivable.transactor_id">
 					    ${it.name}
-					    <g:set var="supplierName" value="${it.name}"/>
+					    <g:set var="customerName" value="${it.name}"/>
 					</g:findAll>
 				</td>
 			    <td class="sum">${receivable.amount }</td>
@@ -63,7 +63,7 @@
 				</td>  
 			    <td><a href="#" onClick="editReceivable($(this),'${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i class="edit icon"></i></a></td>
 			    <td>
-			     	<button class="ui button teal" onClick="addPayment('${receivable.id}','${supplierName}')">View</button>
+			     	<button class="ui right labeled icon button teal" onClick="addPayment('${receivable.id}','${customerName}','${receivable.amount}')"><i class="search basic icon"></i>View</button>
 			     </td>
 			  	</tr>	  		
 	  		</g:each>

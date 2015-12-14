@@ -1,7 +1,6 @@
 package moneytor
 
 class MainController {
-	//def beforeInterceptor = [action:this.&auth]
 	def userService
 	def accountService
 	def transactorService
@@ -26,7 +25,8 @@ class MainController {
 	}
 	def logout() {
 		if(session.user){
-			session.user = null
+			session.user=null
+			session.invalidate()
 			redirect(uri:"/")
 		}
 	}

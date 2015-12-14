@@ -24,9 +24,8 @@
 		      <input type="text" id="searchPayables">
 		    </div>
 	    </div>
-	    <div class="inline fields three wide" style="float:right">
-	    	<button id="" class="ui button teal">Export</button>
-		    <button id="addPayableBtn" class="ui button teal">Add</button>
+	    <div class="inline fields three wide right">
+	    	<button id="addPayableBtn" class="ui button teal">Add Payables</button>
 	    </div>
 	    </div>
 	  </div>
@@ -52,7 +51,7 @@
 			    <g:set var="supplierName" value="${it.name}"/>
 			</g:findAll>
 			</td>
-		    <td class="sum">${payable.amount }</td>
+		    <td class="sum">${payable.amount}</td>
 		    <td><g:formatDate format="MM/dd/yyyy" date="${payable.transaction_date}"/></td>
 		    <td class="dueDate">
 		    <% def dueDate = payable.transaction_date+it.terms %>
@@ -60,7 +59,7 @@
 		    </td>
 		    <td><a href="#" onClick="editPayable($(this),'${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')"><i class="edit icon"></i></a></td>
 		    <td>
-		    	<button class="ui button teal" onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}')">View</button>
+		    	<button class="ui right labeled icon button teal" onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}')"><i class="search basic icon"></i>View</button>
 		    </td>
 		  	</tr>	  		
 	  	</g:each>

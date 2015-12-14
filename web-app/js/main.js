@@ -1,6 +1,6 @@
 //document ready functions
 $(document).ready(function() {
-    $('#employeesTable').DataTable();
+	$('#employeesTable').DataTable();
     $('#administratorsTable').DataTable();
     $('#customersTable').DataTable();
     $('#suppliersTable').DataTable();
@@ -12,79 +12,21 @@ $(document).ready(function() {
     
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
+    $("#aaddMoreB").attr("disabled", "disabled");	
     $("#max").datepicker();
     $("#maxR").datepicker();
     
-	
-	
 	$(".payableNewSupplier").hide();
 	$(".receivableNewCustomer").hide();
 	
 	//receivables
 	var num = $('#receivablesNumEntries').val();
     var receivablesTable = $('#receivablesTable').DataTable({
-    	"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+    	"dom": '<"top"><"dateFilter">rt<"bottom"pB><"clear">',
 		"pageLength": $('#receivablesNumEntries').val(),
-		"order": [[4, "asc"]]
+		"buttons": ['excel', 'pdf', 'print'],
+		"order": [[3, "asc"]]
 	});
-
-    function setreceivablesTotalAmt() {
-	    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
-		var receivablesTotal = 0;
-		for (var i = 0; i<receivablesAmounts.length; i++){
-			receivablesAmounts[i] = receivablesAmounts[i].textContent;
-			receivablesTotal+=parseFloat(receivablesAmounts[i]);
-		}
-		$('#receivablesTotal').html("Php "+receivablesTotal);
-	}
-
-	setreceivablesTotalAmt();
-    $('#maxR').val(new Date().toDateInputValue());
-
-	var maxR = new Date();
-
-	maxR.setMonth(maxR.getMonth() - 1);
-	$('#minR').val(maxR.toDateInputValue());
-	
-	
-	var rend = $("#maxR").val();
-  	var rdate = new Date(rend);
-  	var ry = rdate.getFullYear();
-  	var rd = rdate.getDate();
-  	var rm = rdate.getMonth()-1;
-  	var rNewDate = new Date(py,pm,pd);
-  	$('#minR').datepicker( "setDate", rNewDate);
-  	pUpdateStartDate($("#maxR"),$("#minR"));
-  	$("#maxR").on('change', function(){
-  		notifyDue();
-  		pUpdateStartDate($("#maxR"),$("#minR"));
-  	});
-  	$('#minR').datepicker();
-  	pUpdateStartDate($("#maxR"),$("#minR"));
-  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
-  	
-  	var rstart = $('#minR').val();
-  	var rdate2 = new Date(rstart);
-  	var ry2 = rdate2.getFullYear();
-  	var rd2 = rdate2.getDate();
-  	var rm2 = rdate2.getMonth()-1;
-  	var rNewDate2 = new Date(ry2,rm2,rd2);
-  	$('#maxR').datepicker( "setDate", rNewDate2);
-  	pUpdateEndDate($("#minR"),$("#maxR"));
-  	$("#minR").on('change', function(){
-  		notifyDue();
-  		pUpdateEndDate($("#minR"),$("#maxR"));
-  	});
-  	pUpdateEndDate($("#minR"),$("#maxR"));
-  	$('#maxR').datepicker( "setDate", new Date());
-	
-	receivablesTable.draw();
-
-    $('#minR, #maxR').change( function() {
-    	notifyDue();
-        receivablesTable.draw();
-        setreceivablesTotalAmt();
-    });
 
     new $.fn.dataTable.Buttons(receivablesTable, {
         buttons: [
@@ -140,10 +82,72 @@ $(document).ready(function() {
         ]
     });
 
-    receivablesTable.buttons(0, null).container().prependTo(receivablesTable.table().container());
+    //receivablesTable.buttons(0, null).container().appendTo(receivablesTable.table().container());
+    
+    $('#maxR').val(new Date().toDateInputValue());
 
+	var maxR = new Date();
+
+	maxR.setMonth(maxR.getMonth() - 1);
+	$('#minR').val(maxR.toDateInputValue());
+	
+	
+	var rend = $("#maxR").val();
+  	var rdate = new Date(rend);
+  	var ry = rdate.getFullYear();
+  	var rd = rdate.getDate();
+  	var rm = rdate.getMonth()-1;
+  	var rNewDate = new Date(py,pm,pd);
+  	$('#minR').datepicker( "setDate", rNewDate);
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$("#maxR").on('change', function(){
+  		notifyDue();
+  		pUpdateStartDate($("#maxR"),$("#minR"));
+  	});
+  	$('#minR').datepicker();
+  	pUpdateStartDate($("#maxR"),$("#minR"));
+  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
+  	
+  	var rstart = $('#minR').val();
+  	var rdate2 = new Date(rstart);
+  	var ry2 = rdate2.getFullYear();
+  	var rd2 = rdate2.getDate();
+  	var rm2 = rdate2.getMonth()-1;
+  	var rNewDate2 = new Date(ry2,rm2,rd2);
+  	$('#maxR').datepicker( "setDate", rNewDate2);
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$("#minR").on('change', function(){
+  		alert('change minR');
+  		notifyDue();
+  		pUpdateEndDate($("#minR"),$("#maxR"));
+  	});
+  	pUpdateEndDate($("#minR"),$("#maxR"));
+  	$('#maxR').datepicker( "setDate", new Date());
+	receivablesTable.draw();
+
+	 function setreceivablesTotalAmt() {
+	    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+		var receivablesTotal = 0;
+		for (var i = 0; i<receivablesAmounts.length; i++){
+			receivablesAmounts[i] = receivablesAmounts[i].textContent;
+			receivablesTotal+=parseFloat(receivablesAmounts[i]);
+		}
+		$('#receivablesTotal').html("Php "+receivablesTotal);
+	}
+
+	setreceivablesTotalAmt();
+	
+    $('#minR, #maxR').change( function() {
+    	notifyDue();
+        receivablesTable.draw();
+        setreceivablesTotalAmt();
+        alert('change minR maxR');
+    });
+
+   
     $('#searchReceivables').keyup(function(){
-          receivablesTable.search($(this).val()).draw() ;
+        notifyDue();  
+    	receivablesTable.search($(this).val()).draw() ;
     })
 
     var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
@@ -153,18 +157,17 @@ $(document).ready(function() {
 		 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
 	});
     
-   // $('#customersTable').DataTable();
-   // $('#suppliersTable').DataTable();
-
     // payables
+	//'<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
 	var num = $('#payablesNumEntries').val();
 	
     var payablesTable = $('#payablesTable').DataTable({
-		"dom": '<"top"><"dateFilter">rt<"bottom"ip><"clear">',
+    	"dom": 'tBp',
 		"pageLength": $('#payablesNumEntries').val(),
-		"order": [[4, "asc"]]
+		"buttons": ['excel', 'pdf', 'print'],
+		"order": [[3, "asc"]]
 	});
-
+   
     new $.fn.dataTable.Buttons(payablesTable, {
         buttons: [
 			{
@@ -219,7 +222,7 @@ $(document).ready(function() {
         ]
     });
 
-    payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
+   // payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
 	$('#max').val(new Date().toDateInputValue());
 
@@ -269,7 +272,7 @@ $(document).ready(function() {
 			payablesAmounts[i] = payablesAmounts[i].textContent;
 			payablesTotal+=parseFloat(payablesAmounts[i]);
 		}
-		$('#payablesTotal').html("Php "+payablesTotal);
+		$('#payablesTotal').html("Php "+payablesTotal.toFixed(2));
 	}
 
 	setPayablesTotalAmt();
@@ -322,8 +325,7 @@ $(document).ready(function() {
 	$('#pcancel').on('click',function(){
 		$('#addPayableForm').form('reset');
 		$('#addPayable').modal('hide');
-	});
-	
+	});	
   	$('.ui.form').form({
   		fields: {
         	uF_name: {
@@ -382,7 +384,8 @@ $(document).ready(function() {
     });
   	
   	notifyDue();
-  	
+  	$('.dt-button').addClass("export-btn ui tiny teal button")
+  	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
 });
 
 function notifyDue(){
@@ -399,6 +402,7 @@ function notifyDue(){
   			this.innerHTML += overdue;
   	});
 }
+>>>>>>> refs/remotes/origin/master
 
 function pUpdateStartDate(max, min) {
 	var maxVal =max.val(); 
@@ -424,19 +428,17 @@ function pUpdateEndDate(min, max) {
 $('.top.menu .item').tab();
 
 $('#addemployeeBtn').click(function(){
+	$('#addemployee').modal({
+		closable: false
+	})
 	$('#addemployee').modal('show');
 });	
 
 $('#addadministratorBtn').click(function(){
+	$('#addadministrator').modal({
+		closable: false
+	})
 	$('#addadministrator').modal('show');
-});
-
-$('#editemployeeBtn').click(function() {
-	$('#editemployee').modal('show');
-});
-
-$('#editadministratorBtn').click(function() {
-	$('#editadministrator').modal('show');
 });
 
 $('#addPayableBtn').click(function(){
@@ -480,14 +482,18 @@ function editAdmin(id, username, f_name, l_name, password, status){
 	document.getElementById("adminL_name").value = l_name;
 	document.getElementById("adminPassword").value = password;
 	document.getElementById("adminCpassword").value = password;
-
+	document.getElementById('ausernameTaken').innerText= null;
+	document.getElementById('ausernameTaken').setAttribute("class", "");
+	$('#editadministrator').modal({
+		closable: false
+	})
 	$('#editadministrator').modal('show');
 }
 
 function paginate(){
 	$('table.paginated').each(function() {
 	    var currentPage = 0;
-	    var numPerPage = 5;
+	    var numPerPage = 4;
 	    var $table = $(this);
 	    $table.bind('repaginate', function() {
 	        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
@@ -495,9 +501,9 @@ function paginate(){
 	    $table.trigger('repaginate');
 	    var numRows = $table.find('tbody tr').length;
 	    var numPages = Math.ceil(numRows / numPerPage);
-	    var $pager = $('<div class="ui pagination menu pager" style="float:right"></div>');
+	    var $pager = $('<div class="ui pagination menu pager" style="float:right; margin-bottom:5px;"></div>');
 	    for (var page = 0; page < numPages; page++) {
-	        $('<span class="ui item page-number"></span>').text(page + 1).bind('click', {
+	        $('<span class="ui teal item page-number"></span>').text(page + 1).bind('click', {
 	            newPage: page
 	        }, function(event) {
 	            currentPage = event.data['newPage'];
@@ -516,7 +522,12 @@ function editEmployee(id, username, f_name, l_name, password, status){
 	document.getElementById("empL_name").value = l_name;
 	document.getElementById("empPassword").value = password;
 	document.getElementById("empCpassword").value = password;
-
+	document.getElementById('deactivated').innerText = null;
+	document.getElementById('eusernameTaken').innerText= null;
+	document.getElementById('eusernameTaken').setAttribute("class", "");
+	$('#editemployee').modal({
+		closable: false
+	})
 	$('#editemployee').modal('show');
 }
 
@@ -709,13 +720,35 @@ function checkDec(el){
 	 }
 }
 
+function tablePayment(acct_id){
+	document.getElementById("tablePymnt").innerHTML = ""
+	var d;
+	var datestring;
+	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
+	var boom = document.getElementById("yeah").innerHTML;
+	$(jQuery.parseJSON(boom)).each(function() {  
+        if(this.account == acct_id){
+        	d = new Date(this.received_date);
+
+        	myTable = myTable + '<tr><td>'+ d.toLocaleString() + '</td><td hidden>' + this.amount + '</td><td>PHP ' + (this.amount).toFixed(2) + '</td></tr>';
+        }
+		
+	});
+	myTable += '</tbody></table>';
+	document.getElementById("tablePymnt").innerHTML = myTable;
+	paginate();
+}
+
 function addPayment(account_id, acct_name, amt) {
+	accid = account_id;
+	tablePayment(account_id);
 	amtbal = amt;  
 	balance();
     
 	document.getElementById("pmAccount_id").value = account_id;
 
 	$('#pmAccountName').html(acct_name);
+	
 	$('#payments').modal({
 		closable: false
 	});
@@ -744,8 +777,9 @@ function addPayment(account_id, acct_name, amt) {
 }
 
 function pymntAdded(){
-	$("#paymentsTable").load(location.href + " #paymentsTable>*", balance());
-	setTimeout(500);
+	$("#yeah").load(location.href + " #yeah","");
+	setTimeout(tablePayment(accid), 2000);
+	balance();
 }
 
 function balance(){	   
@@ -754,9 +788,6 @@ function balance(){
     rowsP.children("td:nth-child(2)").each(function() {
     	rawr += parseFloat($(this).html());
     });
-    
-    console.log("AMT BAL " + amtbal);
-    console.log("rawr " + rawr);
     
     if(rawr >= amtbal){
     	document.getElementById("totalpymnt").style.color = "green";
@@ -930,41 +961,93 @@ function ssaved(){
 }
 
 
-function addedEmployee(){
-	document.getElementById('usernameTakene').setAttribute("class", "");
-	var status = document.getElementById('usernameTakene').innerText;
-	if(status == "User has been saved."){
-		document.getElementById('usernameTakene').setAttribute("class","ui message");
-		alert("Employee has been added!");
-		$("#eaddMoreB").removeAttr("disabled");
-		document.getElementById('esaveB').setAttribute("disabled","disabled");
-	}
-	else{
-		document.getElementById('usernameTakene').setAttribute("class","ui negative small message");
-	}
+	function addedEmployee(){
+		var status = document.getElementById('usernameTakene').innerText;
+		alert(status);
+		if(status == "User has been saved."){
+			$("#eaddMoreB").removeAttr("disabled");
+			document.getElementById('esaveB').value = 'Saved';
+			document.getElementById('esaveB').setAttribute("disabled","disabled");
+		}else{
+			document.getElementById('usernameTakene').removeAttribute("hidden");
+			document.getElementById('usernameTakene').setAttribute("class", "");
+			document.getElementById('usernameTakene').setAttribute("class","ui negative small message");
+		}
 }
-
+	function changeUserStatus(){
+		var status = document.getElementById('deactivated').innerText;
+		if(status="deactivated"){
+			$('#editemployee').modal('hide');
+			$('#editadministrator').modal('hide');		
+		}
+	}
+	function editedEmployee(){
+		document.getElementById('eusernameTaken').setAttribute("class", "");
+		var status = document.getElementById('eusernameTaken').innerText;
+		if(status == "User information has been saved."){
+			$('#editemployee').modal('hide');
+		}else{
+			document.getElementById('eusernameTaken').setAttribute("class","ui negative small message");
+			document.getElementById('eusernameTaken').removeAttribute("hidden");
+		}
+	}
+	function editedAdmin(){
+		document.getElementById('eusernameTaken').setAttribute("class", "");		
+		var status = document.getElementById('ausernameTaken').innerText;
+		if(status == "User information has been saved."){
+			$('#editadministrator').modal('hide');
+		}else{
+			document.getElementById('ausernameTaken').setAttribute("class","ui negative small message");
+			document.getElementById('ausernameTaken').removeAttr("hidden");
+		}
+	}
 function addedMoreEmployee(){
 	alert("addmore");
 	var status = document.getElementById('euserSaved').innerText;
 	if(status == "true"){
+		document.getElementById('esaveB').value = 'Save';
 		$("#esaveB").removeAttr("disabled");
 		document.getElementById('eaddMoreB').setAttribute("disabled","disabled");
 		document.getElementById('usernameTakene').innerText = null;
 		document.getElementById('euserSaved').innerText = null;
 		document.getElementById('usernameTakene').setAttribute("class", "")
 		document.getElementById('eresetBtn').click();
+
 	}
 }
 
 function addedAdmin(){
-	alert("added");
-	/*document.getElementById('addMoreBtn').className = 'ui teal button'; 
-	document.getElementById('saveBtn').value = 'Saved';
-	$("#saveBtn").attr("disabled", "disabled");
-	$("#addMoreBtn").removeAttr("disabled");*/
+	document.getElementById('usernameTakena').setAttribute("class", "");
+	var status = document.getElementById('usernameTakena').innerText;
+	if(status == "User has been saved."){
+		document.getElementById('usernameTakena').setAttribute("class","ui message");
+		$("#aaddMoreB").removeAttr("disabled");
+		document.getElementById('asaveB').value = 'Saved';
+		document.getElementById('asaveB').setAttribute("disabled","disabled");
+	}else{
+		document.getElementById('usernameTakena').setAttribute("class","ui negative small message");
+		document.getElementById('usernameTakena').removeAttribute("hidden");
+	}
 } 
+<<<<<<< HEAD
+
+function addedMoreAdmin(){
+	alert("addmore");
+	var status = document.getElementById('auserSaved').innerText;
+	if(status == "true"){
+		$("#asaveB").removeAttr("disabled");
+		document.getElementById('aaddMoreB').setAttribute("disabled","disabled");
+		document.getElementById('usernameTakena').innerText = null;
+		document.getElementById('auserSaved').innerText = null;
+		document.getElementById('usernameTakena').setAttribute("class", "")
+		document.getElementById('aresetBtn').click();
+
+	}
+}
+
+=======
  
+>>>>>>> refs/remotes/origin/master
 function addmoreClick(){
 	document.getElementById('saveBtn').value = 'Save';
 	document.getElementById('addMoreBtn').className = 'ui button'; 

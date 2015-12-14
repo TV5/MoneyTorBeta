@@ -22,15 +22,16 @@
 				<tbody>
 				<g:each var="admin" in="${adminList}">
 					<tr>
-						<th>${admin.username }</th>
-						<th>${admin.f_name}</th>
-						<th>${admin.l_name }</th>
-						<th>${admin.updated_by}</th>
-						<th>${admin.updated_on }</th>						
-						<th><button class="ui button teal" onclick="editAdmin(${admin.id}, '${admin.username}', '${admin.f_name }', '${admin.l_name}', '${admin.password}', ${admin.status})" id="editemployeeBtn">edit</button></th>
+						<td>${admin.username }</td>
+						<td>${admin.f_name}</td>
+						<td>${admin.l_name }</td>
+						<td><g:findAll in="${allAdminList}" expr="it.id == admin.updated_by">
+			    			${it.username}
+							</g:findAll></td>
+						<td><g:formatDate format="MM/dd/yyyy" date="${admin.updated_on }"/></td>						
+						<td><button class="ui button teal" onclick="editAdmin(${admin.id}, '${admin.username}', '${admin.f_name }', '${admin.l_name}', '${admin.password}', ${admin.status})" id="editemployeeBtn">edit</button></td>
 					</tr>
 					</g:each>				
 				</tbody>
 			</table>
-		</div>
-	</div>
+</div>
