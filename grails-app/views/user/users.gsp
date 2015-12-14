@@ -67,7 +67,7 @@
 	  			<a data-tab="employeesTab" class="item active" >
 	    			EMPLOYEES
 	  			</a>
-	  			<a data-tab="administratorsTab" class="item">
+	  			<a id="administratorsTab" data-tab="administratorsTab" class="item">
 	    			ADMINISTRATORS
 	  			</a>
 			</div>

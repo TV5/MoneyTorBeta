@@ -1,6 +1,6 @@
 //document ready functions
 $(document).ready(function() {
-	$('#employeesTable').DataTable({"order":[[0,"asc"]]});
+	var empt = $('#employeesTable').DataTable({"order":[[0,"asc"]]});
     $('#administratorsTable').DataTable({"order":[[0,"asc"]]});
     $('#customersTable').DataTable();
     $('#suppliersTable').DataTable();
@@ -909,8 +909,10 @@ function addedEmployee(){
 		$("#eaddMoreB").removeAttr("disabled");
 		document.getElementById('esaveB').value = 'Saved';
 		document.getElementById('esaveB').setAttribute("disabled","disabled");
-		$("#employeesTable").load(document.URL +  ' #employeesTable');
-//		$("#employeesTable").DataTable();
+		document.getElementById('usernameTakene').setAttribute("hidden","hidden");
+		$('#addEmployeeForm').find('input[type="text"],input[type="password"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		$("#eDoneBtn").show();
+		$("#eCancelBtn").hide();
 	}else{
 		document.getElementById('usernameTakene').removeAttribute("hidden");
 		document.getElementById('usernameTakene').setAttribute("class", "");
@@ -921,20 +923,15 @@ function addedEmployee(){
 	function changeUserStatus(){
 		var status = document.getElementById('deactivated').innerText;
 		if(status="deactivated"){
-			$("#employeesTable").load(document.URL +  ' #employeesTable');
-//			$("#employeesTable").DataTable();
-			$("#administratorsTable").load(document.URL +  ' #administratorsTable');
-//		$("#administratorsTable").DataTable();
 			$('#editemployee').modal('hide');
 			$('#editadministrator').modal('hide');		
 		}
 	}
 	function editedEmployee(){
+		document.getElementById('eusernameTaken').setAttribute("hidden","hidden");
 		document.getElementById('eusernameTaken').setAttribute("class", "");
 		var status = document.getElementById('eusernameTaken').innerText;
 		if(status == "User information has been saved."){
-			$("#employeesTable").load(document.URL +  ' #employeesTable');
-//			$("#employeesTable").DataTable();
 			$('#editemployee').modal('hide');
 		}else{
 			document.getElementById('eusernameTaken').setAttribute("class","ui negative small message");
@@ -945,8 +942,6 @@ function addedEmployee(){
 		document.getElementById('eusernameTaken').setAttribute("class", "");		
 		var status = document.getElementById('ausernameTaken').innerText;
 		if(status == "User information has been saved."){
-			$("#administratorsTable").load(document.URL +  ' #administratorsTable');
-//			$("#administratorsTable").DataTable();
 			$('#editadministrator').modal('hide');
 		}else{
 			document.getElementById('ausernameTaken').setAttribute("class","ui negative small message");
@@ -955,6 +950,7 @@ function addedEmployee(){
 	}
 	function addedMoreEmployee(){
 	alert("addmore");
+	
 	var status = document.getElementById('euserSaved').innerText;
 	if(status == "true"){
 		document.getElementById('esaveB').value = 'Save';
@@ -964,6 +960,7 @@ function addedEmployee(){
 		document.getElementById('euserSaved').innerText = null;
 		document.getElementById('usernameTakene').setAttribute("class", "")
 		document.getElementById('eresetBtn').click();
+		
 
 	}
 }
@@ -976,9 +973,11 @@ function addedAdmin(){
 		$("#aaddMoreB").removeAttr("disabled");
 		document.getElementById('asaveB').value = 'Saved';
 		document.getElementById('asaveB').setAttribute("disabled","disabled");
-		$("#administratorsTable").load(document.URL +  ' #administratosTable');
-//		$("#administratorsTable").DataTable();
-
+		document.getElementById('usernameTakena').setAttribute("hidden","hidden");
+		$("#aDoneBtn").show();
+		$("#aCancelBtn").hide();
+		$('#addAdminForm').find('input[type="text"],input[type="password"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		
 	}else{
 		document.getElementById('usernameTakena').setAttribute("class","ui negative small message");
 		document.getElementById('usernameTakena').removeAttribute("hidden");
