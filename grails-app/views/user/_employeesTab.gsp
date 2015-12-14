@@ -29,8 +29,7 @@
 	</div>
 	
 	
-	</br></br></br>
-	<table id="employeesTable" class="ui celled padded table display" cellspacing="0" width="100%">
+	<table id="employeesTable" class="display ui celled padded table" cellspacing="0" width="100%">
 		<thead>
 			<tr>
 				<th>Username</th>
