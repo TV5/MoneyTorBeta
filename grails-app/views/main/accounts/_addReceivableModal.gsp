@@ -118,7 +118,7 @@
 					class="ui teal button" id="saveReceivableBtn"
 					update="addReceivableErrorList" onSuccess="rsaved()" />
 				<button class="ui right labeled icon teal button" value="Add More"
-					id="raddMoreBtn" onClick="raddmore()">Add More</button>
+					id="raddMoreBtn" onClick="raddmore()"><i class="add icon"></i>Add More</button>
 				<div class="ui right labeled icon button" style="display: none;"
 					id="rdone">
 					<i class="checkmark icon"></i>Done
