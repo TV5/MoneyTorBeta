@@ -900,11 +900,9 @@ function csaved(){
 }
 
 function ssaved(){	
-	alert("GI ATAY");
 	document.getElementById('svalidations').setAttribute("hidden", "hidden");
 	var status = document.getElementById('svalidations').innerText;
 	if(status==""){
-alert("yawa");
 	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('ssaveBtn').value = 'Saved';
 	$("#sDoneBtn").show();
@@ -918,7 +916,6 @@ alert("yawa");
 	$('#sterms').prop('readonly', true);
 	$('#sselect').prop('disabled', true);
 	}else{
-		alert("pakshit");
 		document.getElementById('svalidations').removeAttribute("hidden");
 	}
 }
@@ -970,7 +967,6 @@ function addedEmployee(){
 		}
 	}
 	function addedMoreEmployee(){
-	alert("addmore");
 	
 	var status = document.getElementById('euserSaved').innerText;
 	if(status == "true"){
@@ -1006,7 +1002,6 @@ function addedAdmin(){
 }  
 
 function addedMoreAdmin(){
-	alert("addmore");
 	var status = document.getElementById('auserSaved').innerText;
 	if(status == "true"){
 		$("#asaveB").removeAttr("disabled");
@@ -1060,19 +1055,7 @@ function caddmoreClick(){
 	$('#cselect').prop('disabled', false);
 } 
 
-function validateForm() {
-	var form = document.getElementById('addCustomerForm');
 
-	if(form.validate()) {
-		return true;
-	}
-	else {
-		alert('Form contains invalid data.  Please correct first');
-		return false;
-	}
-
-	return true;
-}
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
