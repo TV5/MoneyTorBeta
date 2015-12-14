@@ -1,9 +1,8 @@
 //document ready functions
 $(document).ready(function() {
+<<<<<<< HEAD
 	$('#employeesTable').DataTable();
     $('#administratorsTable').DataTable();
-    $('#customersTable').DataTable();
-    $('#suppliersTable').DataTable();
     if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
 		var tabId = '#'+tabId;
@@ -18,6 +17,38 @@ $(document).ready(function() {
     
 	$(".payableNewSupplier").hide();
 	$(".receivableNewCustomer").hide();
+	
+	
+	//Customers Search & Entries per page
+	$('#customersNumEntries').change(function(){
+		customersTable.page.len($('#customersNumEntries').val()).draw();
+	});
+	var numC = $('#customersNumEntries').val();
+    var customersTable = $('#customersTable').DataTable({
+    	"dom": '<"top">tRip',
+		"pageLength": numC
+	});
+    $('#searchCustomers').keyup(function(){  
+    	customersTable.search($(this).val()).draw() ;
+    })
+
+    var filterC = customersTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+
+  //Suppliers Search & Entries per page
+	$('#suppliersNumEntries').change(function(){
+		suppliersTable.page.len($('#suppliersNumEntries').val()).draw();
+	});
+	var numS = $('#suppliersNumEntries').val();
+    var suppliersTable = $('#suppliersTable').DataTable({
+    	"dom": '<"top">tRip',
+		"pageLength": numS
+	});
+    $('#searchSuppliers').keyup(function(){  
+    	suppliersTable.search($(this).val()).draw() ;
+    })
+
+    var filterS = suppliersTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+    
 	
 	//receivables
 	var num = $('#receivablesNumEntries').val();
@@ -903,22 +934,28 @@ function ssaved(){
 }
 
 
-	function addedEmployee(){
-		var status = document.getElementById('usernameTakene').innerText;
-		alert(status);
-		if(status == "User has been saved."){
-			$("#eaddMoreB").removeAttr("disabled");
-			document.getElementById('esaveB').value = 'Saved';
-			document.getElementById('esaveB').setAttribute("disabled","disabled");
-		}else{
-			document.getElementById('usernameTakene').removeAttribute("hidden");
-			document.getElementById('usernameTakene').setAttribute("class", "");
-			document.getElementById('usernameTakene').setAttribute("class","ui negative small message");
-		}
+function addedEmployee(){
+	var status = document.getElementById('usernameTakene').innerText;
+	if(status == "User has been saved."){
+		$("#eaddMoreB").removeAttr("disabled");
+		document.getElementById('esaveB').value = 'Saved';
+		document.getElementById('esaveB').setAttribute("disabled","disabled");
+		$("#employeesTable").load(document.URL +  ' #employeesTable');
+//		$("#employeesTable").DataTable();
+	}else{
+		document.getElementById('usernameTakene').removeAttribute("hidden");
+		document.getElementById('usernameTakene').setAttribute("class", "");
+		document.getElementById('usernameTakene').setAttribute("class","ui negative small message");
+	}
 }
+
 	function changeUserStatus(){
 		var status = document.getElementById('deactivated').innerText;
 		if(status="deactivated"){
+			$("#employeesTable").load(document.URL +  ' #employeesTable');
+//			$("#employeesTable").DataTable();
+			$("#administratorsTable").load(document.URL +  ' #administratorsTable');
+//		$("#administratorsTable").DataTable();
 			$('#editemployee').modal('hide');
 			$('#editadministrator').modal('hide');		
 		}
@@ -927,6 +964,8 @@ function ssaved(){
 		document.getElementById('eusernameTaken').setAttribute("class", "");
 		var status = document.getElementById('eusernameTaken').innerText;
 		if(status == "User information has been saved."){
+			$("#employeesTable").load(document.URL +  ' #employeesTable');
+//			$("#employeesTable").DataTable();
 			$('#editemployee').modal('hide');
 		}else{
 			document.getElementById('eusernameTaken').setAttribute("class","ui negative small message");
@@ -937,13 +976,15 @@ function ssaved(){
 		document.getElementById('eusernameTaken').setAttribute("class", "");		
 		var status = document.getElementById('ausernameTaken').innerText;
 		if(status == "User information has been saved."){
+			$("#administratorsTable").load(document.URL +  ' #administratorsTable');
+//			$("#administratorsTable").DataTable();
 			$('#editadministrator').modal('hide');
 		}else{
 			document.getElementById('ausernameTaken').setAttribute("class","ui negative small message");
 			document.getElementById('ausernameTaken').removeAttr("hidden");
 		}
 	}
-function addedMoreEmployee(){
+	function addedMoreEmployee(){
 	alert("addmore");
 	var status = document.getElementById('euserSaved').innerText;
 	if(status == "true"){
@@ -966,11 +1007,14 @@ function addedAdmin(){
 		$("#aaddMoreB").removeAttr("disabled");
 		document.getElementById('asaveB').value = 'Saved';
 		document.getElementById('asaveB').setAttribute("disabled","disabled");
+		$("#administratorsTable").load(document.URL +  ' #administratosTable');
+//		$("#administratorsTable").DataTable();
+
 	}else{
 		document.getElementById('usernameTakena').setAttribute("class","ui negative small message");
 		document.getElementById('usernameTakena').removeAttribute("hidden");
 	}
-} 
+}  
 
 function addedMoreAdmin(){
 	alert("addmore");
