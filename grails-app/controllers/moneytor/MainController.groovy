@@ -19,7 +19,7 @@ class MainController {
 			session.user=user
 			redirect(action:"main")
 		}else{
-			flash.error ="invalid username/password"
+			flash.error ="The username and password you entered did not match our records. Please double-check and try again."
 			redirect (uri: "/")
 		}
 	}
