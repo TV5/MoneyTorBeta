@@ -171,45 +171,45 @@ $(document).ready(function() {
 
    // payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
 
-	$('#max').val(new Date().toDateInputValue());
+	$('#maxP').val(new Date().toDateInputValue());
 
 	var max = new Date();
 
 	max.setMonth(max.getMonth() - 1);
-	$('#min').val(max.toDateInputValue());
+	$('#minP').val(max.toDateInputValue());
 	
 
-  	var pend = $("#max").val();
+  	var pend = $("#maxP").val();
   	var pdate = new Date(pend);
   	var py = pdate.getFullYear();
   	var pd = pdate.getDate();
   	var pm = pdate.getMonth()-1;
   	var pNewDate = new Date(py,pm,pd);
-  	$('#min').datepicker( "setDate", pNewDate);
-  	pUpdateStartDate($("#max"),$("#min"));
-  	$("#max").on('change', function(){
+  	$('#minP').datepicker( "setDate", pNewDate);
+  	pUpdateStartDate($("#maxP"),$("#minP"));
+  	$("#maxP").on('change', function(){
   		notifyDue();
-  		pUpdateStartDate($("#max"),$("#min"));
+  		pUpdateStartDate($("#maxP"),$("#minP"));
   	});
-  	$('#min').datepicker();
-  	pUpdateStartDate($("#max"),$("#min"));
-  	$('#min').datepicker( "setDate", new Date(py, pm, pd));
+  	$('#minP').datepicker();
+  	pUpdateStartDate($("#maxP"),$("#minP"));
+  	$('#minP').datepicker( "setDate", new Date(py, pm, pd));
   	
-  	var pstart = $('#min').val();
+  	var pstart = $('#minP').val();
   	var pdate2 = new Date(pstart);
   	var py2 = pdate2.getFullYear();
   	var pd2 = pdate2.getDate();
   	var pm2 = pdate2.getMonth()-1;
   	var pNewDate2 = new Date(py2,pm2,pd2);
-  	$('#max').datepicker( "setDate", pNewDate2);
+  	$('#maxP').datepicker( "setDate", pNewDate2);
   	pUpdateEndDate($("#min"),$("#max"));
-  	$("#min").on('change', function(){
+  	$("#minP").on('change', function(){
   		notifyDue();
-  		pUpdateEndDate($("#min"),$("#max"));
+  		pUpdateEndDate($("#minP"),$("#maxP"));
   	});
-  	$('#max').datepicker();
-  	pUpdateEndDate($("#min"),$("#max"));
-  	$('#max').datepicker( "setDate", new Date());
+  	$('#maxP').datepicker();
+  	pUpdateEndDate($("#minP"),$("#maxP"));
+  	$('#maxP').datepicker( "setDate", new Date());
 	payablesTable.draw();
     
     function setPayablesTotalAmt(){
@@ -224,7 +224,7 @@ $(document).ready(function() {
 
 	setPayablesTotalAmt();
 
-    $('#min, #max').change( function() {
+    $('#minP, #maxP').change( function() {
     	notifyDue();
         payablesTable.draw();
     	setPayablesTotalAmt();
@@ -1040,11 +1040,26 @@ function validateForm() {
 	return true;
 }
 
+$.fn.dataTable.ext.search.push(
+		function( settings, data, dataIndex ) {
+	  		var min = Date.parse($('#minR').val(),10);
+	  		var max = Date.parse($('#maxR').val());
+	  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
+	        if ( ( isNaN( min ) && isNaN( max ) ) ||
+	             ( isNaN( min ) && date <= max ) ||
+	             ( min <= date   && isNaN( max ) ) ||
+	             ( min <= date   && date <= max ) )
+	        {
+	            return true;
+	        }
+	        return false;
+	    }
+);
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
-	  		var min = Date.parse($('#min').val(),10);
-	  		var max = Date.parse($('#max').val());
+	  		var min = Date.parse($('#minP').val(),10);
+	  		var max = Date.parse($('#maxP').val());
 	  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
 	        if ( ( isNaN( min ) && isNaN( max ) ) ||
 	             ( isNaN( min ) && date <= max ) ||
