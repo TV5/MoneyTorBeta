@@ -1,209 +1,246 @@
 //document ready functions
 
 $(document).ready(function() {
-	var empt = $('#employeesTable').DataTable();
-    $('#administratorsTable').DataTable({"order":[[0,"asc"]]});
-    if(window.location.href.indexOf("?")!=-1){
+	// Admin Search & Entries per page
+	var numA = $('#adminNumEntries').val();
+	var admn = $('#administratorsTable').DataTable({
+		"dom" : '<"top">tRip',
+		"pageLength" : numA
+	});
+	$('#searchAdmins').keyup(function() {
+		admn.search($(this).val()).draw();
+	})
+	$('#adminNumEntries').change(function() {
+		administratorsTable.page.len($('#adminNumEntries').val()).draw();
+	});
+	var filterA = admn.rows({
+		search : 'applied'
+	}).data().each(function(value, index) {
+	});
+
+	// Employees Search & Entries per page
+	$('#employeesNumEntries').change(function() {
+		employeesTable.page.len($('#employeesNumEntries').val()).draw();
+	});
+	var numE = $('#employeesNumEntries').val();
+	var empt = $('#employeesTable').DataTable({
+		"dom" : '<"top">tRip',
+		"pageLength" : $('#employeesNumEntries').val(),
+		"order" : [ [ 0, "asc" ] ]
+	});
+	$('#searchEmployees').keyup(function() {
+		empt.search($(this).val()).draw();
+	})
+
+	var filterE = empt.rows({
+		search : 'applied'
+	}).data().each(function(value, index) {
+	});
+
+	// var empt = $('#employeesTable').DataTable();
+
+
+
+	// $('#administratorsTable').DataTable({"order":[[0,"asc"]]});
+	if (window.location.href.indexOf("?") != -1) {
 		var tabId = window.location.href.split("?")[1].split("=")[1];
-		var tabId = '#'+tabId;
-		$(tabId).click();		
+		var tabId = '#' + tabId;
+		$(tabId).click();
 	}
-    
-    $("#caddMoreBtn").attr("disabled", "disabled");	    
-    $("#eaddMoreB").attr("disabled", "disabled");	
-    $("#aaddMoreB").attr("disabled", "disabled");	
-    $("#maxP").datepicker();
-    $("#maxR").datepicker();
-    
+
+	$("#caddMoreBtn").attr("disabled", "disabled");
+	$("#eaddMoreB").attr("disabled", "disabled");
+	$("#aaddMoreB").attr("disabled", "disabled");
+	$("#maxP").datepicker();
+	$("#maxR").datepicker();
+
 	$(".payableNewSupplier").hide();
 	$(".receivableNewCustomer").hide();
-	
-	
-	//Customers Search & Entries per page
-	$('#customersNumEntries').change(function(){
+
+	// Customers Search & Entries per page
+	$('#customersNumEntries').change(function() {
 		customersTable.page.len($('#customersNumEntries').val()).draw();
 	});
 	var numC = $('#customersNumEntries').val();
-    var customersTable = $('#customersTable').DataTable({
-    	"dom": '<"top">tRip',
-		"pageLength": numC
+	var customersTable = $('#customersTable').DataTable({
+		"dom" : '<"top">tRip',
+		"pageLength" : numC
 	});
-    $('#searchCustomers').keyup(function(){  
-    	customersTable.search($(this).val()).draw() ;
-    })
+	$('#searchCustomers').keyup(function() {
+		customersTable.search($(this).val()).draw();
+	})
 
-    var filterC = customersTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+	var filterC = customersTable.rows({
+		search : 'applied'
+	}).data().each(function(value, index) {
+	});
 
-  //Suppliers Search & Entries per page
-	$('#suppliersNumEntries').change(function(){
+	// Suppliers Search & Entries per page
+	$('#suppliersNumEntries').change(function() {
 		suppliersTable.page.len($('#suppliersNumEntries').val()).draw();
 	});
 	var numS = $('#suppliersNumEntries').val();
-    var suppliersTable = $('#suppliersTable').DataTable({
-    	"dom": '<"top">tRip',
-		"pageLength": numS
+	var suppliersTable = $('#suppliersTable').DataTable({
+		"dom" : '<"top">tRip',
+		"pageLength" : numS
 	});
-    $('#searchSuppliers').keyup(function(){  
-    	suppliersTable.search($(this).val()).draw() ;
-    })
+	$('#searchSuppliers').keyup(function() {
+		suppliersTable.search($(this).val()).draw();
+	})
 
-    var filterS = suppliersTable.rows( { search:'applied' } ).data().each(function(value, index) {});
-    
-  
-	
- 
-    
-	//receivables
+	var filterS = suppliersTable.rows({
+		search : 'applied'
+	}).data().each(function(value, index) {
+	});
+
+	// receivables
 	var num = $('#receivablesNumEntries').val();
-    var receivablesTable = $('#receivablesTable').DataTable({
-    	"dom": 'tBp',
-		"pageLength": $('#receivablesNumEntries').val(),
-		"buttons": [
-					{
-					    extend: 'excelHtml5',
-					    title: 'Receivables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
-					{
-					    extend: 'pdfHtml5',
-					    title: 'Receivables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
-					{
-					    extend: 'print',
-					    title: 'Receivables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					        columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					}
-			    ],
-		"order": [[3, "desc"]]
+	var receivablesTable = $('#receivablesTable').DataTable({
+		"dom" : 'tBp',
+		"pageLength" : $('#receivablesNumEntries').val(),
+		"buttons" : [ {
+			extend : 'excelHtml5',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'pdfHtml5',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'print',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		} ],
+		"order" : [ [ 3, "desc" ] ]
 	});
 
-    //receivablesTable.buttons(0, null).container().appendTo(receivablesTable.table().container());
-    
-    $('#maxR').val(new Date().toDateInputValue());
+	// receivablesTable.buttons(0,
+	// null).container().appendTo(receivablesTable.table().container());
+
+	$('#maxR').val(new Date().toDateInputValue());
 
 	var maxR = new Date();
 
 	maxR.setMonth(maxR.getMonth() - 1);
 	$('#minR').val(maxR.toDateInputValue());
-	
-	
+
 	var rend = $("#maxR").val();
-  	var rdate = new Date(rend);
-  	var ry = rdate.getFullYear();
-  	var rd = rdate.getDate();
-  	var rm = rdate.getMonth()-1;
-  	var rNewDate = new Date(py,pm,pd);
-  	$('#minR').datepicker( "setDate", rNewDate);
-  	pUpdateStartDate($("#maxR"),$("#minR"));
-  	$("#maxR").on('change', function(){
-  		notifyDue();
-  		pUpdateStartDate($("#maxR"),$("#minR"));
-  	});
-  	$('#minR').datepicker();
-  	pUpdateStartDate($("#maxR"),$("#minR"));
-  	$('#minR').datepicker( "setDate", new Date(ry, rm, rd));
-  	
-  	var rstart = $('#minR').val();
-  	var rdate2 = new Date(rstart);
-  	var ry2 = rdate2.getFullYear();
-  	var rd2 = rdate2.getDate();
-  	var rm2 = rdate2.getMonth()-1;
-  	var rNewDate2 = new Date(ry2,rm2,rd2);
-  	$('#maxR').datepicker( "setDate", rNewDate2);
-  	pUpdateEndDate($("#minR"),$("#maxR"));
-  	$("#minR").on('change', function(){
-  		//alert('change minR');
-  		notifyDue();
-  		pUpdateEndDate($("#minR"),$("#maxR"));
-  	});
-  	pUpdateEndDate($("#minR"),$("#maxR"));
-  	$('#maxR').datepicker( "setDate", new Date());
+	var rdate = new Date(rend);
+	var ry = rdate.getFullYear();
+	var rd = rdate.getDate();
+	var rm = rdate.getMonth() - 1;
+	var rNewDate = new Date(py, pm, pd);
+	$('#minR').datepicker("setDate", rNewDate);
+	pUpdateStartDate($("#maxR"), $("#minR"));
+	$("#maxR").on('change', function() {
+		notifyDue();
+		pUpdateStartDate($("#maxR"), $("#minR"));
+	});
+	$('#minR').datepicker();
+	pUpdateStartDate($("#maxR"), $("#minR"));
+	$('#minR').datepicker("setDate", new Date(ry, rm, rd));
+
+	var rstart = $('#minR').val();
+	var rdate2 = new Date(rstart);
+	var ry2 = rdate2.getFullYear();
+	var rd2 = rdate2.getDate();
+	var rm2 = rdate2.getMonth() - 1;
+	var rNewDate2 = new Date(ry2, rm2, rd2);
+	$('#maxR').datepicker("setDate", rNewDate2);
+	pUpdateEndDate($("#minR"), $("#maxR"));
+	$("#minR").on('change', function() {
+		// alert('change minR');
+		notifyDue();
+		pUpdateEndDate($("#minR"), $("#maxR"));
+	});
+	pUpdateEndDate($("#minR"), $("#maxR"));
+	$('#maxR').datepicker("setDate", new Date());
 	receivablesTable.draw();
 
-	 function setreceivablesTotalAmt() {
-	    var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
+	function setreceivablesTotalAmt() {
+		var receivablesAmounts = $("#receivablesTable").dataTable().$('tr', {
+			"filter" : "applied"
+		}).find(':nth-child(3)');
 		var receivablesTotal = 0;
-		for (var i = 0; i<receivablesAmounts.length; i++){
+		for (var i = 0; i < receivablesAmounts.length; i++) {
 			receivablesAmounts[i] = receivablesAmounts[i].textContent;
-			receivablesTotal+=parseFloat(receivablesAmounts[i]);
+			receivablesTotal += parseFloat(receivablesAmounts[i]);
 		}
-		$('#receivablesTotal').html("Php "+receivablesTotal.toFixed(2));
+		$('#receivablesTotal').html("Php " + receivablesTotal.toFixed(2));
 	}
 
 	setreceivablesTotalAmt();
-	
-    $('#minR, #maxR').change( function() {
-    	notifyDue();
-        receivablesTable.draw();
-        setreceivablesTotalAmt();
-        //alert('change minR maxR');
-    });
 
-   
-    $('#searchReceivables').keyup(function(){
-        notifyDue();  
-    	receivablesTable.search($(this).val()).draw() ;
-    })
-
-    var filterR = receivablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
-
-	$('#receivablesNumEntries').change(function(){
+	$('#minR, #maxR').change(function() {
 		notifyDue();
-		 receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
-	});
-    
-    // payables
-	//'<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
-	var num = $('#payablesNumEntries').val();
-    var payablesTable = $('#payablesTable').DataTable({
-    	"dom": 'tBp',
-		"pageLength": $('#payablesNumEntries').val(),
-		"buttons": [
-					{
-					    extend: 'excelHtml5',
-					    title: 'Payables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
-					{
-					    extend: 'pdfHtml5',
-					    title: 'Payables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					    	columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					},
-					{
-					    extend: 'print',
-					    title: 'Payables Summary',
-					    orientation: 'portrait',
-					    pageSize: 'LETTER',
-					    exportOptions: {
-					        columns: [ 0, 1, 2, 3, 4 ]
-					    }
-					}
-			    ],
-		"order": [[3, "desc"]]
+		receivablesTable.draw();
+		setreceivablesTotalAmt();
+		// alert('change minR maxR');
 	});
 
-   // payablesTable.buttons(0, null).container().prependTo(payablesTable.table().container());
+	$('#searchReceivables').keyup(function() {
+		notifyDue();
+		receivablesTable.search($(this).val()).draw();
+	})
+
+	var filterR = receivablesTable.rows({
+		search : 'applied'
+	}).data().each(function(value, index) {
+	});
+
+	$('#receivablesNumEntries').change(function() {
+		notifyDue();
+		receivablesTable.page.len($('#receivablesNumEntries').val()).draw();
+	});
+
+	// payables
+	// '<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
+	var num = $('#payablesNumEntries').val();
+	var payablesTable = $('#payablesTable').DataTable({
+		"dom" : 'tBp',
+		"pageLength" : $('#payablesNumEntries').val(),
+		"buttons" : [ {
+			extend : 'excelHtml5',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'pdfHtml5',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'print',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		} ],
+		"order" : [ [ 3, "desc" ] ]
+	});
+
+	// payablesTable.buttons(0,
+	// null).container().prependTo(payablesTable.table().container());
 
 	$('#maxP').val(new Date().toDateInputValue());
 
@@ -211,291 +248,298 @@ $(document).ready(function() {
 
 	max.setMonth(max.getMonth() - 1);
 	$('#minP').val(max.toDateInputValue());
-	
 
-  	var pend = $("#maxP").val();
-  	var pdate = new Date(pend);
-  	var py = pdate.getFullYear();
-  	var pd = pdate.getDate();
-  	var pm = pdate.getMonth()-1;
-  	var pNewDate = new Date(py,pm,pd);
-  	$('#minP').datepicker( "setDate", pNewDate);
-  	pUpdateStartDate($("#maxP"),$("#minP"));
-  	$("#maxP").on('change', function(){
-  		notifyDue();
-  		pUpdateStartDate($("#maxP"),$("#minP"));
-  	});
-  	$('#minP').datepicker();
-  	pUpdateStartDate($("#maxP"),$("#minP"));
-  	$('#minP').datepicker( "setDate", new Date(py, pm, pd));
-  	
-  	var pstart = $('#minP').val();
-  	var pdate2 = new Date(pstart);
-  	var py2 = pdate2.getFullYear();
-  	var pd2 = pdate2.getDate();
-  	var pm2 = pdate2.getMonth()-1;
-  	var pNewDate2 = new Date(py2,pm2,pd2);
-  	$('#maxP').datepicker( "setDate", pNewDate2);
-  	pUpdateEndDate($("#minP"),$("#maxP"));
-  	$("#minP").on('change', function(){
-  		notifyDue();
-  		pUpdateEndDate($("#minP"),$("#maxP"));
-  	});
-  	$('#maxP').datepicker();
-  	pUpdateEndDate($("#minP"),$("#maxP"));
-  	$('#maxP').datepicker( "setDate", new Date());
+	var pend = $("#maxP").val();
+	var pdate = new Date(pend);
+	var py = pdate.getFullYear();
+	var pd = pdate.getDate();
+	var pm = pdate.getMonth() - 1;
+	var pNewDate = new Date(py, pm, pd);
+	$('#minP').datepicker("setDate", pNewDate);
+	pUpdateStartDate($("#maxP"), $("#minP"));
+	$("#maxP").on('change', function() {
+		notifyDue();
+		pUpdateStartDate($("#maxP"), $("#minP"));
+	});
+	$('#minP').datepicker();
+	pUpdateStartDate($("#maxP"), $("#minP"));
+	$('#minP').datepicker("setDate", new Date(py, pm, pd));
+
+	var pstart = $('#minP').val();
+	var pdate2 = new Date(pstart);
+	var py2 = pdate2.getFullYear();
+	var pd2 = pdate2.getDate();
+	var pm2 = pdate2.getMonth() - 1;
+	var pNewDate2 = new Date(py2, pm2, pd2);
+	$('#maxP').datepicker("setDate", pNewDate2);
+	pUpdateEndDate($("#minP"), $("#maxP"));
+	$("#minP").on('change', function() {
+		notifyDue();
+		pUpdateEndDate($("#minP"), $("#maxP"));
+	});
+	$('#maxP').datepicker();
+	pUpdateEndDate($("#minP"), $("#maxP"));
+	$('#maxP').datepicker("setDate", new Date());
 	payablesTable.draw();
-    
-    function setPayablesTotalAmt(){
-	    var payablesAmounts = $("#payablesTable").dataTable().$('tr', {"filter":"applied"}).find(':nth-child(3)');
-		var payablesTotal=0;
-		for (var i = 0; i<payablesAmounts.length; i++){
+
+	function setPayablesTotalAmt() {
+		var payablesAmounts = $("#payablesTable").dataTable().$('tr', {
+			"filter" : "applied"
+		}).find(':nth-child(3)');
+		var payablesTotal = 0;
+		for (var i = 0; i < payablesAmounts.length; i++) {
 			payablesAmounts[i] = payablesAmounts[i].textContent;
-			payablesTotal+=parseFloat(payablesAmounts[i]);
+			payablesTotal += parseFloat(payablesAmounts[i]);
 		}
-		$('#payablesTotal').html("Php "+payablesTotal.toFixed(2));
+		$('#payablesTotal').html("Php " + payablesTotal.toFixed(2));
 	}
 
 	setPayablesTotalAmt();
 
-    $('#minP, #maxP').change( function() {
-    	notifyDue();
-        payablesTable.draw();
-    	setPayablesTotalAmt();
-    });
+	$('#minP, #maxP').change(function() {
+		notifyDue();
+		payablesTable.draw();
+		setPayablesTotalAmt();
+	});
 
-    $('#searchPayables').keyup(function(){
-    	notifyDue();
-          payablesTable.search($(this).val()).draw() ;
-    })
+	$('#searchPayables').keyup(function() {
+		notifyDue();
+		payablesTable.search($(this).val()).draw();
+	})
 
-    var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+	var filter = payablesTable.rows({
+		search : 'applied'
+	}).data().each(function(value, index) {
+	});
 
-	$('#payablesNumEntries').change(function(){
+	$('#payablesNumEntries').change(function() {
 		notifyDue();
 		payablesTable.page.len($('#payablesNumEntries').val()).draw();
-	});	
+	});
 
 	$('#pdone').click(function() {
-	    location.reload();
+		location.reload();
 	});
 
 	$('#rdone').click(function() {
-	    window.location.replace("main?tab=receivablesTabLink");
+		window.location.replace("main?tab=receivablesTabLink");
 	});
-	
+
 	$('#addCustDoneBtn').click(function() {
-	    window.location.replace("main?tab=customersTabLink");
+		window.location.replace("main?tab=customersTabLink");
 	});
 	$('#sdone').click(function() {
-	    window.location.replace("main?tab=suppliersTabLink");
+		window.location.replace("main?tab=suppliersTabLink");
 	});
-	
+
 	$('#ecsave').click(function() {
-	    window.location.replace("main?tab=customersTabLink");
+		window.location.replace("main?tab=customersTabLink");
 	});
 	$('#essave').click(function() {
-	    window.location.replace("main?tab=suppliersTabLink");
+		window.location.replace("main?tab=suppliersTabLink");
 	});
-	
-	$('#raddMoreBtn').attr("disabled", true);	
-	$('#paddMoreBtn').attr("disabled", true);	
-	
-	$('#pcancel').on('click',function(){
+
+	$('#raddMoreBtn').attr("disabled", true);
+	$('#paddMoreBtn').attr("disabled", true);
+
+	$('#pcancel').on('click', function() {
 		$('#addPayableForm').form('reset');
 		$('#addPayable').modal('hide');
-	});	
-  	$('.ui.form').form({
-  		fields: {
-        	uF_name: {
-          		identifier  : 'uF_name',
-          		rules: [
-	                {
-	                  type   : 'empty',
-	                  prompt : 'Please enter your First Name'
-	                },
-	                {
-	                    type   : 'regExp[/^[a-zA-Z ]+$/]',
-	                    prompt : 'Invalid input.'
-	                }
-          		]
-            },
-            uL_name: {
-              	identifier  : 'uL_name',
-              	rules: [
-	                {
-	                  	type   : 'empty',
-	                  	prompt : 'Please enter your Last Name'
-	                },
-	                {
-	                    type   : 'regExp[/^[a-zA-Z ]+$/]',
-	                    prompt : 'Invalid input.'
-	                }
-              	]
-            },
-            username: {
-                identifier  : 'username',
-                rules: [
-                  	{
-                    	type   : 'empty',
-                    	prompt : 'Please enter your username'
-                  	},                
-                  	{
-                      	type   : 'length[8]',
-                      	prompt : 'Your username must be at least 8 characters'
-                    }	                    
-                ]
-              },
-            password: {
-                identifier  : 'password',
-                rules: [
-                  	{
-                    	type   : 'empty',
-                    	prompt : 'Please enter your password'
-                  	},
-                  	{
-                    	type   : 'length[8]',
-                    	prompt : 'Your password must be at least 8 characters'
-                  	}
-                ]
-            }
-        }
-    });
-  	
-  	notifyDue();
-  	$('.dt-button').addClass("export-btn ui tiny teal button");
-  	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
-  	
-  	$('#payablesNumEntries').on('change',notifyDue);
-  	$('#receivablesNumEntries').on('change',notifyDue);
+	});
+	$('.ui.form').form({
+		fields : {
+			uF_name : {
+				identifier : 'uF_name',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Please enter your First Name'
+				}, {
+					type : 'regExp[/^[a-zA-Z ]+$/]',
+					prompt : 'Invalid input.'
+				} ]
+			},
+			uL_name : {
+				identifier : 'uL_name',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Please enter your Last Name'
+				}, {
+					type : 'regExp[/^[a-zA-Z ]+$/]',
+					prompt : 'Invalid input.'
+				} ]
+			},
+			username : {
+				identifier : 'username',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Please enter your username'
+				}, {
+					type : 'length[8]',
+					prompt : 'Your username must be at least 8 characters'
+				} ]
+			},
+			password : {
+				identifier : 'password',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Please enter your password'
+				}, {
+					type : 'length[8]',
+					prompt : 'Your password must be at least 8 characters'
+				} ]
+			}
+		}
+	});
+
+	notifyDue();
+	$('.dt-button').addClass("export-btn ui tiny teal button");
+	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
+
+	$('#payablesNumEntries').on('change', notifyDue);
+	$('#receivablesNumEntries').on('change', notifyDue);
 });
 
-function notifyDue(){
+function notifyDue() {
 	var today = new Date();
-  	today.setHours(0,0,0,0);
-  	var overdue = '<div class="ui left red pointing label">Overdue</div>';
-  	var dueToday = '<div class="ui left orange pointing label">Due today</div>';
-  	$('.dueDate').each(function(){
-  		var due = new Date (this.innerHTML);
-  		due.setHours(0,0,0,0);
-  		if(today.getTime() == due.getTime())
-  			this.innerHTML += dueToday;
-  		else if (today>due)
-  			this.innerHTML += overdue;
-  	});
+	today.setHours(0, 0, 0, 0);
+	var overdue = '<div class="ui left red pointing label">Overdue</div>';
+	var dueToday = '<div class="ui left orange pointing label">Due today</div>';
+	$('.dueDate').each(function() {
+		var due = new Date(this.innerHTML);
+		due.setHours(0, 0, 0, 0);
+		if (today.getTime() == due.getTime())
+			this.innerHTML += dueToday;
+		else if (today > due)
+			this.innerHTML += overdue;
+	});
 }
 function pUpdateStartDate(max, min) {
-	var maxVal =max.val(); 
-    var date = new Date(maxVal);
-    var date = new Date(maxVal);
-    var currentMonth = date.getMonth();
-    var currentDate = date.getDate()-1;
-    var currentYear = date.getFullYear();
-    min.datepicker( "option", "maxDate", new Date(currentYear, currentMonth, currentDate));
+	var maxVal = max.val();
+	var date = new Date(maxVal);
+	var date = new Date(maxVal);
+	var currentMonth = date.getMonth();
+	var currentDate = date.getDate() - 1;
+	var currentYear = date.getFullYear();
+	min.datepicker("option", "maxDate", new Date(currentYear, currentMonth,
+			currentDate));
 }
 
 function pUpdateEndDate(min, max) {
-	var maxVal =min.val(); 
-    var date = new Date(maxVal);
-    var date = new Date(maxVal);
-    var currentMonth = date.getMonth();
-    var currentDate = date.getDate()+1;
-    var currentYear = date.getFullYear();
-    max.datepicker( "option", "minDate", new Date(currentYear, currentMonth, currentDate));
+	var maxVal = min.val();
+	var date = new Date(maxVal);
+	var date = new Date(maxVal);
+	var currentMonth = date.getMonth();
+	var currentDate = date.getDate() + 1;
+	var currentYear = date.getFullYear();
+	max.datepicker("option", "minDate", new Date(currentYear, currentMonth,
+			currentDate));
 }
 
-//MODALS
+// MODALS
 $('.top.menu .item').tab();
 
-$('#addemployeeBtn').click(function(){
+$('#addemployeeBtn').click(function() {
 	$('#addemployee').modal({
-		closable: false
+		closable : false
 	})
 	$('#addemployee').modal('show');
-});	
+});
 
-$('#addadministratorBtn').click(function(){
+$('#addadministratorBtn').click(function() {
 	$('#addadministrator').modal({
-		closable: false
+		closable : false
 	})
 	$('#addadministrator').modal('show');
 });
 
-$('#addPayableBtn').click(function(){
+$('#addPayableBtn').click(function() {
 	$('#addPayable').modal({
-		closable: false
+		closable : false
 	})
 
 	$('#addPayable').modal('show');
 });
 
-$('#addReceivableBtn').click(function(){
+$('#addReceivableBtn').click(function() {
 	$('#addReceivable').modal({
-		closable: false
+		closable : false
 	})
 	$('#addReceivable').modal('show');
-});	
+});
 
-$('#addSupplierBtn').click(function(){
+$('#addSupplierBtn').click(function() {
 	$('#addSupplier').modal({
-		closable: false
+		closable : false
 	})
 	$('#addSupplier').modal('show');
-});	
+});
 
-$('#addCustomerBtn').click(function(){
+$('#addCustomerBtn').click(function() {
 	$('#addCustomer').modal({
-		closable: false
+		closable : false
 	})
 	$('#addCustomer').modal('show');
-});	
+});
 
-$('#logoutLink').click(function(){
+$('#logoutLink').click(function() {
 	$('#logout').modal('show');
 });
 
-//edit stuffs
-function editAdmin(id, username, f_name, l_name, password, status){
+// edit stuffs
+function editAdmin(id, username, f_name, l_name, password, status) {
 	document.getElementById("adminId").value = id;
 	document.getElementById("adminUsername").value = username;
 	document.getElementById("adminF_name").value = f_name;
 	document.getElementById("adminL_name").value = l_name;
 	document.getElementById("adminPassword").value = password;
 	document.getElementById("adminCpassword").value = password;
-	document.getElementById('ausernameTaken').innerText= null;
+	document.getElementById('ausernameTaken').innerText = null;
 	document.getElementById('ausernameTaken').setAttribute("class", "");
 	$('#editadministrator').modal({
-		closable: false
+		closable : false
 	})
 	$('#editadministrator').modal('show');
 }
 
-function paginate(){
-	$('table.paginated').each(function() {
-	    var currentPage = 0;
-	    var numPerPage = 4;
-	    var $table = $(this);
-	    $table.bind('repaginate', function() {
-	        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
-	    });
-	    $table.trigger('repaginate');
-	    var numRows = $table.find('tbody tr').length;
-	    var numPages = Math.ceil(numRows / numPerPage);
-	    var $pager = $('<div class="ui pagination menu pager" style="float:right; margin-bottom:5px;"></div>');
-	    for (var page = 0; page < numPages; page++) {
-	        $('<span class="ui teal item page-number"></span>').text(page + 1).bind('click', {
-	            newPage: page
-	        }, function(event) {
-	            currentPage = event.data['newPage'];
-	            $table.trigger('repaginate');
-	            $(this).addClass('active').siblings().removeClass('active');
-	        }).appendTo($pager).addClass('clickable');
-	    }
-	    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
-	});
+function paginate() {
+	$('table.paginated')
+			.each(
+					function() {
+						var currentPage = 0;
+						var numPerPage = 4;
+						var $table = $(this);
+						$table.bind('repaginate', function() {
+							$table.find('tbody tr').hide().slice(
+									currentPage * numPerPage,
+									(currentPage + 1) * numPerPage).show();
+						});
+						$table.trigger('repaginate');
+						var numRows = $table.find('tbody tr').length;
+						var numPages = Math.ceil(numRows / numPerPage);
+						var $pager = $('<div class="ui pagination menu pager" style="float:right; margin-bottom:5px;"></div>');
+						for (var page = 0; page < numPages; page++) {
+							$('<span class="ui teal item page-number"></span>')
+									.text(page + 1)
+									.bind(
+											'click',
+											{
+												newPage : page
+											},
+											function(event) {
+												currentPage = event.data['newPage'];
+												$table.trigger('repaginate');
+												$(this).addClass('active')
+														.siblings()
+														.removeClass('active');
+											}).appendTo($pager).addClass(
+											'clickable');
+						}
+						$pager.insertBefore($table).find(
+								'span.page-number:first').addClass('active');
+					});
 }
 
-function editEmployee(id, username, f_name, l_name, password, status){
+function editEmployee(id, username, f_name, l_name, password, status) {
 	document.getElementById("empId").value = id;
 	document.getElementById("empUsername").value = username;
 	document.getElementById("empF_name").value = f_name;
@@ -503,15 +547,16 @@ function editEmployee(id, username, f_name, l_name, password, status){
 	document.getElementById("empPassword").value = password;
 	document.getElementById("empCpassword").value = password;
 	document.getElementById('deactivated').innerText = null;
-	document.getElementById('eusernameTaken').innerText= null;
+	document.getElementById('eusernameTaken').innerText = null;
 	document.getElementById('eusernameTaken').setAttribute("class", "");
 	$('#editemployee').modal({
-		closable: false
+		closable : false
 	})
 	$('#editemployee').modal('show');
 }
 
-function editSupplier(esname,esaddress,estelephone_no, esmobile_no,esterms,esid){
+function editSupplier(esname, esaddress, estelephone_no, esmobile_no, esterms,
+		esid) {
 	$('#editSupplierModal').modal('show');
 	$('#esname').val(esname);
 	$('#esaddress').val(esaddress);
@@ -536,7 +581,8 @@ function editSupplier(esname,esaddress,estelephone_no, esmobile_no,esterms,esid)
 	$("#esid").val(esid);
 }
 
-function editCustomer(ecname,ecaddress,ectelephone_no, ecmobile_no,ecterms,ecid){
+function editCustomer(ecname, ecaddress, ectelephone_no, ecmobile_no, ecterms,
+		ecid) {
 	$('#editCustomerModal').modal('show');
 	$('#ecname').val(ecname);
 	$('#ecaddress').val(ecaddress);
@@ -561,7 +607,7 @@ function editCustomer(ecname,ecaddress,ectelephone_no, ecmobile_no,ecterms,ecid)
 	$("#ecid").val(ecid);
 }
 
-function editReceivable(that, id, or_no, transactor_id, amount, date){
+function editReceivable(that, id, or_no, transactor_id, amount, date) {
 	var transName = $(that).parent().parent().find(":nth-child(2)").html()
 	transName = $.trim(transName);
 	$('#ercustomer_name').val(transName);
@@ -572,7 +618,7 @@ function editReceivable(that, id, or_no, transactor_id, amount, date){
 	$('#editReceivableModal').modal('show');
 }
 
-function editPayable(that,id, or_no, transactor_id, amount, date){
+function editPayable(that, id, or_no, transactor_id, amount, date) {
 	var t = this.find(":nth-child(2)");
 	console.log(t);
 	sample = that;
@@ -586,7 +632,7 @@ function editPayable(that,id, or_no, transactor_id, amount, date){
 	$('#editPayableModal').modal('show');
 }
 
-function editTransactor(name, address, telephone_no, mobile_no, terms){
+function editTransactor(name, address, telephone_no, mobile_no, terms) {
 	document.getElementById("empId").value = id;
 	document.getElementById("empUsername").value = username;
 	document.getElementById("empF_name").value = f_name;
@@ -594,93 +640,85 @@ function editTransactor(name, address, telephone_no, mobile_no, terms){
 	document.getElementById("empPassword").value = password;
 	document.getElementById("empCpassword").value = password;
 
-	$('#editemployee').modal('show');	
+	$('#editemployee').modal('show');
 }
 
-function editUserAccount(id, f_name, l_name, password){
+function editUserAccount(id, f_name, l_name, password) {
 	document.getElementById("uId").value = id;
 	document.getElementById("uF_name").value = f_name;
 	document.getElementById("uL_name").value = l_name;
 	document.getElementById("uCurrentPass").value = password;
 }
 
-//unsorted
-function edit(){
+// unsorted
+function edit() {
 	$('#saveBtn').show();
 	$('.displayFirst').hide();
 	$('.displaySec').show();
 	$('#editBtn').hide();
 }
 
-function save(){
+function save() {
 	$('#saveBtn').hide();
 	$('.displayFirst').show();
 	$('.displaySec').hide();
 	$('#editBtn').show();
 	$('#newPass').hide();
 	$('.oldPass').show();
-}	
-
-function changePassword(){		
-	$('.oldPass').hide();
-	$('#newPass').show();
-	
-	$('.ui.form').form({
-      	fields: {
-          	uCurrentPass: {
-            	identifier  : 'uCurrentPass'         
-        	},
-            uCurrPass: {
-              	identifier  : 'uCurrPass',
-              	rules: [
-	                {
-	                  type   : 'empty',
-	                  prompt : 'Please enter current password'
-	                },                
-	                {
-	                    type   : 'match[uCurrentPass]',
-	                    prompt : 'The current password entered is incorrect.'
-	                }
-                ]
-            },
-            uNewPass: {
-              	identifier  : 'uNewPass',
-              	rules: [
-	                {
-	                  	type   : 'empty',
-	                  	prompt : 'Please enter your new password'
-	                },
-	                {
-	                  	type   : 'length[8]',
-	                  	prompt : 'Your new password must be at least 8 characters'
-	                }
-              	]              
-            },
-            uCNewPass: {
-              	identifier  : 'uCNewPass',
-              	rules: [
-                	{
-                  		type   : 'match[uNewPass]',
-                  		prompt : 'Password does not match'
-                	}
-              	]              
-        	}
-      	}
-    });
 }
 
-function toggleNewSupplier(){
+function changePassword() {
+	$('.oldPass').hide();
+	$('#newPass').show();
+
+	$('.ui.form').form({
+		fields : {
+			uCurrentPass : {
+				identifier : 'uCurrentPass'
+			},
+			uCurrPass : {
+				identifier : 'uCurrPass',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Please enter current password'
+				}, {
+					type : 'match[uCurrentPass]',
+					prompt : 'The current password entered is incorrect.'
+				} ]
+			},
+			uNewPass : {
+				identifier : 'uNewPass',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Please enter your new password'
+				}, {
+					type : 'length[8]',
+					prompt : 'Your new password must be at least 8 characters'
+				} ]
+			},
+			uCNewPass : {
+				identifier : 'uCNewPass',
+				rules : [ {
+					type : 'match[uNewPass]',
+					prompt : 'Password does not match'
+				} ]
+			}
+		}
+	});
+}
+
+function toggleNewSupplier() {
 	var selectedValue = document.getElementById("payabaleSupplierList").value;
-	if(selectedValue == -1) {
+	if (selectedValue == -1) {
 		$(".payableNewSupplier").show();
 	} else {
 		$(".payableNewSupplier").hide();
 	}
 }
 
-function toggleNewCustomer(){
+function toggleNewCustomer() {
 	var selectedValue = document.getElementById("receivableCustomerList").value;
-	if(selectedValue == -1) {
+	if (selectedValue == -1) {
 		$(".receivableNewCustomer").show();
 	} else {
 		$(".receivableNewCustomer").hide();
@@ -691,27 +729,31 @@ function addNewCustomer() {
 	$('#addCustomerBtn').click();
 }
 
-//used to check if input is a number with 2 decimal places
-function checkDec(el){
-	 var ex = /^[0-9]+\.?[0-9]*$/;
-	 if(ex.test(el.value) == false){
-	   el.value = el.value.substring(0,el.value.length - 1);
-	 }
+// used to check if input is a number with 2 decimal places
+function checkDec(el) {
+	var ex = /^[0-9]+\.?[0-9]*$/;
+	if (ex.test(el.value) == false) {
+		el.value = el.value.substring(0, el.value.length - 1);
+	}
 }
 
-function tablePayment(acct_id){
+function tablePayment(acct_id) {
 	var d;
 	var datestring;
 	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
 	var boom = document.getElementById("yeah").innerHTML;
-	$(jQuery.parseJSON(boom)).each(function() {  
-        if(this.account == acct_id){
-        	d = new Date(this.received_date);
+	$(jQuery.parseJSON(boom)).each(
+			function() {
+				if (this.account == acct_id) {
+					d = new Date(this.received_date);
 
-        	myTable = myTable + '<tr><td>'+ d.toLocaleString() + '</td><td hidden>' + this.amount + '</td><td>PHP ' + (this.amount).toFixed(2) + '</td></tr>';
-        }
-		
-	});
+					myTable = myTable + '<tr><td>' + d.toLocaleString()
+							+ '</td><td hidden>' + this.amount
+							+ '</td><td>PHP ' + (this.amount).toFixed(2)
+							+ '</td></tr>';
+				}
+
+			});
 	myTable += '</tbody></table>';
 	document.getElementById("tablePymnt").innerHTML = myTable;
 	paginate();
@@ -720,92 +762,90 @@ function tablePayment(acct_id){
 function addPayment(account_id, acct_name, amt) {
 	accid = account_id;
 	tablePayment(account_id);
-	amtbal = amt;  
+	amtbal = amt;
 	balance();
-    
+
 	document.getElementById("pmAccount_id").value = account_id;
 
 	$('#pmAccountName').html(acct_name);
-	
+
 	$('#payments').modal({
-		closable: false
+		closable : false
 	});
 	$('#payments').modal('show');
 	$('.ui.form').form({
-      	fields: {
-        	pmAmount: {
-          		identifier  : 'pmAmount',
-	            rules: [
-	                {
-	                  	type   : 'empty',
-	                  	prompt : 'Please enter amount.'
-	                },
-	                {
-	                    type   : 'regExp[/^\\d+\.?\\d{0,2}$/]',
-	                    prompt : 'Invalid input.'
-	                },
-	                {
-	                    type   : 'notExactly[0]',
-	                    prompt : 'Please enter amount.'
-	                }                    
-	            ]
-        	}
-      	}
-    });
+		fields : {
+			pmAmount : {
+				identifier : 'pmAmount',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Please enter amount.'
+				}, {
+					type : 'regExp[/^\\d+\.?\\d{0,2}$/]',
+					prompt : 'Invalid input.'
+				}, {
+					type : 'notExactly[0]',
+					prompt : 'Please enter amount.'
+				} ]
+			}
+		}
+	});
 }
 
-function pymntAdded(){
-	$("#yeah").load(location.href + " #yeah",function(){
-		tablePayment(accid);	
+function pymntAdded() {
+	$("#yeah").load(location.href + " #yeah", function() {
+		tablePayment(accid);
 		balance();
 	});
 }
 
-function balance(){	   
+function balance() {
 	var rawr = 0;
-    var rowsP = $("#paymentsTable tr:gt(0)");
-    rowsP.children("td:nth-child(2)").each(function() {
-    	rawr += parseFloat($(this).html());
-    });
-    
-    if(rawr >= amtbal){
-    	document.getElementById("totalpymnt").style.color = "green";
-    }
-    else{
-    	document.getElementById("totalpymnt").style.color = "red";
-    }
-    
-    $("#totalpymnt").html("PHP " + rawr.toFixed(2));
+	var rowsP = $("#paymentsTable tr:gt(0)");
+	rowsP.children("td:nth-child(2)").each(function() {
+		rawr += parseFloat($(this).html());
+	});
+
+	if (rawr >= amtbal) {
+		document.getElementById("totalpymnt").style.color = "green";
+	} else {
+		document.getElementById("totalpymnt").style.color = "red";
+	}
+
+	$("#totalpymnt").html("PHP " + rawr.toFixed(2));
 }
 
 function psaved() {
 	$('#addPayableErrorList').show();
 	$('#pdone').show();
 	$('#pcancel').hide();
-	if(document.getElementById('addPayableErrorList').innerText==""){
-		$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
-		$('#paddMoreBtn').attr("disabled", false);	
+	if (document.getElementById('addPayableErrorList').innerText == "") {
+		$('#addPayableForm')
+				.find(
+						'input[type="text"], input[type="number"], input[type="checkbox"], select')
+				.prop("disabled", true);
+		$('#paddMoreBtn').attr("disabled", false);
 		$('#savePayableBtn').val('Saved');
-		$('#savePayableBtn').attr("disabled", "disabled");	
+		$('#savePayableBtn').attr("disabled", "disabled");
 		$('#addPayableErrorList').hide();
 	}
-} 
+}
 
 function pesaved() {
 	$('#editPayableErrorList').show();
-	if(document.getElementById('editPayableErrorList').innerText==""){
+	if (document.getElementById('editPayableErrorList').innerText == "") {
 		$('#editPayableErrorList').hide();
 		window.location.replace("main?tab=payablesTabLink");
 	}
-} 
+}
 function resaved() {
 	$('#editReceivableErrorList').show();
-	if(document.getElementById('editReceivableErrorList').innerText==""){
+	if (document.getElementById('editReceivableErrorList').innerText == "") {
 		$('#editReceivableErrorList').hide();
 		window.location.replace("main?tab=receivablesTabLink");
 	}
-} 
-function paddmore(){
+}
+function paddmore() {
 	$('#pdate').val('');
 	$('#pamount').val('');
 	$('#por_no').val('');
@@ -818,29 +858,38 @@ function paddmore(){
 	$('.payableNewSupplier').hide();
 	$('#payabaleSupplierList').val('0');
 	$('#savePayableBtn').val('Save');
-	document.getElementById('paddMoreBtn').className = 'ui button'; 
+	document.getElementById('paddMoreBtn').className = 'ui button';
 	$('#savePayableBtn').removeAttr("disabled");
-	$("#paddMoreBtn").attr("disabled", "disabled");		
-	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
-	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
-	document.getElementById('addPayableErrorList').innerText==null;
+	$("#paddMoreBtn").attr("disabled", "disabled");
+	$('#addPayableForm')
+			.find(
+					'input[type="text"], input[type="number"], input[type="checkbox"], select')
+			.prop("disabled", false);
+	$('#addPayableForm')
+			.find(
+					'input[type="text"], input[type="number"], input[type="checkbox"], select')
+			.attr("readonly", false);
+	document.getElementById('addPayableErrorList').innerText == null;
 	$('#addPayableErrorList').hide();
 }
 
-function rsaved(){
+function rsaved() {
 	$('#addReceivableErrorList').show();
 	$('#rdone').show();
 	$('#rcancel').hide();
-	if(document.getElementById('addReceivableErrorList').innerText==""){
-		$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
-		$('#raddMoreBtn').attr("disabled", false);	
+	if (document.getElementById('addReceivableErrorList').innerText == "") {
+		$('#addReceivableForm')
+				.find(
+						'input[type="text"], input[type="number"], input[type="checkbox"], select')
+				.prop("disabled", true);
+		$('#raddMoreBtn').attr("disabled", false);
 		$('#saveReceivableBtn').val('Saved');
-		$('#saveReceivableBtn').attr("disabled", "disabled");	
+		$('#saveReceivableBtn').attr("disabled", "disabled");
 		$('#addReceivableErrorList').hide();
 	}
 }
 
-function raddmore(){
+function raddmore() {
 	$('#rdate').val('');
 	$('#ramount').val('');
 	$('#ror_no').val('');
@@ -853,22 +902,28 @@ function raddmore(){
 	$('.receivableNewCustomer').hide();
 	$('#receivableCustomerList').val('0');
 	$('#saveReceivableBtn').val('Save');
-	document.getElementById('raddMoreBtn').className = 'ui button'; 
+	document.getElementById('raddMoreBtn').className = 'ui button';
 	$('#saveReceivableBtn').removeAttr("disabled");
 	$("#raddMoreBtn").attr("disabled", "disabled");
-	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
-	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
-	document.getElementById('addReceivableErrorList').innerText==null;
+	$('#addReceivableForm')
+			.find(
+					'input[type="text"], input[type="number"], input[type="checkbox"], select')
+			.prop("disabled", false);
+	$('#addReceivableForm')
+			.find(
+					'input[type="text"], input[type="number"], input[type="checkbox"], select')
+			.attr("readonly", false);
+	document.getElementById('addReceivableErrorList').innerText == null;
 	$('#addReceivableErrorList').hide();
 }
 
 Date.prototype.toDateInputValue = (function() {
-    var local = new Date(this);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0,10);
+	var local = new Date(this);
+	local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+	return local.toJSON().slice(0, 10);
 });
 
-$('#settingsLink').click(function(){
+$('#settingsLink').click(function() {
 	$('#userSettings').modal('show');
 	$('.displaySec').hide();
 	$('.displayFirst').show();
@@ -876,136 +931,157 @@ $('#settingsLink').click(function(){
 	$('#saveBtn').hide();
 	$('#newPass').hide();
 	$('.oldPass').show();
-});	
+});
 
-function csaved(){	
+function csaved() {
 	document.getElementById('Validations').setAttribute("hidden", "hidden");
 	var status = document.getElementById('Validations').innerText;
-	if(status==""){
-	document.getElementById('caddMoreBtn').className = 'ui teal button'; 
-	document.getElementById('csaveBtn').value = 'Saved';
-	$("#cDoneBtn").show();
-	$("#cCancelBtn").hide();
-	$("#csaveBtn").attr("disabled", "disabled");
-	$("#caddMoreBtn").removeAttr("disabled");
-	$('#cname').prop('readonly', true);
-	$('#caddress').prop('readonly', true);
-	$('#ctelephone_no').prop('readonly', true);
-	$('#cmobile_no').prop('readonly', true);
-	$('#cterms').prop('readonly', true);
-	$('#cselect').prop('disabled', true);
-	}else{
+	if (status == "") {
+		document.getElementById('caddMoreBtn').className = 'ui teal button';
+		document.getElementById('csaveBtn').value = 'Saved';
+		$("#cDoneBtn").show();
+		$("#cCancelBtn").hide();
+		$("#csaveBtn").attr("disabled", "disabled");
+		$("#caddMoreBtn").removeAttr("disabled");
+		$('#cname').prop('readonly', true);
+		$('#caddress').prop('readonly', true);
+		$('#ctelephone_no').prop('readonly', true);
+		$('#cmobile_no').prop('readonly', true);
+		$('#cterms').prop('readonly', true);
+		$('#cselect').prop('disabled', true);
+	} else {
 		document.getElementById('Validations').removeAttribute("hidden");
 	}
 }
 
-function ssaved(){	
+function ssaved() {
 	document.getElementById('svalidations').setAttribute("hidden", "hidden");
 	var status = document.getElementById('svalidations').innerText;
-	if(status==""){
-	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
-	document.getElementById('ssaveBtn').value = 'Saved';
-	$("#sDoneBtn").show();
-	$("#sCancelBtn").hide();
-	$("#ssaveBtn").attr("disabled", "disabled");
-	$("#saddMoreBtn").removeAttr("disabled");
-	$('#sname').prop('readonly', true);
-	$('#saddress').prop('readonly', true);
-	$('#stelephone_no').prop('readonly', true);
-	$('#smobile_no').prop('readonly', true);
-	$('#sterms').prop('readonly', true);
-	$('#sselect').prop('disabled', true);
-	}else{
+	if (status == "") {
+		document.getElementById('saddMoreBtn').className = 'ui teal button';
+		document.getElementById('ssaveBtn').value = 'Saved';
+		$("#sDoneBtn").show();
+		$("#sCancelBtn").hide();
+		$("#ssaveBtn").attr("disabled", "disabled");
+		$("#saddMoreBtn").removeAttr("disabled");
+		$('#sname').prop('readonly', true);
+		$('#saddress').prop('readonly', true);
+		$('#stelephone_no').prop('readonly', true);
+		$('#smobile_no').prop('readonly', true);
+		$('#sterms').prop('readonly', true);
+		$('#sselect').prop('disabled', true);
+	} else {
 		document.getElementById('svalidations').removeAttribute("hidden");
 	}
 }
 
-
-function addedEmployee(){
+function addedEmployee() {
 	var status = document.getElementById('usernameTakene').innerText;
-	if(status == "User has been saved."){
+	if (status == "User has been saved.") {
 		$("#eaddMoreB").removeAttr("disabled");
 		document.getElementById('esaveB').value = 'Saved';
-		document.getElementById('esaveB').setAttribute("disabled","disabled");
-		document.getElementById('usernameTakene').setAttribute("hidden","hidden");
-		$('#addEmployeeForm').find('input[type="text"],input[type="password"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		document.getElementById('esaveB').setAttribute("disabled", "disabled");
+		document.getElementById('usernameTakene').setAttribute("hidden",
+				"hidden");
+		$('#addEmployeeForm')
+				.find(
+						'input[type="text"],input[type="password"], input[type="number"], input[type="checkbox"], select')
+				.prop("disabled", true);
 		$("#eDoneBtn").show();
 		$("#eCancelBtn").hide();
-	}else{
+	} else {
 		document.getElementById('usernameTakene').removeAttribute("hidden");
 		document.getElementById('usernameTakene').setAttribute("class", "");
-		document.getElementById('usernameTakene').setAttribute("class","ui negative small message");
+		document.getElementById('usernameTakene').setAttribute("class",
+				"ui negative small message");
 	}
 }
 
-	function changeUserStatus(){
-		var status = document.getElementById('deactivated').innerText;
-		if(status="deactivated"){
-			$('#editemployee').modal('hide');
-			$('#editadministrator').modal('hide');		
-		}
+function changeUserStatus() {
+	var status = document.getElementById('deactivated').innerText;
+	if (status = "deactivated") {
+		$('#editemployee').modal('hide');
+		$('#editadministrator').modal('hide');
 	}
-	function editedEmployee(){
-		document.getElementById('eusernameTaken').setAttribute("hidden","hidden");
-		document.getElementById('eusernameTaken').setAttribute("class", "");
-		var status = document.getElementById('eusernameTaken').innerText;
-		if(status == "User information has been saved."){
-			$('#editemployee').modal('hide');
-		}else{
-			document.getElementById('eusernameTaken').setAttribute("class","ui negative small message");
-			document.getElementById('eusernameTaken').removeAttribute("hidden");
-		}
+}
+function editedEmployee() {
+	document.getElementById('eusernameTaken').setAttribute("hidden", "hidden");
+	document.getElementById('eusernameTaken').setAttribute("class", "");
+	var status = document.getElementById('eusernameTaken').innerText;
+	if (status == "User information has been saved.") {
+		$('#editemployee').modal('hide');
+	} else {
+		document.getElementById('eusernameTaken').setAttribute("class",
+				"ui negative small message");
+		document.getElementById('eusernameTaken').removeAttribute("hidden");
 	}
-	function editedAdmin(){
-		document.getElementById('eusernameTaken').setAttribute("class", "");		
-		var status = document.getElementById('ausernameTaken').innerText;
-		if(status == "User information has been saved."){
-			$('#editadministrator').modal('hide');
-		}else{
-			document.getElementById('ausernameTaken').setAttribute("class","ui negative small message");
-			document.getElementById('ausernameTaken').removeAttr("hidden");
-		}
+}
+function editedAdmin() {
+	document.getElementById('eusernameTaken').setAttribute("class", "");
+	var status = document.getElementById('ausernameTaken').innerText;
+	if (status == "User information has been saved.") {
+		$('#editadministrator').modal('hide');
+	} else {
+		document.getElementById('ausernameTaken').setAttribute("class",
+				"ui negative small message");
+		document.getElementById('ausernameTaken').removeAttr("hidden");
 	}
-	function addedMoreEmployee(){
-	
+}
+function addedMoreEmployee() {
+
 	var status = document.getElementById('euserSaved').innerText;
-	if(status == "true"){
+	if (status == "true") {
 		document.getElementById('esaveB').value = 'Save';
 		$("#esaveB").removeAttr("disabled");
-		document.getElementById('eaddMoreB').setAttribute("disabled","disabled");
+		document.getElementById('eaddMoreB').setAttribute("disabled",
+				"disabled");
 		document.getElementById('usernameTakene').innerText = null;
 		document.getElementById('euserSaved').innerText = null;
 		document.getElementById('usernameTakene').setAttribute("class", "")
 		document.getElementById('eresetBtn').click();
-		
+		$('#addEmployeeForm')
+				.find(
+						'input[type="text"], input[type="number"], input[type="checkbox"], select')
+				.prop("disabled", false);
+		$('#addEmployeeForm')
+				.find(
+						'input[type="text"], input[type="number"], input[type="checkbox"], select')
+				.attr("readonly", false);
 
 	}
 }
 
-function addedAdmin(){
+function addedAdmin() {
 	document.getElementById('usernameTakena').setAttribute("class", "");
 	var status = document.getElementById('usernameTakena').innerText;
-	if(status == "User has been saved."){
-		document.getElementById('usernameTakena').setAttribute("class","ui message");
+	if (status == "User has been saved.") {
+		document.getElementById('usernameTakena').setAttribute("class",
+				"ui message");
 		$("#aaddMoreB").removeAttr("disabled");
 		document.getElementById('asaveB').value = 'Saved';
-		document.getElementById('asaveB').setAttribute("disabled","disabled");
-		document.getElementById('usernameTakena').setAttribute("hidden","hidden");
+		document.getElementById('asaveB').setAttribute("disabled", "disabled");
+		document.getElementById('usernameTakena').setAttribute("hidden",
+				"hidden");
 		$("#aDoneBtn").show();
 		$("#aCancelBtn").hide();
-		$('#addAdminForm').find('input[type="text"],input[type="password"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
-		
-	}else{
-		document.getElementById('usernameTakena').setAttribute("class","ui negative small message");
+		$('#addAdminForm')
+				.find(
+						'input[type="text"],input[type="password"], input[type="number"], input[type="checkbox"], select')
+				.prop("disabled", true);
+
+	} else {
+		document.getElementById('usernameTakena').setAttribute("class",
+				"ui negative small message");
 		document.getElementById('usernameTakena').removeAttribute("hidden");
 	}
-}  
+}
 
-function addedMoreAdmin(){
+function addedMoreAdmin() {
 	var status = document.getElementById('auserSaved').innerText;
-	if(status == "true"){
+	if (status == "true") {
 		$("#asaveB").removeAttr("disabled");
-		document.getElementById('aaddMoreB').setAttribute("disabled","disabled");
+		document.getElementById('aaddMoreB').setAttribute("disabled",
+				"disabled");
 		document.getElementById('usernameTakena').innerText = null;
 		document.getElementById('auserSaved').innerText = null;
 		document.getElementById('usernameTakena').setAttribute("class", "")
@@ -1013,9 +1089,9 @@ function addedMoreAdmin(){
 	}
 }
 
-function addmoreClick(){
+function addmoreClick() {
 	document.getElementById('saveBtn').value = 'Save';
-	document.getElementById('addMoreBtn').className = 'ui button'; 
+	document.getElementById('addMoreBtn').className = 'ui button';
 	$("#saveBtn").removeAttr("disabled");
 	$("#addMoreBtn").attr("disabled", "disabled");
 	document.getElementById('resetBtn').click();
@@ -1025,12 +1101,12 @@ function addmoreClick(){
 	$('#mobile_no').prop('readonly', false);
 	$('#terms').prop('readonly', false);
 	$('#select').prop('disabled', false);
-}	
+}
 
-function saddmoreClick(){
+function saddmoreClick() {
 	document.getElementById('saddResetBtn').click();
 	document.getElementById('ssaveBtn').value = 'Save';
-	document.getElementById('saddMoreBtn').className = 'ui button'; 
+	document.getElementById('saddMoreBtn').className = 'ui button';
 	$("#ssaveBtn").removeAttr("disabled");
 	$("#saddMoreBtn").attr("disabled", "disabled");
 	$('#sname').prop('readonly', false);
@@ -1039,12 +1115,12 @@ function saddmoreClick(){
 	$('#smobile_no').prop('readonly', false);
 	$('#sterms').prop('readonly', false);
 	$('#sselect').prop('disabled', false);
-} 
+}
 
-function caddmoreClick(){
+function caddmoreClick() {
 	document.getElementById('cresetBtn').click();
 	document.getElementById('csaveBtn').value = 'Save';
-	document.getElementById('caddMoreBtn').className = 'ui button'; 
+	document.getElementById('caddMoreBtn').className = 'ui button';
 	$("#csaveBtn").removeAttr("disabled");
 	$("#caddMoreBtn").attr("disabled", "disabled");
 	$('#cname').prop('readonly', false);
@@ -1053,57 +1129,46 @@ function caddmoreClick(){
 	$('#cmobile_no').prop('readonly', false);
 	$('#cterms').prop('readonly', false);
 	$('#cselect').prop('disabled', false);
-} 
+}
 
-
-
-$.fn.dataTable.ext.search.push(
-		function( settings, data, dataIndex ) {
-			if ( settings.nTable != document.getElementById('receivablesTable')) {
-			    return true;
-			}
-	  		var min = Date.parse($('#minR').val(),10);
-	  		var max = Date.parse($('#maxR').val());
-	  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
-	        if ( ( isNaN( min ) && isNaN( max ) ) ||
-	             ( isNaN( min ) && date <= max ) ||
-	             ( min <= date   && isNaN( max ) ) ||
-	             ( min <= date   && date <= max ) )
-	        {
-	            return true;
-	        }
-	        return false;
-	    }
-);
-
-$.fn.dataTable.ext.search.push(
-		function( settings, data, dataIndex ) {
-			if ( settings.nTable != document.getElementById('payablesTable')) {
-			    return true;
-			}
-	  		var min = Date.parse($('#minP').val(),10);
-	  		var max = Date.parse($('#maxP').val());
-	  		var date = Date.parse( data[3].toString().split(' ') [0]) || 0;
-	        if ( ( isNaN( min ) && isNaN( max ) ) ||
-	             ( isNaN( min ) && date <= max ) ||
-	             ( min <= date   && isNaN( max ) ) ||
-	             ( min <= date   && date <= max ) )
-	        {
-	            return true;
-	        }
-	        return false;
-	    }
-);
-
-$.fn.dataTable.Api.register( 'sum()', function () {
-    return this.flatten().reduce( function (a, b) {
-        if ( typeof a === 'string' ) {
-            a = a.replace(/[^\d.-]/g, '') * 1;
-        }
-        if ( typeof b === 'string' ) {
-            b = b.replace(/[^\d.-]/g, '') * 1;
-        }
- 
-        return a + b;
-    }, 0 );
+$.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+	if (settings.nTable != document.getElementById('receivablesTable')) {
+		return true;
+	}
+	var min = Date.parse($('#minR').val(), 10);
+	var max = Date.parse($('#maxR').val());
+	var date = Date.parse(data[3].toString().split(' ')[0]) || 0;
+	if ((isNaN(min) && isNaN(max)) || (isNaN(min) && date <= max)
+			|| (min <= date && isNaN(max)) || (min <= date && date <= max)) {
+		return true;
+	}
+	return false;
 });
+
+$.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+	if (settings.nTable != document.getElementById('payablesTable')) {
+		return true;
+	}
+	var min = Date.parse($('#minP').val(), 10);
+	var max = Date.parse($('#maxP').val());
+	var date = Date.parse(data[3].toString().split(' ')[0]) || 0;
+	if ((isNaN(min) && isNaN(max)) || (isNaN(min) && date <= max)
+			|| (min <= date && isNaN(max)) || (min <= date && date <= max)) {
+		return true;
+	}
+	return false;
+});
+
+$.fn.dataTable.Api.register('sum()', function() {
+	return this.flatten().reduce(function(a, b) {
+		if (typeof a === 'string') {
+			a = a.replace(/[^\d.-]/g, '') * 1;
+		}
+		if (typeof b === 'string') {
+			b = b.replace(/[^\d.-]/g, '') * 1;
+		}
+
+		return a + b;
+	}, 0);
+});
+

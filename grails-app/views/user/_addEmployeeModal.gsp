@@ -53,7 +53,7 @@
 				<div id="usernameTakene" hidden></div>	
 			<div class="actions">				
     			<g:submitToRemote url="[controller: 'User' ,action: 'addEmployee']"  id="esaveB" class="ui teal button" value="Save" update="usernameTakene" onSuccess="addedEmployee()"/>
-    			<g:submitToRemote url="[controller: 'User' ,action: 'addMoreEmployee']" id="eaddMoreB" class="ui button" value="Add More" update="euserSaved" onSuccess="addedMoreEmployee()"/>
+<%--    			<g:submitToRemote style="display:none;" url="[controller: 'User' ,action: 'addMoreEmployee']" id="eaddMoreB" class="ui button" value="Add More" update="euserSaved" onSuccess="addedMoreEmployee()"/>--%>
     			<input type='reset' id="eresetBtn" value='Reset' hidden />
     			
     			<div class="ui cancel button" id="eCancelBtn" >Cancel</div>

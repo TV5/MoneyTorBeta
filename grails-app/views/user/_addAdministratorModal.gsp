@@ -53,7 +53,7 @@
 					<div id="usernameTakena" hidden></div>	
 			<div class="actions">
     			<g:submitToRemote url="[controller: 'User' ,action: 'addAdmin']"  id="asaveB" class="ui teal button" value="Save" update="usernameTakena" onSuccess="addedAdmin()"/>
-    			<g:submitToRemote url="[controller: 'User' ,action: 'addMoreAdmin']" id="aaddMoreB" class="ui button" value="Add More" update="auserSaved" onSuccess="addedMoreAdmin()"/>
+<%--    			<g:submitToRemote url="[controller: 'User' ,action: 'addMoreAdmin']" id="aaddMoreB" class="ui button" value="Add More" update="auserSaved" onSuccess="addedMoreAdmin()"/>--%>
     			<input type='reset' id="aresetBtn" value='Reset' hidden />
 				<div class="ui cancel button" id="aCancelBtn" >Cancel</div>
 				<div class="ui button" id="aDoneBtn" style="display: none;" onclick="location.href = '/Moneytor/user/users?tab=administratorsTab';" >Done</div>
