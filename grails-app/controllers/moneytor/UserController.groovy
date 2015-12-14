@@ -47,55 +47,76 @@ class UserController {
 	def validations(){
 		def validationList =[]
 		def username
+		if(params.ef_name==""|| params.af_name==""|| params.adminF_name=="" || params.empF_name ==""){
+			validationList.add("First name is required.")
+		}
+		if(params.el_name==""|| params.al_name==""|| params.adminL_name=="" || params.empL_name ==""){
+			validationList.add("Last name is required.")
+		}
+		
 		if(params.eusername!=null){
 			username=params.eusername
 		}else if(params.ausername!=null){
 			username=params.ausername
 		}else if(params.adminUsername!=null){
 			username=params.adminUsername
-		}else if(params.empUsername){
+		}else if(params.empUsername!=null){
 			username=params.empUsername
 		}
-		if(username.length()-1>7){
-			def invalid=false
-			for(def x=0; x<=username.length()-1; x++){
-				if(username[x]==' '){
-					invalid=true
+		if(username==""){
+			validationList.add("Username is required.")
+		}else{		
+			if(username.length()>7){
+				if(!username.matches("[A-Za-z0-9_]+")){
+					validationList.add("Username can only contain alphanumeric characters and underscore(_).")
 				}
+			}else{
+				validationList.add("Username must be at least 8 characters.")
 			}
-			if(invalid){
-				validationList.add("Username must not contain spaces.")
-			}
-		}else{
-			validationList.add("Username must be at least 8 characters.")
 		}
-		def pass=false, lpass=false
+		def pass=false, lpass=false, empty=false
 		if(params.epassword!=null && params.epassword==params.ecpassword){
 			pass=true
-			if(params.epassword.length()>7)
+			if(params.epassword.length()>7){
 				lpass=true
+			}else if(params.epassword == ""){
+				empty=true
+			}
 		}else if(params.apassword!=null && params.apassword==params.acpassword){
 			pass=true
-			if(params.apassword.length()>7)
+			if(params.apassword.length()>7){
 				lpass=true
+			}else if(params.apassword == ""){
+				empty=true
+			}
 		}else if(params.adminPassword!=null && params.adminPassword==params.adminCpassword){
 			pass=true
-			if(params.adminPassword.length()>7)
+			if(params.adminPassword.length()>7){
 				lpass=true
+			}else if(params.epassword == ""){
+				empty=true
+			}
 		}else if(params.empPassword!=null && params.empPassword==params.empCpassword){
 			pass=true
-			if(params.empPassword.length()>7)
+			if(params.empPassword.length()>7){
 				lpass=true
+			}else if(params.epassword == ""){
+				empty=true
+			}
 		}
-		if(pass==false){
-			validationList.add("Password and Confirm Password must match.")
-		}
-		if(lpass==false){
-			validationList.add("Password must be at least 8 characters.")
+		if(empty == true){
+			System.out.println("empty")
+			validationList.add("Password is required.")
+		}else{
+			if(pass==false){
+				validationList.add("Password and Confirm Password must match.")
+			}
+			if(lpass==false){
+				validationList.add("Password must be at least 8 characters.")
+			}
 		}
 		return validationList
 	}
-
 	def addEmployee() {
 		def validationList = validations()
 		if(validationList.isEmpty()){
@@ -121,7 +142,7 @@ class UserController {
 				render "Username unavailable."
 			}
 		}else{
-			validationList.each{ render '<ul>'+it+'</ul>' }
+			validationList.each{ render '<li>'+it+'</li>' }
 		}
 	}
 
@@ -170,7 +191,7 @@ class UserController {
 				render "Username unavailable."
 			}
 		}else{
-			validationList.each{ render '<ul>'+it+'</ul>' }
+			validationList.each{ render '<li>'+it+'</li>' }
 		}
 	}
 
@@ -230,7 +251,7 @@ class UserController {
 				}
 			}
 		}else{
-			validationList.each{ render '<ul>'+it+'</ul>' }
+			validationList.each{ render '<li>'+it+'</li>' }
 		}
 	}
 
