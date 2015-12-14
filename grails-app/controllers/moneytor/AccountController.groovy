@@ -40,7 +40,7 @@ class AccountController {
 		if(transactor_id!="edit"){
 			if(transactor_id==null) {
 				validationList.add("Please enter customer/supplier.")
-			} else if (Integer.parseInt(transactor_id) < 1) {
+			} else if (Integer.parseInt(transactor_id) < 1 && Integer.parseInt(transactor_id) != -1) {
 				validationList.add("Please enter customer/supplier.")
 			}
 		}
@@ -59,6 +59,7 @@ class AccountController {
 
 	def addPayable() {
 		def errorList = getErrorList(params.por_no,params.transactor_id,params.pamount)
+		def transErrorList = []
 		if(errorList.isEmpty()){
 			def transId = params.transactor_id
 					if (transId == "-1") {
@@ -73,6 +74,8 @@ class AccountController {
 								)
 						transactorService.addTransactor(transactor)
 						transId = transactorService.getTransactorIDByName(params.pname, 'S')
+						transErrorList = transactorService.validate(params.pname, params.paddress, params.ptelephone_no,
+							params.mobile_no, params.terms)
 					} else {
 						System.out.println("False" + transId)
 					}
@@ -88,11 +91,13 @@ class AccountController {
 			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
+			
 		}
 	}
 
 	def addReceivable() {
 		def errorList = getErrorList(params.ror_no, params.rtransactor_id, params.ramount)
+		def transErrorList = []
 		if(errorList.isEmpty()){
 			def transId = params.int('rtransactor_id')
 			if (transId == "-1") {
@@ -107,6 +112,8 @@ class AccountController {
 						)
 				transactorService.addTransactor(transactor)
 				transId = transactorService.getTransactorIDByName(params.rname, 'C')
+				transErrorList = transactorService.validate(params.rname, params.raddress, params.rtelephone_no,
+					params.rmobile_no, params.rterms)
 			} else {
 				System.out.println("False" + transId)
 			}
@@ -122,6 +129,7 @@ class AccountController {
 			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
+			transErrorList.each{ render '<li class="list">'+it+'</li>' }
 		}
 		
 	}
@@ -163,6 +171,7 @@ class AccountController {
 		render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
+			transErrorList.each{ render '<li class="list">'+it+'</li>' }
 		}
 	}
 

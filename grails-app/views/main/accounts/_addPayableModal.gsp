@@ -4,7 +4,7 @@
 		<g:renderErrors bean="${account}" />
 		<g:form class="ui form" id="addPayableForm" name="addPayableForm"
 			action="">
-			<div style="overflow-y: scroll; max-height: 300px">
+			<div style="overflow-y: scroll; max-height: 250px">
 				<div class="inline fields">
 					<div class="two wide field">
 						<label>Supplier Name</label>

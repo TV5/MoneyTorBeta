@@ -2,7 +2,7 @@
   <div class="header">Account Receivable</div>
   <div class="content">
     <g:form class="ui form" name="addReceivableForm" controller="account" action="addReceivable">
-    	<div style="overflow-y: scroll; max-height: 300px">
+    	<div style="overflow-y: scroll; max-height: 250px">
     	<div class="inline fields">
 		    <div class="two wide field">
 		      <label>Customer Name</label>      
