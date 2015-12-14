@@ -1,7 +1,5 @@
 //document ready functions
 $(document).ready(function() {
-	$('.dataTables_paginate').addClass("ui pagination menu");
-	$('.dataTables_paginate').children().addClass("ui item teal");
 	$('#employeesTable').DataTable();
     $('#administratorsTable').DataTable();
     $('#customersTable').DataTable();
@@ -288,13 +286,8 @@ $(document).ready(function() {
     $('#searchPayables').keyup(function(){
     	notifyDue();
           payablesTable.search($(this).val()).draw() ;
-    });
-    
-    $('#searchEmployees').keyup(function(){
-    	employeesTable.search($(this).val()).draw() ;
-    });
+    })
 
-    var filterE = employeesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
     var filter = payablesTable.rows( { search:'applied' } ).data().each(function(value, index) {});
 
 	$('#payablesNumEntries').change(function(){
