@@ -2,7 +2,8 @@
 	<div class="header">Account Payable</div>
 	<div class="content">
 		<g:renderErrors bean="${account}" />
-		<g:form class="ui form" id="addPayableForm" name="addPayableForm" action="">
+		<g:form class="ui form" id="addPayableForm" name="addPayableForm"
+			action="">
 			<div style="overflow-y: scroll; max-height: 300px">
 				<div class="inline fields">
 					<div class="two wide field">
@@ -108,19 +109,20 @@
 							precision="day" />
 					</div>
 				</div>
-				</div>
-				<div id="addPayableErrorList" class="ui negative small message" hidden></div>	
-				<div class="actions">
-					<g:submitToRemote
-						url="[controller: 'Account' ,action: 'addPayable']" value="Save"
-						class="ui teal button" id="savePayableBtn" onSuccess="psaved()" 
-						update="addPayableErrorList"/>
-					<button class="ui teal button" value="Add More" id="paddMoreBtn"
-						onClick="paddmore()">Add More</button>
-					<div class="ui button" style="display: none;" id="pdone">Done</div>
-					<div class="ui cancel button" id="pcancel">Cancel</div>
-				</div>
+			</div>
+			<div id="addPayableErrorList" class="ui negative small message"
+				style="display:none;"></div>
+			<div class="actions">
+				<g:submitToRemote
+					url="[controller: 'Account' ,action: 'addPayable']" value="Save"
+					class="ui teal button" id="savePayableBtn" onComplete="psaved()"
+					update="addPayableErrorList"/>
+				<button class="ui teal button" value="Add More" id="paddMoreBtn"
+					onClick="paddmore()">Add More</button>
+				<div class="ui button" style="display: none;" id="pdone">Done</div>
+				<div class="ui cancel button" id="pcancel">Cancel</div>
+			</div>
 		</g:form>
-	
 
-</div>
+
+	</div>
