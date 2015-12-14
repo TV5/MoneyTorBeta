@@ -1,5 +1,8 @@
 <div id="editPayableModal" class="ui small modal">
-	<div class="header">Edit Account Payable</div>
+	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
+		<i class="circular teal edit icon" style="margin-right: 10px;"></i>Edit
+		Account Payable
+	</div>
 	<div class="content">
 		<g:form class="ui form" controller="account" action="">
 			<div class="inline fields">
@@ -40,15 +43,16 @@
 			</div>
 			<g:hiddenField name="payable_id" />
 			<g:hiddenField name="type" value="P" />
+		</g:form>
+	</div>
 	<div id="editPayableErrorList" class="ui negative small message"
 		style="display: none;"></div>
 	<div class="actions">
 		<g:submitToRemote url="[controller: 'Account' ,action: 'editPayable']"
 			value="Save" class="ui teal button" id="saveEditPayableBtn"
-			onComplete="pesaved()" update="editPayableErrorList" 
-			/>
-		<div class="ui cancel button">Cancel</div>
-	</div>
-	</g:form>
+			onComplete="pesaved()" update="editPayableErrorList" />
+		<div class="ui right labeled icon cancel button">
+			<i class="cancel basic icon"></i>Cancel
+		</div>
 	</div>
 </div>

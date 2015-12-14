@@ -799,7 +799,11 @@ function pymntAdded() {
 	});
 }
 
-function balance() {
+function loadPayment(){
+	window.location.reload(true);
+}
+
+function balance(){	   
 	var rawr = 0;
 	var rowsP = $("#paymentsTable tr:gt(0)");
 	rowsP.children("td:nth-child(2)").each(function() {

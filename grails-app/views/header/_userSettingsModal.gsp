@@ -1,5 +1,7 @@
 <div id="userSettings" class="ui small modal">
-	<div class="header">User Settings<i class="settings basic icon" style="color:#00B5AD; margin-left:10px;"></i></div>
+	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
+		<i class="circular teal wrench icon"
+			style="margin-right: 10px;"></i>User Settings</div>
 	<div class="content" id="">
 		<g:form class="ui form" id="userSet" controller="user">		
 		    <div class="inline fields">
@@ -69,12 +71,12 @@
 			<div class="ui divider"></div>
 		    <g:hiddenField name="uId" />
 			<g:hiddenField name="uCurrentPass" />
-			<div class="actions right">
+			<div class="actions" style="float:right; margin-bottom:14px;">
 				<div id="editBtn" class="ui right labeled icon button teal displayFirst" onclick="edit()">
 					<i class="edit basic icon"></i>Edit
 				</div>
 				<g:actionSubmit class="ui button teal displaySec" value="Save" action="editUserAccount"/>
-				<div class="ui right labeled icon cancel button teal" onclick="cancelEdit()">					
+				<div class="ui right labeled icon cancel button" onclick="cancelEdit()">					
 					<i class="cancel basic icon"></i>Cancel
 				</div>
 			</div>
