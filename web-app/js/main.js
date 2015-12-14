@@ -13,7 +13,7 @@ $(document).ready(function() {
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
     $("#aaddMoreB").attr("disabled", "disabled");	
-    $("#max").datepicker();
+    $("#maxP").datepicker();
     $("#maxR").datepicker();
     
 	$(".payableNewSupplier").hide();
@@ -202,7 +202,7 @@ $(document).ready(function() {
   	var pm2 = pdate2.getMonth()-1;
   	var pNewDate2 = new Date(py2,pm2,pd2);
   	$('#maxP').datepicker( "setDate", pNewDate2);
-  	pUpdateEndDate($("#min"),$("#max"));
+  	pUpdateEndDate($("#minP"),$("#maxP"));
   	$("#minP").on('change', function(){
   		notifyDue();
   		pUpdateEndDate($("#minP"),$("#maxP"));
