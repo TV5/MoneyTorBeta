@@ -743,45 +743,6 @@ function balance(){
     $("#totalpymnt").html("PHP " + rawr.toFixed(2));
 }
 
-
-function validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs) {
-	errorList.empty();
-	if(transactorList == null || or_no == "" || amount == "" || amount < 1 || /[^a-zA-Z0-9]/.test( or_no)){
-		errorDiv.show();
-		
-		if(transactorList == null){
-			errorList.append('<li>Please select a supplier from the list provided.'+
-					' If you cannot find the supplier you are looking for, please click <b>Create new record</b>'+
-			' to add a new supplier.</li>');
-		}
-		
-		if(or_no == ""){
-			errorList.append('<li>Please enter an official receipt number.</li>');
-		}
-
-		else if( /[^a-zA-Z0-9]/.test( or_no) ){
-			errorList.append('<li>Official receipt number must be alphanumeric.</li>');
-		}
-		
-		if (amount == ""){
-			errorList.append('<li>Please enter an amount.</li>');
-		}
-		else if(amount < 1){
-			errorList.append('<li>Amount must be greater than zero.</li>');
-		}
-	}
-	else {
-		errorDiv.hide();
-		addMoreBtn.attr("disabled", false);	
-		saveBtn.val('Saved');
-		saveBtn.attr("disabled", "disabled");	
-		formInputs.attr('readonly',true);
-		
-	}
-	
-}	
-
-
 function psaved() {
 	document.getElementById('addPayableErrorList').removeAttribute("hidden");
 	$('#pdone').show();
