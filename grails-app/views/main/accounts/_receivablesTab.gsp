@@ -12,22 +12,26 @@
 						<option value="100">100</option>
 					</select>
 				</div>
-				<div class="four wide field">
+				<div class="three wide field">
 					<label>Start Date</label> <input type="text" id="minR">
 				</div>
-				<div class="four wide field">
+				<div class="three wide field">
 					<label>End Date</label> <input type="text" id="maxR">
 				</div>
 				<div class="four wide field">
 					<label>Search</label> <input type="text" id="searchReceivables">
 				</div>
-			</div>
-			<div class="inline fields three wide right">
-				<button id="addReceivableBtn" class="ui button teal">Add
-					Receivable</button>
+				<div class="six wide field">
+					<button id="addReceivableBtn"
+						style="margin-left: auto; margin-right: 0;"
+						class="ui labeled icon button teal">
+						<i class="add icon"></i>Add Receivables
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
+
 	<table id="receivablesTable" class="display ui celled padded table"
 		cellspacing="0" width="100%">
 		<thead>
@@ -53,7 +57,7 @@
 							<g:set var="customerName" value="${it.name}" />
 						</g:findAll></td>
 					<td class="sum">
-						${receivable.amount }
+						${receivable.amount}
 					</td>
 					<td><g:formatDate format="MM/dd/yyyy"
 							date="${receivable.transaction_date}" /></td>

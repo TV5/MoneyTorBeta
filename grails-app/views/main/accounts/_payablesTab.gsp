@@ -6,25 +6,29 @@
 				<div class="three wide field">
 					<label>Entries per page</label> <select class="ui dropdown"
 						id="payablesNumEntries">
+
 						<option value="10">10</option>
 						<option value="15">15</option>
 						<option value="30">30</option>
 						<option value="100">100</option>
 					</select>
 				</div>
-				<div class="four wide field">
+				<div class="three wide field">
 					<label>Start Date</label> <input type="text" id="min">
 				</div>
-				<div class="four wide field">
+				<div class="three wide field">
 					<label>End Date</label> <input type="text" id="max">
 				</div>
 				<div class="four wide field">
 					<label>Search</label> <input type="text" id="searchPayables">
 				</div>
-			</div>
-			<div class="inline fields three wide right">
-				<button id="addPayableBtn" class="ui button teal">Add
-					Payables</button>
+				<div class="six wide field">
+					<button id="addPayableBtn"
+						style="margin-left: auto; margin-right: 0;"
+						class="ui labeled icon button teal">
+						<i class="add icon"></i>Add Payables
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
