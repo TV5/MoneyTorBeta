@@ -28,18 +28,22 @@ class UserController {
 		user = userService.checkUser(username)
 		return user
 	}
+
 	def listEmployees(){
 		def empList=userService.listEmployees()
 		return empList
 	}
+
 	def listAdmins(){
 		def adminList=userService.listAdmins()
 		return adminList
 	}
+
 	def listAllAdmin(){
 		def alladminList=userService.listAllAdmin()
 		return alladminList
 	}
+
 	def validations(){
 		def validationList =[]
 		def username
@@ -141,6 +145,7 @@ class UserController {
 			validationList.each{ render '<li>'+it+'</li>' }
 		}
 	}
+
 	def addMoreEmployee() {
 		def ret
 		if(params.ecpassword==params.epassword){
@@ -160,6 +165,7 @@ class UserController {
 			}
 		}
 	}
+
 	def addAdmin() {
 		def validationList = validations()
 		if(validationList.isEmpty()){
@@ -245,7 +251,7 @@ class UserController {
 				}
 			}
 		}else{
-			validationList.each{ render '<ul>'+it+'</ul>' }
+			validationList.each{ render '<li>'+it+'</li>' }
 		}
 	}
 

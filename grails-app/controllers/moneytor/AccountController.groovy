@@ -1,6 +1,8 @@
 package moneytor
 
 import grails.converters.JSON
+
+import java.io.ObjectInputStream.ValidationList;
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Formatter.DateTime
@@ -23,6 +25,34 @@ class AccountController {
 	def show() {
 		[accountList: Account.findAllByType(params.id)]
 	}
+	
+	def getErrorList(or_no, transactor_id, amount) {
+		def validationList = []
+		try {
+			if(or_no==null || or_no=="") {
+				print "or_no null"
+				validationList.add("Please enter official receipt number.")
+			} else if(!or_no.matches("[A-Za-z0-9]+")) {
+				print "or_no"
+				validationList.add("Official receipt number must be alphanumeric.")
+			}			
+		} catch (e){
+			print "ambot unsa ni nga error"
+		}
+		
+		if(transactor_id==null) {
+			validationList.add("Please enter customer/supplier")
+		} else if (Integer.parseInt(transactor_id) < 1) {
+			validationList.add("Please enter customer/supplier")
+		}
+		
+		if(amount==null || amount==0 || amount=="") {
+			print amount
+			validationList.add("Please enter amount.")
+		}
+		
+		return validationList
+	}
 
 	def payableList() {
 		def payables = getPayableList()
@@ -30,71 +60,74 @@ class AccountController {
 	}
 
 	def addPayable() {
-		System.out.println("add payable" + params.ptransaction_date.toString())
-
-		def transId = params.transactor_id
-		if (transId == "-1") {
-			def transactor = new Transactor(
-					name: params.pname,
-					address: params.paddress,
-					telephone_no: params.ptelephone_no,
-					mobile_no: params.pmobile_no,
-					terms: params.pterms,
-					type: 'S',
-					status: 'A'
+		def errorList = getErrorList(params.por_no,params.transactor_id,params.pamount)
+		if(errorList.isEmpty()){
+			def transId = params.transactor_id
+					if (transId == "-1") {
+						def transactor = new Transactor(
+								name: params.pname,
+								address: params.paddress,
+								telephone_no: params.ptelephone_no,
+								mobile_no: params.pmobile_no,
+								terms: params.pterms,
+								type: 'S',
+								status: 'A'
+								)
+						transactorService.addTransactor(transactor)
+						transId = transactorService.getTransactorIDByName(params.pname, 'S')
+					} else {
+						System.out.println("False" + transId)
+					}
+			def account = new Account(
+					or_no: params.por_no,
+					transactor_id: transId,
+					amount: params.pamount,
+					transaction_date: params.pdate,
+					type: 'P',
+					updated_by: session.user.id
 					)
-			transactorService.addTransactor(transactor)
-			transId = transactorService.getTransactorIDByName(params.pname, 'S')
+			accountService.addAccount(account)
 		} else {
-			System.out.println("False" + transId)
+			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
-		def account = new Account(
-				or_no: params.por_no,
-				transactor_id: transId,
-				amount: params.pamount,
-				transaction_date: params.pdate,
-				type: 'P',
-				updated_by: session.user.id
-				)
-		accountService.addAccount(account)
-
-		redirect(action: "main", controller: "main")
 	}
 
 	def addReceivable() {
-		System.out.println("add receivable" + params.ptransaction_date.toString())
-
-		def transId = params.rtransactor_id
-		System.out.println("1:" +transId)
-		if (transId == "-1") {
-			System.out.println("2:" +transId)
-			def transactor = new Transactor(
-					name: params.rname,
-					address: params.raddress,
-					telephone_no: params.rtelephone_no,
-					mobile_no: params.rmobile_no,
-					terms: params.rterms,
-					type: 'C',
-					status: 'A'
+		def errorList = getErrorList(params.ror_no, params.rtransactor_id, params.ramount)
+		if(errorList.isEmpty()){
+			def transId = params.int('rtransactor_id')
+			System.out.println("1:" +transId)
+			if (transId == "-1") {
+				System.out.println("2:" +transId)
+				def transactor = new Transactor(
+						name: params.rname,
+						address: params.raddress,
+						telephone_no: params.rtelephone_no,
+						mobile_no: params.rmobile_no,
+						terms: params.rterms,
+						type: 'C',
+						status: 'A'
+						)
+				transactorService.addTransactor(transactor)
+				transId = transactorService.getTransactorIDByName(params.rname, 'C')
+				System.out.println("3:" +transId)
+			} else {
+				System.out.println("False" + transId)
+			}
+			System.out.println("4:" +transId)
+			def account = new Account(
+					or_no: params.ror_no,
+					transactor_id: transId,
+					amount: params.ramount,
+					transaction_date: params.rdate,
+					type: 'R',
+					updated_by: session.user.id
 					)
-			transactorService.addTransactor(transactor)
-			transId = transactorService.getTransactorIDByName(params.rname, 'C')
-			System.out.println("3:" +transId)
+			accountService.addAccount(account)
 		} else {
-			System.out.println("False" + transId)
+			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
-		System.out.println("4:" +transId)
-		def account = new Account(
-				or_no: params.ror_no,
-				transactor_id: transId,
-				amount: params.ramount,
-				transaction_date: params.rdate,
-				type: 'R',
-				updated_by: session.user.id
-				)
-		accountService.addAccount(account)
 		
-		redirect(action: "main", controller: "main")
 	}
 
 	def editReceivable() {
