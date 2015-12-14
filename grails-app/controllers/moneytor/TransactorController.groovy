@@ -56,11 +56,11 @@ class TransactorController {
 		System.out.println("hehe")
 		System.out.println("hehasfjash")
 		System.out.println("shit"+params.sname)
-		def validationsList = transactorService.validate("", "piste", 1,1,1)
-		//def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
-		System.out.println(validatonsList)
+		def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
+		System.out.println(validationsList)
 		if(validationsList.isEmpty()){
-		/*	System.out.println("asdas")
+			System.out.println("empty");
+			System.out.println("asdas")
 				def transactor = new Transactor(
 					name: params.sname,
 					address: params.saddress,
@@ -74,7 +74,8 @@ class TransactorController {
 				System.out.println(params.sselect)
 				System.out.println("added!")
 				render ""
-		}else{*/
+		}else{
+		System.out.println("errors")
 		validationsList.each{ render '<li>'+it+'</li>' }
 	}
 
@@ -96,6 +97,9 @@ class TransactorController {
 	}
 	
 	def editSupplier() {
+		def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
+		System.out.println(validationsList)
+		if(validationsList.isEmpty()){
 		def transactor = new Transactor(
 				name: params.esname,
 				address: params.esaddress,
@@ -107,7 +111,12 @@ class TransactorController {
 				)
 		transactorService.editTransactor(params.int('esid'), transactor)
 		redirect(action: "main", controller: "main", params:[tab:"suppliersTabLink"])
+		}else{
+		System.out.println("errors")
+		validationsList.each{ render '<li>'+it+'</li>' }
 	}
+
+}
 	
 	def editCustomer() {
 		def transactor = new Transactor(
