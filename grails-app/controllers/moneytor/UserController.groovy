@@ -5,7 +5,6 @@ class UserController {
 	def scaffold=true
 	def userService
 	def index() {
-		
 	}
 	def auth(){
 		if(!session.user){
@@ -13,7 +12,7 @@ class UserController {
 			return false
 		}
 	}
-	
+
 	def checkUsername(){
 		def username
 		def user
@@ -44,52 +43,77 @@ class UserController {
 	def validations(){
 		def validationList =[]
 		def username
+		if(params.ef_name==""|| params.af_name==""|| params.adminF_name=="" || params.empF_name ==""){
+			validationList.add("First name is required.")
+		}
+		if(params.el_name==""|| params.al_name==""|| params.adminL_name=="" || params.empL_name ==""){
+			validationList.add("Last name is required.")
+		}
+		
 		if(params.eusername!=null){
 			username=params.eusername
 		}else if(params.ausername!=null){
 			username=params.ausername
 		}else if(params.adminUsername!=null){
 			username=params.adminUsername
-		}else if(params.empUsername){
+		}else if(params.empUsername!=null){
 			username=params.empUsername
-		}else{
+		}
+		if(username==""){
 			validationList.add("Username is required.")
-		}
-		if(username.length()-1>7){			
-			if(!username.matches("[A-Za-z0-9],-+")){
-				validationList.add("Username can only contain alphanumeric characters and underscore(_).")
+		}else{		
+			if(username.length()>7){
+				if(!username.matches("[A-Za-z0-9_]+")){
+					validationList.add("Username can only contain alphanumeric characters and underscore(_).")
+				}
+			}else{
+				validationList.add("Username must be at least 8 characters.")
 			}
-
-		}else{
-			validationList.add("Username must be at least 8 characters.")
 		}
-		def pass=false, lpass=false
+		def pass=false, lpass=false, empty=false
 		if(params.epassword!=null && params.epassword==params.ecpassword){
 			pass=true
-			if(params.epassword.length()>7)
+			if(params.epassword.length()>7){
 				lpass=true
+			}else if(params.epassword == ""){
+				empty=true
+			}
 		}else if(params.apassword!=null && params.apassword==params.acpassword){
 			pass=true
-			if(params.apassword.length()>7)
+			if(params.apassword.length()>7){
 				lpass=true
+			}else if(params.apassword == ""){
+				empty=true
+			}
 		}else if(params.adminPassword!=null && params.adminPassword==params.adminCpassword){
 			pass=true
-			if(params.adminPassword.length()>7)
+			if(params.adminPassword.length()>7){
 				lpass=true
+			}else if(params.epassword == ""){
+				empty=true
+			}
 		}else if(params.empPassword!=null && params.empPassword==params.empCpassword){
 			pass=true
-			if(params.empPassword.length()>7)
+			if(params.empPassword.length()>7){
 				lpass=true
+			}else if(params.epassword == ""){
+				empty=true
+			}
 		}
-		if(pass==false){
-			validationList.add("Password and Confirm Password must match.")
-		}
-		if(lpass==false){
-			validationList.add("Password must be at least 8 characters.")
+		if(empty == true){
+			System.out.println("empty")
+			validationList.add("Password is required.")
+		}else{
+			if(pass==false){
+				validationList.add("Password and Confirm Password must match.")
+			}
+			if(lpass==false){
+				validationList.add("Password must be at least 8 characters.")
+			}
 		}
 		return validationList
 	}
-def addEmployee() {
+	def addEmployee() {
 		def validationList = validations()
 		if(validationList.isEmpty()){
 			def username = checkUsername()
@@ -104,7 +128,7 @@ def addEmployee() {
 							status: 1,
 							updated_on: new Date(),
 							updated_by: session.user.id
-						)
+							)
 					if(user!=null){
 						userService.addUser(user)
 						render "User has been saved."
@@ -114,9 +138,7 @@ def addEmployee() {
 				render "Username unavailable."
 			}
 		}else{
-			validationList.each{
-				render '<li>'+it+'</li>'
-			}
+			validationList.each{ render '<li>'+it+'</li>' }
 		}
 	}
 	def addMoreEmployee() {
@@ -131,7 +153,7 @@ def addEmployee() {
 					status: 1,
 					updated_on: new Date(),
 					updated_by: session.user.id
-				)
+					)
 			if(user!=null){
 				ret = userService.addMoreUser(user)
 				render ret
@@ -141,98 +163,90 @@ def addEmployee() {
 	def addAdmin() {
 		def validationList = validations()
 		if(validationList.isEmpty()){
-		def username = checkUsername();
-		if(username == "available"){
-		if(params.acpassword==params.apassword){
-			def user =new User(
-			f_name:params.af_name,
-			l_name:params.al_name,
-			username:params.ausername,
-			password:params.apassword,
-			type:params.atype,
-			status:1,
-			updated_on:new Date(),
-			updated_by:session.user.id
-			)
-			if(user!=null){
-				userService.addUser(user)
-				render "User has been saved."
+			def username = checkUsername();
+			if(username == "available"){
+				if(params.acpassword==params.apassword){
+					def user =new User(
+							f_name:params.af_name,
+							l_name:params.al_name,
+							username:params.ausername,
+							password:params.apassword,
+							type:params.atype,
+							status:1,
+							updated_on:new Date(),
+							updated_by:session.user.id
+							)
+					if(user!=null){
+						userService.addUser(user)
+						render "User has been saved."
+					}
+				}
+			}else{
+				render "Username unavailable."
 			}
+		}else{
+			validationList.each{ render '<li>'+it+'</li>' }
 		}
-	}else{
-		render "Username unavailable."
 	}
-	}else{
-			validationList.each{
-				render '<li>'+it+'</li>'
-			}
-		}
 
-}
-	
 	def editEmployee(){
 		def validationList = validations()
 		if(validationList.isEmpty()){
-		if(params.empCpassword==params.empPassword){
+			if(params.empCpassword==params.empPassword){
 				def user =new User(
-				f_name:params.empF_name,
-				l_name:params.empL_name,
-				username:params.empUsername,
-				password:params.empPassword,
-				updated_on:new Date(),
-				updated_by:session.user.id
-				)
+						f_name:params.empF_name,
+						l_name:params.empL_name,
+						username:params.empUsername,
+						password:params.empPassword,
+						updated_on:new Date(),
+						updated_by:session.user.id
+						)
 				user.id=params.int('empId')
 				if(user!=null){
 					def ret = userService.editUser(user.id, user)
 					render ret
 				}
-		}
+			}
 		}else{
-		validationList.each{
-			render '<li>'+it+'</li>'
+			validationList.each{ render '<li>'+it+'</li>' }
 		}
 	}
-	}
-	
+
 	def editUserAccount(){
-			def user = new User()
-			user.id = params.int('uId')
-			user.f_name = params.uF_name
-			user.l_name = params.uL_name
-			
-			user.password = params.uNewPass == "" ? params.uCurrentPass : params.uNewPass;
-			
-			userService.editUserAccount(user.id, user)
-			session.user=userService.getUser(user.id)
-			
-			redirect(uri: request.getHeader('referer'))
+		def user = new User()
+		user.id = params.int('uId')
+		user.f_name = params.uF_name
+		user.l_name = params.uL_name
+
+		user.password = params.uNewPass == "" ? params.uCurrentPass : params.uNewPass;
+
+		userService.editUserAccount(user.id, user)
+		session.user=userService.getUser(user.id)
+
+		redirect(uri: request.getHeader('referer'))
 	}
-	
+
 	def editAdmin(){
 		def validationList = validations()
 		if(validationList.isEmpty()){
-		if(params.adminCpassword==params.adminPassword){
-			def user =new User(
-			f_name:params.adminF_name,
-			l_name:params.adminL_name,
-			username:params.adminUsername,
-			password:params.adminPassword,
-			updated_on:new Date(),
-			updated_by:session.user.id
-			)
-			user.id=params.int('adminId')
+			if(params.adminCpassword==params.adminPassword){
+				def user =new User(
+						f_name:params.adminF_name,
+						l_name:params.adminL_name,
+						username:params.adminUsername,
+						password:params.adminPassword,
+						updated_on:new Date(),
+						updated_by:session.user.id
+						)
+				user.id=params.int('adminId')
 				if(user!=null){
 					def ret = userService.editUser(user.id, user)
 					render ret
 				}
-		}	
-		}else{
-			validationList.each{
-				render '<ul>'+it+'</ul>'
 			}
+		}else{
+			validationList.each{ render '<ul>'+it+'</ul>' }
 		}
-
 	}
 
 	def changeStatus(){
@@ -245,16 +259,16 @@ def addEmployee() {
 		user.updated_on=new Date()
 		user.updated_by=session.user.id
 		userService.changeUserStatus(user.id, user)
-		
+
 		render "deactivated"
 	}
 
 	def users(){
 		if(session.user){
-		def empList=listEmployees()
-		def adminList=listAdmins()
-		def allAdminList = listAllAdmin()
-		[user:session.user, empList:empList, adminList:adminList, allAdminList:allAdminList]
+			def empList=listEmployees()
+			def adminList=listAdmins()
+			def allAdminList = listAllAdmin()
+			[user:session.user, empList:empList, adminList:adminList, allAdminList:allAdminList]
 		}
 	}
 }
