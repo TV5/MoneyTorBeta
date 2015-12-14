@@ -13,7 +13,7 @@ $(document).ready(function() {
     $("#caddMoreBtn").attr("disabled", "disabled");	    
     $("#eaddMoreB").attr("disabled", "disabled");	
     $("#aaddMoreB").attr("disabled", "disabled");	
-    $("#max").datepicker();
+    $("#maxP").datepicker();
     $("#maxR").datepicker();
     
 	$(".payableNewSupplier").hide();
