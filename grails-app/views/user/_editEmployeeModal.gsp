@@ -2,8 +2,6 @@
 			<div class="header">Employee</div>
 			<div class="content">
 				<g:form class="ui form" controller="user">
-				<div id="eusernameTaken"></div>	
-				<div class="ui error message"></div>		
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>First Name</label>
@@ -51,12 +49,12 @@
 						
 					<g:hiddenField name="empId" />
 					<g:hiddenField name="empStatus" />
-
+				<div id="eusernameTaken" ></div>	
+				<div id="deactivated" hidden></div>
 			<div class="actions">
-    			<g:submitToRemote url="[controller: 'User' ,action: 'editEmployee']" class="ui teal button" value="Save" update="eusernameTaken" onSuccess="addedEmployee()"/>
-				<!--<g:actionSubmit class="ui approve button" value="Save" action="editEmployee" update="eusernameTaken"/>		-->
-				<g:actionSubmit class="ui button" value="Deactivate" action="changeStatus"/>				
-				<div class="ui cancel button">Cancel</div>
+    			<g:submitToRemote url="[controller: 'User' ,action: 'editEmployee']" class="ui teal button" value="Save" update="eusernameTaken" onSuccess="editedEmployee()"/>
+    			<g:submitToRemote url="[controller: 'User' ,action: 'changeStatus']" id="edeactivate" class="ui button" update="deactivated" value="Deactivate" onSuccess="changeUserStatus()"/>
+				<div class="ui cancel button" id="ecancelB">Cancel</div>
 			</div>
 				
 			</div>

@@ -66,6 +66,7 @@
 				</div>
 			</div>
 			<div class="ui error message"></div>
+			<div class="ui divider"></div>
 		    <g:hiddenField name="uId" />
 			<g:hiddenField name="uCurrentPass" />
 			<div class="actions">

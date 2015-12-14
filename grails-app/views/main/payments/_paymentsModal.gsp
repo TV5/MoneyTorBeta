@@ -1,8 +1,8 @@
 <div id="payments" class="ui modal small" style="padding-top:-50px!important;">
-	<div class="header" >Payment History
+	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">Payment History
 		<h2 id="pmAccountName" class="ui left pointing teal basic label" style="margin-left:10px;"></h2>
 	</div>
-  	<div class="content" id="paymentsss">	  
+  	<div class="content" id="paymentsss" style="padding-top:10px;padding-bottom:0px;">	  
   	<div id="yeah" hidden>${paymentList}</div>
 		<div id="tablePymnt"></div>
     	<g:formRemote name="subForm" url="[controller:'payment', action:'addPayment']" class="ui form">
@@ -28,6 +28,6 @@
     	</g:formRemote>
   	</div>
 	<div class="actions">
-		<div class="ui approve button teal">Done</div>
+		<div class="ui approve button">Done</div>
 	</div>
 </div>
