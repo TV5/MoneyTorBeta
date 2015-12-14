@@ -757,12 +757,19 @@ function psaved() {
 } 
 
 function pesaved() {
-	document.getElementById('editPayableErrorList').removeAttribute("hidden");
-	if(document.getElementById('addPayableErrorList').innerText==""){
-		$('#addPayableErrorList').hide();
+	$('#editPayableErrorList').show();
+	if(document.getElementById('editPayableErrorList').innerText==""){
+		$('#editPayableErrorList').hide();
+		window.location.replace("main?tab=payablesTabLink");
 	}
 } 
-
+function resaved() {
+	$('#editReceivableErrorList').show();
+	if(document.getElementById('editReceivableErrorList').innerText==""){
+		$('#editReceivableErrorList').hide();
+		window.location.replace("main?tab=receivablesTabLink");
+	}
+} 
 function paddmore(){
 	$('#pdate').val('');
 	$('#pamount').val('');

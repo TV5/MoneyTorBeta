@@ -45,7 +45,8 @@
 	<div class="actions">
 		<g:submitToRemote url="[controller: 'Account' ,action: 'editPayable']"
 			value="Save" class="ui teal button" id="saveEditPayableBtn"
-			onComplete="pesaved()" update="editPayableErrorList" />
+			onComplete="pesaved()" update="editPayableErrorList" 
+			/>
 		<div class="ui cancel button">Cancel</div>
 	</div>
 	</g:form>

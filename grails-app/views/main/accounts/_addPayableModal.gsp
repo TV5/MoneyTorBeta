@@ -116,7 +116,7 @@
 				<g:submitToRemote
 					url="[controller: 'Account' ,action: 'addPayable']" value="Save"
 					class="ui teal button" id="savePayableBtn" onComplete="psaved()"
-					update="addPayableErrorList" />
+					update="addPayableErrorList"/>
 				<button class="ui teal button" value="Add More" id="paddMoreBtn"
 					onClick="paddmore()">Add More</button>
 				<div class="ui button" style="display: none;" id="pdone">Done</div>

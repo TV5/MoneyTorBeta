@@ -37,13 +37,13 @@ class AccountController {
 		} catch (e){
 			print "Error"
 		}
-		
-		if(transactor_id==null) {
-			validationList.add("Please enter customer/supplier.")
-		} else if (Integer.parseInt(transactor_id) < 1) {
-			validationList.add("Please enter customer/supplier.")
+		if(transactor_id!="edit"){
+			if(transactor_id==null) {
+				validationList.add("Please enter customer/supplier.")
+			} else if (Integer.parseInt(transactor_id) < 1) {
+				validationList.add("Please enter customer/supplier.")
+			}
 		}
-		
 		if(amount==null ||  amount=="") {
 			validationList.add("Please enter amount.")
 		} else if (amount==0 || amount=="0") {
@@ -127,6 +127,8 @@ class AccountController {
 	}
 
 	def editReceivable() {
+		def errorList = getErrorList(params.eror_no, "edit", params.eramount)
+		if(errorList.isEmpty()){
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
 		Date trans_date = formatter.parse(params.ertransaction_date)
 		def account = new Account(
@@ -137,10 +139,15 @@ class AccountController {
 				updated_by: session.user.id
 				)
 		accountService.editAccount(params.int('receivable_id'),account)
-		redirect(action: "main", controller: "main")
+		render ""
+		} else {
+			errorList.each{ render '<li class="list">'+it+'</li>' }
+		}
 	}
 
 	def editPayable() {
+		def errorList = getErrorList(params.epor_no, "edit", params.epamount)
+		if(errorList.isEmpty()){
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
 		Date trans_date = formatter.parse(params.eptransaction_date)
 		print 'trans date ' + trans_date
@@ -153,7 +160,10 @@ class AccountController {
 				updated_by: session.user.id
 				)
 		accountService.editAccount(params.int('payable_id'),account)
-		redirect(action: "main", controller: "main")
+		render ""
+		} else {
+			errorList.each{ render '<li class="list">'+it+'</li>' }
+		}
 	}
 
 	def index() {
