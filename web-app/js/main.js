@@ -875,6 +875,9 @@ $('#settingsLink').click(function(){
 });	
 
 function csaved(){	
+	document.getElementById('Validations').setAttribute("hidden", "hidden");
+	var status = document.getElementById('Validations').innerText;
+	if(status==""){
 	document.getElementById('caddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('csaveBtn').value = 'Saved';
 	$("#cDoneBtn").show();
@@ -887,9 +890,16 @@ function csaved(){
 	$('#cmobile_no').prop('readonly', true);
 	$('#cterms').prop('readonly', true);
 	$('#cselect').prop('disabled', true);
+	}else{
+		document.getElementById('Validations').removeAttribute("hidden");
+	}
 }
 
 function ssaved(){	
+	document.getElementById('svalidations').setAttribute("hidden", "hidden");
+	var status = document.getElementById('svalidations').innerText;
+	if(status==""){
+
 	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('ssaveBtn').value = 'Saved';
 	$("#sDoneBtn").show();
@@ -902,6 +912,9 @@ function ssaved(){
 	$('#smobile_no').prop('readonly', true);
 	$('#sterms').prop('readonly', true);
 	$('#sselect').prop('disabled', true);
+	}else{
+		document.getElementById('svalidations').removeAttribute("hidden");
+	}
 }
 
 
