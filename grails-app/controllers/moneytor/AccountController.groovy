@@ -59,26 +59,32 @@ class AccountController {
 
 	def addPayable() {
 		def errorList = getErrorList(params.por_no,params.transactor_id,params.pamount)
-		def transErrorList = []
-		if(errorList.isEmpty()){
-			def transId = params.transactor_id
-					if (transId == "-1") {
-						def transactor = new Transactor(
-								name: params.pname,
-								address: params.paddress,
-								telephone_no: params.ptelephone_no,
-								mobile_no: params.pmobile_no,
-								terms: params.pterms,
-								type: 'S',
-								status: 'A'
-								)
-						transactorService.addTransactor(transactor)
-						transId = transactorService.getTransactorIDByName(params.pname, 'S')
-						transErrorList = transactorService.validate(params.pname, params.paddress, params.ptelephone_no,
-							params.mobile_no, params.terms)
-					} else {
-						System.out.println("False" + transId)
-					}
+		def transErrorsList = transactorService.validate(params.pname, params.paddress, params.ptelephone_no,params.pmobile_no, params.pterms)
+		def transId = params.transactor_id
+		if (transId == "-1") {
+			if(transErrorsList.isEmpty()){
+				def transactor = new Transactor(
+						name: params.pname,
+						address: params.paddress,
+						telephone_no: params.ptelephone_no,
+						mobile_no: params.pmobile_no,
+						terms: params.pterms,
+						type: 'S',
+						status: 'A'
+						)
+				
+				transactorService.addTransactor(transactor)
+				transId = transactorService.getTransactorIDByName(params.pname, 'S')
+				print params.pname
+				
+			} else {
+				transErrorsList.each{ render '<li class="list">'+it+'</li>' }
+			}
+		}else {
+			System.out.println("False" + transId)
+		}
+			
+			if(errorList.isEmpty()){
 			def account = new Account(
 					or_no: params.por_no,
 					transactor_id: transId,
@@ -91,16 +97,15 @@ class AccountController {
 			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
-			
 		}
 	}
 
 	def addReceivable() {
-		def errorList = getErrorList(params.ror_no, params.rtransactor_id, params.ramount)
-		def transErrorList = []
-		if(errorList.isEmpty()){
-			def transId = params.int('rtransactor_id')
-			if (transId == "-1") {
+		def errorList = getErrorList(params.ror_no,params.rtransactor_id,params.ramount)
+		def transErrorsList = transactorService.validate(params.rname, params.raddress, params.rtelephone_no,params.rmobile_no, params.rterms)
+		def transId = params.rtransactor_id
+		if (transId == "-1") {
+			if(transErrorsList.isEmpty()){
 				def transactor = new Transactor(
 						name: params.rname,
 						address: params.raddress,
@@ -110,13 +115,18 @@ class AccountController {
 						type: 'C',
 						status: 'A'
 						)
+				
 				transactorService.addTransactor(transactor)
-				transId = transactorService.getTransactorIDByName(params.rname, 'C')
-				transErrorList = transactorService.validate(params.rname, params.raddress, params.rtelephone_no,
-					params.rmobile_no, params.rterms)
+				transId = transactorService.getTransactorIDByName(params.pname, 'C')
+				
 			} else {
-				System.out.println("False" + transId)
+				transErrorsList.each{ render '<li class="list">'+it+'</li>' }
 			}
+		}else {
+			System.out.println("False" + transId)
+		}
+			
+			if(errorList.isEmpty()){
 			def account = new Account(
 					or_no: params.ror_no,
 					transactor_id: transId,
@@ -129,11 +139,9 @@ class AccountController {
 			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
-			transErrorList.each{ render '<li class="list">'+it+'</li>' }
 		}
-		
 	}
-
+	
 	def editReceivable() {
 		def errorList = getErrorList(params.eror_no, "edit", params.eramount)
 		if(errorList.isEmpty()){
