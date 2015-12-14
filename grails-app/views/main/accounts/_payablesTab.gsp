@@ -6,7 +6,6 @@
 				<div class="three wide field">
 					<label>Entries per page</label> <select class="ui dropdown"
 						id="payablesNumEntries">
-
 						<option value="10">10</option>
 						<option value="15">15</option>
 						<option value="30">30</option>

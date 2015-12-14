@@ -31,7 +31,6 @@
 			</div>
 		</div>
 	</div>
-
 	<table id="receivablesTable" class="display ui celled padded table"
 		cellspacing="0" width="100%">
 		<thead>
