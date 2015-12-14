@@ -1,6 +1,5 @@
 //document ready functions
 $(document).ready(function() {
-<<<<<<< HEAD
 	$('#employeesTable').DataTable();
     $('#administratorsTable').DataTable();
     if(window.location.href.indexOf("?")!=-1){
@@ -749,9 +748,10 @@ function addPayment(account_id, acct_name, amt) {
 }
 
 function pymntAdded(){
-	$("#yeah").load(location.href + " #yeah","");
-	tablePayment(11);	
-	balance();
+	$("#yeah").load(location.href + " #yeah",function(){
+		tablePayment(accid);	
+		balance();
+	});
 }
 
 function balance(){	   
