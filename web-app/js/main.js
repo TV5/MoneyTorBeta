@@ -1,9 +1,8 @@
 //document ready functions
+
 $(document).ready(function() {
 	var empt = $('#employeesTable').DataTable({"order":[[0,"asc"]]});
     $('#administratorsTable').DataTable({"order":[[0,"asc"]]});
-    $('#customersTable').DataTable();
-    $('#suppliersTable').DataTable();
     if(window.location.href.indexOf("?")!=-1){
 		var tabId = window.location.href.split("?")[1].split("=")[1];
 		var tabId = '#'+tabId;
@@ -18,6 +17,38 @@ $(document).ready(function() {
     
 	$(".payableNewSupplier").hide();
 	$(".receivableNewCustomer").hide();
+	
+	
+	//Customers Search & Entries per page
+	$('#customersNumEntries').change(function(){
+		customersTable.page.len($('#customersNumEntries').val()).draw();
+	});
+	var numC = $('#customersNumEntries').val();
+    var customersTable = $('#customersTable').DataTable({
+    	"dom": '<"top">tRip',
+		"pageLength": numC
+	});
+    $('#searchCustomers').keyup(function(){  
+    	customersTable.search($(this).val()).draw() ;
+    })
+
+    var filterC = customersTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+
+  //Suppliers Search & Entries per page
+	$('#suppliersNumEntries').change(function(){
+		suppliersTable.page.len($('#suppliersNumEntries').val()).draw();
+	});
+	var numS = $('#suppliersNumEntries').val();
+    var suppliersTable = $('#suppliersTable').DataTable({
+    	"dom": '<"top">tRip',
+		"pageLength": numS
+	});
+    $('#searchSuppliers').keyup(function(){  
+    	suppliersTable.search($(this).val()).draw() ;
+    })
+
+    var filterS = suppliersTable.rows( { search:'applied' } ).data().each(function(value, index) {});
+    
 	
 	//receivables
 	var num = $('#receivablesNumEntries').val();
@@ -331,6 +362,9 @@ $(document).ready(function() {
   	notifyDue();
   	$('.dt-button').addClass("export-btn ui tiny teal button");
   	$('.export-btn').removeClass("dt-button buttons-pdf buttons-html5");
+  	
+  	$('#payablesNumEntries').on('change',notifyDue);
+  	$('#receivablesNumEntries').on('change',notifyDue);
 });
 
 function notifyDue(){
@@ -718,9 +752,10 @@ function addPayment(account_id, acct_name, amt) {
 }
 
 function pymntAdded(){
-	$("#yeah").load(location.href + " #yeah","");
-	tablePayment(11);	
-	balance();
+	$("#yeah").load(location.href + " #yeah",function(){
+		tablePayment(accid);	
+		balance();
+	});
 }
 
 function balance(){	   
@@ -740,63 +775,33 @@ function balance(){
     $("#totalpymnt").html("PHP " + rawr.toFixed(2));
 }
 
-
-function validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs) {
-	errorList.empty();
-	if(transactorList == null || or_no == "" || amount == "" || amount < 1 || /[^a-zA-Z0-9]/.test( or_no)){
-		errorDiv.show();
-		
-		if(transactorList == null){
-			errorList.append('<li>Please select a supplier from the list provided.'+
-					' If you cannot find the supplier you are looking for, please click <b>Create new record</b>'+
-			' to add a new supplier.</li>');
-		}
-		
-		if(or_no == ""){
-			errorList.append('<li>Please enter an official receipt number.</li>');
-		}
-
-		else if( /[^a-zA-Z0-9]/.test( or_no) ){
-			errorList.append('<li>Official receipt number must be alphanumeric.</li>');
-		}
-		
-		if (amount == ""){
-			errorList.append('<li>Please enter an amount.</li>');
-		}
-		else if(amount < 1){
-			errorList.append('<li>Amount must be greater than zero.</li>');
-		}
-	}
-	else {
-		errorDiv.hide();
-		addMoreBtn.attr("disabled", false);	
-		saveBtn.val('Saved');
-		saveBtn.attr("disabled", "disabled");	
-		formInputs.attr('readonly',true);
-		
-	}
-	
-}	
-
-
 function psaved() {
-	document.getElementById('addPayableErrorList').removeAttribute("hidden");
-	var errorList = $('#addPayableErrorList');
-	var errorDiv = $('#addPayableErrorDiv');
-	var transactorList = $('#payabaleSupplierList').val();
-	var or_no = $('#por_no').val();
-	var amount = $('#pamount').val();
-	var transactorType = "supplier";
-	var addMoreBtn = $('#paddMoreBtn');
-	var saveBtn = $('#savePayableBtn');
-	var formInputs = $('#addPayableForm :input');
+	$('#addPayableErrorList').show();
 	$('#pdone').show();
 	$('#pcancel').hide();
-	if($('#addPayableErrorList').html()==""){
+	if(document.getElementById('addPayableErrorList').innerText==""){
 		$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		$('#paddMoreBtn').attr("disabled", false);	
+		$('#savePayableBtn').val('Saved');
+		$('#savePayableBtn').attr("disabled", "disabled");	
+		$('#addPayableErrorList').hide();
 	}
 } 
 
+function pesaved() {
+	$('#editPayableErrorList').show();
+	if(document.getElementById('editPayableErrorList').innerText==""){
+		$('#editPayableErrorList').hide();
+		window.location.replace("main?tab=payablesTabLink");
+	}
+} 
+function resaved() {
+	$('#editReceivableErrorList').show();
+	if(document.getElementById('editReceivableErrorList').innerText==""){
+		$('#editReceivableErrorList').hide();
+		window.location.replace("main?tab=receivablesTabLink");
+	}
+} 
 function paddmore(){
 	$('#pdate').val('');
 	$('#pamount').val('');
@@ -815,24 +820,20 @@ function paddmore(){
 	$("#paddMoreBtn").attr("disabled", "disabled");		
 	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
 	$('#addPayableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
+	document.getElementById('addPayableErrorList').innerText==null;
+	$('#addPayableErrorList').hide();
 }
 
 function rsaved(){
-	document.getElementById('addReceivableErrorList').removeAttribute("hidden");
-	//var errorList = $('#addReceivableErrorList');
-	//var errorDiv = $('#addReceivableErrorDiv');
-	var transactorList = $('#receivableCustomerList').val();
-	var or_no = $('#ror_no').val();
-	var amount = $('#ramount').val();
-	var transactorType = "customer";
-	var addMoreBtn = $('#raddMoreBtn');
-	var saveBtn = $('#saveReceivableBtn');
-	var formInputs = $('#addReceivableForm :input');
-	//validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
+	$('#addReceivableErrorList').show();
 	$('#rdone').show();
 	$('#rcancel').hide();
-	if($('#addReceivableErrorList').html()==""){
+	if(document.getElementById('addReceivableErrorList').innerText==""){
 		$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		$('#raddMoreBtn').attr("disabled", false);	
+		$('#saveReceivableBtn').val('Saved');
+		$('#saveReceivableBtn').attr("disabled", "disabled");	
+		$('#addReceivableErrorList').hide();
 	}
 }
 
@@ -854,6 +855,8 @@ function raddmore(){
 	$("#raddMoreBtn").attr("disabled", "disabled");
 	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", false);
 	$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').attr("readonly", false);
+	document.getElementById('addReceivableErrorList').innerText==null;
+	$('#addReceivableErrorList').hide();
 }
 
 Date.prototype.toDateInputValue = (function() {
@@ -873,6 +876,9 @@ $('#settingsLink').click(function(){
 });	
 
 function csaved(){	
+	document.getElementById('Validations').setAttribute("hidden", "hidden");
+	var status = document.getElementById('Validations').innerText;
+	if(status==""){
 	document.getElementById('caddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('csaveBtn').value = 'Saved';
 	$("#cDoneBtn").show();
@@ -885,9 +891,16 @@ function csaved(){
 	$('#cmobile_no').prop('readonly', true);
 	$('#cterms').prop('readonly', true);
 	$('#cselect').prop('disabled', true);
+	}else{
+		document.getElementById('Validations').removeAttribute("hidden");
+	}
 }
 
 function ssaved(){	
+	document.getElementById('svalidations').setAttribute("hidden", "hidden");
+	var status = document.getElementById('svalidations').innerText;
+	if(status==""){
+
 	document.getElementById('saddMoreBtn').className = 'ui teal button'; 
 	document.getElementById('ssaveBtn').value = 'Saved';
 	$("#sDoneBtn").show();
@@ -900,6 +913,9 @@ function ssaved(){
 	$('#smobile_no').prop('readonly', true);
 	$('#sterms').prop('readonly', true);
 	$('#sselect').prop('disabled', true);
+	}else{
+		document.getElementById('svalidations').removeAttribute("hidden");
+	}
 }
 
 

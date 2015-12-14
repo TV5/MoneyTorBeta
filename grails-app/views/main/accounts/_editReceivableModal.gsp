@@ -40,10 +40,14 @@
 		</div>
 		<g:hiddenField name="receivable_id"/>
 		<g:hiddenField name="type" value="R" />
-	  </div>
+	  <div id="editReceivableErrorList" class="ui negative small message"
+		style="display: none;"></div>
 	  <div class="actions">
-	    <g:actionSubmit class="ui approve button teal" value="Save" action="editReceivable"/>
+	  <g:submitToRemote url="[controller: 'Account' ,action: 'editReceivable']"
+			value="Save" class="ui teal button" id="saveEditReceivableBtn"
+			onComplete="resaved()" update="editReceivableErrorList" />
 	    <div class="ui cancel button">Cancel</div>
+	  </div>
 	  </div>
     </g:form>
 </div> 

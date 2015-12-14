@@ -30,27 +30,25 @@ class AccountController {
 		def validationList = []
 		try {
 			if(or_no==null || or_no=="") {
-				print "or_no null"
 				validationList.add("Please enter official receipt number.")
 			} else if(!or_no.matches("[A-Za-z0-9]+")) {
-				print "or_no"
 				validationList.add("Official receipt number must be alphanumeric.")
 			}			
 		} catch (e){
-			print "ambot unsa ni nga error"
+			print "Error"
 		}
-		
-		if(transactor_id==null) {
-			validationList.add("Please enter customer/supplier")
-		} else if (Integer.parseInt(transactor_id) < 1) {
-			validationList.add("Please enter customer/supplier")
+		if(transactor_id!="edit"){
+			if(transactor_id==null) {
+				validationList.add("Please enter customer/supplier.")
+			} else if (Integer.parseInt(transactor_id) < 1) {
+				validationList.add("Please enter customer/supplier.")
+			}
 		}
-		
-		if(amount==null || amount==0 || amount=="") {
-			print amount
+		if(amount==null ||  amount=="") {
 			validationList.add("Please enter amount.")
+		} else if (amount==0 || amount=="0") {
+			validationList.add("Amount must be greater than zero.")
 		}
-		
 		return validationList
 	}
 
@@ -87,6 +85,7 @@ class AccountController {
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
+			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
@@ -96,9 +95,7 @@ class AccountController {
 		def errorList = getErrorList(params.ror_no, params.rtransactor_id, params.ramount)
 		if(errorList.isEmpty()){
 			def transId = params.int('rtransactor_id')
-			System.out.println("1:" +transId)
 			if (transId == "-1") {
-				System.out.println("2:" +transId)
 				def transactor = new Transactor(
 						name: params.rname,
 						address: params.raddress,
@@ -110,11 +107,9 @@ class AccountController {
 						)
 				transactorService.addTransactor(transactor)
 				transId = transactorService.getTransactorIDByName(params.rname, 'C')
-				System.out.println("3:" +transId)
 			} else {
 				System.out.println("False" + transId)
 			}
-			System.out.println("4:" +transId)
 			def account = new Account(
 					or_no: params.ror_no,
 					transactor_id: transId,
@@ -124,6 +119,7 @@ class AccountController {
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
+			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
@@ -131,21 +127,27 @@ class AccountController {
 	}
 
 	def editReceivable() {
+		def errorList = getErrorList(params.eror_no, "edit", params.eramount)
+		if(errorList.isEmpty()){
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
 		Date trans_date = formatter.parse(params.ertransaction_date)
 		def account = new Account(
 				or_no: params.eror_no,
-				transactor_id: params.int('ercustomer_name'),
 				amount: params.eramount,
 				transaction_date: trans_date,
 				type: params.type,
 				updated_by: session.user.id
 				)
 		accountService.editAccount(params.int('receivable_id'),account)
-		redirect(action: "main", controller: "main")
+		render ""
+		} else {
+			errorList.each{ render '<li class="list">'+it+'</li>' }
+		}
 	}
 
 	def editPayable() {
+		def errorList = getErrorList(params.epor_no, "edit", params.epamount)
+		if(errorList.isEmpty()){
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
 		Date trans_date = formatter.parse(params.eptransaction_date)
 		print 'trans date ' + trans_date
@@ -158,7 +160,10 @@ class AccountController {
 				updated_by: session.user.id
 				)
 		accountService.editAccount(params.int('payable_id'),account)
-		redirect(action: "main", controller: "main")
+		render ""
+		} else {
+			errorList.each{ render '<li class="list">'+it+'</li>' }
+		}
 	}
 
 	def index() {
