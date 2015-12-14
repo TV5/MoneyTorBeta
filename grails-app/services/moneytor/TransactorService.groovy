@@ -44,5 +44,35 @@ class TransactorService {
 		newTransactor.status = transactor.status
 		newTransactor.save()
 	}
+	
+	def validate(name, address, telephone_no,mobile_no,terms){
+		System.out.println("Validating..")
+		def validationList =[]
+		if(name==""){
+			validationList.add("Name is required.")
+		}
+		if(address==""){
+			validationList.add("Address is required.")
+		}
+		if(telephone_no==""){
+			validationList.add("Telephone Number name is required.")
+		}
+		if(mobile_no==""){
+			validationList.add("Mobile Number is required.")
+		}
+		if(terms==""){
+			validationList.add("Terms is required.")
+		}
+		if(!telephone_no.matches("[0-9]+")){
+			validationList.add("Telephone Number must only contain numeric characters")
+		}
+		if(!mobile_no.matches("[0-9]+")){
+			validationList.add("Mobile Number must only contain numeric characters")
+		}
+		if(!terms.matches("[0-9]+")){
+			validationList.add("Terms must only contain numeric character/s")
+		}
+		return validationList
+	}
 
 }

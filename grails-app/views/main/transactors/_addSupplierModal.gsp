@@ -56,13 +56,14 @@
 		</div>    	
 		<g:hiddenField name="stype" value="S" />
 		<g:hiddenField name="sstatus" value="A" />
+				<div id="svalidations" class="ui negative small message"  hidden></div>	
 		<input type='reset' id="saddResetBtn" value='Reset' hidden />
-		
+
 		<div class="actions">
     		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addSupplier']"  
     		class="ui teal button"
     		id="ssaveBtn"  
-    		update="saddMoreBtn"
+    		update="svalidations"
     		value="Save" 
     		onComplete ="ssaved()" />
     		
