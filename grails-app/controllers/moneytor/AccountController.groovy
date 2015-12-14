@@ -41,16 +41,18 @@ class AccountController {
 		}
 		
 		if(transactor_id==null) {
+			print "transid"
 			validationList.add("Please enter customer/supplier")
 		} else if (Integer.parseInt(transactor_id) < 1) {
+			print "transId2"
 			validationList.add("Please enter customer/supplier")
 		}
 		
 		if(amount==null || amount==0 || amount=="") {
-			print amount
+			print "amt" + amount
 			validationList.add("Please enter amount.")
 		}
-		
+		print "done"
 		return validationList
 	}
 
