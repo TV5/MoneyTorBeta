@@ -1043,8 +1043,7 @@ function validateForm() {
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
-			if ( settings.nTable != document.getElementById('receivablesTable'))
-			{
+			if ( settings.nTable != document.getElementById('receivablesTable')) {
 			    return true;
 			}
 	  		var min = Date.parse($('#minR').val(),10);
@@ -1063,8 +1062,7 @@ $.fn.dataTable.ext.search.push(
 
 $.fn.dataTable.ext.search.push(
 		function( settings, data, dataIndex ) {
-			if ( settings.nTable != document.getElementById('payablesTable'))
-			{
+			if ( settings.nTable != document.getElementById('payablesTable')) {
 			    return true;
 			}
 	  		var min = Date.parse($('#minP').val(),10);
