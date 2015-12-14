@@ -817,20 +817,14 @@ function paddmore(){
 
 function rsaved(){
 	document.getElementById('addReceivableErrorList').removeAttribute("hidden");
-	//var errorList = $('#addReceivableErrorList');
-	//var errorDiv = $('#addReceivableErrorDiv');
-	var transactorList = $('#receivableCustomerList').val();
-	var or_no = $('#ror_no').val();
-	var amount = $('#ramount').val();
-	var transactorType = "customer";
-	var addMoreBtn = $('#raddMoreBtn');
-	var saveBtn = $('#saveReceivableBtn');
-	var formInputs = $('#addReceivableForm :input');
-	//validateAccount(errorList, errorDiv, transactorList, or_no, amount, transactorType, addMoreBtn, saveBtn, formInputs);
 	$('#rdone').show();
 	$('#rcancel').hide();
-	if($('#addReceivableErrorList').html()==""){
+	if(document.getElementById('addReceivableErrorList').innerText==""){
 		$('#addReceivableForm').find('input[type="text"], input[type="number"], input[type="checkbox"], select').prop("disabled", true);		
+		$('#raddMoreBtn').attr("disabled", false);	
+		$('#saveReceivableBtn').val('Saved');
+		$('#saveReceivableBtn').attr("disabled", "disabled");	
+		$('#addReceivableErrorList').hide();
 	}
 }
 
