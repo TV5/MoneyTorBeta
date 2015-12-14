@@ -69,7 +69,7 @@
 			<div class="ui divider"></div>
 		    <g:hiddenField name="uId" />
 			<g:hiddenField name="uCurrentPass" />
-			<div class="actions">
+			<div class="actions right">
 				<div id="editBtn" class="ui right labeled icon button teal displayFirst" onclick="edit()">
 					<i class="edit basic icon"></i>Edit
 				</div>

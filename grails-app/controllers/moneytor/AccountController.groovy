@@ -30,27 +30,25 @@ class AccountController {
 		def validationList = []
 		try {
 			if(or_no==null || or_no=="") {
-				print "or_no null"
-				validationList.add("Please enter official receipt number.")
+				validationList.add("Official receipt number is required.")
 			} else if(!or_no.matches("[A-Za-z0-9]+")) {
-				print "or_no"
 				validationList.add("Official receipt number must be alphanumeric.")
 			}			
 		} catch (e){
-			print "ambot unsa ni nga error"
+			print "Error"
 		}
-		
-		if(transactor_id==null) {
-			validationList.add("Please enter customer/supplier")
-		} else if (Integer.parseInt(transactor_id) < 1) {
-			validationList.add("Please enter customer/supplier")
+		if(transactor_id!="edit"){
+			if(transactor_id==null) {
+				validationList.add("Customer/supplier is required.")
+			} else if (Integer.parseInt(transactor_id) < 1 && Integer.parseInt(transactor_id) != -1) {
+				validationList.add("Customer/supplier is required.")
+			}
 		}
-		
-		if(amount==null || amount==0 || amount=="") {
-			print amount
-			validationList.add("Please enter amount.")
+		if(amount==null ||  amount=="") {
+			validationList.add("Amount is required.")
+		} else if (amount==0 || amount=="0") {
+			validationList.add("Amount must be greater than zero.")
 		}
-		
 		return validationList
 	}
 
@@ -61,23 +59,32 @@ class AccountController {
 
 	def addPayable() {
 		def errorList = getErrorList(params.por_no,params.transactor_id,params.pamount)
-		if(errorList.isEmpty()){
-			def transId = params.transactor_id
-					if (transId == "-1") {
-						def transactor = new Transactor(
-								name: params.pname,
-								address: params.paddress,
-								telephone_no: params.ptelephone_no,
-								mobile_no: params.pmobile_no,
-								terms: params.pterms,
-								type: 'S',
-								status: 'A'
-								)
-						transactorService.addTransactor(transactor)
-						transId = transactorService.getTransactorIDByName(params.pname, 'S')
-					} else {
-						System.out.println("False" + transId)
-					}
+		def transErrorsList = transactorService.validate(params.pname, params.paddress, params.ptelephone_no,params.pmobile_no, params.pterms)
+		def transId = params.transactor_id
+		if (transId == "-1") {
+			if(transErrorsList.isEmpty()){
+				def transactor = new Transactor(
+						name: params.pname,
+						address: params.paddress,
+						telephone_no: params.ptelephone_no,
+						mobile_no: params.pmobile_no,
+						terms: params.pterms,
+						type: 'S',
+						status: 'A'
+						)
+				
+				transactorService.addTransactor(transactor)
+				transId = transactorService.getTransactorIDByName(params.pname, 'S')
+				print params.pname
+				
+			} else {
+				transErrorsList.each{ render '<li class="list">'+it+'</li>' }
+			}
+		}else {
+			System.out.println("False" + transId)
+		}
+			
+			if(errorList.isEmpty()){
 			def account = new Account(
 					or_no: params.por_no,
 					transactor_id: transId,
@@ -87,18 +94,18 @@ class AccountController {
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
+			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
 	}
 
 	def addReceivable() {
-		def errorList = getErrorList(params.ror_no, params.rtransactor_id, params.ramount)
-		if(errorList.isEmpty()){
-			def transId = params.int('rtransactor_id')
-			System.out.println("1:" +transId)
-			if (transId == "-1") {
-				System.out.println("2:" +transId)
+		def errorList = getErrorList(params.ror_no,params.rtransactor_id,params.ramount)
+		def transErrorsList = transactorService.validate(params.rname, params.raddress, params.rtelephone_no,params.rmobile_no, params.rterms)
+		def transId = params.rtransactor_id
+		if (transId == "-1") {
+			if(transErrorsList.isEmpty()){
 				def transactor = new Transactor(
 						name: params.rname,
 						address: params.raddress,
@@ -108,13 +115,18 @@ class AccountController {
 						type: 'C',
 						status: 'A'
 						)
+				
 				transactorService.addTransactor(transactor)
-				transId = transactorService.getTransactorIDByName(params.rname, 'C')
-				System.out.println("3:" +transId)
+				transId = transactorService.getTransactorIDByName(params.pname, 'C')
+				
 			} else {
-				System.out.println("False" + transId)
+				transErrorsList.each{ render '<li class="list">'+it+'</li>' }
 			}
-			System.out.println("4:" +transId)
+		}else {
+			System.out.println("False" + transId)
+		}
+			
+			if(errorList.isEmpty()){
 			def account = new Account(
 					or_no: params.ror_no,
 					transactor_id: transId,
@@ -124,28 +136,34 @@ class AccountController {
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
+			render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
 		}
-		
 	}
-
+	
 	def editReceivable() {
+		def errorList = getErrorList(params.eror_no, "edit", params.eramount)
+		if(errorList.isEmpty()){
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
 		Date trans_date = formatter.parse(params.ertransaction_date)
 		def account = new Account(
 				or_no: params.eror_no,
-				transactor_id: params.int('ercustomer_name'),
 				amount: params.eramount,
 				transaction_date: trans_date,
 				type: params.type,
 				updated_by: session.user.id
 				)
 		accountService.editAccount(params.int('receivable_id'),account)
-		redirect(action: "main", controller: "main")
+		render ""
+		} else {
+			errorList.each{ render '<li class="list">'+it+'</li>' }
+		}
 	}
 
 	def editPayable() {
+		def errorList = getErrorList(params.epor_no, "edit", params.epamount)
+		if(errorList.isEmpty()){
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
 		Date trans_date = formatter.parse(params.eptransaction_date)
 		print 'trans date ' + trans_date
@@ -158,7 +176,11 @@ class AccountController {
 				updated_by: session.user.id
 				)
 		accountService.editAccount(params.int('payable_id'),account)
-		redirect(action: "main", controller: "main")
+		render ""
+		} else {
+			errorList.each{ render '<li class="list">'+it+'</li>' }
+			transErrorList.each{ render '<li class="list">'+it+'</li>' }
+		}
 	}
 
 	def index() {

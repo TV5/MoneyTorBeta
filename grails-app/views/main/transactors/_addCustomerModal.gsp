@@ -58,13 +58,13 @@
 		<g:hiddenField name="ctype" value="C" />
 		<g:hiddenField name="cstatus" value="A" />
 		<input type='reset' id="cresetBtn" value='Reset' hidden />
-		
+		<div id="Validations" class="ui negative small message"  hidden></div>	
 		
     	<div class="actions">
     		<g:submitToRemote url="[controller: 'Transactor' ,action: 'addCustomer']"  
     		class="ui teal button"
     		id="csaveBtn"  
-    		update="caddMoreBtn"
+    		update="Validations"
     		value="Save" 
     		onComplete ="csaved()" />
 			

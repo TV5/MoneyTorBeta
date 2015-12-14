@@ -3,7 +3,7 @@
 		<h2 id="pmAccountName" class="ui left pointing teal basic label" style="margin-left:10px;"></h2>
 	</div>
   	<div class="content" id="paymentsss" style="padding-top:10px;padding-bottom:0px;">	  
-  		<div id="yeah">${paymentList}</div>
+  		<div id="yeah" hidden>${paymentList}</div>
 		<div id="tablePymnt"></div>
     	<g:formRemote name="subForm" url="[controller:'payment', action:'addPayment']" class="ui form">
     		<div class="inline fields" style="margin-top:14px">
