@@ -108,15 +108,7 @@
 							precision="day" />
 					</div>
 				</div>
-
-				<%--<div class="ui negative small message" id="addPayableErrorDiv"
-					style="display: none;">
-					<div class="header">There were some errors with your
-						submission.</div>
-					<ul class="list" id="addPayableErrorList">
-					</ul>
 				</div>
-				--%></div>
 				<div id="addPayableErrorList" class="ui negative small message" hidden></div>	
 				<div class="actions">
 					<g:submitToRemote

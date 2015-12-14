@@ -95,25 +95,25 @@ class AccountController {
 	def addReceivable() {
 		def errorList = getErrorList(params.ror_no, params.rtransactor_id, params.ramount)
 		if(errorList.isEmpty()){
-			def transId = params.rtransactor_id
-					System.out.println("1:" +transId)
-					if (transId == "-1") {
-						System.out.println("2:" +transId)
-						def transactor = new Transactor(
-								name: params.rname,
-								address: params.raddress,
-								telephone_no: params.rtelephone_no,
-								mobile_no: params.rmobile_no,
-								terms: params.rterms,
-								type: 'C',
-								status: 'A'
-								)
-						transactorService.addTransactor(transactor)
-						transId = transactorService.getTransactorIDByName(params.rname, 'C')
-						System.out.println("3:" +transId)
-					} else {
-						System.out.println("False" + transId)
-					}
+			def transId = params.int('rtransactor_id')
+			System.out.println("1:" +transId)
+			if (transId == "-1") {
+				System.out.println("2:" +transId)
+				def transactor = new Transactor(
+						name: params.rname,
+						address: params.raddress,
+						telephone_no: params.rtelephone_no,
+						mobile_no: params.rmobile_no,
+						terms: params.rterms,
+						type: 'C',
+						status: 'A'
+						)
+				transactorService.addTransactor(transactor)
+				transId = transactorService.getTransactorIDByName(params.rname, 'C')
+				System.out.println("3:" +transId)
+			} else {
+				System.out.println("False" + transId)
+			}
 			System.out.println("4:" +transId)
 			def account = new Account(
 					or_no: params.ror_no,
