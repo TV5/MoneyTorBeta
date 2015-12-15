@@ -50,7 +50,7 @@
 					</div>
 					<g:hiddenField name="adminId" />
 					<g:hiddenField name="adminStatus" />
-					<div id="ausernameTaken"></div>	
+					<div id="ausernameTaken" hidden></div>	
 					<div id="deactivated" hidden></div>
 			<div class="actions">
     			<g:submitToRemote url="[controller: 'User' ,action: 'editAdmin']" class="ui teal button" value="Save" update="ausernameTaken" onSuccess="editedAdmin()"/>
