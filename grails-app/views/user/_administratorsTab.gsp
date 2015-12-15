@@ -19,7 +19,7 @@
 				style="margin-top: -15px; margin-left: auto; margin-right: 0;">
 				<button class="ui labeled icon button teal"
 					style="margin-left: auto; margin-right: 0;" id="addadministratorBtn">
-					<i class="add user basic icon"></i>Add Employees
+					<i class="add user basic icon"></i>Add Administrator
 				</button>
 			</div>
 		</div>

@@ -57,7 +57,6 @@
 			</div>
 			<g:hiddenField name="stype" value="S" />
 			<g:hiddenField name="sstatus" value="A" />
-		</g:form>
 		<div class="ui divider"></div>
 		<div id="svalidations" class="ui negative small message" hidden></div>
 		<input type='reset' id="saddResetBtn" value='Reset' hidden />
@@ -80,5 +79,6 @@
 				<i class="checkmark icon"></i>Done
 			</div>
 		</div>
+		</g:form>
 	</div>
 </div>

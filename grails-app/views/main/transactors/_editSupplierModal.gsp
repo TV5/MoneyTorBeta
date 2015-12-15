@@ -58,11 +58,11 @@
 			<g:hiddenField name="estype" value="S" />
 			<g:hiddenField name="esstatus" value="A" />
 			<g:hiddenField name="esid" value="${esid}" />
+			<div id="sTaken" hidden></div>	
 			<input type='reset' id="sresetBtn" value='Reset' hidden />
 			<div class="ui divider"></div>
 			<div class="actions" style="float:right; margin-bottom:14px;">
-				<g:actionSubmit id="essave" class="ui approve button teal"
-					value="Save" action="editSupplier" />
+				<g:submitToRemote url="[controller: 'Transactor' ,action: 'editSupplier']" class="ui teal button" value="Save" update="sTaken" onSuccess="editedSupplier()"/>
 				<input type='reset' id="sresetBtn" value='Reset' hidden />
 				<div class="ui right labeled icon cancel button"><i class="cancel basic icon"></i>Cancel</div>
 			</div>
