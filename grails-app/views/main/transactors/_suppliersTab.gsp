@@ -1,29 +1,25 @@
 <div class="ui bottom attached tab segment" data-tab="suppliersTab" style="padding-bottom: 50px">
 	<div class="ui form ">
 		<div class="inline fields">
-			<div class="inline fields thirteen wide" style="float: left">
-				<div class="three wide field">
-					<label>Entries per page</label> <select class="ui dropdown" id="suppliersNumEntries">
+			<div class="inline fields">
+				<div class="seven wide field">
+					<label>Entries per page</label> 
+					<select class="ui dropdown" id="suppliersNumEntries">
 						<option value="10">10</option>
 						<option value="15">15</option>
 						<option value="30">30</option>
 						<option value="100">100</option>
 					</select>
 				</div>
-				<div class="three wide field">
-					<label>Start Date</label> <input type="text" id="minR">
+				<div class="eight wide field">
+					<label>Search</label> 
+					<input type="text" id="searchSuppliers">
 				</div>
-				<div class="three wide field">
-					<label>End Date</label> <input type="text" id="maxR">
-				</div>
-				<div class="four wide field">
-					<label>Search</label> <input type="text" id="searchSuppliers">
-				</div>
-						<div class="three wide field" style="float: right">
-							<button class="ui labeled icon button teal" id="addSupplierBtn">
-								<i class="add user basic icon"></i>Add Suppliers
-							</button>
-						</div>
+			</div>
+			<div class="four wide field" style="margin-top:-15px; margin-left: auto; margin-right: 0;">
+				<button class="ui labeled icon button teal" style="margin-left: auto; margin-right: 0;" id="addSupplierBtn">
+					<i class="add user basic icon"></i>Add Suppliers
+				</button>
 			</div>
 		</div>
 	</div>
@@ -35,7 +31,7 @@
 				<th>Telephone No</th>
 				<th>Mobile No</th>
 				<th>Terms</th>
-				<th>Edit</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,9 +55,10 @@
 							}
 						</script>
 					</td>
-					<td><a href="#" onClick="editSupplier('${supplier.name}','${supplier.address}','${supplier.telephone_no}','${supplier.mobile_no}','${supplier.terms}','${supplier.id}')">
-							<i class="edit icon editCustomerBtn"></i>
-						</a>
+					<td>
+						<button id="editCustomerBtn" class="ui right labeled icon button" onClick="editSupplier('${supplier.name}','${supplier.address}','${supplier.telephone_no}','${supplier.mobile_no}','${supplier.terms}','${supplier.id}')">
+							EDIT <i class="edit teal icon"></i>
+						</button>
 					</td>
 				</tr>
 			</g:each>

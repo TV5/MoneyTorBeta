@@ -27,6 +27,7 @@ class UserService {
 	def addMoreUser(user){
 		def ret
 		def userCheck = User.findByUsernameAndPassword(user.username, user.password)
+		System.out.println (userCheck)
 		if(userCheck){
 			ret = "true"
 			System.out.println("true");

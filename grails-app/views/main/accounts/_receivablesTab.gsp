@@ -68,9 +68,9 @@
 						onClick="editReceivable($(this),'${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i
 							class="edit icon"></i></a></td>
 					<td>
-						<button class="ui right labeled icon button teal"
+						<button class="ui right labeled icon button"
 							onClick="addPayment('${receivable.id}','${customerName}','${receivable.amount}')">
-							<i class="search basic icon"></i>View
+							<i class="search basic teal icon"></i>View
 						</button>
 					</td>
 				</tr>
