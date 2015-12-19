@@ -43,8 +43,6 @@
 			</div>
 			<g:hiddenField name="payable_id" />
 			<g:hiddenField name="type" value="P" />
-		</g:form>
-	</div>
 	<div id="editPayableErrorList" class="ui negative small message"
 		style="display: none;"></div>
 	<div class="actions">
@@ -54,5 +52,7 @@
 		<div class="ui right labeled icon cancel button">
 			<i class="cancel basic icon"></i>Cancel
 		</div>
+	</div>
+		</g:form>
 	</div>
 </div>

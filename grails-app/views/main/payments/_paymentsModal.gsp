@@ -31,5 +31,6 @@
   	</div>
 	<div class="actions">
 		<div id="pymntDone" onClick="loadPayment()" class="ui right labeled icon approve button"><i class="checkmark icon"></i>Done</div>
+		<div class="ui right labeled icon cancel button"><i class="cancel basic icon"></i>Cancel</div>
 	</div>
 </div>
