@@ -44,11 +44,12 @@ class AccountController {
 				validationList.add("Customer/supplier is required.")
 			}
 		}
+		print "AMOUNT "+amount + amount.getClass()
 		if(amount==null ||  amount=="") {
 			validationList.add("Amount is required.")
-		} else if (amount==0 || amount=="0") {
+		} else if (!amount.matches("[1-9]+")) {
 			validationList.add("Amount must be greater than zero.")
-		}
+		} 
 		return validationList
 	}
 
