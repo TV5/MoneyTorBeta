@@ -179,7 +179,6 @@ class AccountController {
 		render ""
 		} else {
 			errorList.each{ render '<li class="list">'+it+'</li>' }
-			transErrorList.each{ render '<li class="list">'+it+'</li>' }
 		}
 	}
 

@@ -1,5 +1,7 @@
 <div id="editadministrator" class="ui modal">
-			<div class="header">Administrator</div>
+			<div class="header"  style="padding-top: 16px; padding-bottom: 13px;">
+		<i class="circular teal edit icon"
+			style="margin-right: 10px;"></i>Administrator</div>
 			<div class="content">
 
 				<g:form class="ui form" controller="user">
@@ -48,14 +50,15 @@
 				            <g:passwordField name="adminCpassword" />
 						</div>
 					</div>
+					<div class="ui divider"></div>
 					<g:hiddenField name="adminId" />
 					<g:hiddenField name="adminStatus" />
 					<div id="ausernameTaken" hidden></div>	
 					<div id="deactivated" hidden></div>
-			<div class="actions">
+			<div class="actions" style="float:right; margin-bottom:14px;">
     			<g:submitToRemote url="[controller: 'User' ,action: 'editAdmin']" class="ui teal button" value="Save" update="ausernameTaken" onSuccess="editedAdmin()"/>
     			<g:submitToRemote url="[controller: 'User' ,action: 'changeStatus']" id="adeactivate" class="ui button" value="Deactivate" onSuccess="changeUserStatus()"/>		
-				<div class="ui cancel button">Cancel</div>
+				<div class="ui right labeled icon cancel button"><i class="cancel basic icon"></i>Cancel</div>
 			</div>
 			</g:form>
 			</div>

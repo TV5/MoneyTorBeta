@@ -69,10 +69,13 @@ class TransactorService {
 
 		if(terms==null||terms==""){
 			validationList.add("Terms is required.")
+		}else if(terms.matches("\\d\\.\\d{1,3}")){
+		validationList.add("Terms must only be in whole number")
+		}else if(!terms.matches("[1-9]+")){
+		validationList.add("Terms must be greater than or equal to 1")
 		}else if(!terms.matches("[0-9]+")){
 			validationList.add("Terms must only contain numeric character/s")
 		}
-		
 		return validationList
 	}
 
