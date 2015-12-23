@@ -54,8 +54,7 @@ class TransactorController {
 	def addSupplier() {
 		System.out.println("add supplier")
 		System.out.println("hehe")
-		System.out.println("hehasfjash")
-		System.out.println("shit"+params.sname)
+		System.out.println("hgfhg"+params.suname)
 		def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
 		System.out.println(validationsList)
 		if(validationsList.isEmpty()){
@@ -97,7 +96,7 @@ class TransactorController {
 	}
 	
 	def editSupplier() {
-		def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms)
+		def validationsList = transactorService.validate(params.esname, params.esaddress, params.estelephone_no, params.esmobile_no, params.esterms)
 		System.out.println(validationsList)
 		if(validationsList.isEmpty()){
 		def transactor = new Transactor(
@@ -110,7 +109,7 @@ class TransactorController {
 				status: params.esstatus
 				)
 		transactorService.editTransactor(params.int('esid'), transactor)
-		redirect(action: "main", controller: "main", params:[tab:"suppliersTabLink"])
+		render "Transactor information has been saved."
 		}else{
 		System.out.println("errors")
 		validationsList.each{ render '<li>'+it+'</li>' }
@@ -119,6 +118,10 @@ class TransactorController {
 }
 	
 	def editCustomer() {
+		System.out.println("jasfkas");
+		def validationsList = transactorService.validate(params.ecname, params.ecaddress, params.ectelephone_no, params.ecmobile_no, params.ecterms)
+		System.out.println(validationsList)
+		if(validationsList.isEmpty()){
 		def transactor = new Transactor(
 				name: params.ecname,
 				address: params.ecaddress,
@@ -129,7 +132,11 @@ class TransactorController {
 				status: params.ecstatus
 				)
 		transactorService.editTransactor(params.int('ecid'), transactor)
-		redirect(action: "main", controller: "main", params:[tab:"customersTabLink"])
+		render "Transactor information has been saved."
+		}else{
+		System.out.println("errors")
+		validationsList.each{ render '<li>'+it+'</li>' }
+	}
 	}
 	def convertTerms(String num, String terms ){
 		int value = num.toInteger()

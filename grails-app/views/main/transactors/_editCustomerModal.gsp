@@ -57,10 +57,10 @@
 			<g:hiddenField name="ectype" value="C" />
 			<g:hiddenField name="ecstatus" value="A" />
 			<g:hiddenField name="ecid" value="${ecid}" />
+			<div id="cTaken" hidden></div>	
 			<input type='reset' id="ecresetBtn" value='Reset' hidden />
 			<div class="actions" style="float:right; margin-bottom:14px;">
-				<g:actionSubmit id="ecsave" class="ui approve button teal"
-					value="Save" action="editCustomer" />
+			<g:submitToRemote url="[controller: 'Transactor' ,action: 'editCustomer']" class="ui teal button" value="Save" update="cTaken" onSuccess="editedCustomer()"/>
 				<!--<g:field id="addmore" class="ui button" type="reset" name="myReset"  update="saveBtn" value="Add More" url="" onComplete="addmoreClick()"/> -->
 				<div class="ui right labeled icon cancel button"><i class="cancel basic icon"></i>Cancel</div>
 			</div>
