@@ -31,7 +31,7 @@
 				<th>Telephone No</th>
 				<th>Mobile No</th>
 				<th>Terms</th>
-				<th></th>
+				<th>Edit</th>
 			</tr>
 		</thead>
 		<tbody>
