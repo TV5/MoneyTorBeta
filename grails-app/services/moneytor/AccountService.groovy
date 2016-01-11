@@ -33,5 +33,11 @@ class AccountService {
 
     }
 	
-	
+	def makePaid(id, updatedBy) {
+		Account newAccount = Account.get(id)
+		newAccount.status = 'P'
+		newAccount.updated_by = updatedBy
+		newAccount.updated_on = new Date()
+		newAccount.save()
+	}
 }
