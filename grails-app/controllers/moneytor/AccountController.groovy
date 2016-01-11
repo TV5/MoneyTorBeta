@@ -92,6 +92,7 @@ class AccountController {
 					amount: params.pamount,
 					transaction_date: params.pdate,
 					type: 'P',
+					status: 'U',
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
@@ -134,6 +135,7 @@ class AccountController {
 					amount: params.ramount,
 					transaction_date: params.rdate,
 					type: 'R',
+					status: 'U',
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
@@ -183,6 +185,16 @@ class AccountController {
 		}
 	}
 
+	def makePaid() {
+		def errorList = getErrorList(params.eror_no, "edit", params.eramount)
+		if(errorList.isEmpty()){
+		accountService.makePaid(params.int('receivable_id'), session.user.id)
+		render ""
+		} else {
+			errorList.each{ render '<li class="list">'+it+'</li>' }
+		}
+	}
+	
 	def index() {
 	}
 }
