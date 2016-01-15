@@ -355,9 +355,9 @@ $(document).ready(function() {
 				identifier : 'uF_name',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter your First Name'
+					prompt : 'First Name must not be blank.'
 				}, {
-					type : 'regExp[/^[a-zA-Z ]+$/]',
+					type : 'regExp[/^[a-zA-Z .]+$/]',
 					prompt : 'Invalid input.'
 				} ]
 			},
@@ -365,9 +365,9 @@ $(document).ready(function() {
 				identifier : 'uL_name',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter your Last Name'
+					prompt : 'Last Name must not be blank.'
 				}, {
-					type : 'regExp[/^[a-zA-Z ]+$/]',
+					type : 'regExp[/^[a-zA-Z .]+$/]',
 					prompt : 'Invalid input.'
 				} ]
 			},
@@ -683,27 +683,30 @@ function changePassword() {
 				identifier : 'uCurrPass',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter current password'
+					prompt : 'Please input current password'
 				}, {
 					type : 'match[uCurrentPass]',
-					prompt : 'The current password entered is incorrect.'
+					prompt : 'The current password inputted is incorrect.'
 				} ]
 			},
 			uNewPass : {
 				identifier : 'uNewPass',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter your new password'
+					prompt : 'Please input your new password'
 				}, {
 					type : 'length[8]',
-					prompt : 'Your new password must be at least 8 characters'
+					prompt : 'New password must be at least 8 characters'
+				}, {
+					type : 'different[uCurrentPass]',
+					prompt : 'New password matches your old password. Please input a new one.'
 				} ]
 			},
 			uCNewPass : {
 				identifier : 'uCNewPass',
 				rules : [ {
 					type : 'match[uNewPass]',
-					prompt : 'Password does not match'
+					prompt : 'Passwords do not match.'
 				} ]
 			}
 		}
@@ -743,7 +746,7 @@ function checkDec(el) {
 function tablePayment(acct_id) {
 	var d;
 	var datestring;
-	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
+	var myTable = '<table id="paymentsTable" class="ui teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
 	var boom = document.getElementById("yeah").innerHTML;
 	$(jQuery.parseJSON(boom)).each(
 			function() {
@@ -759,7 +762,6 @@ function tablePayment(acct_id) {
 			});
 	myTable += '</tbody></table>';
 	document.getElementById("tablePymnt").innerHTML = myTable;
-	paginate();
 }
 
 function addPayment(account_id, acct_name, amt) {
@@ -784,11 +786,14 @@ function addPayment(account_id, acct_name, amt) {
 					type : 'empty',
 					prompt : 'Please enter amount.'
 				}, {
-					type : 'regExp[/^\\d+\.?\\d{0,2}$/]',
-					prompt : 'Invalid input.'
+					type : 'doesntContainExactly[-]',
+					prompt : 'Amount must be greater than 0.00 PHP'
+				}, {
+					type : 'regExp[/^-\\d+\.?\\d{0,2}$/]',
+					prompt : 'Amount must only contain valid decimal numbers.'
 				}, {
 					type : 'notExactly[0]',
-					prompt : 'Please enter amount.'
+					prompt : 'Amount must be greater than 0.00 PHP'
 				} ]
 			}
 		}
@@ -797,9 +802,12 @@ function addPayment(account_id, acct_name, amt) {
 
 function pymntAdded() {
 	$("#yeah").load(location.href + " #yeah", function() {
-		tablePayment(accid);
-		balance();
 	});
+	//document.getElementById("tablePymnt").innerHTML = "";
+	setTimeout(function(){
+		tablePayment(accid);
+		//balance();
+	}, 3000);	
 }
 
 function loadPayment(){
