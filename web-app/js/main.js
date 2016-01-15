@@ -1,6 +1,8 @@
 //document ready functions
 	var admn;
 	var empt;
+	var rDates;
+	var pDates;
 $(document).ready(function() {
 	// Admin Search & Entries per page
 	var numA = $('#adminNumEntries').val();
@@ -98,37 +100,9 @@ $(document).ready(function() {
 	// receivables
 	
 	var num = $('#receivablesNumEntries').val();
-	var receivablesTable = $('#receivablesTable').DataTable({
-		"dom" : 'tBp',
-		"pageLength" : $('#receivablesNumEntries').val(),
-		"buttons" : [ {
-			extend : 'excelHtml5',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'pdfHtml5',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'print',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		} ],
-		"order" : [ [ 3, "desc" ] ]
-	});
 
+	
+	
 	// receivablesTable.buttons(0,
 	// null).container().appendTo(receivablesTable.table().container());
 
@@ -170,6 +144,43 @@ $(document).ready(function() {
 	});
 	pUpdateEndDate($("#minR"), $("#maxR"));
 	$('#maxR').datepicker("setDate", new Date());
+	
+	
+	rDates = $('#minR').val() + "-" + $('#maxR').val();
+	console.log("Dates: " + rDates);
+	
+	var receivablesTable = $('#receivablesTable').DataTable({
+		"dom" : 'tBp',
+		"pageLength" : $('#receivablesNumEntries').val(),
+		"buttons" : [ {
+			extend : 'excelHtml5',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'pdfHtml5',
+			title : 'Receivables Summary' + $('#maxR').val(),
+			fileName : "Receivable Summary " + $('#maxR').val() + + ".pdf",
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'print',
+			title : 'Receivables Summary ' + $('#maxR').val(),
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		} ],
+		"order" : [ [ 3, "desc" ] ]
+	});
+	
 	receivablesTable.draw();
 
 	function setreceivablesTotalAmt() {
@@ -188,6 +199,8 @@ $(document).ready(function() {
 
 	$('#minR, #maxR').change(function() {
 		notifyDue();
+		rDates = $('#minR').val() + "-" + $('#maxR').val();
+		console.log("Dates: " + rDates);
 		receivablesTable.draw();
 		setreceivablesTotalAmt();
 		// alert('change minR maxR');
