@@ -6,7 +6,7 @@
 	</div>
   	<div class="content" id="paymentsss" style="padding-top:10px;padding-bottom:0px;">	  
   		<div id="yeah" hidden>${paymentList}</div>
-		<div id="tablePymnt"></div>
+		<div style="overflow-y: scroll; max-height: 200px" id="tablePymnt"></div>
     	<g:formRemote name="subForm" url="[controller:'payment', action:'addPayment']" class="ui form">
     		<div class="inline fields" style="margin-top:14px">
     			<div class="eleven wide field">
@@ -30,7 +30,6 @@
     	</g:formRemote>
   	</div>
 	<div class="actions">
-		<div id="pymntDone" onClick="loadPayment()" class="ui right labeled icon approve button"><i class="checkmark icon"></i>Done</div>
-		<div class="ui right labeled icon cancel button"><i class="cancel basic icon"></i>Cancel</div>
+		<div class="ui right labeled icon approve button"><i class="checkmark icon"></i>Done</div>
 	</div>
 </div>
