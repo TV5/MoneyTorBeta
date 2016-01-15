@@ -8,11 +8,11 @@ import grails.transaction.Transactional
 class AccountService {
 
 	def getPayableList() {
-		return Account.findAllByType('P')
+		return Account.findAllByTypeAndStatus('P', 'U')
 	}
 	
 	def getReceivableList() {
-		return Account.findAllByType('R')
+		return Account.findAllByTypeAndStatus('R', 'U')
 	}
 	
 	def addAccount(account) {
@@ -33,5 +33,11 @@ class AccountService {
 
     }
 	
-	
+	def makePaid(id, updatedBy) {
+		Account newAccount = Account.get(id)
+		newAccount.status = 'P'
+		newAccount.updated_by = updatedBy
+		newAccount.updated_on = new Date()
+		newAccount.save()
+	}
 }

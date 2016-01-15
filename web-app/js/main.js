@@ -96,6 +96,7 @@ $(document).ready(function() {
 	});
 
 	// receivables
+	
 	var num = $('#receivablesNumEntries').val();
 	var receivablesTable = $('#receivablesTable').DataTable({
 		"dom" : 'tBp',
