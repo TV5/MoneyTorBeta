@@ -97,10 +97,6 @@ $(document).ready(function() {
 
 	// receivables
 	
-	var sDates = $('#minR').val();
-	var eDates = $('#maxR').val();
-	var titel = sDates + eDates;
-	
 	var num = $('#receivablesNumEntries').val();
 	var receivablesTable = $('#receivablesTable').DataTable({
 		"dom" : 'tBp',
