@@ -1006,8 +1006,16 @@ function addedEmployee() {
 function changeUserStatus() {
 	var status = document.getElementById('deactivated').innerText;
 	if (status = "deactivated") {
-		$('#editemployee').modal('hide');
-		$('#editadministrator').modal('hide');
+		var empID = document.getElementById('empID').value;
+		var adminID = document.getElementById('adminID').value;
+		if(empID){
+			$('#editemployee').modal('hide');
+			window.location.replace("users");
+		}
+		if(adminID){
+			$('#editadministrator').modal('hide');
+			window.location.replace("users?tab=administratorsTab");			
+		}
 	}
 }
 function editedEmployee() {
