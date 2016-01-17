@@ -13,4 +13,9 @@ class PaymentService {
 	def addPayment(payment){
 		payment.save()
 	}
+	
+	def getPayments(id){
+		def tots = Payment.findAllByAccount(id)
+		return tots.amount.sum()
+	}
 }

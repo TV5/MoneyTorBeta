@@ -96,6 +96,7 @@ $(document).ready(function() {
 	});
 
 	// receivables
+	
 	var num = $('#receivablesNumEntries').val();
 	var receivablesTable = $('#receivablesTable').DataTable({
 		"dom" : 'tBp',
@@ -354,9 +355,9 @@ $(document).ready(function() {
 				identifier : 'uF_name',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter your First Name'
+					prompt : 'First Name must not be blank.'
 				}, {
-					type : 'regExp[/^[a-zA-Z ]+$/]',
+					type : 'regExp[/^[a-zA-Z .]+$/]',
 					prompt : 'Invalid input.'
 				} ]
 			},
@@ -364,9 +365,9 @@ $(document).ready(function() {
 				identifier : 'uL_name',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter your Last Name'
+					prompt : 'Last Name must not be blank.'
 				}, {
-					type : 'regExp[/^[a-zA-Z ]+$/]',
+					type : 'regExp[/^[a-zA-Z .]+$/]',
 					prompt : 'Invalid input.'
 				} ]
 			},
@@ -682,27 +683,30 @@ function changePassword() {
 				identifier : 'uCurrPass',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter current password'
+					prompt : 'Please input current password'
 				}, {
 					type : 'match[uCurrentPass]',
-					prompt : 'The current password entered is incorrect.'
+					prompt : 'The current password inputted is incorrect.'
 				} ]
 			},
 			uNewPass : {
 				identifier : 'uNewPass',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter your new password'
+					prompt : 'Please input your new password'
 				}, {
 					type : 'length[8]',
-					prompt : 'Your new password must be at least 8 characters'
+					prompt : 'New password must be at least 8 characters'
+				}, {
+					type : 'different[uCurrentPass]',
+					prompt : 'New password matches your old password. Please input a new one.'
 				} ]
 			},
 			uCNewPass : {
 				identifier : 'uCNewPass',
 				rules : [ {
 					type : 'match[uNewPass]',
-					prompt : 'Password does not match'
+					prompt : 'Passwords do not match.'
 				} ]
 			}
 		}
@@ -738,12 +742,12 @@ function checkDec(el) {
 		el.value = el.value.substring(0, el.value.length - 1);
 	}
 }
-
+var boom;
 function tablePayment(acct_id) {
 	var d;
 	var datestring;
-	var myTable = '<table id="paymentsTable" class="ui paginated teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
-	var boom = document.getElementById("yeah").innerHTML;
+	var myTable = '<table id="paymentsTable" class="ui teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
+	boom = document.getElementById("yeah").innerHTML;
 	$(jQuery.parseJSON(boom)).each(
 			function() {
 				if (this.account == acct_id) {
@@ -758,15 +762,14 @@ function tablePayment(acct_id) {
 			});
 	myTable += '</tbody></table>';
 	document.getElementById("tablePymnt").innerHTML = myTable;
-	paginate();
+	balance();
 }
 
 function addPayment(account_id, acct_name, amt) {
 	accid = account_id;
-	tablePayment(account_id);
+	
 	amtbal = amt;
-	balance();
-
+	tablePayment(account_id);
 	document.getElementById("pmAccount_id").value = account_id;
 
 	$('#pmAccountName').html(acct_name);
@@ -783,22 +786,40 @@ function addPayment(account_id, acct_name, amt) {
 					type : 'empty',
 					prompt : 'Please enter amount.'
 				}, {
-					type : 'regExp[/^\\d+\.?\\d{0,2}$/]',
-					prompt : 'Invalid input.'
+					type : 'doesntContainExactly[-]',
+					prompt : 'Amount must be greater than 0.00 PHP'
 				}, {
 					type : 'notExactly[0]',
-					prompt : 'Please enter amount.'
-				} ]
+					prompt : 'Amount must be greater than 0.00 PHP'
+				},{
+					type : 'regExp[/^(?=.*\\d)\\d*(?:\\.\\d\\d)?$/]',
+					prompt : 'Amount must only contain valid decimal numbers.'
+				}]
 			}
 		}
 	});
 }
-
+var amt;
 function pymntAdded() {
-	$("#yeah").load(location.href + " #yeah", function() {
-		tablePayment(accid);
-		balance();
-	});
+	var smt = document.getElementById("pmAmount").value;
+	setTimeout(function(){
+		console.log("1 " + $('.ui .error .message').length);
+		if($('.ui .error .message').length != 1){
+			console.log("ddooo");
+			$("#yeah").load(location.href + " #yeah", function() {
+			});
+			var appTable = document.getElementById("paymentsTable");
+			var row = appTable.insertRow(appTable.rows.length);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var date = new Date();	
+			
+			cell1.innerHTML = date.toLocaleString();
+			cell2.innerHTML = "PHP " + smt;
+			amt -= smt;
+			$("#totalpymnt").html("PHP " + amt.toFixed(2));
+		}
+	}, 300);
 }
 
 function loadPayment(){
@@ -817,8 +838,8 @@ function balance(){
 	} else {
 		document.getElementById("totalpymnt").style.color = "red";
 	}
-
-	$("#totalpymnt").html("PHP " + rawr.toFixed(2));
+	amt = amtbal - rawr;
+	$("#totalpymnt").html("PHP " + amt.toFixed(2));
 }
 
 function psaved() {

@@ -92,6 +92,7 @@ class AccountController {
 					amount: params.pamount,
 					transaction_date: params.pdate,
 					type: 'P',
+					status: 'U',
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
@@ -134,6 +135,7 @@ class AccountController {
 					amount: params.ramount,
 					transaction_date: params.rdate,
 					type: 'R',
+					status: 'U',
 					updated_by: session.user.id
 					)
 			accountService.addAccount(account)
