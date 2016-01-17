@@ -24,12 +24,12 @@
 		    	</div>
 		    	<g:hiddenField name="pmAccount_id"/>
 		    	<div class="four wide field">
-		    		<button class="ui labeled icon button teal" onclick="pymntAdded()"><i class="dollar basic icon"></i>Add Payment</button>
+		    		<button class="ui labeled icon button teal" onclick="pymntAdded('${pmAmount}')"><i class="dollar basic icon"></i>Add Payment</button>
 		    	</div>
 			</div>
     	</g:formRemote>
   	</div>
 	<div class="actions">
-		<div class="ui right labeled icon approve button"><i class="checkmark icon"></i>Done</div>
+		<div onClick="loadPayment()" class="ui right labeled icon approve button"><i class="checkmark icon"></i>Done</div>
 	</div>
 </div>
