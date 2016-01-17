@@ -742,12 +742,12 @@ function checkDec(el) {
 		el.value = el.value.substring(0, el.value.length - 1);
 	}
 }
-
+var boom;
 function tablePayment(acct_id) {
 	var d;
 	var datestring;
 	var myTable = '<table id="paymentsTable" class="ui teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
-	var boom = document.getElementById("yeah").innerHTML;
+	boom = document.getElementById("yeah").innerHTML;
 	$(jQuery.parseJSON(boom)).each(
 			function() {
 				if (this.account == acct_id) {
@@ -762,14 +762,14 @@ function tablePayment(acct_id) {
 			});
 	myTable += '</tbody></table>';
 	document.getElementById("tablePymnt").innerHTML = myTable;
+	balance();
 }
 
 function addPayment(account_id, acct_name, amt) {
 	accid = account_id;
-	tablePayment(account_id);
+	
 	amtbal = amt;
-	balance();
-
+	tablePayment(account_id);
 	document.getElementById("pmAccount_id").value = account_id;
 
 	$('#pmAccountName').html(acct_name);
@@ -789,25 +789,37 @@ function addPayment(account_id, acct_name, amt) {
 					type : 'doesntContainExactly[-]',
 					prompt : 'Amount must be greater than 0.00 PHP'
 				}, {
-					type : 'regExp[/^-\\d+\.?\\d{0,2}$/]',
-					prompt : 'Amount must only contain valid decimal numbers.'
-				}, {
 					type : 'notExactly[0]',
 					prompt : 'Amount must be greater than 0.00 PHP'
-				} ]
+				},{
+					type : 'regExp[/^(?=.*\\d)\\d*(?:\\.\\d\\d)?$/]',
+					prompt : 'Amount must only contain valid decimal numbers.'
+				}]
 			}
 		}
 	});
 }
-
+var amt;
 function pymntAdded() {
-	$("#yeah").load(location.href + " #yeah", function() {
-	});
-	//document.getElementById("tablePymnt").innerHTML = "";
+	var smt = document.getElementById("pmAmount").value;
 	setTimeout(function(){
-		tablePayment(accid);
-		//balance();
-	}, 3000);	
+		console.log("1 " + $('.ui .error .message').length);
+		if($('.ui .error .message').length != 1){
+			console.log("ddooo");
+			$("#yeah").load(location.href + " #yeah", function() {
+			});
+			var appTable = document.getElementById("paymentsTable");
+			var row = appTable.insertRow(appTable.rows.length);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var date = new Date();	
+			
+			cell1.innerHTML = date.toLocaleString();
+			cell2.innerHTML = "PHP " + smt;
+			amt -= smt;
+			$("#totalpymnt").html("PHP " + amt.toFixed(2));
+		}
+	}, 300);
 }
 
 function loadPayment(){
@@ -826,8 +838,8 @@ function balance(){
 	} else {
 		document.getElementById("totalpymnt").style.color = "red";
 	}
-
-	$("#totalpymnt").html("PHP " + rawr.toFixed(2));
+	amt = amtbal - rawr;
+	$("#totalpymnt").html("PHP " + amt.toFixed(2));
 }
 
 function psaved() {

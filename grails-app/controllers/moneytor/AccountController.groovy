@@ -185,16 +185,6 @@ class AccountController {
 		}
 	}
 
-	def makePaid() {
-		def errorList = getErrorList(params.eror_no, "edit", params.eramount)
-		if(errorList.isEmpty()){
-		accountService.makePaid(params.int('receivable_id'), session.user.id)
-		render ""
-		} else {
-			errorList.each{ render '<li class="list">'+it+'</li>' }
-		}
-	}
-	
 	def index() {
 	}
 }
