@@ -18,7 +18,7 @@ class PaymentController {
 			received_date: new Date()
 		)
 		
-		if(params.pmAmount > '0'){
+		if(params.pmAmount > '0'){			
 			paymentService.addPayment(payment)
 			total = paymentService.getPayments(params.pmAccount_id)
 			accountService.makePaid(params.pmAccount_id, session.user.id, total)
