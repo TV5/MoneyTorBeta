@@ -13,7 +13,9 @@ class PaymentService {
 	def addPayment(payment){
 		def pymnt = Payment.findAllByAccount(payment.account)
 		Account acct = Account.get(payment.account)
-		if(pymnt.isEmpty() || (pymnt.amount.sum() + payment.amount) <= acct.amount)
+		if((pymnt.isEmpty() && payment.amount <= acct.amount))
+			payment.save()
+		else if (pymnt.isEmpty() == false && (pymnt.amount.sum() + payment.amount) <= acct.amount)
 			payment.save()
 	}
 	
