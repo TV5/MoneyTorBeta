@@ -44,12 +44,16 @@ class AccountController {
 				validationList.add("Customer/supplier is required.")
 			}
 		}
-		print "AMOUNT "+amount + amount.getClass()
-		if(amount==null ||  amount=="") {
-			validationList.add("Amount is required.")
-		} else if (!amount.matches("[1-9]+")) {
-			validationList.add("Amount must be greater than zero.")
-		} 
+		
+		print amount;
+		if(amount != null && !amount.isEmpty()) {
+			if(!amount.matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*\$")) {
+				validationList.add("Amount must be a positive number with a maximum of two decimal places.")
+			}
+		} else {
+			validationList.add("Invalid amount.")
+		}
+		
 		return validationList
 	}
 
