@@ -36,14 +36,14 @@ class AccountService {
 	def makePaid(id, updatedBy, tot) {
 		Account newAccount = Account.get(id)
 		if(tot == newAccount.amount){
-			print "HUMAN NA"
 			newAccount.status = 'P'
 			newAccount.updated_by = updatedBy
 			newAccount.updated_on = new Date()
 			newAccount.save()
 		}
-		else {
-			print "ayy wala pa"
-		}
+	}
+	
+	def getAcct(id){
+		return Account.get(id)
 	}
 }

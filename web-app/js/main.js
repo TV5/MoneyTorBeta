@@ -760,8 +760,11 @@ function checkDec(el) {
 		el.value = el.value.substring(0, el.value.length - 1);
 	}
 }
+
+var amtbal;
 var boom;
 function tablePayment(acct_id) {
+	$('#errr').hide();
 	var d;
 	var datestring;
 	var myTable = '<table id="paymentsTable" class="ui teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
@@ -780,13 +783,25 @@ function tablePayment(acct_id) {
 			});
 	myTable += '</tbody></table>';
 	document.getElementById("tablePymnt").innerHTML = myTable;
-	balance();
+	var grr = document.getElementById("paymentsTable");
+	if(grr.rows.length == 1){
+		var rrow = grr.insertRow(1);
+		var cellz = rrow.insertCell(0);
+		var cellz1 = rrow.insertCell(1);
+		cellz.innerHTML = "No payments added yet.";
+		grr.rows[1].style.backgroundColor = "#F9F9F9";
+		grr.rows[1].style.textAlign = "center";	
+		$('#totalpymnt').text("PHP " + parseFloat(amtbal).toFixed(2));
+	}
+	else
+		balance();
 }
-
-function addPayment(account_id, acct_name, amt) {
+var amt;
+function addPayment(account_id, acct_name, amts) {
 	accid = account_id;
 	
-	amtbal = amt;
+	amtbal = amts;
+	amt = amtbal;
 	tablePayment(account_id);
 	document.getElementById("pmAccount_id").value = account_id;
 
@@ -817,27 +832,45 @@ function addPayment(account_id, acct_name, amt) {
 		}
 	});
 }
-var amt;
+
+
 function pymntAdded() {
 	var smt = document.getElementById("pmAmount").value;
 	setTimeout(function(){
-		console.log("1 " + $('.ui .error .message').length);
-		if($('.ui .error .message').length != 1){
-			console.log("ddooo");
-			$("#yeah").load(location.href + " #yeah", function() {
-			});
-			var appTable = document.getElementById("paymentsTable");
-			var row = appTable.insertRow(appTable.rows.length);
-			var cell1 = row.insertCell(0);
-			var cell2 = row.insertCell(1);
-			var date = new Date();	
-			
-			cell1.innerHTML = date.toLocaleString();
-			cell2.innerHTML = "PHP " + smt;
-			amt -= smt;
-			$("#totalpymnt").html("PHP " + amt.toFixed(2));
+		amt -= smt;	
+		if(amt >= 0){
+			$('#errr').hide();
+			if($('.ui .error .message').length == 0){
+				$("#yeah").load(location.href + " #yeah", function() {});
+				var appTable = document.getElementById("paymentsTable");
+				var row = appTable.insertRow(appTable.rows.length);
+				if(appTable.rows[1].cells[0].innerHTML == "No payments added yet.")
+					appTable.deleteRow(1);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var date = new Date();	
+				
+				cell1.innerHTML = date.toLocaleString();
+				cell2.innerHTML = "PHP " + parseFloat(smt).toFixed(2);
+						
+				$("#totalpymnt").html("PHP " + amt.toFixed(2));
+				if (realamt == 0)				
+					document.getElementById("totalpymnt").style.color = "green";
+			}
 		}
+		else if(amt < 0){
+			$('#errr').show();
+		}			
 	}, 300);
+}
+
+function confirmPay(){	
+	if(amt == 0){
+		$("#confirm").show();
+	}
+	else{
+		loadPayment();
+	}
 }
 
 function loadPayment(){
@@ -850,14 +883,9 @@ function balance(){
 	rowsP.children("td:nth-child(2)").each(function() {
 		rawr += parseFloat($(this).html());
 	});
-
-	if (rawr >= amtbal) {
-		document.getElementById("totalpymnt").style.color = "green";
-	} else {
-		document.getElementById("totalpymnt").style.color = "red";
-	}
 	amt = amtbal - rawr;
 	$("#totalpymnt").html("PHP " + amt.toFixed(2));
+	document.getElementById("totalpymnt").style.color = "red";
 }
 
 function psaved() {
