@@ -72,7 +72,7 @@
 					</td>
 					<td>
 						<button class="ui right labeled icon button"
-							onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}')">
+							onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}','p')">
 							<i class="search basic teal icon"></i>View
 						</button>
 					</td>
