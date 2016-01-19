@@ -778,15 +778,16 @@ function tablePayment(acct_id) {
 	else
 		balance();
 }
+
 var amt;
-function addPayment(account_id, acct_name, amts) {
+var acct_type;
+function addPayment(account_id, acct_name, amts, type) {
 	accid = account_id;
-	
+	acct_type = type;
 	amtbal = amts;
 	amt = amtbal;
 	tablePayment(account_id);
 	document.getElementById("pmAccount_id").value = account_id;
-
 	$('#pmAccountName').html(acct_name);
 
 	$('#payments').modal({
@@ -807,7 +808,7 @@ function addPayment(account_id, acct_name, amts) {
 					type : 'notExactly[0]',
 					prompt : 'Amount must be greater than 0.00 PHP'
 				},{
-					type : 'regExp[/^(?=.*\\d)\\d*(?:\\.\\d\\d)?$/]',
+					type : 'regExp[/^(\\d+|\\d{1,3}(,\\d{3})*)(\\.\\d+)?$/]',
 					prompt : 'Amount must only contain valid decimal numbers.'
 				}]
 			}
@@ -815,35 +816,37 @@ function addPayment(account_id, acct_name, amts) {
 	});
 }
 
-
 function pymntAdded() {
 	var smt = document.getElementById("pmAmount").value;
-	setTimeout(function(){
-		amt -= smt;	
-		if(amt >= 0){
-			$('#errr').hide();
-			if($('.ui .error .message').length == 0){
-				$("#yeah").load(location.href + " #yeah", function() {});
-				var appTable = document.getElementById("paymentsTable");
-				var row = appTable.insertRow(appTable.rows.length);
-				if(appTable.rows[1].cells[0].innerHTML == "No payments added yet.")
-					appTable.deleteRow(1);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				var date = new Date();	
-				
-				cell1.innerHTML = date.toLocaleString();
-				cell2.innerHTML = "PHP " + parseFloat(smt).toFixed(2);
-						
-				$("#totalpymnt").html("PHP " + amt.toFixed(2));
-				if (realamt == 0)				
-					document.getElementById("totalpymnt").style.color = "green";
+	if(!isNaN(smt.replace(/,/g, ''))){
+		setTimeout(function(){
+			amt -= parseFloat(smt.replace(/,/g, ''));	
+			console.log(amt);
+			if(amt >= 0) {
+				$('#errr').hide();
+				console.log($('.ui .error .message').length);
+				if($('.ui .error .message').length == 0){
+					$("#yeah").load(location.href + " #yeah", function() {});
+					var appTable = document.getElementById("paymentsTable");
+					var row = appTable.insertRow(appTable.rows.length);
+					if(appTable.rows[1].cells[0].innerHTML == "No payments added yet.")
+						appTable.deleteRow(1);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var date = new Date();	
+					
+					cell1.innerHTML = date.toLocaleString();
+					cell2.innerHTML = "PHP " + parseFloat(smt.replace(/,/g, '')).toFixed(2);
+							
+					$("#totalpymnt").html("PHP " + amt.toFixed(2));
+					if (amt == 0)				
+						document.getElementById("totalpymnt").style.color = "green";
+				}
 			}
-		}
-		else if(amt < 0){
-			$('#errr').show();
-		}			
-	}, 300);
+			else if(amt < 0)
+				$('#errr').show();
+		}, 300);
+	}
 }
 
 function confirmPay(){	
@@ -856,7 +859,10 @@ function confirmPay(){
 }
 
 function loadPayment(){
-	window.location.reload(true);
+	if(acct_type == "p")
+		window.location.replace("main?tab=payablesTabLink");
+	else if(acct_type == "r")
+		window.location.replace("main?tab=receivablesTabLink");
 }
 
 function balance(){	   
