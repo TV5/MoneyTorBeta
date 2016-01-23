@@ -69,7 +69,7 @@
 							class="edit icon"></i></a></td>
 					<td>
 						<button class="ui right labeled icon button"
-							onClick="addPayment('${receivable.id}','${customerName}','${receivable.amount}')">
+							onClick="addPayment('${receivable.id}','${customerName}','${receivable.amount}', 'r')">
 							<i class="search basic teal icon"></i>View
 						</button>
 					</td>
