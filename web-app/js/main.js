@@ -1,6 +1,10 @@
 //document ready functions
 	var admn;
 	var empt;
+	
+	var rDates;
+	var pDates;
+	
 $(document).ready(function() {
 	// Admin Search & Entries per page
 	var numA = $('#adminNumEntries').val();
@@ -98,36 +102,6 @@ $(document).ready(function() {
 	// receivables
 	
 	var num = $('#receivablesNumEntries').val();
-	var receivablesTable = $('#receivablesTable').DataTable({
-		"dom" : 'tBp',
-		"pageLength" : $('#receivablesNumEntries').val(),
-		"buttons" : [ {
-			extend : 'excelHtml5',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'pdfHtml5',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'print',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		} ],
-		"order" : [ [ 3, "desc" ] ]
-	});
 
 	// receivablesTable.buttons(0,
 	// null).container().appendTo(receivablesTable.table().container());
@@ -170,6 +144,41 @@ $(document).ready(function() {
 	});
 	pUpdateEndDate($("#minR"), $("#maxR"));
 	$('#maxR').datepicker("setDate", new Date());
+	
+	rDates = $('#minR').val() + " - " + $('#maxR').val();
+	console.log("rDates:" + rDates);
+	
+	var receivablesTable = $('#receivablesTable').DataTable({
+		"dom" : 'tBp',
+		"pageLength" : $('#receivablesNumEntries').val(),
+		"buttons" : [ {
+			extend : 'excelHtml5',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'pdfHtml5',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'print',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		} ],
+		"order" : [ [ 3, "desc" ] ]
+	});
+	
 	receivablesTable.draw();
 
 	function setreceivablesTotalAmt() {
@@ -188,6 +197,8 @@ $(document).ready(function() {
 
 	$('#minR, #maxR').change(function() {
 		notifyDue();
+		rDates = $('#minR').val() + " - " + $('#maxR').val();
+		console.log("rDates:" + rDates);
 		receivablesTable.draw();
 		setreceivablesTotalAmt();
 		// alert('change minR maxR');
@@ -211,36 +222,6 @@ $(document).ready(function() {
 	// payables
 	// '<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
 	var num = $('#payablesNumEntries').val();
-	var payablesTable = $('#payablesTable').DataTable({
-		"dom" : 'tBp',
-		"pageLength" : $('#payablesNumEntries').val(),
-		"buttons" : [ {
-			extend : 'excelHtml5',
-			title : 'Payables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'pdfHtml5',
-			title : 'Payables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'print',
-			title : 'Payables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		} ],
-		"order" : [ [ 3, "desc" ] ]
-	});
 
 	// payablesTable.buttons(0,
 	// null).container().prependTo(payablesTable.table().container());
@@ -283,6 +264,41 @@ $(document).ready(function() {
 	$('#maxP').datepicker();
 	pUpdateEndDate($("#minP"), $("#maxP"));
 	$('#maxP').datepicker("setDate", new Date());
+	
+	pDates = $('#minP').val() + " - " + $('#maxP').val();
+	console.log("pDates:" + pDates);
+	
+	var payablesTable = $('#payablesTable').DataTable({
+		"dom" : 'tBp',
+		"pageLength" : $('#payablesNumEntries').val(),
+		"buttons" : [ {
+			extend : 'excelHtml5',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'pdfHtml5',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'print',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		} ],
+		"order" : [ [ 3, "desc" ] ]
+	});
+	
 	payablesTable.draw();
 
 	function setPayablesTotalAmt() {
@@ -301,6 +317,8 @@ $(document).ready(function() {
 
 	$('#minP, #maxP').change(function() {
 		notifyDue();
+		pDates = $('#minP').val() + " - " + $('#maxP').val();
+		console.log("pDates:" + pDates);
 		payablesTable.draw();
 		setPayablesTotalAmt();
 	});
@@ -610,7 +628,7 @@ function editCustomer(ecname, ecaddress, ectelephone_no, ecmobile_no, ecterms,
 	$("#ecid").val(ecid);
 }
 
-function editReceivable(that, id, or_no, transactor_id, amount, date) {
+function editReceivable(that, id, or_no, transactor_id, amount, date, status) {
 	var transName = $(that).parent().parent().find(":nth-child(2)").html()
 	transName = $.trim(transName);
 	$('#ercustomer_name').val(transName);
@@ -618,10 +636,14 @@ function editReceivable(that, id, or_no, transactor_id, amount, date) {
 	$('#eramount').val(amount);
 	$('#ertransaction_date').val(date.toString().split(' ')[0]);
 	$('#receivable_id').val(id);
-	$('#editReceivableModal').modal('show');
+	if (status == 'H') {
+		alert("Cannot edit because this account has a payment already!");
+	} else {
+		$('#editReceivableModal').modal('show');
+	}
 }
 
-function editPayable(that, id, or_no, transactor_id, amount, date) {
+function editPayable(that, id, or_no, transactor_id, amount, date, status) {
 	var t = this.find(":nth-child(2)");
 	console.log(t);
 	sample = that;
@@ -632,7 +654,11 @@ function editPayable(that, id, or_no, transactor_id, amount, date) {
 	$('#epamount').val(amount);
 	$('#eptransaction_date').val(date.toString().split(' ')[0]);
 	$('#payable_id').val(id);
-	$('#editPayableModal').modal('show');
+	if (status == 'H') {
+		alert("Cannot edit because this account has a payment already!");
+	} else {
+		$('#editPayableModal').modal('show');
+	}	
 }
 
 function editTransactor(name, address, telephone_no, mobile_no, terms) {
