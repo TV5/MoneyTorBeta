@@ -775,6 +775,7 @@ function tablePayment(acct_id) {
 	$('#errr').hide();
 	var d;
 	var datestring;
+	var myRow = " ";
 	var myTable = '<table id="paymentsTable" class="ui teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
 	boom = document.getElementById("yeah").innerHTML;
 	$(jQuery.parseJSON(boom)).each(
@@ -782,14 +783,14 @@ function tablePayment(acct_id) {
 				if (this.account == acct_id) {
 					d = new Date(this.received_date);
 
-					myTable = myTable + '<tr><td>' + d.toLocaleString()
+					myRow = '<tr><td>' + d.toLocaleString()
 							+ '</td><td hidden>' + this.amount
 							+ '</td><td>PHP ' + (this.amount).toFixed(2)
-							+ '</td></tr>';
+							+ '</td></tr>' + myRow;
 				}
 
 			});
-	myTable += '</tbody></table>';
+	myTable = myTable + myRow + '</tbody></table>';
 	document.getElementById("tablePymnt").innerHTML = myTable;
 	var grr = document.getElementById("paymentsTable");
 	if(grr.rows.length == 1){
@@ -846,15 +847,13 @@ function pymntAdded() {
 	var smt = document.getElementById("pmAmount").value;
 	if(!isNaN(smt.replace(/,/g, ''))){
 		setTimeout(function(){
-			amt -= parseFloat(smt.replace(/,/g, ''));	
-			console.log(amt);
+			amt -= parseFloat(smt.replace(/,/g, ''));
 			if(amt >= 0) {
 				$('#errr').hide();
-				console.log($('.ui .error .message').length);
 				if($('.ui .error .message').length == 0){
 					$("#yeah").load(location.href + " #yeah", function() {});
 					var appTable = document.getElementById("paymentsTable");
-					var row = appTable.insertRow(appTable.rows.length);
+					var row = appTable.insertRow(2);
 					if(appTable.rows[1].cells[0].innerHTML == "No payments added yet.")
 						appTable.deleteRow(1);
 					var cell1 = row.insertCell(0);
