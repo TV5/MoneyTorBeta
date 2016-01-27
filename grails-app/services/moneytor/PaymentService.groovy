@@ -11,7 +11,12 @@ class PaymentService {
 	}
 	
 	def addPayment(payment){
-		payment.save()
+		def pymnt = Payment.findAllByAccount(payment.account)
+		Account acct = Account.get(payment.account)
+		if((pymnt.isEmpty() && payment.amount <= acct.amount))
+			payment.save()
+		else if (pymnt.isEmpty() == false && (pymnt.amount.sum() + payment.amount) <= acct.amount)
+			payment.save()
 	}
 	
 	def getPayments(id){

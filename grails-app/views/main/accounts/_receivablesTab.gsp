@@ -65,11 +65,11 @@
 							format="MM/dd/yyyy" date="${dueDate}" />
 					</td>
 					<td><a href="#"
-						onClick="editReceivable($(this),'${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}')"><i
+						onClick="editReceivable($(this),'${receivable.id}','${receivable.or_no}','${receivable.transactor_id}','${receivable.amount}','${receivable.transaction_date}','${receivable.status}')"><i
 							class="edit icon"></i></a></td>
 					<td>
 						<button class="ui right labeled icon button"
-							onClick="addPayment('${receivable.id}','${customerName}','${receivable.amount}')">
+							onClick="addPayment('${receivable.id}','${customerName}','${receivable.amount}', 'r')">
 							<i class="search basic teal icon"></i>View
 						</button>
 					</td>

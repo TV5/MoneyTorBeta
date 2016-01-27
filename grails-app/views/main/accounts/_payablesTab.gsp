@@ -66,13 +66,13 @@
 							format="MM/dd/yyyy" date="${dueDate}" />
 					</td>
 					<td>
-						<a href="#"	onClick="editPayable($(this),'${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}')">
+						<a href="#"	onClick="editPayable($(this),'${payable.id}','${payable.or_no}','${payable.transactor_id}','${payable.amount}','${payable.transaction_date}','${payable.status}')">
 							<i class="edit icon"></i>
 						</a>
 					</td>
 					<td>
 						<button class="ui right labeled icon button"
-							onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}')">
+							onClick="addPayment('${payable.id}','${supplierName}','${payable.amount}','p')">
 							<i class="search basic teal icon"></i>View
 						</button>
 					</td>
