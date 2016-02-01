@@ -93,11 +93,6 @@
     		}
   		</style>
   		
-  		<script>
-			window.onbeforeunload = function () {
-				   // stuff do do before the window is unloaded here.
-				}
-		</script>
 	</head>
 	<body>
 		<div class="ui container">

@@ -1,14 +1,15 @@
 package moneytor
 
 class UserController {
-	def beforeInterceptor = [action:this.&auth]
+	def beforeInterceptor = [action:this.&auth, except: 'index']
 	def scaffold=true
 	def userService
 	def index() {
+		render(template: '../index')
 	}
-	def auth(){
+	private auth(){
 		if(!session.user){
-			redirect(uri: "/")
+		    redirect(uri: request.getHeader('referer') )
 			return false
 		}
 	}
@@ -49,6 +50,7 @@ class UserController {
 		def username
 		def fname
 		def lname
+		def usrn
 		if(params.ef_name!=null){
 			fname=params.ef_name
 			lname=params.el_name
@@ -89,47 +91,53 @@ class UserController {
 				if(!username.matches("[A-Za-z0-9_]+")){
 					validationList.add("Username can only contain alphanumeric characters and underscore(_).")
 				}
+				usrn=checkUsername();
+				if(usrn!="available"){
+					validationList.add("Username unavailable.")
+				}
+
 			}else{
 				validationList.add("Username must be at least 8 characters.")
 			}
 		}
 		def pass=true, lpass=true, empty=false
 		if(params.epassword!=null){
-			if(params.epassword.length()<8){
+			if(params.epassword == ""){
+				empty=true
+			}else if(params.epassword.length()<8){
 				lpass=false
 
-			}else if(params.epassword == ""){
-				empty=true
 			}
 			if(params.epassword!=params.ecpassword){
 				pass=false
 			}
 		}else if(params.apassword!=null){
 			pass=true
-			if(params.apassword.length()<8){
-				lpass=false
-			}else if(params.apassword == ""){
+			if(params.apassword == ""){
 				empty=true
+			}else if(params.apassword.length()<8){
+				lpass=false
 			}
 			if(params.apassword!=params.acpassword){
 				pass=false
 			}
 		}else if(params.adminPassword!=null){
 			pass=true
-			if(params.adminPassword.length()<8){
-				lpass=false
-			}else if(params.epassword == ""){
+			if(params.epassword == ""){
 				empty=true
+			}else if(params.adminPassword.length()<8){
+				lpass=false
 			}
 			if(params.adminPassword!=params.adminCpassword){
 				pass=false
 			}
 		}else if(params.empPassword!=null){
 			pass=true
-			if(params.empPassword.length()<8){
-				lpass=false
-			}else if(params.epassword == ""){
+			if(params.epassword == ""){
 				empty=true
+
+			}else if(params.empPassword.length()<8){
+				lpass=false
 			}
 			if(params.empPassword!=params.empCpassword){
 				pass=false
@@ -170,8 +178,6 @@ class UserController {
 						render "User has been saved."
 					}
 				}
-			}else{
-				render "Username unavailable."
 			}
 		}else{
 			validationList.each{ render '<li>'+it+'</li>' }
@@ -219,8 +225,6 @@ class UserController {
 						render "User has been saved."
 					}
 				}
-			}else{
-				render "Username unavailable."
 			}
 		}else{
 			validationList.each{ render '<li>'+it+'</li>' }
