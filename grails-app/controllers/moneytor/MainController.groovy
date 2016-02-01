@@ -6,10 +6,13 @@ class MainController {
 	def transactorService
 	def paymentService
 	
-	def index(){}
+	def index(){
+		render(template: '../index')
+		//			redirect (uri: "/")
+	}
 	def auth(){
 		if(!session.user){
-			redirect(uri: "/")
+		    redirect(uri: request.getHeader('referer') )
 			return false
 		}
 	}
@@ -27,7 +30,7 @@ class MainController {
 		if(session.user){
 			session.user=null
 			session.invalidate()
-			redirect(uri:"/")
+		    redirect(uri: request.getHeader('referer') )
 		}
 	}
 	def checkUsername(){
@@ -57,7 +60,7 @@ class MainController {
 
 			
 		}else{
-			redirect(uri: "/")
+		    redirect(uri: request.getHeader('referer') )
 			return false
 		}
 	}

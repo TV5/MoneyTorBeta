@@ -1,14 +1,15 @@
 package moneytor
 
 class UserController {
-	def beforeInterceptor = [action:this.&auth]
+	def beforeInterceptor = [action:this.&auth, except: 'index']
 	def scaffold=true
 	def userService
 	def index() {
+		render(template: '../index')
 	}
-	def auth(){
+	private auth(){
 		if(!session.user){
-			redirect(uri: "/")
+		    redirect(uri: request.getHeader('referer') )
 			return false
 		}
 	}
@@ -49,6 +50,7 @@ class UserController {
 		def username
 		def fname
 		def lname
+		def usrn
 		if(params.ef_name!=null){
 			fname=params.ef_name
 			lname=params.el_name
@@ -89,6 +91,11 @@ class UserController {
 				if(!username.matches("[A-Za-z0-9_]+")){
 					validationList.add("Username can only contain alphanumeric characters and underscore(_).")
 				}
+				usrn=checkUsername();
+				if(usrn!="available"){
+					validationList.add("Username unavailable.")
+				}
+
 			}else{
 				validationList.add("Username must be at least 8 characters.")
 			}
@@ -170,8 +177,6 @@ class UserController {
 						render "User has been saved."
 					}
 				}
-			}else{
-				render "Username unavailable."
 			}
 		}else{
 			validationList.each{ render '<li>'+it+'</li>' }
@@ -219,8 +224,6 @@ class UserController {
 						render "User has been saved."
 					}
 				}
-			}else{
-				render "Username unavailable."
 			}
 		}else{
 			validationList.each{ render '<li>'+it+'</li>' }
