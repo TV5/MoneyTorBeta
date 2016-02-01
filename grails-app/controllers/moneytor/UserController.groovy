@@ -102,41 +102,42 @@ class UserController {
 		}
 		def pass=true, lpass=true, empty=false
 		if(params.epassword!=null){
-			if(params.epassword.length()<8){
+			if(params.epassword == ""){
+				empty=true
+			}else if(params.epassword.length()<8){
 				lpass=false
 
-			}else if(params.epassword == ""){
-				empty=true
 			}
 			if(params.epassword!=params.ecpassword){
 				pass=false
 			}
 		}else if(params.apassword!=null){
 			pass=true
-			if(params.apassword.length()<8){
-				lpass=false
-			}else if(params.apassword == ""){
+			if(params.apassword == ""){
 				empty=true
+			}else if(params.apassword.length()<8){
+				lpass=false
 			}
 			if(params.apassword!=params.acpassword){
 				pass=false
 			}
 		}else if(params.adminPassword!=null){
 			pass=true
-			if(params.adminPassword.length()<8){
-				lpass=false
-			}else if(params.epassword == ""){
+			if(params.epassword == ""){
 				empty=true
+			}else if(params.adminPassword.length()<8){
+				lpass=false
 			}
 			if(params.adminPassword!=params.adminCpassword){
 				pass=false
 			}
 		}else if(params.empPassword!=null){
 			pass=true
-			if(params.empPassword.length()<8){
-				lpass=false
-			}else if(params.epassword == ""){
+			if(params.epassword == ""){
 				empty=true
+
+			}else if(params.empPassword.length()<8){
+				lpass=false
 			}
 			if(params.empPassword!=params.empCpassword){
 				pass=false
