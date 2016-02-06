@@ -672,11 +672,12 @@ function editTransactor(name, address, telephone_no, mobile_no, terms) {
 	$('#editemployee').modal('show');
 }
 
-function editUserAccount(id, f_name, l_name, password) {
-	document.getElementById("uId").value = id;
-	document.getElementById("uF_name").value = f_name;
-	document.getElementById("uL_name").value = l_name;
-	document.getElementById("uCurrentPass").value = password;
+function editUserAccount(vid, vf_name, vl_name, vpassword) {
+	if
+	document.getElementById("uId").value = vid;
+	document.getElementById("uF_name").value = vf_name;
+	document.getElementById("uL_name").value = vl_name;
+	document.getElementById("uCurrentPass").value = vpassword;
 }
 
 // unsorted
@@ -730,7 +731,10 @@ function changePassword() {
 			},
 			uCNewPass : {
 				identifier : 'uCNewPass',
-				rules : [ {
+				rules : [{
+					type : 'empty',
+					prompt : 'Please confirm your new password'
+				}, {
 					type : 'match[uNewPass]',
 					prompt : 'Passwords do not match.'
 				} ]
@@ -827,7 +831,7 @@ function addPayment(account_id, acct_name, amts, type) {
 				identifier : 'pmAmount',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter amount.'
+					prompt : 'Please input amount.'
 				}, {
 					type : 'doesntContainExactly[-]',
 					prompt : 'Amount must be greater than 0.00 PHP'
