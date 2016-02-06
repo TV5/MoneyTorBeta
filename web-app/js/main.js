@@ -673,7 +673,6 @@ function editTransactor(name, address, telephone_no, mobile_no, terms) {
 }
 
 function editUserAccount(vid, vf_name, vl_name, vpassword) {
-	if
 	document.getElementById("uId").value = vid;
 	document.getElementById("uF_name").value = vf_name;
 	document.getElementById("uL_name").value = vl_name;
@@ -872,8 +871,10 @@ function pymntAdded() {
 						document.getElementById("totalpymnt").style.color = "green";
 				}
 			}
-			else if(amt < 0)
+			else if(amt < 0){
+				amt += parseFloat(smt.replace(/,/g, ''));
 				$('#errr').show();
+			}
 		}, 300);
 	}
 }
@@ -1304,4 +1305,3 @@ $.fn.dataTable.Api.register('sum()', function() {
 		return a + b;
 	}, 0);
 });
-
