@@ -28,8 +28,8 @@
 			<tr>
 				<th>Name</th>
 			    <th>Address</th>
-			    <th>Telephone No</th>
-			    <th>Mobile No</th>
+			    <th>Telephone Number</th>
+			    <th>Mobile Number</th>
 			    <th>Terms</th>
 			    <th>Edit</th>
 			</tr>
