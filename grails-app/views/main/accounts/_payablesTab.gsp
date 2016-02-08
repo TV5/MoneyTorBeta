@@ -57,7 +57,7 @@
 							<g:set var="supplierName" value="${it.name}" />
 						</g:findAll></td>
 					<td class="sum">
-						${payable.amount}
+						<g:formatNumber number="${payable.amount}" format="0.00"/>
 					</td>
 					<td><g:formatDate format="MM/dd/yyyy"
 							date="${payable.transaction_date}" /></td>
