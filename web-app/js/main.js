@@ -1,6 +1,10 @@
 //document ready functions
 	var admn;
 	var empt;
+	
+	var rDates;
+	var pDates;
+	
 $(document).ready(function() {
 	// Admin Search & Entries per page
 	var numA = $('#adminNumEntries').val();
@@ -98,36 +102,6 @@ $(document).ready(function() {
 	// receivables
 	
 	var num = $('#receivablesNumEntries').val();
-	var receivablesTable = $('#receivablesTable').DataTable({
-		"dom" : 'tBp',
-		"pageLength" : $('#receivablesNumEntries').val(),
-		"buttons" : [ {
-			extend : 'excelHtml5',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'pdfHtml5',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'print',
-			title : 'Receivables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		} ],
-		"order" : [ [ 3, "desc" ] ]
-	});
 
 	// receivablesTable.buttons(0,
 	// null).container().appendTo(receivablesTable.table().container());
@@ -170,6 +144,41 @@ $(document).ready(function() {
 	});
 	pUpdateEndDate($("#minR"), $("#maxR"));
 	$('#maxR').datepicker("setDate", new Date());
+	
+	rDates = $('#minR').val() + " - " + $('#maxR').val();
+	console.log("rDates:" + rDates);
+	
+	var receivablesTable = $('#receivablesTable').DataTable({
+		"dom" : 'tBp',
+		"pageLength" : $('#receivablesNumEntries').val(),
+		"buttons" : [ {
+			extend : 'excelHtml5',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'pdfHtml5',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'print',
+			title : 'Receivables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		} ],
+		"order" : [ [ 3, "desc" ] ]
+	});
+	
 	receivablesTable.draw();
 
 	function setreceivablesTotalAmt() {
@@ -188,6 +197,8 @@ $(document).ready(function() {
 
 	$('#minR, #maxR').change(function() {
 		notifyDue();
+		rDates = $('#minR').val() + " - " + $('#maxR').val();
+		console.log("rDates:" + rDates);
 		receivablesTable.draw();
 		setreceivablesTotalAmt();
 		// alert('change minR maxR');
@@ -211,36 +222,6 @@ $(document).ready(function() {
 	// payables
 	// '<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
 	var num = $('#payablesNumEntries').val();
-	var payablesTable = $('#payablesTable').DataTable({
-		"dom" : 'tBp',
-		"pageLength" : $('#payablesNumEntries').val(),
-		"buttons" : [ {
-			extend : 'excelHtml5',
-			title : 'Payables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'pdfHtml5',
-			title : 'Payables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		}, {
-			extend : 'print',
-			title : 'Payables Summary',
-			orientation : 'portrait',
-			pageSize : 'LETTER',
-			exportOptions : {
-				columns : [ 0, 1, 2, 3, 4 ]
-			}
-		} ],
-		"order" : [ [ 3, "desc" ] ]
-	});
 
 	// payablesTable.buttons(0,
 	// null).container().prependTo(payablesTable.table().container());
@@ -283,6 +264,41 @@ $(document).ready(function() {
 	$('#maxP').datepicker();
 	pUpdateEndDate($("#minP"), $("#maxP"));
 	$('#maxP').datepicker("setDate", new Date());
+	
+	pDates = $('#minP').val() + " - " + $('#maxP').val();
+	console.log("pDates:" + pDates);
+	
+	var payablesTable = $('#payablesTable').DataTable({
+		"dom" : 'tBp',
+		"pageLength" : $('#payablesNumEntries').val(),
+		"buttons" : [ {
+			extend : 'excelHtml5',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'pdfHtml5',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		}, {
+			extend : 'print',
+			title : 'Payables Summary',
+			orientation : 'portrait',
+			pageSize : 'LETTER',
+			exportOptions : {
+				columns : [ 0, 1, 2, 3, 4 ]
+			}
+		} ],
+		"order" : [ [ 3, "desc" ] ]
+	});
+	
 	payablesTable.draw();
 
 	function setPayablesTotalAmt() {
@@ -301,6 +317,8 @@ $(document).ready(function() {
 
 	$('#minP, #maxP').change(function() {
 		notifyDue();
+		pDates = $('#minP').val() + " - " + $('#maxP').val();
+		console.log("pDates:" + pDates);
 		payablesTable.draw();
 		setPayablesTotalAmt();
 	});
@@ -610,7 +628,7 @@ function editCustomer(ecname, ecaddress, ectelephone_no, ecmobile_no, ecterms,
 	$("#ecid").val(ecid);
 }
 
-function editReceivable(that, id, or_no, transactor_id, amount, date) {
+function editReceivable(that, id, or_no, transactor_id, amount, date, status) {
 	var transName = $(that).parent().parent().find(":nth-child(2)").html()
 	transName = $.trim(transName);
 	$('#ercustomer_name').val(transName);
@@ -618,10 +636,14 @@ function editReceivable(that, id, or_no, transactor_id, amount, date) {
 	$('#eramount').val(amount);
 	$('#ertransaction_date').val(date.toString().split(' ')[0]);
 	$('#receivable_id').val(id);
-	$('#editReceivableModal').modal('show');
+	if (status == 'H') {
+		alert("Cannot edit because this account has a payment already!");
+	} else {
+		$('#editReceivableModal').modal('show');
+	}
 }
 
-function editPayable(that, id, or_no, transactor_id, amount, date) {
+function editPayable(that, id, or_no, transactor_id, amount, date, status) {
 	var t = this.find(":nth-child(2)");
 	console.log(t);
 	sample = that;
@@ -632,7 +654,11 @@ function editPayable(that, id, or_no, transactor_id, amount, date) {
 	$('#epamount').val(amount);
 	$('#eptransaction_date').val(date.toString().split(' ')[0]);
 	$('#payable_id').val(id);
-	$('#editPayableModal').modal('show');
+	if (status == 'H') {
+		alert("Cannot edit because this account has a payment already!");
+	} else {
+		$('#editPayableModal').modal('show');
+	}	
 }
 
 function editTransactor(name, address, telephone_no, mobile_no, terms) {
@@ -646,11 +672,11 @@ function editTransactor(name, address, telephone_no, mobile_no, terms) {
 	$('#editemployee').modal('show');
 }
 
-function editUserAccount(id, f_name, l_name, password) {
-	document.getElementById("uId").value = id;
-	document.getElementById("uF_name").value = f_name;
-	document.getElementById("uL_name").value = l_name;
-	document.getElementById("uCurrentPass").value = password;
+function editUserAccount(vid, vf_name, vl_name, vpassword) {
+	document.getElementById("uId").value = vid;
+	document.getElementById("uF_name").value = vf_name;
+	document.getElementById("uL_name").value = vl_name;
+	document.getElementById("uCurrentPass").value = vpassword;
 }
 
 // unsorted
@@ -704,7 +730,10 @@ function changePassword() {
 			},
 			uCNewPass : {
 				identifier : 'uCNewPass',
-				rules : [ {
+				rules : [{
+					type : 'empty',
+					prompt : 'Please confirm your new password'
+				}, {
 					type : 'match[uNewPass]',
 					prompt : 'Passwords do not match.'
 				} ]
@@ -749,6 +778,7 @@ function tablePayment(acct_id) {
 	$('#errr').hide();
 	var d;
 	var datestring;
+	var myRow = " ";
 	var myTable = '<table id="paymentsTable" class="ui teal celled padded fixed table"><thead><tr><th>Date Received</th><th>Amount</th></tr></thead><tbody>';
 	boom = document.getElementById("yeah").innerHTML;
 	$(jQuery.parseJSON(boom)).each(
@@ -756,14 +786,14 @@ function tablePayment(acct_id) {
 				if (this.account == acct_id) {
 					d = new Date(this.received_date);
 
-					myTable = myTable + '<tr><td>' + d.toLocaleString()
+					myRow = '<tr><td>' + d.toLocaleString()
 							+ '</td><td hidden>' + this.amount
 							+ '</td><td>PHP ' + (this.amount).toFixed(2)
-							+ '</td></tr>';
+							+ '</td></tr>' + myRow;
 				}
 
 			});
-	myTable += '</tbody></table>';
+	myTable = myTable + myRow + '</tbody></table>';
 	document.getElementById("tablePymnt").innerHTML = myTable;
 	var grr = document.getElementById("paymentsTable");
 	if(grr.rows.length == 1){
@@ -778,15 +808,16 @@ function tablePayment(acct_id) {
 	else
 		balance();
 }
+
 var amt;
-function addPayment(account_id, acct_name, amts) {
+var acct_type;
+function addPayment(account_id, acct_name, amts, type) {
 	accid = account_id;
-	
+	acct_type = type;
 	amtbal = amts;
 	amt = amtbal;
 	tablePayment(account_id);
 	document.getElementById("pmAccount_id").value = account_id;
-
 	$('#pmAccountName').html(acct_name);
 
 	$('#payments').modal({
@@ -799,7 +830,7 @@ function addPayment(account_id, acct_name, amts) {
 				identifier : 'pmAmount',
 				rules : [ {
 					type : 'empty',
-					prompt : 'Please enter amount.'
+					prompt : 'Please input amount.'
 				}, {
 					type : 'doesntContainExactly[-]',
 					prompt : 'Amount must be greater than 0.00 PHP'
@@ -807,7 +838,7 @@ function addPayment(account_id, acct_name, amts) {
 					type : 'notExactly[0]',
 					prompt : 'Amount must be greater than 0.00 PHP'
 				},{
-					type : 'regExp[/^(?=.*\\d)\\d*(?:\\.\\d\\d)?$/]',
+					type : 'regExp[/^(\\d+|\\d{1,3}(,\\d{3})*)(\\.\\d+)?$/]',
 					prompt : 'Amount must only contain valid decimal numbers.'
 				}]
 			}
@@ -815,35 +846,37 @@ function addPayment(account_id, acct_name, amts) {
 	});
 }
 
-
 function pymntAdded() {
 	var smt = document.getElementById("pmAmount").value;
-	setTimeout(function(){
-		amt -= smt;	
-		if(amt >= 0){
-			$('#errr').hide();
-			if($('.ui .error .message').length == 0){
-				$("#yeah").load(location.href + " #yeah", function() {});
-				var appTable = document.getElementById("paymentsTable");
-				var row = appTable.insertRow(appTable.rows.length);
-				if(appTable.rows[1].cells[0].innerHTML == "No payments added yet.")
-					appTable.deleteRow(1);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				var date = new Date();	
-				
-				cell1.innerHTML = date.toLocaleString();
-				cell2.innerHTML = "PHP " + parseFloat(smt).toFixed(2);
-						
-				$("#totalpymnt").html("PHP " + amt.toFixed(2));
-				if (realamt == 0)				
-					document.getElementById("totalpymnt").style.color = "green";
+	if(!isNaN(smt.replace(/,/g, ''))){
+		setTimeout(function(){
+			amt -= parseFloat(smt.replace(/,/g, ''));
+			if(amt >= 0) {
+				$('#errr').hide();
+				if($('.ui .error .message').length == 0){
+					$("#yeah").load(location.href + " #yeah", function() {});
+					var appTable = document.getElementById("paymentsTable");
+					var row = appTable.insertRow(2);
+					if(appTable.rows[1].cells[0].innerHTML == "No payments added yet.")
+						appTable.deleteRow(1);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var date = new Date();	
+					
+					cell1.innerHTML = date.toLocaleString();
+					cell2.innerHTML = "PHP " + parseFloat(smt.replace(/,/g, '')).toFixed(2);
+							
+					$("#totalpymnt").html("PHP " + amt.toFixed(2));
+					if (amt == 0)				
+						document.getElementById("totalpymnt").style.color = "green";
+				}
 			}
-		}
-		else if(amt < 0){
-			$('#errr').show();
-		}			
-	}, 300);
+			else if(amt < 0){
+				amt += parseFloat(smt.replace(/,/g, ''));
+				$('#errr').show();
+			}
+		}, 300);
+	}
 }
 
 function confirmPay(){	
@@ -856,7 +889,10 @@ function confirmPay(){
 }
 
 function loadPayment(){
-	window.location.reload(true);
+	if(acct_type == "p")
+		window.location.replace("main?tab=payablesTabLink");
+	else if(acct_type == "r")
+		window.location.replace("main?tab=receivablesTabLink");
 }
 
 function balance(){	   
@@ -1269,4 +1305,3 @@ $.fn.dataTable.Api.register('sum()', function() {
 		return a + b;
 	}, 0);
 });
-
