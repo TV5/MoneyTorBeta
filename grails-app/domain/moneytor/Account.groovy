@@ -15,7 +15,7 @@ class Account {
     static constraints = {
 		or_no nullable: true
 		transactor_id  nullable: true
-		amount nullable: true
+		amount nullable: true, scale: 2
 		transaction_date nullable: true
 		type default: 'P'
 		status default: 'U'
