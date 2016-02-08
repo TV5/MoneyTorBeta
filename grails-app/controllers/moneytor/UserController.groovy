@@ -167,7 +167,7 @@ class UserController {
 							f_name: params.ef_name,
 							l_name: params.el_name,
 							username: params.eusername,
-							password: params.epassword,
+							password: params.epassword.encodeAsPassword(),
 							type: params.etype,
 							status: 1,
 							updated_on: new Date(),
@@ -214,12 +214,12 @@ class UserController {
 							f_name:params.af_name,
 							l_name:params.al_name,
 							username:params.ausername,
-							password:params.apassword,
 							type:params.atype,
 							status:1,
 							updated_on:new Date(),
 							updated_by:session.user.id
 							)
+					user.password=params.apassword.encodeAsPassword()
 					if(user!=null){
 						userService.addUser(user)
 						render "User has been saved."
@@ -239,7 +239,7 @@ class UserController {
 						f_name:params.empF_name,
 						l_name:params.empL_name,
 						username:params.empUsername,
-						password:params.empPassword,
+						password:params.empPassword.encodeAsPassword(),
 						updated_on:new Date(),
 						updated_by:session.user.id
 						)
@@ -261,7 +261,7 @@ class UserController {
 		user.f_name = params.uF_name
 		user.l_name = params.uL_name
 
-		user.password = params.uNewPass == "" ? params.uCurrentPass : params.uNewPass;
+		user.password = params.uNewPass == "" ? params.uCurrentPass.encodeAsPassword() : params.uNewPass.encodeAsPassword();
 
 		userService.editUserAccount(user.id, user)
 		session.user=userService.getUser(user.id)
@@ -277,7 +277,7 @@ class UserController {
 						f_name:params.adminF_name,
 						l_name:params.adminL_name,
 						username:params.adminUsername,
-						password:params.adminPassword,
+						password:params.adminPassword.encodeAsPassword(),
 						updated_on:new Date(),
 						updated_by:session.user.id
 						)
