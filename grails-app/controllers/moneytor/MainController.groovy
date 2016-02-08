@@ -8,7 +8,6 @@ class MainController {
 	
 	def index(){
 		render(template: '../index')
-		//			redirect (uri: "/")
 	}
 	def auth(){
 		if(!session.user){
