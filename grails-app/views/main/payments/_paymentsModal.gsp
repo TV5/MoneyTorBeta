@@ -61,9 +61,9 @@
 		Fully Paid
 	</div>
 	<div class="content">
-		<h5 style="margin-top: -10px">The account has been fully paid.
+		<p style="margin-top: -10px">The account has been fully paid.
 			After closing this message, it will automatically be removed from the
-			list of pending accounts.</h5>
+			list of pending accounts.</p>
 	</div>
 	<div class="actions">
 		<div onClick="loadPayment()" class="ui labeled positive icon button">
