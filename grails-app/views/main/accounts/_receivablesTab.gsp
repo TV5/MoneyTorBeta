@@ -80,3 +80,16 @@
 	<b>Total Amount:</b>
 	<p id="receivablesTotal"></p>
 </div>
+
+<div id="cantedit" class="ui small test modal transition"
+	style="margin-top: -92.5px;">
+	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
+		<i class="circular teal warning icon"
+			style="margin-right: 10px;"></i>Edit Account</div>
+	<div class="content">
+		<p style="margin-top:-10px">Payments have already been made in this account. Modifications are no longer allowed.</p>
+	</div>
+	<div class="actions">
+		<div class="ui cancel teal button">OK</div>
+	</div>
+</div>
