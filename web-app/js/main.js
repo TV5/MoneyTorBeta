@@ -822,14 +822,20 @@ function pymntAdded() {
 				if($('.ui .error .message').length == 0){
 					$("#yeah").load(location.href + " #yeah", function() {});
 					var appTable = document.getElementById("paymentsTable");
-					var row = appTable.insertRow(1);
-					var row2 = appTable.insertRow(0);
-					if(appTable.rows[1].cells[0].innerHTML == "No payments added yet.")
+					var row;
+					if(appTable.rows[1].cells[0].innerHTML == "No payments added yet."){
+						row = appTable.insertRow(2);
 						appTable.deleteRow(1);
+					}
+					else {
+						row = appTable.insertRow(1);
+						var row2 = appTable.insertRow(0);
+						appTable.deleteRow(0);
+					}
 					var cell1 = row.insertCell(0);
 					var cell2 = row.insertCell(1);
 					var date = new Date();	
-					appTable.deleteRow(0);
+					
 					cell1.innerHTML = date.toLocaleString();
 					cell2.innerHTML = "PHP " + parseFloat(smt.replace(/,/g, '')).toFixed(2);
 							

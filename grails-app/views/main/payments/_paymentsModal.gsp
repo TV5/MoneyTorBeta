@@ -1,28 +1,20 @@
-<div id="payments" class="ui modal small"
-	style="padding-top: -50px !important;">
+<div id="payments" class="ui modal small" style="padding-top: -50px !important;">
 	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
-		<i class="circular teal dollar icon" style="margin-right: 10px;"></i>Payment
-		History
-		<h2 id="pmAccountName" class="ui left pointing teal basic label"
-			style="margin-left: 10px;"></h2>
+		<i class="circular teal dollar icon" style="margin-right: 10px;"></i>Payment History
+		<h2 id="pmAccountName" class="ui left pointing teal basic label" style="margin-left: 10px;"></h2>
 	</div>
-	<div class="content" id="paymentsss"
-		style="padding-top: 10px; padding-bottom: 0px;">
+	<div class="content" id="paymentsss" style="padding-top: 10px; padding-bottom: 0px;">
 		<div id="yeah" hidden>
 			${paymentList}
 		</div>
 		<div style="overflow-y: scroll; max-height: 200px" id="tablePymnt"></div>
-		<g:formRemote name="subForm"
-			url="[controller:'payment', action:'addPayment']" class="ui form">
+		<g:formRemote name="subForm" url="[controller:'payment', action:'addPayment']" class="ui form">
 			<div class="inline fields" style="margin-top: 14px">
 				<div class="eleven wide field">
-					<h4 style="text-align: right; margin-left: auto; margin-right: 0;">Balance:
-					</h4>
+					<h4 style="text-align: right; margin-left: auto; margin-right: 0;">Balance: </h4>
 				</div>
 				<div class="five wide field">
-					<h3
-						style="text-align: right; margin-left: auto; margin-right: 30px; color: red;"
-						id="totalpymnt"></h3>
+					<h3 style="text-align: right; margin-left: auto; margin-right: 30px; color: red;" id="totalpymnt"></h3>
 				</div>
 			</div>
 			<div class="ui divider"></div>
@@ -54,11 +46,9 @@
 	</div>
 </div>
 
-<div id="confirm" class="ui small test modal transition"
-	style="margin-top: -92.5px;">
+<div id="confirm" class="ui small test modal transition" style="margin-top: -92.5px;">
 	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
-		<i class="circular teal sign out icon" style="margin-right: 10px;"></i>Account
-		Fully Paid
+		<i class="circular teal sign out icon" style="margin-right: 10px;"></i>Account Fully Paid
 	</div>
 	<div class="content">
 		<p style="margin-top: -10px">The account has been fully paid.

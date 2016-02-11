@@ -43,9 +43,10 @@
 			</div>
 			<g:hiddenField name="payable_id" />
 			<g:hiddenField name="type" value="P" />
+			<div class="ui divider"></div>
 	<div id="editPayableErrorList" class="ui negative small message"
 		style="display: none;"></div>
-	<div class="actions">
+	<div class="actions" style="float: right; margin-bottom: 14px;">
 		<g:submitToRemote url="[controller: 'Account' ,action: 'editPayable']"
 			value="Save" class="ui teal button" id="saveEditPayableBtn"
 			onComplete="pesaved()" update="editPayableErrorList" />
