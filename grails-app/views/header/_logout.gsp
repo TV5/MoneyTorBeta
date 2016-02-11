@@ -5,7 +5,7 @@
 			style="margin-right: 10px;"></i>Log Out</div>
 	<div class="content">
 		<h3>Hello, ${user.f_name}!</h3>
-		<h5 style="margin-top:-10px">Are you sure you want to log out of your account?</h5>
+		<p style="margin-top:-10px">Are you sure you want to log out of your account?</p>
 	</div>
 	<div class="actions">
 		<div class="ui negative button">No</div>

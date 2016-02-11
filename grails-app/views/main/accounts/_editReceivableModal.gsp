@@ -1,4 +1,4 @@
-<div id="editReceivableModal" class="ui modal">
+<div id="editReceivableModal" class="ui small modal">
 	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
 		<i class="circular teal edit icon" style="margin-right: 10px;"></i>Edit
 		Account Receivable
@@ -45,9 +45,10 @@
 			</div>
 			<g:hiddenField name="receivable_id" />
 			<g:hiddenField name="type" value="R" />
+			<div class="ui divider"></div>
 	<div id="editReceivableErrorList" class="ui negative small message"
 		style="display: none;"></div>
-	<div class="actions">
+	<div class="actions" style="float: right; margin-bottom: 14px;">
 		<g:submitToRemote
 			url="[controller: 'Account' ,action: 'editReceivable']" value="Save"
 			class="ui teal button" id="saveEditReceivableBtn"
