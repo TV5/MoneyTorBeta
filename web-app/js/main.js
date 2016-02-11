@@ -623,7 +623,7 @@ function editUserAccount(vid, vf_name, vl_name, vpassword) {
 					prompt : 'First Name must not be blank.'
 				}, {
 					type : 'regExp[/^[a-zA-Z .]+$/]',
-					prompt : 'Invalid input.'
+					prompt : 'First Name must only contain letters.'
 				} ]
 			},
 			uL_name : {
@@ -633,7 +633,7 @@ function editUserAccount(vid, vf_name, vl_name, vpassword) {
 					prompt : 'Last Name must not be blank.'
 				}, {
 					type : 'regExp[/^[a-zA-Z .]+$/]',
-					prompt : 'Invalid input.'
+					prompt : 'Last Name must only contain letters.'
 				} ]
 			}
 		}
@@ -673,12 +673,9 @@ function changePassword() {
 			},
 			uCurrPass : {
 				identifier : 'uCurrPass',
-				rules : [ {
-					type : 'empty',
-					prompt : 'Please input current password'
-				}, {
+				rules : [{
 					type : 'match[uCurrentPass]',
-					prompt : 'The current password inputted is incorrect.'
+					prompt : 'Please input your current password correctly.'
 				} ]
 			},
 			uNewPass : {
@@ -701,7 +698,7 @@ function changePassword() {
 					prompt : 'Please confirm your new password'
 				}, {
 					type : 'match[uNewPass]',
-					prompt : 'Passwords do not match.'
+					prompt : 'Please confirm your new password'
 				} ]
 			}
 		}
