@@ -368,26 +368,6 @@ $(document).ready(function() {
 	});
 	$('.ui.form').form({
 		fields : {
-			uF_name : {
-				identifier : 'uF_name',
-				rules : [ {
-					type : 'empty',
-					prompt : 'First Name must not be blank.'
-				}, {
-					type : 'regExp[/^[a-zA-Z .]+$/]',
-					prompt : 'Invalid input.'
-				} ]
-			},
-			uL_name : {
-				identifier : 'uL_name',
-				rules : [ {
-					type : 'empty',
-					prompt : 'Last Name must not be blank.'
-				}, {
-					type : 'regExp[/^[a-zA-Z .]+$/]',
-					prompt : 'Invalid input.'
-				} ]
-			},
 			username : {
 				identifier : 'username',
 				rules : [ {
@@ -417,6 +397,25 @@ $(document).ready(function() {
 
 	$('#payablesNumEntries').on('change', notifyDue);
 	$('#receivablesNumEntries').on('change', notifyDue);
+	
+	$("#maxP").change(function(){
+		payablesTable.draw(false);
+		notifyDue();
+	});
+	$("#minP").change(function(){
+		payablesTable.draw(false);
+		notifyDue();
+	});
+	$("#maxR").change(function(){
+		receivablesTable.draw(false);
+		notifyDue();
+	});
+	$("#minR").change(function(){
+		console.log('min r change');
+		receivablesTable.draw(false);
+		notifyDue();
+	});
+	
 });
 
 function notifyDue() {
@@ -521,44 +520,6 @@ function editAdmin(id, username, f_name, l_name, password, status) {
 	$('#editadministrator').modal('show');
 }
 
-function paginate() {
-	$('table.paginated')
-			.each(
-					function() {
-						var currentPage = 0;
-						var numPerPage = 4;
-						var $table = $(this);
-						$table.bind('repaginate', function() {
-							$table.find('tbody tr').hide().slice(
-									currentPage * numPerPage,
-									(currentPage + 1) * numPerPage).show();
-						});
-						$table.trigger('repaginate');
-						var numRows = $table.find('tbody tr').length;
-						var numPages = Math.ceil(numRows / numPerPage);
-						var $pager = $('<div class="ui pagination menu pager" style="float:right; margin-bottom:5px;"></div>');
-						for (var page = 0; page < numPages; page++) {
-							$('<span class="ui teal item page-number"></span>')
-									.text(page + 1)
-									.bind(
-											'click',
-											{
-												newPage : page
-											},
-											function(event) {
-												currentPage = event.data['newPage'];
-												$table.trigger('repaginate');
-												$(this).addClass('active')
-														.siblings()
-														.removeClass('active');
-											}).appendTo($pager).addClass(
-											'clickable');
-						}
-						$pager.insertBefore($table).find(
-								'span.page-number:first').addClass('active');
-					});
-}
-
 function editEmployee(id, username, f_name, l_name, password, status) {
 	document.getElementById("empId").value = id;
 	document.getElementById("empUsername").value = username;
@@ -636,7 +597,7 @@ function editReceivable(that, id, or_no, transactor_id, amount, date, status) {
 	$('#ertransaction_date').val(date.toString().split(' ')[0]);
 	$('#receivable_id').val(id);
 	if (status == 'H') {
-		alert("Cannot edit because this account has a payment already!");
+		$('#cantedit').modal('show');
 	} else {
 		$('#editReceivableModal').modal('show');
 	}
@@ -654,7 +615,7 @@ function editPayable(that, id, or_no, transactor_id, amount, date, status) {
 	$('#eptransaction_date').val(date.toString().split(' ')[0]);
 	$('#payable_id').val(id);
 	if (status == 'H') {
-		alert("Cannot edit because this account has a payment already!");
+		$('#cantedit').modal('show');
 	} else {
 		$('#editPayableModal').modal('show');
 	}	
@@ -672,6 +633,31 @@ function editTransactor(name, address, telephone_no, mobile_no, terms) {
 }
 
 function editUserAccount(vid, vf_name, vl_name, vpassword) {
+	$('.ui.form').form({
+		fields : {
+			uF_name : {
+				identifier : 'uF_name',
+				rules : [ {
+					type : 'empty',
+					prompt : 'First Name must not be blank.'
+				}, {
+					type : 'regExp[/^[a-zA-Z .]+$/]',
+					prompt : 'First Name must only contain letters.'
+				} ]
+			},
+			uL_name : {
+				identifier : 'uL_name',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Last Name must not be blank.'
+				}, {
+					type : 'regExp[/^[a-zA-Z .]+$/]',
+					prompt : 'Last Name must only contain letters.'
+				} ]
+			}
+		}
+	});
+	
 	document.getElementById("uId").value = vid;
 	document.getElementById("uF_name").value = vf_name;
 	document.getElementById("uL_name").value = vl_name;
@@ -706,12 +692,9 @@ function changePassword() {
 			},
 			uCurrPass : {
 				identifier : 'uCurrPass',
-				rules : [ {
-					type : 'empty',
-					prompt : 'Please input current password'
-				}, {
+				rules : [{
 					type : 'match[uCurrentPass]',
-					prompt : 'The current password inputted is incorrect.'
+					prompt : 'Please input your current password correctly.'
 				} ]
 			},
 			uNewPass : {
@@ -734,7 +717,7 @@ function changePassword() {
 					prompt : 'Please confirm your new password'
 				}, {
 					type : 'match[uNewPass]',
-					prompt : 'Passwords do not match.'
+					prompt : 'Please confirm your new password'
 				} ]
 			}
 		}
@@ -837,7 +820,7 @@ function addPayment(account_id, acct_name, amts, type) {
 					type : 'notExactly[0]',
 					prompt : 'Amount must be greater than 0.00 PHP'
 				},{
-					type : 'regExp[/^(\\d+|\\d{1,3}(,\\d{3})*)(\\.\\d+)?$/]',
+					type : 'regExp[/^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*\$/]',
 					prompt : 'Amount must only contain valid decimal numbers.'
 				}]
 			}
@@ -855,9 +838,16 @@ function pymntAdded() {
 				if($('.ui .error .message').length == 0){
 					$("#yeah").load(location.href + " #yeah", function() {});
 					var appTable = document.getElementById("paymentsTable");
-					var row = appTable.insertRow(2);
-					if(appTable.rows[1].cells[0].innerHTML == "No payments added yet.")
+					var row;
+					if(appTable.rows[1].cells[0].innerHTML == "No payments added yet."){
+						row = appTable.insertRow(2);
 						appTable.deleteRow(1);
+					}
+					else {
+						row = appTable.insertRow(1);
+						var row2 = appTable.insertRow(0);
+						appTable.deleteRow(0);
+					}
 					var cell1 = row.insertCell(0);
 					var cell2 = row.insertCell(1);
 					var date = new Date();	
@@ -868,6 +858,10 @@ function pymntAdded() {
 					$("#totalpymnt").html("PHP " + amt.toFixed(2));
 					if (amt == 0)				
 						document.getElementById("totalpymnt").style.color = "green";
+					
+					setTimeout(function(){
+						document.getElementById("pmAmount").value="";
+					},200);
 				}
 			}
 			else if(amt < 0){
@@ -1014,6 +1008,9 @@ Date.prototype.toDateInputValue = (function() {
 });
 
 $('#settingsLink').click(function() {
+	$('#userSettings').modal({
+		closable : false
+	})
 	$('#userSettings').modal('show');
 	$('.displaySec').hide();
 	$('.displayFirst').show();
@@ -1304,3 +1301,8 @@ $.fn.dataTable.Api.register('sum()', function() {
 		return a + b;
 	}, 0);
 });
+
+function cancelEdit(){
+	if($('.ui .error .message').length != 0)
+		location.reload(true);
+}
