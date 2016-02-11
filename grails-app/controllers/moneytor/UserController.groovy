@@ -214,12 +214,13 @@ class UserController {
 							f_name:params.af_name,
 							l_name:params.al_name,
 							username:params.ausername,
+							password:params.apassword.encodeAsPassword(),
 							type:params.atype,
 							status:1,
 							updated_on:new Date(),
 							updated_by:session.user.id
 							)
-					user.password=params.apassword.encodeAsPassword()
+
 					if(user!=null){
 						userService.addUser(user)
 						render "User has been saved."

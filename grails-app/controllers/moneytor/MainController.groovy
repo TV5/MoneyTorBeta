@@ -16,9 +16,11 @@ class MainController {
 		}
 	}
 	def login() {
-		def user = userService.login(params.username, params.password)
-		if(user){
-			session.user=user
+		def user = userService.login(params.username, params.password.encodeAsPassword())
+		if(user || session.user){
+			if(session.user==null){
+				session.user=user
+			}
 			redirect(action:"main")
 		}else{
 			flash.error ="The username and password you entered did not match our records. Please double-check and try again."

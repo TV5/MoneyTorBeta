@@ -1,5 +1,6 @@
 import java.security.MessageDigest
-import org.apache.commons.codec.binary.Base64
+import sun.misc.BASE64Encoder
+import sun.misc.CharacterEncoder
 class PasswordCodec {
 
    static encode = { String s ->
