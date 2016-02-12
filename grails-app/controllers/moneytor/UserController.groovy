@@ -295,16 +295,22 @@ class UserController {
 
 	def changeStatus(){
 		def user =new User()
+		def u
 		if(params.int('empId')){
 			user.id = params.int('empId')
-		}else{
+			u="emp"
+		}
+		if(params.int('adminId')){
 			user.id = params.int('adminId')
+			u="admin"
+			System.out.println(user.id)
 		}
 		user.updated_on=new Date()
 		user.updated_by=session.user.id
 		userService.changeUserStatus(user.id, user)
 
-		render "deactivated"
+		render u
+		
 	}
 
 	def users(){
