@@ -1136,18 +1136,15 @@ function addedEmployee() {
 
 function changeUserStatus() {
 	var status = document.getElementById('deactivated').innerText;
-	if (status = "deactivated") {
-		var empID = document.getElementById('empID').value;
-		var adminID = document.getElementById('adminID').value;
-		if(empID){
+		if(status == "emp"){
 			$('#editemployee').modal('hide');
 			window.location.replace("users");
 		}
-		if(adminID){
+		else if(status=="admin"){
 			$('#editadministrator').modal('hide');
 			window.location.replace("users?tab=administratorsTab");			
 		}
-	}
+
 }
 function editedEmployee() {
 	document.getElementById('eusernameTaken').setAttribute("hidden", "hidden");
@@ -1250,6 +1247,7 @@ function addedAdmin() {
 function addedMoreAdmin() {
 //	var status = document.getElementById('auserSaved').innerText;
 	//if (status == "true") {
+		document.getElementById('asaveB').value = 'Save';
 		$("#asaveB").removeAttr("disabled");
 		document.getElementById('aaddMoreB').setAttribute("disabled",
 				"disabled");
