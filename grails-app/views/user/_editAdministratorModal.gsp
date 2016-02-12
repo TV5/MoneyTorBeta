@@ -57,7 +57,7 @@
 					<div id="deactivated" hidden></div>
 			<div class="actions" style="float:right; margin-bottom:14px;">
     			<g:submitToRemote url="[controller: 'User' ,action: 'editAdmin']" class="ui teal button" value="Save" update="ausernameTaken" onSuccess="editedAdmin()"/>
-    			<g:submitToRemote url="[controller: 'User' ,action: 'changeStatus']" id="adeactivate" class="ui button" value="Deactivate" onSuccess="changeUserStatus()"/>		
+    			<g:submitToRemote url="[controller: 'User' ,action: 'changeStatus']" id="adeactivate" update="deactivated" class="ui button" value="Deactivate" onSuccess="changeUserStatus()"/>		
 				<div class="ui right labeled icon cancel button"><i class="cancel basic icon"></i>Cancel</div>
 			</div>
 			</g:form>
