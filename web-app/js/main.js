@@ -591,9 +591,10 @@ function editCustomer(ecname, ecaddress, ectelephone_no, ecmobile_no, ecterms,
 function editReceivable(that, id, or_no, transactor_id, amount, date, status) {
 	var transName = $(that).parent().parent().find(":nth-child(2)").html()
 	transName = $.trim(transName);
+	newAmount = parseFloat(amount).toFixed(2);
 	$('#ercustomer_name').val(transName);
 	$('#eror_no').val(or_no);
-	$('#eramount').val(amount);
+	$('#eramount').val(newAmount);
 	$('#ertransaction_date').val(date.toString().split(' ')[0]);
 	$('#receivable_id').val(id);
 	if (status == 'H') {
@@ -609,9 +610,11 @@ function editPayable(that, id, or_no, transactor_id, amount, date, status) {
 	sample = that;
 	var transName = $(that).parent().parent().find(":nth-child(2)").html()
 	transName = $.trim(transName);
+	newAmount = parseFloat(amount).toFixed(2);
+	console.log(amount);
 	$('#epsupplier_name').val(transName);
 	$('#epor_no').val(or_no);
-	$('#epamount').val(amount);
+	$('#epamount').val(newAmount);
 	$('#eptransaction_date').val(date.toString().split(' ')[0]);
 	$('#payable_id').val(id);
 	if (status == 'H') {
