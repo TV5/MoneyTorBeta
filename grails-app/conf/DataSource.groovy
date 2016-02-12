@@ -1,13 +1,6 @@
 dataSource {
     pooled = true
     jmxExport = true
-    driverClassName = "org.h2.Driver"
-	//driverClassName = "com.mysql.jdbc.Driver"
-	//dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-    username = "sa"
-    password = ""
-	//username = "root"
-	//password = "password"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -23,8 +16,13 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+			
+			username = "sa"
+			password = ""
+			driverClassName = "org.h2.Driver"
+			url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
 			//url = "jdbc:mysql://localhost:3306/MoneyTor_DB?useUnicode=yes&characterEncoding=UTF-8"
+			//driverClassName = "com.mysql.jdbc.Driver"
         }
 		hibernate {
 			show_sql = true
@@ -33,15 +31,24 @@ environments {
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+            
+			username = "sa"
+			password = ""
+			driverClassName = "org.h2.Driver"
+			url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
 			//url = "jdbc:mysql://localhost:3306/MoneyTor_DB?useUnicode=yes&characterEncoding=UTF-8"
+			//driverClassName = "com.mysql.jdbc.Driver"
         }
     }
     production {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-			//url = "jdbc:mysql://localhost:3306/MoneyTor_DB?useUnicode=yes&characterEncoding=UTF-8"
+			username = "admin"
+			password = "password"
+			pooled = true
+			dbCreate = "update"
+			driverClassName = "com.mysql.jdbc.Driver"
+			url = "jdbc:mysql://aad7huuvkywecw.cuyy0lhjbzer.us-west-2.rds.amazonaws.com:3306/ebdb?user=admin&password=password"
+			dialect = org.hibernate.dialect.MySQL5InnoDBDialect
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true
