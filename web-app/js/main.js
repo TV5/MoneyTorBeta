@@ -662,15 +662,6 @@ $.fn.form.settings.rules.myCustomNewPass = function(param) {
 		return true;
 }
 
-$.fn.form.settings.rules.myCustomConfPass = function(param, param1) {
-	if(param != ""){
-		if (param == param1)
-		    return true;
-	}
-	else
-		return true;
-}
-
 // unsorted
 function edit() {
 	$('.ui.form').form({
@@ -748,7 +739,7 @@ function changePassword() {
 					type : 'empty',
 					prompt : 'Please confirm your new password'
 				}, {
-					type : 'myCustomConfPass[uCNewPass, uNewPass]',
+					type : 'match[uNewPass]',
 					prompt : 'Please confirm your new password'
 				} ]
 			}
