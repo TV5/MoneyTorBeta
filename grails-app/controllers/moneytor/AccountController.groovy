@@ -49,9 +49,9 @@ class AccountController {
 		if(amount != null && !amount.isEmpty()) {
 			if(!amount.matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*\$")) {
 				validationList.add("Amount must be a positive number with a maximum of two decimal places.")
-			} else if (amount > 9999999) {
-				validationList.add("Amount must be lesser than 9,999,999.00.")
-			}
+			} //else if (amount > 9999999) {
+			//	validationList.add("Amount must be lesser than 9,999,999.00.")
+			//}
 		} else {
 			validationList.add("Please enter a number.")
 		}
