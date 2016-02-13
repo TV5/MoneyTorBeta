@@ -573,9 +573,10 @@ function editCustomer(ecname, ecaddress, ectelephone_no, ecmobile_no, ecterms,
 function editReceivable(that, id, or_no, transactor_id, amount, date, status) {
 	var transName = $(that).parent().parent().find(":nth-child(2)").html()
 	transName = $.trim(transName);
+	newAmount = parseFloat(amount).toFixed(2);
 	$('#ercustomer_name').val(transName);
 	$('#eror_no').val(or_no);
-	$('#eramount').val(amount);
+	$('#eramount').val(newAmount);
 	$('#ertransaction_date').val(date.toString().split(' ')[0]);
 	$('#receivable_id').val(id);
 	if (status == 'H') {
@@ -591,9 +592,11 @@ function editPayable(that, id, or_no, transactor_id, amount, date, status) {
 	sample = that;
 	var transName = $(that).parent().parent().find(":nth-child(2)").html()
 	transName = $.trim(transName);
+	newAmount = parseFloat(amount).toFixed(2);
+	console.log(amount);
 	$('#epsupplier_name').val(transName);
 	$('#epor_no').val(or_no);
-	$('#epamount').val(amount);
+	$('#epamount').val(newAmount);
 	$('#eptransaction_date').val(date.toString().split(' ')[0]);
 	$('#payable_id').val(id);
 	if (status == 'H') {
@@ -615,30 +618,6 @@ function editTransactor(name, address, telephone_no, mobile_no, terms) {
 }
 
 function editUserAccount(vid, vf_name, vl_name, vpassword) {
-	$('.ui.form').form({
-		fields : {
-			uF_name : {
-				identifier : 'uF_name',
-				rules : [ {
-					type : 'empty',
-					prompt : 'First Name must not be blank.'
-				}, {
-					type : 'regExp[/^[a-zA-Z .]+$/]',
-					prompt : 'Invalid input.'
-				} ]
-			},
-			uL_name : {
-				identifier : 'uL_name',
-				rules : [ {
-					type : 'empty',
-					prompt : 'Last Name must not be blank.'
-				}, {
-					type : 'regExp[/^[a-zA-Z .]+$/]',
-					prompt : 'Invalid input.'
-				} ]
-			}
-		}
-	});
 	
 	document.getElementById("uId").value = vid;
 	document.getElementById("uF_name").value = vf_name;
@@ -646,8 +625,52 @@ function editUserAccount(vid, vf_name, vl_name, vpassword) {
 	document.getElementById("uCurrentPass").value = vpassword;
 }
 
+$.fn.form.settings.rules.myCustomRule = function(param) {
+	var re = new RegExp("^[a-zA-Z .]+$");
+	if(param != ""){
+		if (re.test(param))
+		    return true;
+	}
+	else
+		return true;
+}
+
+$.fn.form.settings.rules.myCustomNewPass = function(param) {
+	if(param != ""){
+		if (param.length >= 8)
+		    return true;
+	}
+	else
+		return true;
+}
+
 // unsorted
 function edit() {
+	$('.ui.form').form({
+		fields : {
+			uF_name : {
+				identifier : 'uF_name',
+				rules : [{
+					type : 'empty',
+					prompt : 'First Name must not be blank.'
+				}, {
+					type : 'myCustomRule[uF_name]',
+					prompt : 'First Name must only contain letters.'
+				}]
+			},
+			uL_name : {
+				identifier : 'uL_name',
+				rules : [ {
+					type : 'empty',
+					prompt : 'Last Name must not be blank.'
+				}, {
+					type : 'myCustomRule[uL_name]',
+					prompt : 'Last Name must only contain letters.'
+				}]
+			}
+		}
+	});
+	
 	$('#saveBtn').show();
 	$('.displayFirst').hide();
 	$('.displaySec').show();
@@ -674,12 +697,9 @@ function changePassword() {
 			},
 			uCurrPass : {
 				identifier : 'uCurrPass',
-				rules : [ {
-					type : 'empty',
-					prompt : 'Please input current password'
-				}, {
+				rules : [{
 					type : 'match[uCurrentPass]',
-					prompt : 'The current password inputted is incorrect.'
+					prompt : 'Please input your current password correctly.'
 				} ]
 			},
 			uNewPass : {
@@ -688,7 +708,7 @@ function changePassword() {
 					type : 'empty',
 					prompt : 'Please input your new password'
 				}, {
-					type : 'length[8]',
+					type : 'myCustomNewPass[uNewPass]',
 					prompt : 'New password must be at least 8 characters'
 				}, {
 					type : 'different[uCurrentPass]',
@@ -702,7 +722,7 @@ function changePassword() {
 					prompt : 'Please confirm your new password'
 				}, {
 					type : 'match[uNewPass]',
-					prompt : 'Passwords do not match.'
+					prompt : 'Please confirm your new password'
 				} ]
 			}
 		}
@@ -776,6 +796,16 @@ function tablePayment(acct_id) {
 		balance();
 }
 
+$.fn.form.settings.rules.myCustomPymnt = function(param) {
+	var re = new RegExp("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*\$");
+	if(param != ""){
+		if (re.test(param))
+		    return true;
+	}
+	else
+		return true;
+}
+
 var amt;
 var acct_type;
 function addPayment(account_id, acct_name, amts, type) {
@@ -805,7 +835,7 @@ function addPayment(account_id, acct_name, amts, type) {
 					type : 'notExactly[0]',
 					prompt : 'Amount must be greater than 0.00 PHP'
 				},{
-					type : 'regExp[/^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*\$/]',
+					type : 'myCustomPymnt[pmAmount]',
 					prompt : 'Amount must only contain valid decimal numbers.'
 				}]
 			}
@@ -815,12 +845,16 @@ function addPayment(account_id, acct_name, amts, type) {
 
 function pymntAdded() {
 	var smt = document.getElementById("pmAmount").value;
-	if(!isNaN(smt.replace(/,/g, ''))){
+	if(!isNaN(smt)){
+		console.log("yyehyrt " + smt);
 		setTimeout(function(){
-			amt -= parseFloat(smt.replace(/,/g, ''));
+			amt -= smt;
+			console.log(amt);
 			if(amt >= 0) {
+				console.log("yyehyrt2");
 				$('#errr').hide();
 				if($('.ui .error .message').length == 0){
+					console.log("yyehyrt3");
 					$("#yeah").load(location.href + " #yeah", function() {});
 					var appTable = document.getElementById("paymentsTable");
 					var row;
@@ -852,6 +886,10 @@ function pymntAdded() {
 			else if(amt < 0){
 				amt += parseFloat(smt.replace(/,/g, ''));
 				$('#errr').show();
+			}
+			else {
+				amt += parseFloat(smt.replace(/,/g, ''));
+				console.log("yyehyrt4 " + amt);
 			}
 		}, 300);
 	}
@@ -1071,18 +1109,15 @@ function addedEmployee() {
 
 function changeUserStatus() {
 	var status = document.getElementById('deactivated').innerText;
-	if (status = "deactivated") {
-		var empID = document.getElementById('empID').value;
-		var adminID = document.getElementById('adminID').value;
-		if(empID){
+		if(status == "emp"){
 			$('#editemployee').modal('hide');
 			window.location.replace("users");
 		}
-		if(adminID){
+		else if(status=="admin"){
 			$('#editadministrator').modal('hide');
 			window.location.replace("users?tab=administratorsTab");			
 		}
-	}
+
 }
 function editedEmployee() {
 	document.getElementById('eusernameTaken').setAttribute("hidden", "hidden");
@@ -1185,6 +1220,7 @@ function addedAdmin() {
 function addedMoreAdmin() {
 //	var status = document.getElementById('auserSaved').innerText;
 	//if (status == "true") {
+		document.getElementById('asaveB').value = 'Save';
 		$("#asaveB").removeAttr("disabled");
 		document.getElementById('aaddMoreB').setAttribute("disabled",
 				"disabled");
