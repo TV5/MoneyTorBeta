@@ -53,7 +53,7 @@ class AccountController {
 			//	validationList.add("Amount must be lesser than 9,999,999.00.")
 			//}
 		} else {
-			validationList.add("Invalid amount.")
+			validationList.add("Please enter a number.")
 		}
 		
 		return validationList

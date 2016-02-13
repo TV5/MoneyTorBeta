@@ -43,11 +43,6 @@ $(document).ready(function() {
 	}).data().each(function(value, index) {
 	});
 
-	// var empt = $('#employeesTable').DataTable();
-
-
-
-	// $('#administratorsTable').DataTable({"order":[[0,"asc"]]});
 	if (window.location.href.indexOf("?") != -1) {
 		var tabId = window.location.href.split("?")[1].split("=")[1];
 		var tabId = '#' + tabId;
@@ -103,8 +98,6 @@ $(document).ready(function() {
 	
 	var num = $('#receivablesNumEntries').val();
 
-	// receivablesTable.buttons(0,
-	// null).container().appendTo(receivablesTable.table().container());
 
 	$('#maxR').val(new Date().toDateInputValue());
 
@@ -179,6 +172,12 @@ $(document).ready(function() {
 		"order" : [ [ 3, "desc" ] ]
 	});
 	
+	receivablesTable.on('page', function(){
+		console.log("page change");
+		receivablesTable.draw(false);
+		notifyDue();
+	});
+	
 	receivablesTable.draw();
 
 	function setreceivablesTotalAmt() {
@@ -222,9 +221,6 @@ $(document).ready(function() {
 	// payables
 	// '<"top"><"toolbar"><"dateFilter">rt<"bottom"p><"exportBar">B<"clear">',
 	var num = $('#payablesNumEntries').val();
-
-	// payablesTable.buttons(0,
-	// null).container().prependTo(payablesTable.table().container());
 
 	$('#maxP').val(new Date().toDateInputValue());
 
@@ -299,6 +295,13 @@ $(document).ready(function() {
 		"order" : [ [ 3, "desc" ] ]
 	});
 	
+	payablesTable.on('page', function(){
+		console.log("page change");
+		notifyDue();
+		payablesTable.draw(false);
+		notifyDue();
+	});
+	
 	payablesTable.draw();
 
 	function setPayablesTotalAmt() {
@@ -336,10 +339,6 @@ $(document).ready(function() {
 	$('#payablesNumEntries').change(function() {
 		notifyDue();
 		payablesTable.page.len($('#payablesNumEntries').val()).draw();
-	});
-
-	$('#pdone').click(function() {
-		location.reload();
 	});
 
 	$('#rdone').click(function() {

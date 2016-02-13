@@ -56,7 +56,7 @@
 							<g:set var="customerName" value="${it.name}" />
 						</g:findAll></td>
 					<td class="sum">
-						${receivable.amount}
+					<g:formatNumber number="${receivable.amount}" format="0.00"/>
 					</td>
 					<td><g:formatDate format="MM/dd/yyyy"
 							date="${receivable.transaction_date}" /></td>
