@@ -397,25 +397,6 @@ $(document).ready(function() {
 
 	$('#payablesNumEntries').on('change', notifyDue);
 	$('#receivablesNumEntries').on('change', notifyDue);
-	
-	$("#maxP").change(function(){
-		payablesTable.draw(false);
-		notifyDue();
-	});
-	$("#minP").change(function(){
-		payablesTable.draw(false);
-		notifyDue();
-	});
-	$("#maxR").change(function(){
-		receivablesTable.draw(false);
-		notifyDue();
-	});
-	$("#minR").change(function(){
-		console.log('min r change');
-		receivablesTable.draw(false);
-		notifyDue();
-	});
-	
 });
 
 function notifyDue() {
