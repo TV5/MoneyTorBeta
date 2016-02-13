@@ -45,10 +45,12 @@ class AccountController {
 			}
 		}
 		
-		print amount;
+		print "AMOUNT CLASS " + amount.getClass();
 		if(amount != null && !amount.isEmpty()) {
 			if(!amount.matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*\$")) {
 				validationList.add("Amount must be a positive number with a maximum of two decimal places.")
+			} else if (Float.parseFloat(amount) > 9999999) {
+				validationList.add("Amount must be less than 10,000,000.00")
 			}
 		} else {
 			validationList.add("Please enter a number.")
@@ -123,7 +125,7 @@ class AccountController {
 						)
 				
 				transactorService.addTransactor(transactor)
-				transId = transactorService.getTransactorIDByName(params.pname, 'C')
+				transId = transactorService.getTransactorIDByName(params.rname, 'C')
 				
 			} else {
 				transErrorsList.each{ render '<li class="list">'+it+'</li>' }
