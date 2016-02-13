@@ -51,7 +51,7 @@ class AccountController {
 				validationList.add("Amount must be a positive number with a maximum of two decimal places.")
 			}
 		} else {
-			validationList.add("Please enter a number.")
+			validationList.add("Invalid amount.")
 		}
 		
 		return validationList

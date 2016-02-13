@@ -122,7 +122,7 @@
 					update="addPayableErrorList"/>
 				<button class="ui right labeled icon teal button" value="Add More" id="paddMoreBtn"
 					onClick="paddmore()"><i class="add icon"></i>Add More</button>
-				<div class="ui right labeled icon button" style="display: none;" onclick="location.href = '/Moneytor/main/main?tab=payablesTabLink';" id="pdone"><i class="checkmark icon"></i>Done</div>
+				<div class="ui right labeled icon button" style="display: none;" id="pdone"><i class="checkmark icon"></i>Done</div>
 				<div class="ui right labeled icon cancel button" id="pcancel"><i class="cancel basic icon"></i>Cancel</div>
 			</div>
 		</g:form>
