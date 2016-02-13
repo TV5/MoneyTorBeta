@@ -125,7 +125,7 @@ class AccountController {
 						)
 				
 				transactorService.addTransactor(transactor)
-				transId = transactorService.getTransactorIDByName(params.pname, 'C')
+				transId = transactorService.getTransactorIDByName(params.rname, 'C')
 				
 			} else {
 				transErrorsList.each{ render '<li class="list">'+it+'</li>' }
