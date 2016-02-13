@@ -42,12 +42,13 @@ environments {
     }
     production {
         dataSource {
-			username = "admin"
+			username = "root"
 			password = "password"
 			pooled = true
 			dbCreate = "update"
 			driverClassName = "com.mysql.jdbc.Driver"
-			url = "jdbc:mysql://aad7huuvkywecw.cuyy0lhjbzer.us-west-2.rds.amazonaws.com:3306/ebdb?user=admin&password=password"
+			url = "jdbc:mysql://localhost:3306/MoneyTor_DB?useUnicode=yes&characterEncoding=UTF-8"
+			//url = "jdbc:mysql://aad7huuvkywecw.cuyy0lhjbzer.us-west-2.rds.amazonaws.com:3306/ebdb?user=admin&password=password"
 			dialect = org.hibernate.dialect.MySQL5InnoDBDialect
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
