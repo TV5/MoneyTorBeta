@@ -634,7 +634,22 @@ function editTransactor(name, address, telephone_no, mobile_no, terms) {
 
 	$('#editemployee').modal('show');
 }
+function editedUser(){
+	document.getElementById('userEdit').setAttribute("class", "");
+	var status = document.getElementById('userEdit').innerText;
+	if (status == "success") {
+		document.getElementById('userEdit').setAttribute("class",
+				"ui message");
+		document.getElementById('userEdit').setAttribute("hidden",
+				"hidden");
+		location.reload(true);
+	} else {
+		document.getElementById('userEdit').setAttribute("class",
+				"ui negative small message");
+		document.getElementById('userEdit').removeAttribute("hidden");
+	}
 
+}
 function editUserAccount(vid, vf_name, vl_name, vpassword) {
 	
 	document.getElementById("uId").value = vid;
@@ -1342,6 +1357,9 @@ $.fn.dataTable.Api.register('sum()', function() {
 });
 
 function cancelEdit(){
-	if($('.ui .error .message').length != 0)
-		location.reload(true);
+	document.getElementById('userEdit').setAttribute("class",
+	"ui message");
+document.getElementById('userEdit').setAttribute("hidden",
+	"hidden");
+
 }
