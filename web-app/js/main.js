@@ -505,7 +505,7 @@ $('#logoutLink').click(function() {
 });
 
 // edit stuffs
-function editAdmin(id, username, f_name, l_name, password, status) {
+function editAdmin(id, username, f_name, l_name, password, status, userID) {
 	document.getElementById("adminId").value = id;
 	document.getElementById("adminUsername").value = username;
 	document.getElementById("adminF_name").value = f_name;
@@ -514,6 +514,11 @@ function editAdmin(id, username, f_name, l_name, password, status) {
 	document.getElementById("adminCpassword").value = password;
 	document.getElementById('ausernameTaken').innerText = null;
 	document.getElementById('ausernameTaken').setAttribute("class", "");
+	if(id==userID){
+		document.getElementById('adeactivate').setAttribute("disabled", "disabled");
+	}else{
+		document.getElementById('adeactivate').removeAttribute("disabled");
+	}
 	$('#editadministrator').modal({
 		closable : false
 	})
