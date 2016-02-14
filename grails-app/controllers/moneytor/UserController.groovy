@@ -51,108 +51,138 @@ class UserController {
 		def fname
 		def lname
 		def usrn
-		if(params.ef_name!=null){
-			fname=params.ef_name
-			lname=params.el_name
-		}else if(params.af_name!=null){
-			fname=params.af_name
-			lname=params.al_name
-		}else if(params.adminF_name!=null){
-			fname=params.adminF_name
-			lname=params.adminL_name
-		}else if(params.empF_name!=null){
-			fname=params.empF_name
-			lname=params.empL_name
-		}
-		if(fname ==""){
-			validationList.add("First name is required.")
-		}else if(!fname.matches("[A-Za-z ]+")){
-			validationList.add("Only letters are allowed for first name.")
-		}
-		if(lname ==""){
-			validationList.add("Last name is required.")
-		}else if(!lname.matches("[A-Za-z ]+")){
-			validationList.add("Only letters are allowed for last name.")
-		}
-		
-		if(params.eusername!=null){
-			username=params.eusername
-		}else if(params.ausername!=null){
-			username=params.ausername
-		}else if(params.adminUsername!=null){
-			username=params.adminUsername
-		}else if(params.empUsername!=null){
-			username=params.empUsername
-		}
-		if(username==""){
-			validationList.add("Username is required.")
-		}else{		
-			if(username.length()>7){
-				if(!username.matches("[A-Za-z0-9_]+")){
-					validationList.add("Username can only contain alphanumeric characters and underscore(_).")
+		if(params.uF_name!=null){
+			if(params.uF_name ==""){
+				validationList.add("First Name must not be blank.")
+			}else if(!params.uF_name.matches("[A-Za-z ]+")){
+				validationList.add("First Name must only contain letters.")
+			}
+			if(params.uL_name ==""){
+				validationList.add("Last Name must not be blank.")
+			}else if(!params.uL_name.matches("[A-Za-z ]+")){
+				validationList.add("Last Name must only contain letters.")
+			}
+			
+			if(session.user.password==params.uCurrPass.encodeAsPassword()){
+				if(params.uNewPass == ""){
+					validationList.add("Please input your new password.")
+				}else if(params.uNewPass.length()<8){
+					validationList.add("New password must be at least 8 characters.")
+	
 				}
-				usrn=checkUsername();
-				if(usrn!="available"){
-					validationList.add("Username unavailable.")
+				if(params.uCurrPass==params.uNewPass){
+					validationList.add("New password matches your old password. Please input a new one.")
 				}
-
+				if(params.uNewPass!=params.uCNewPass){
+					validationList.add("Please confirm your new password.")
+				}
 			}else{
-				validationList.add("Username must be at least 8 characters.")
+				validationList.add("Please input your current password correctly.")
 			}
-		}
-		def pass=true, lpass=true, empty=false
-		if(params.epassword!=null){
-			if(params.epassword == ""){
-				empty=true
-			}else if(params.epassword.length()<8){
-				lpass=false
-
-			}
-			if(params.epassword!=params.ecpassword){
-				pass=false
-			}
-		}else if(params.apassword!=null){
-			pass=true
-			if(params.apassword == ""){
-				empty=true
-			}else if(params.apassword.length()<8){
-				lpass=false
-			}
-			if(params.apassword!=params.acpassword){
-				pass=false
-			}
-		}else if(params.adminPassword!=null){
-			pass=true
-			if(params.epassword == ""){
-				empty=true
-			}else if(params.adminPassword.length()<8){
-				lpass=false
-			}
-			if(params.adminPassword!=params.adminCpassword){
-				pass=false
-			}
-		}else if(params.empPassword!=null){
-			pass=true
-			if(params.epassword == ""){
-				empty=true
-
-			}else if(params.empPassword.length()<8){
-				lpass=false
-			}
-			if(params.empPassword!=params.empCpassword){
-				pass=false
-			}
-
-		}
-		if(empty == true){
-			System.out.println("empty")
-			validationList.add("Password is required.")
 		}else{
-			if(lpass==false){
-				validationList.add("Password must be at least 8 characters.")
+			if(params.ef_name!=null){
+				fname=params.ef_name
+				lname=params.el_name
+			}else if(params.af_name!=null){
+				fname=params.af_name
+				lname=params.al_name
+			}else if(params.adminF_name!=null){
+				fname=params.adminF_name
+				lname=params.adminL_name
+			}else if(params.empF_name!=null){
+				fname=params.empF_name
+				lname=params.empL_name
 			}
-			if(pass==false){
-				validationList.add("Password and Confirm Password must match.")
+				if(fname ==""){
+					validationList.add("First name is required.")
+				}else if(!fname.matches("[A-Za-z ]+")){
+					validationList.add("Only letters are allowed for first name.")
+				}
+				if(lname ==""){
+					validationList.add("Last name is required.")
+				}else if(!lname.matches("[A-Za-z ]+")){
+					validationList.add("Only letters are allowed for last name.")
+				}
+			if(params.eusername!=null){
+				username=params.eusername
+			}else if(params.ausername!=null){
+				username=params.ausername
+			}else if(params.adminUsername!=null){
+				username=params.adminUsername
+			}else if(params.empUsername!=null){
+				username=params.empUsername
+			}
+			if(username==""){
+				validationList.add("Username is required.")
+			}else{		
+				if(username.length()>7){
+					if(!username.matches("[A-Za-z0-9_]+")){
+						validationList.add("Username can only contain alphanumeric characters and underscore(_).")
+					}
+					usrn=checkUsername();
+					if(usrn!="available"){
+						validationList.add("Username unavailable.")
+					}
+	
+				}else{
+					validationList.add("Username must be at least 8 characters.")
+				}
+			}
+			def pass=true, lpass=true, empty=false
+			if(params.epassword!=null){
+				if(params.epassword == ""){
+					empty=true
+				}else if(params.epassword.length()<8){
+					lpass=false
+	
+				}
+				if(params.epassword!=params.ecpassword){
+					pass=false
+				}
+			}else if(params.apassword!=null){
+				pass=true
+				if(params.apassword == ""){
+					empty=true
+				}else if(params.apassword.length()<8){
+					lpass=false
+				}
+				if(params.apassword!=params.acpassword){
+					pass=false
+				}
+			}else if(params.adminPassword!=null){
+				pass=true
+				if(params.epassword == ""){
+					empty=true
+				}else if(params.adminPassword.length()<8){
+					lpass=false
+				}
+				if(params.adminPassword!=params.adminCpassword){
+					pass=false
+				}
+			}else if(params.empPassword!=null){
+				pass=true
+				if(params.epassword == ""){
+					empty=true
+	
+				}else if(params.empPassword.length()<8){
+					lpass=false
+				}
+				if(params.empPassword!=params.empCpassword){
+					pass=false
+				}
+	
+			}
+			
+			if(empty == true){
+				System.out.println("empty")
+				validationList.add("Password is required.")
+			}else{
+				if(lpass==false){
+					validationList.add("Password must be at least 8 characters.")
+				}
+				if(pass==false){
+					validationList.add("Password and Confirm Password must match.")
+				}
 			}
 		}
 		return validationList
@@ -257,17 +287,24 @@ class UserController {
 	}
 
 	def editUserAccount(){
-		def user = new User()
-		user.id = params.int('uId')
-		user.f_name = params.uF_name
-		user.l_name = params.uL_name
+		def validationList = validations()
+		if(validationList.isEmpty()){
 
-		user.password = params.uNewPass == "" ? params.uCurrentPass.encodeAsPassword() : params.uNewPass.encodeAsPassword();
+			def user = new User()
+			user.id = params.int('uId')
+			user.f_name = params.uF_name
+			user.l_name = params.uL_name
 
-		userService.editUserAccount(user.id, user)
-		session.user=userService.getUser(user.id)
+			user.password = params.uNewPass == "" ? params.uCurrentPass.encodeAsPassword() : params.uNewPass.encodeAsPassword();
 
-		redirect(uri: request.getHeader('referer'))
+			userService.editUserAccount(user.id, user)
+			session.user=userService.getUser(user.id)
+			render "success"
+		}else{
+			System.out.println("here")
+			validationList.each{ render '<li>'+it+'</li>' }
+
+		}
 	}
 
 	def editAdmin(){
