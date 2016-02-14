@@ -505,7 +505,7 @@ $('#logoutLink').click(function() {
 });
 
 // edit stuffs
-function editAdmin(id, username, f_name, l_name, password, status) {
+function editAdmin(id, username, f_name, l_name, password, status, userID) {
 	document.getElementById("adminId").value = id;
 	document.getElementById("adminUsername").value = username;
 	document.getElementById("adminF_name").value = f_name;
@@ -514,6 +514,11 @@ function editAdmin(id, username, f_name, l_name, password, status) {
 	document.getElementById("adminCpassword").value = password;
 	document.getElementById('ausernameTaken').innerText = null;
 	document.getElementById('ausernameTaken').setAttribute("class", "");
+	if(id==userID){
+		document.getElementById('adeactivate').setAttribute("disabled", "disabled");
+	}else{
+		document.getElementById('adeactivate').removeAttribute("disabled");
+	}
 	$('#editadministrator').modal({
 		closable : false
 	})
@@ -634,7 +639,22 @@ function editTransactor(name, address, telephone_no, mobile_no, terms) {
 
 	$('#editemployee').modal('show');
 }
+function editedUser(){
+	document.getElementById('userEdit').setAttribute("class", "");
+	var status = document.getElementById('userEdit').innerText;
+	if (status == "success") {
+		document.getElementById('userEdit').setAttribute("class",
+				"ui message");
+		document.getElementById('userEdit').setAttribute("hidden",
+				"hidden");
+		location.reload(true);
+	} else {
+		document.getElementById('userEdit').setAttribute("class",
+				"ui negative small message");
+		document.getElementById('userEdit').removeAttribute("hidden");
+	}
 
+}
 function editUserAccount(vid, vf_name, vl_name, vpassword) {
 	
 	document.getElementById("uId").value = vid;
@@ -1342,6 +1362,9 @@ $.fn.dataTable.Api.register('sum()', function() {
 });
 
 function cancelEdit(){
-	if($('.ui .error .message').length != 0)
-		location.reload(true);
+	document.getElementById('userEdit').setAttribute("class",
+	"ui message");
+document.getElementById('userEdit').setAttribute("hidden",
+	"hidden");
+
 }
