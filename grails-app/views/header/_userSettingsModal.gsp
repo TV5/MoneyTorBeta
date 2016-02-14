@@ -71,11 +71,13 @@
 			<div class="ui divider"></div>
 		    <g:hiddenField name="uId" />
 			<g:hiddenField name="uCurrentPass" />
+			<div id="userEdit" hidden></div>	
 			<div class="actions" style="float:right; margin-bottom:14px;">
 				<div id="editBtn" class="ui right labeled icon button teal displayFirst" onclick="edit()">
 					<i class="edit basic icon"></i>Edit
 				</div>
-				<g:actionSubmit class="ui button teal displaySec" value="Save" action="editUserAccount"/>
+				<g:submitToRemote url="[controller: 'User' ,action: 'editUserAccount']"  id="usaveB" class="ui teal button" value="Save" update="userEdit" onSuccess="editedUser()"/>
+				<!--<g:actionSubmit class="ui button teal displaySec" value="Save" action="editUserAccount"/>-->
 				<div class="ui right labeled icon cancel button" onclick="cancelEdit()">					
 					<i class="cancel basic icon"></i>Cancel
 				</div>
