@@ -73,8 +73,11 @@
 					class="ui teal button" id="csaveBtn" update="Validations"
 					value="Save" onComplete="csaved()" />
 
-				<g:submitToRemote url="" update="csaveBtn" class="ui button"
-					value="Add More" id="caddMoreBtn" onComplete="caddmoreClick()" />
+				<!--<g:submitToRemote url="" update="csaveBtn" class="ui button"
+					value="Add More" id="caddMoreBtn" onComplete="caddmoreClick()" />-->
+					
+					<button class="ui button" value="Add More" id="caddMoreBtn"
+					onClick="caddmoreClick()"><i class="add icon"></i>Add More</button>
 
 				<!--<g:field id="addmore" class="ui button" type="reset" name="myReset"  update="saveBtn" value="Add More" url="" onComplete="addmoreClick()"/> -->
 				<div class="ui right labeled icon cancel button" id="cCancelBtn">
