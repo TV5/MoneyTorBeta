@@ -461,6 +461,11 @@ $('#addemployeeBtn').click(function() {
 	$('#addemployee').modal({
 		closable : false
 	})
+			document.getElementById('usernameTakene').setAttribute("class",
+	"ui message");
+document.getElementById('usernameTakene').setAttribute("hidden",
+	"hidden");
+
 	$('#addemployee').modal('show');
 });
 
@@ -468,6 +473,11 @@ $('#addadministratorBtn').click(function() {
 	$('#addadministrator').modal({
 		closable : false
 	})
+		document.getElementById('usernameTakena').setAttribute("class",
+	"ui message");
+document.getElementById('usernameTakena').setAttribute("hidden",
+	"hidden");
+
 	$('#addadministrator').modal('show');
 });
 
