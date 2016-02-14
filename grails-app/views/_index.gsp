@@ -1,4 +1,4 @@
-
+   
 <!-- 
 /* -------------------------------------------------------------------------
  * Unauthorized copying of this file, via any medium is strictly prohibited
@@ -44,6 +44,12 @@
 	  	</style>
 	</head>
 	<body>
+	   <g:if test="${session?.user}">
+	   		<g:javascript>
+				window.location.replace("../main/main");
+			</g:javascript>
+   		</g:if>
+   		<g:else>
 		<div class="ui middle aligned center aligned grid">
 	  		<div class="column">
 	    		<h2 class="ui teal image header">
@@ -75,6 +81,7 @@
 		    	</g:form>
 	  		</div>
 		</div>
+		</g:else>
 	</body>
 	<script src="${resource(dir: 'js', file: 'main.js')}"></script>
 </html>
