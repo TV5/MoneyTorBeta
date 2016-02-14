@@ -91,7 +91,7 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://localhost:8080/Moneytor-0.1"
+        grails.serverURL = "http://localhost:8080/Moneytor"
     }
 }
 
