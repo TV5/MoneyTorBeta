@@ -55,7 +55,7 @@
 						<g:formatDate format="MM/dd/yyyy" date="${admin.updated_on }" />
 					</td>
 					<td>
-						<button class="ui labeled icon button" onclick="editAdmin(${admin.id}, '${admin.username}', '${admin.f_name }', '${admin.l_name}', '${admin.password}', ${admin.status})" id="editemployeeBtn">
+						<button class="ui labeled icon button" onclick="editAdmin(${admin.id}, '${admin.username}', '${admin.f_name }', '${admin.l_name}', '${admin.password}', ${admin.status}, ${user.id})" id="editemployeeBtn">
 							EDIT <i class="edit basic icon"></i>
 						</button>
 					</td>
