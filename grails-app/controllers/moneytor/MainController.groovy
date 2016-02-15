@@ -1,6 +1,7 @@
 package moneytor
 
 class MainController {
+	def beforeInterceptor = [action:this.&auth, except: 'index, login']
 	def userService
 	def accountService
 	def transactorService
