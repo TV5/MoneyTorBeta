@@ -4,8 +4,9 @@
 		Receivable
 	</div>
 	<div class="content">
-		<g:form class="ui form" name="addReceivableForm" controller="account"
+		<g:form class="ui form" id="addReceivableForm" name="addReceivableForm" controller="account"
 			action="addReceivable">
+			<div id="recList">
 			<div style="overflow-y: scroll; max-height: 200px">
 				<div class="inline fields">
 					<div class="two wide field">
@@ -25,7 +26,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="receivableNewCustomer">
+				<div class="receivableNewCustomer" hidden>
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>Name</label>
@@ -108,6 +109,7 @@
 						<g:datePicker name="rdate" value="${rdate}" precision="day" />
 					</div>
 				</div>
+			</div>
 			</div>
 			<div class="ui divider"></div>
 			<div id="addReceivableErrorList" class="ui negative small message"
