@@ -6,6 +6,6 @@ class BootStrap {
 		
 	}
     def destroy = {
-		getUserByUsername("adminuser").delete()
+		
     }
 }
