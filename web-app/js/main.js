@@ -482,6 +482,7 @@ document.getElementById('usernameTakena').setAttribute("hidden",
 });
 
 $('#addPayableBtn').click(function() {
+	$('#addPayableErrorList').hide();
 	$('#addPayable').modal({
 		closable : false
 	})
@@ -490,6 +491,7 @@ $('#addPayableBtn').click(function() {
 });
 
 $('#addReceivableBtn').click(function() {
+	$('#addReceivableErrorList').hide();
 	$('#addReceivable').modal({
 		closable : false
 	})
@@ -497,6 +499,7 @@ $('#addReceivableBtn').click(function() {
 });
 
 $('#addSupplierBtn').click(function() {
+	document.getElementById('svalidations').setAttribute("hidden", "hidden");
 	$('#addSupplier').modal({
 		closable : false
 	})
@@ -504,6 +507,7 @@ $('#addSupplierBtn').click(function() {
 });
 
 $('#addCustomerBtn').click(function() {
+	document.getElementById('Validations').setAttribute("hidden", "hidden");
 	$('#addCustomer').modal({
 		closable : false
 	})
@@ -1032,8 +1036,6 @@ function paddmore() {
 
 function rsaved() {
 	$('#addReceivableErrorList').show();
-	$('#rdone').show();
-	$('#rcancel').hide();
 	if (document.getElementById('addReceivableErrorList').innerText == "") {
 		$('#addReceivableForm')
 				.find(
@@ -1043,6 +1045,8 @@ function rsaved() {
 		$('#saveReceivableBtn').val('Saved');
 		$('#saveReceivableBtn').attr("disabled", "disabled");
 		$('#addReceivableErrorList').hide();
+		$('#rdone').show();
+		$('#rcancel').hide();
 	}
 }
 
