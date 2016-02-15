@@ -461,6 +461,11 @@ $('#addemployeeBtn').click(function() {
 	$('#addemployee').modal({
 		closable : false
 	})
+			document.getElementById('usernameTakene').setAttribute("class",
+	"ui message");
+document.getElementById('usernameTakene').setAttribute("hidden",
+	"hidden");
+
 	$('#addemployee').modal('show');
 });
 
@@ -468,6 +473,11 @@ $('#addadministratorBtn').click(function() {
 	$('#addadministrator').modal({
 		closable : false
 	})
+		document.getElementById('usernameTakena').setAttribute("class",
+	"ui message");
+document.getElementById('usernameTakena').setAttribute("hidden",
+	"hidden");
+
 	$('#addadministrator').modal('show');
 });
 
@@ -962,8 +972,6 @@ function balance(){
 
 function psaved() {
 	$('#addPayableErrorList').show();
-	$('#pdone').show();
-	$('#pcancel').hide();
 	if (document.getElementById('addPayableErrorList').innerText == "") {
 		$('#addPayableForm')
 				.find(
@@ -973,6 +981,8 @@ function psaved() {
 		$('#savePayableBtn').val('Saved');
 		$('#savePayableBtn').attr("disabled", "disabled");
 		$('#addPayableErrorList').hide();
+		$('#pdone').show();
+		$('#pcancel').hide();
 	}
 }
 
@@ -991,6 +1001,8 @@ function resaved() {
 	}
 }
 function paddmore() {
+	$('#supList').load(document.URL +  ' #supList');
+
 	$('#pdate').val('');
 	$('#pamount').val('');
 	$('#por_no').val('');
@@ -1060,6 +1072,7 @@ function raddmore() {
 			.attr("readonly", false);
 	document.getElementById('addReceivableErrorList').innerText == null;
 	$('#addReceivableErrorList').hide();
+	$('#recList').load(document.URL +  ' #recList');
 }
 
 Date.prototype.toDateInputValue = (function() {

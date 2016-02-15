@@ -7,6 +7,7 @@
 		<g:renderErrors bean="${account}" />
 		<g:form class="ui form" id="addPayableForm" name="addPayableForm"
 			action="">
+			<div id="supList">
 			<div style="overflow-y: scroll; max-height: 200px">
 				<div class="inline fields">
 					<div class="two wide field">
@@ -26,7 +27,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="payableNewSupplier">
+				<div class="payableNewSupplier" hidden>
 					<div class="inline fields">
 						<div class="two wide field">
 							<label>Name</label>
@@ -112,6 +113,7 @@
 							precision="day" />
 					</div>
 				</div>
+			</div>
 			</div>
 			<div class="ui divider"></div>
 			<div id="addPayableErrorList"  style="overflow-y: scroll; max-height: 100px; display:none;" class="ui negative small message"></div>
