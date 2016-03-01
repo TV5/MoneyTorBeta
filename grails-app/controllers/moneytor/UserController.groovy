@@ -64,20 +64,19 @@ class UserController {
 			}
 			
 			if(session.user.password==params.uCurrPass.encodeAsPassword()){
-				if(params.uNewPass == ""){
-					validationList.add("Please input your new password.")
-				}else if(params.uNewPass.length()<8){
-					validationList.add("New password must be at least 8 characters.")
-	
-				}
 				if(params.uCurrPass==params.uNewPass){
 					validationList.add("New password matches your old password. Please input a new one.")
 				}
-				if(params.uNewPass!=params.uCNewPass){
-					validationList.add("Please confirm your new password.")
-				}
 			}else{
 				validationList.add("Please input your current password correctly.")
+			}
+			if(params.uNewPass == ""){
+				validationList.add("Please input your new password.")
+			}else if(params.uNewPass.length()<8){
+				validationList.add("New password must be at least 8 characters.")
+			}
+			if(params.uNewPass!=params.uCNewPass){
+				validationList.add("Please confirm your new password.")
 			}
 		}else{
 			if(params.ef_name!=null){

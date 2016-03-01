@@ -461,6 +461,11 @@ $('#addemployeeBtn').click(function() {
 	$('#addemployee').modal({
 		closable : false
 	})
+			document.getElementById('usernameTakene').setAttribute("class",
+	"ui message");
+document.getElementById('usernameTakene').setAttribute("hidden",
+	"hidden");
+
 	$('#addemployee').modal('show');
 });
 
@@ -468,10 +473,16 @@ $('#addadministratorBtn').click(function() {
 	$('#addadministrator').modal({
 		closable : false
 	})
+		document.getElementById('usernameTakena').setAttribute("class",
+	"ui message");
+document.getElementById('usernameTakena').setAttribute("hidden",
+	"hidden");
+
 	$('#addadministrator').modal('show');
 });
 
 $('#addPayableBtn').click(function() {
+	$('#addPayableErrorList').hide();
 	$('#addPayable').modal({
 		closable : false
 	})
@@ -480,6 +491,7 @@ $('#addPayableBtn').click(function() {
 });
 
 $('#addReceivableBtn').click(function() {
+	$('#addReceivableErrorList').hide();
 	$('#addReceivable').modal({
 		closable : false
 	})
@@ -487,6 +499,7 @@ $('#addReceivableBtn').click(function() {
 });
 
 $('#addSupplierBtn').click(function() {
+	document.getElementById('svalidations').setAttribute("hidden", "hidden");
 	$('#addSupplier').modal({
 		closable : false
 	})
@@ -494,6 +507,7 @@ $('#addSupplierBtn').click(function() {
 });
 
 $('#addCustomerBtn').click(function() {
+	document.getElementById('Validations').setAttribute("hidden", "hidden");
 	$('#addCustomer').modal({
 		closable : false
 	})
@@ -962,8 +976,6 @@ function balance(){
 
 function psaved() {
 	$('#addPayableErrorList').show();
-	$('#pdone').show();
-	$('#pcancel').hide();
 	if (document.getElementById('addPayableErrorList').innerText == "") {
 		$('#addPayableForm')
 				.find(
@@ -973,6 +985,8 @@ function psaved() {
 		$('#savePayableBtn').val('Saved');
 		$('#savePayableBtn').attr("disabled", "disabled");
 		$('#addPayableErrorList').hide();
+		$('#pdone').show();
+		$('#pcancel').hide();
 	}
 }
 
@@ -991,6 +1005,8 @@ function resaved() {
 	}
 }
 function paddmore() {
+	$('#supList').load(document.URL +  ' #supList');
+
 	$('#pdate').val('');
 	$('#pamount').val('');
 	$('#por_no').val('');
@@ -1020,8 +1036,6 @@ function paddmore() {
 
 function rsaved() {
 	$('#addReceivableErrorList').show();
-	$('#rdone').show();
-	$('#rcancel').hide();
 	if (document.getElementById('addReceivableErrorList').innerText == "") {
 		$('#addReceivableForm')
 				.find(
@@ -1031,6 +1045,8 @@ function rsaved() {
 		$('#saveReceivableBtn').val('Saved');
 		$('#saveReceivableBtn').attr("disabled", "disabled");
 		$('#addReceivableErrorList').hide();
+		$('#rdone').show();
+		$('#rcancel').hide();
 	}
 }
 
@@ -1060,6 +1076,7 @@ function raddmore() {
 			.attr("readonly", false);
 	document.getElementById('addReceivableErrorList').innerText == null;
 	$('#addReceivableErrorList').hide();
+	$('#recList').load(document.URL +  ' #recList');
 }
 
 Date.prototype.toDateInputValue = (function() {
