@@ -51,7 +51,7 @@ class UserController {
 		def fname
 		def lname
 		def usrn
-		def usrnid
+		def usrnid = null
 		if(params.uF_name!=null){
 			if(params.uF_name ==""){
 				validationList.add("First Name must not be blank.")
@@ -122,10 +122,11 @@ class UserController {
 						validationList.add("Username can only contain alphanumeric characters and underscore(_).")
 					}
 					usrn=checkUsername();
+					if(usrnid!=null && userService.getUsername(usrnid)==username){
+						usrn="available"
+					}
 					if(usrn!="available"){
-						if(userService.getUsername(usrnid)!=username){
 							validationList.add("Username unavailable.")
-						}
 					}
 	
 				}else{
