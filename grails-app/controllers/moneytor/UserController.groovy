@@ -51,6 +51,7 @@ class UserController {
 		def fname
 		def lname
 		def usrn
+		def usrnid
 		if(params.uF_name!=null){
 			if(params.uF_name ==""){
 				validationList.add("First Name must not be blank.")
@@ -108,8 +109,10 @@ class UserController {
 				username=params.ausername
 			}else if(params.adminUsername!=null){
 				username=params.adminUsername
+				usrnid = params.int('adminId')
 			}else if(params.empUsername!=null){
 				username=params.empUsername
+				usrnid = params.int('empId')
 			}
 			if(username==""){
 				validationList.add("Username is required.")
@@ -120,7 +123,9 @@ class UserController {
 					}
 					usrn=checkUsername();
 					if(usrn!="available"){
-						validationList.add("Username unavailable.")
+						if(userService.getUsername(usrnid)!=username){
+							validationList.add("Username unavailable.")
+						}
 					}
 	
 				}else{

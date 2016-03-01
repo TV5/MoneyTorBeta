@@ -16,6 +16,10 @@ class UserService {
 		}
 		return ret
 	}
+	def getUsername(userid){
+		def user =User.findById(userid)
+		return user.username
+	}
 	def addUser(user){
 		def userCheck = User.findByUsername(user.username)
 		if(userCheck){
