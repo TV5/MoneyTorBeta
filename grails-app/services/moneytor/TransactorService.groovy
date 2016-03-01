@@ -27,6 +27,9 @@ class TransactorService {
 		return customerList
 	}
 	
+	def getTransactorByName(name) {
+		return Transactor.findByName(name)
+	}
 	
 	def getTransactorIDByName(name, type){
 		def transactor = Transactor.findByNameAndStatusAndType(name, "A", type)
@@ -45,7 +48,7 @@ class TransactorService {
 		newTransactor.save()
 	}
 	
-	def validate(name, address, telephone_no,mobile_no,terms){
+	def validate(name, address, telephone_no,mobile_no,terms, transactor_type){
 		System.out.println("Validating..")
 		def validationList =[]
 		if(name==null||name==""){
@@ -77,6 +80,13 @@ class TransactorService {
 		}else if(terms==null||terms==""){
 			validationList.add("Terms is required.")
 		}
+		
+		if (transactor_type == 'S') {
+			if (getTransactorByName(name) != null) {
+				validationList.add("Supplier name is already taken.");
+			}
+		}
+		
 		return validationList
 	}
 
