@@ -529,7 +529,7 @@ function editAdmin(id, username, f_name, l_name, password, status, userID) {
 	document.getElementById('ausernameTaken').innerText = null;
 	document.getElementById('ausernameTaken').setAttribute("class", "");
 	if(id==userID){
-		document.getElementById('adeactivate').setAttribute("hidden", "hidden");
+		document.getElementById('adeactivate').setAttribute("disabled", "disabled");
 	}else{
 		document.getElementById('adeactivate').removeAttribute("hidden");
 	}
