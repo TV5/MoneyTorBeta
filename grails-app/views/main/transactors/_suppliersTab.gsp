@@ -26,22 +26,22 @@
 	<table id="suppliersTable" class="display ui celled padded table" cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th style="max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Name</th>
-				<th style="max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Address</th>
-				<th style="max-width:75px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Telephone Number</th>
-				<th style="max-width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Mobile Number</th>
-				<th style="width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Terms</th>
-				<th style="width:70px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Edit</th>
+				<th >Name</th>
+				<th >Address</th>
+				<th>Telephone Number</th>
+				<th  >Mobile Number</th>
+				<th  >Terms</th>
+				<th >Edit</th>
 			</tr>
 		</thead>
 		<tbody>
 			<g:each in="${supplierList}" var="supplier">
 				<tr>
-					<td style="max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="${supplier.name}">${supplier.name}</td>
-					<td style="max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="${supplier.address}">${supplier.address}</td>
-					<td style="max-width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="${supplier.telephone_no}">${supplier.telephone_no}</td>
-					<td style="max-width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="${supplier.mobile_no}">${supplier.mobile_no}</td>
-					<td style="max-width:70px;">
+					<td  title="${supplier.name}">${supplier.name}</td>
+					<td  title="${supplier.address}">${supplier.address}</td>
+					<td   title="${supplier.telephone_no}">${supplier.telephone_no}</td>
+					<td   title="${supplier.mobile_no}">${supplier.mobile_no}</td>
+					<td >
 						<script>
 							var days = ${supplier.terms};
 							if(days%7 == 0)	{
@@ -55,7 +55,7 @@
 							}
 						</script>
 					</td>
-					<td style="width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+					<td  >
 						<button id="editCustomerBtn" class="ui right labeled icon button" onClick="editSupplier('${supplier.name}','${supplier.address}','${supplier.telephone_no}','${supplier.mobile_no}','${supplier.terms}','${supplier.id}')">
 							EDIT <i class="edit teal icon"></i>
 						</button>

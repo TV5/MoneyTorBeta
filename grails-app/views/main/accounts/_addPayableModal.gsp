@@ -5,8 +5,7 @@
 	</div>
 	<div class="content">
 		<g:renderErrors bean="${account}" />
-		<g:form class="ui form" id="addPayableForm" name="addPayableForm"
-			action="">
+		<g:form class="ui form" id="addPayableForm" name="addPayableForm">
 			<div id="supList">
 			<div style="overflow-y: scroll; max-height: 200px">
 				<div class="inline fields">

@@ -26,22 +26,22 @@
 	<table id="customersTable" class="display ui celled padded table"  cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th style="max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Name</th>
-			    <th style="max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Address</th>
-			    <th style="max-width:75px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Telephone Number</th>
-			    <th style="max-width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Mobile Number</th>
-			    <th style="width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Terms</th>
-			    <th style="width:70px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">Edit</th>
+				<th>Name</th>
+			    <th>Address</th>
+			    <th>Telephone Number</th>
+			    <th>Mobile Number</th>
+			    <th>Terms</th>
+			    <th>Edit</th>
 			</tr>
 		</thead>
 		<tbody>
 	  		<g:each in="${customerList}" var="customer">
         		<tr>			  	
-					<td style="max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="${customer.name}">${customer.name}</td>
-					<td style="max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="${customer.address}">${customer.address}</td>
-					<td style="max-width:70px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="${customer.telephone_no}">${customer.telephone_no}</td>
-					<td style="max-width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="${customer.mobile_no}">${customer.mobile_no}</td>
-					<td style="max-width:70px;">
+					<td title="${customer.name}">${customer.name}</td>
+					<td title="${customer.address}">${customer.address}</td>
+					<td title="${customer.telephone_no}">${customer.telephone_no}</td>
+					<td title="${customer.mobile_no}">${customer.mobile_no}</td>
+					<td>
 						<script>
 							var days = ${customer.terms};
 							if(days%7 == 0)	{
@@ -55,7 +55,7 @@
 							}
 						</script>
 					</td>
-					<td style="width:50px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+					<td>
 						<button class="ui right labeled icon button" id="editCustomerBtn" onClick="editCustomer('${customer.name}','${customer.address}','${customer.telephone_no}','${customer.mobile_no}','${customer.terms}','${customer.id}')" >
 							EDIT <i class="edit teal icon"></i>
 						</button>
