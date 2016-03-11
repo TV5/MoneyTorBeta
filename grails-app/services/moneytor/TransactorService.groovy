@@ -71,7 +71,7 @@ class TransactorService {
 		}else if(!mobile_no.matches("[0-9]+")){
 			validationList.add("Mobile Number must only contain numeric characters")
 		}else if(!mobile_no.matches("^.{1,15}")){
-			validationList.add("Telephone Number exceeds character limit")
+			validationList.add("Mobile Number exceeds character limit")
 		}
 		
 		
