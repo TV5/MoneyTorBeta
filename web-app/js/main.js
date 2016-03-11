@@ -531,7 +531,7 @@ function editAdmin(id, username, f_name, l_name, password, status, userID) {
 	if(id==userID){
 		document.getElementById('adeactivate').setAttribute("disabled", "disabled");
 	}else{
-		document.getElementById('adeactivate').removeAttribute("disabled");
+		document.getElementById('adeactivate').removeAttribute("hidden");
 	}
 	$('#editadministrator').modal({
 		closable : false
@@ -739,6 +739,7 @@ function save() {
 }
 
 function changePassword() {
+	document.getElementById("cpassClicked").value = "yes";
 	$('.oldPass').hide();
 	$('#newPass').show();
 
@@ -1167,11 +1168,10 @@ function changeUserStatus() {
 		if(status == "emp"){
 			$('#editemployee').modal('hide');
 			window.location.replace("users");
-		}
-		else if(status=="admin"){
-			$('#editadministrator').modal('hide');
-			window.location.replace("users?tab=administratorsTab");			
-		}
+		}else if(status=="admin"){
+				$('#editadministrator').modal('hide');
+				window.location.replace("users?tab=administratorsTab");			
+			}
 
 }
 function editedEmployee() {
