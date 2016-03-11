@@ -34,7 +34,7 @@ class TransactorService {
 	def getTransactorIDByName(name, type){
 		def transactor = Transactor.findByNameAndStatusAndType(name, "A", type)
 		return transactor.id
-	}
+	} 
 	
 	def editTransactor(id, Transactor transactor) {
 		Transactor newTransactor = Transactor.get(id)
@@ -48,7 +48,7 @@ class TransactorService {
 		newTransactor.save()
 	}
 	
-	def validate(name, address, telephone_no,mobile_no,terms, transactor_type){
+	def validate(id, name, address, telephone_no,mobile_no,terms, transactor_type){
 		System.out.println("Validating..")
 		def validationList =[]
 		if(name==null||name==""||name.matches("^\\s+")){
@@ -88,7 +88,13 @@ class TransactorService {
 		
 		if (transactor_type == 'S') {
 			if (getTransactorByName(name) != null) {
-				validationList.add("Supplier name is already taken.");
+				if (id != null) {
+					if (Transactor.findById(id).name != name) {
+						validationList.add("Supplier name is already taken.");
+					}
+				} else {
+					validationList.add("Supplier name is already taken.");
+				}
 			}
 		}
 		

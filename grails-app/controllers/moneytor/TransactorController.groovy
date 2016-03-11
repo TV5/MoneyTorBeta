@@ -30,7 +30,7 @@ class TransactorController {
 	def addCustomer() {
 			System.out.println("add customer")
 			System.out.println("hehe")
-			def validationList = transactorService.validate(params.cname,params.caddress,params.ctelephone_no, params.cmobile_no, params.cterms, 'C')
+			def validationList = transactorService.validate(null, params.cname,params.caddress,params.ctelephone_no, params.cmobile_no, params.cterms, 'C')
 			 if(validationList.isEmpty()){
 				 System.out.println("EMPTY VALIDATIONS!")
 				 def transactor = new Transactor(
@@ -55,7 +55,7 @@ class TransactorController {
 		System.out.println("add supplier")
 		System.out.println("hehe")
 		System.out.println("hgfhg"+params.suname)
-		def validationsList = transactorService.validate(params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms, 'S')
+		def validationsList = transactorService.validate(null, params.sname, params.saddress, params.stelephone_no, params.smobile_no, params.sterms, 'S')
 		System.out.println(validationsList)
 		if(validationsList.isEmpty()){
 			System.out.println("empty");
@@ -96,7 +96,7 @@ class TransactorController {
 	}
 	
 	def editSupplier() {
-		def validationsList = transactorService.validate(params.esname, params.esaddress, params.estelephone_no, params.esmobile_no, params.esterms, 'S')
+		def validationsList = transactorService.validate(params.esid, params.esname, params.esaddress, params.estelephone_no, params.esmobile_no, params.esterms, 'S')
 		System.out.println(validationsList)
 		if(validationsList.isEmpty()){
 		def transactor = new Transactor(
@@ -119,7 +119,7 @@ class TransactorController {
 	
 	def editCustomer() {
 		System.out.println("jasfkas");
-		def validationsList = transactorService.validate(params.ecname, params.ecaddress, params.ectelephone_no, params.ecmobile_no, params.ecterms, 'C')
+		def validationsList = transactorService.validate(null, params.ecname, params.ecaddress, params.ectelephone_no, params.ecmobile_no, params.ecterms, 'C')
 		System.out.println(validationsList)
 		if(validationsList.isEmpty()){
 		def transactor = new Transactor(

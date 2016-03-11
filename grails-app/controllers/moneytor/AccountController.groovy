@@ -72,7 +72,7 @@ class AccountController {
 
 	def addPayable() {
 		def errorList = getErrorList(params.por_no,params.transactor_id,params.pamount, 'P')
-		def transErrorsList = transactorService.validate(params.pname, params.paddress, params.ptelephone_no,params.pmobile_no, params.pterms, 'S')
+		def transErrorsList = transactorService.validate(null, params.pname, params.paddress, params.ptelephone_no,params.pmobile_no, params.pterms, 'S')
 		def transId = params.transactor_id
 		if (transId == "-1") {
 			if(transErrorsList.isEmpty()){
@@ -116,7 +116,7 @@ class AccountController {
 
 	def addReceivable() {
 		def errorList = getErrorList(params.ror_no,params.rtransactor_id,params.ramount, 'R')
-		def transErrorsList = transactorService.validate(params.rname, params.raddress, params.rtelephone_no,params.rmobile_no, params.rterms, 'C')
+		def transErrorsList = transactorService.validate(null, params.rname, params.raddress, params.rtelephone_no,params.rmobile_no, params.rterms, 'C')
 		def transId = params.rtransactor_id
 		if (transId == "-1") {
 			if(transErrorsList.isEmpty()){
