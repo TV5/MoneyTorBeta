@@ -9,7 +9,7 @@ class UserController {
 	}
 	private auth(){
 		if(!session.user){
-		    redirect(uri: request.getHeader('referer') )
+		    redirect(uri: "/")
 			return false
 		}
 	}
@@ -392,7 +392,7 @@ class UserController {
 			def allAdminList = listAllAdmin()
 			[user:session.user, empList:empList, adminList:adminList, allAdminList:allAdminList]
 		}else{
-			redirect(uri: request.getHeader('referer') )
+			redirect(uri: "/")
 			return false
 		}
 	}
