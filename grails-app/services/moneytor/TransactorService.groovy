@@ -34,7 +34,7 @@ class TransactorService {
 	def getTransactorIDByName(name, type){
 		def transactor = Transactor.findByNameAndStatusAndType(name, "A", type)
 		return transactor.id
-	}
+	} 
 	
 	def editTransactor(id, Transactor transactor) {
 		Transactor newTransactor = Transactor.get(id)
@@ -48,13 +48,13 @@ class TransactorService {
 		newTransactor.save()
 	}
 	
-	def validate(name, address, telephone_no,mobile_no,terms, transactor_type){
+	def validate(id, name, address, telephone_no,mobile_no,terms, transactor_type){
 		System.out.println("Validating..")
 		def validationList =[]
-		if(name==null||name==""){
+		if(name==null||name==""||name.matches("^\\s+")){
 			validationList.add("Name is required.")
 		}
-		if(address==null||address==""){
+		if(address==null||address==""||address.matches("^\\s+")){
 			validationList.add("Address is required.")
 		}
 		
@@ -62,13 +62,18 @@ class TransactorService {
 			validationList.add("Telephone Number name is required.")
 		}else if(!telephone_no.matches("[0-9]+")){
 			validationList.add("Telephone Number must only contain numeric characters")
+		}else if(!telephone_no.matches("^.{1,15}")){
+			validationList.add("Telephone Number exceeds character limit")
 		}
 
 		if(mobile_no==null||mobile_no==""){
 			validationList.add("Mobile Number is required.")
 		}else if(!mobile_no.matches("[0-9]+")){
 			validationList.add("Mobile Number must only contain numeric characters")
+		}else if(!mobile_no.matches("^.{1,15}")){
+			validationList.add("Telephone Number exceeds character limit")
 		}
+		
 		
 		if(terms.matches("[0]+")){
 			validationList.add("Terms must be greater than or equal to 1")
@@ -83,7 +88,13 @@ class TransactorService {
 		
 		if (transactor_type == 'S') {
 			if (getTransactorByName(name) != null) {
-				validationList.add("Supplier name is already taken.");
+				if (id != null) {
+					if (Transactor.findById(id).name != name) {
+						validationList.add("Supplier name is already taken.");
+					}
+				} else {
+					validationList.add("Supplier name is already taken.");
+				}
 			}
 		}
 		

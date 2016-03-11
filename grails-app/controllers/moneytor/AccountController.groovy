@@ -79,9 +79,10 @@ class AccountController {
 	}
 
 	def addPayable() {
+
 		if(session.user){
 			def errorList = getErrorList(params.por_no,params.transactor_id,params.pamount, 'P')
-			def transErrorsList = transactorService.validate(params.pname, params.paddress, params.ptelephone_no,params.pmobile_no, params.pterms, 'S')
+			def transErrorsList = transactorService.validate(null, params.pname, params.paddress, params.ptelephone_no,params.pmobile_no, params.pterms, 'S')
 			def transId = params.transactor_id
 			if (transId == "-1") {
 				if(transErrorsList.isEmpty()){
@@ -126,23 +127,23 @@ class AccountController {
 
 	def addReceivable() {
 		if(session.user){
-				def errorList = getErrorList(params.ror_no,params.rtransactor_id,params.ramount, 'R')
-			def transErrorsList = transactorService.validate(params.rname, params.raddress, params.rtelephone_no,params.rmobile_no, params.rterms, 'C')
-			def transId = params.rtransactor_id
-			if (transId == "-1") {
-				if(transErrorsList.isEmpty()){
-					def transactor = new Transactor(
-							name: params.rname,
-							address: params.raddress,
-							telephone_no: params.rtelephone_no,
-							mobile_no: params.rmobile_no,
-							terms: params.rterms,
-							type: 'C',
-							status: 'A'
-							)
-					
-					transactorService.addTransactor(transactor)
-					transId = transactorService.getTransactorIDByName(params.rname, 'C')
+			def errorList = getErrorList(params.ror_no,params.rtransactor_id,params.ramount, 'R')
+				def transErrorsList = transactorService.validate(null, params.rname, params.raddress, params.rtelephone_no,params.rmobile_no, params.rterms, 'C')
+				def transId = params.rtransactor_id
+				if (transId == "-1") {
+					if(transErrorsList.isEmpty()){
+						def transactor = new Transactor(
+								name: params.rname,
+								address: params.raddress,
+								telephone_no: params.rtelephone_no,
+								mobile_no: params.rmobile_no,
+								terms: params.rterms,
+								type: 'C',
+								status: 'A'
+								)
+						
+						transactorService.addTransactor(transactor)
+						transId = transactorService.getTransactorIDByName(params.rname, 'C')
 					
 				} else {
 					transErrorsList.each{ render '<li class="list">'+it+'</li>' }
