@@ -4,7 +4,7 @@
 		<i class="circular teal sign out icon"
 			style="margin-right: 10px;"></i>Log Out</div>
 	<div class="content">
-		<h3>Hello, ${user.f_name}!</h3>
+		<h3 class="fixed">Hello, ${user.f_name}!</h3>
 		<p style="margin-top:-10px">Are you sure you want to log out of your account?</p>
 	</div>
 	<div class="actions">

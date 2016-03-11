@@ -35,6 +35,7 @@ class MainController {
 		}
 	}
 	def checkUsername(){
+		if(session.user){
 		def available
 		if(userService.checkUsername(params.eusername)) {
 		   available = false
@@ -43,6 +44,7 @@ class MainController {
 		}
 		response.contentType = "application/json"
 		render """{"available":${available}}"""
+		}
 	}
 	def main(){
 		if(session.user){
@@ -52,9 +54,6 @@ class MainController {
 			def supplierList = transactorService.getSupplierList()
 			def customerList = transactorService.getCustomerList()
 			def paymentList = paymentService.getPaymentList()
-			
-			
-			
 			
 			
 			[user: session.user, payableList: payableList, receivableList: receivableList,transactorList: transactorList, supplierList: supplierList, customerList: customerList,paymentList:paymentList]
@@ -67,17 +66,21 @@ class MainController {
 	}
 	
 	def addTransactor(){
-		def transactor = new Transactor(
-			name: params.name,
-			address: params.address,
-			telephone_no: params.telephone_no,
-			mobile_no: params.mobile_no,
-			terms: params.terms,
-			type: params.type
-			)
-		transactorService.addTransactor(transactor)
-		System.out.println("added2!")
-		
+		if(session.user){
+			def transactor = new Transactor(
+				name: params.name,
+				address: params.address,
+				telephone_no: params.telephone_no,
+				mobile_no: params.mobile_no,
+				terms: params.terms,
+				type: params.type
+				)
+			transactorService.addTransactor(transactor)
+			System.out.println("added2!")
+		}else{
+			redirect(uri: request.getHeader('referer') )
+			return false
+		}	
 	}
 
 	
