@@ -57,7 +57,7 @@
 				</div>
 				<div class="seven wide field">
 					<g:select id="cselect" name="cselect" value="${cselect}"
-						from="${['d': 'day(s)', 'w': 'week(s)', 'm': 'month(s)', 'y':'year(s)']}"
+						from="${['d': 'day(s)', 'w': 'week(s)', 'm': 'month(s)']}"
 						optionKey="key" optionValue="value" />
 				</div>
 
