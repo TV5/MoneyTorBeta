@@ -31,7 +31,7 @@ class MainController {
 		if(session.user){
 			session.user=null
 			session.invalidate()
-		    redirect(uri: request.getHeader('referer') )
+		    redirect(uri: "/")
 		}
 	}
 	def checkUsername(){
@@ -60,7 +60,7 @@ class MainController {
 
 			
 		}else{
-		    redirect(uri: request.getHeader('referer') )
+		    redirect(uri: "/")
 			return false
 		}
 	}
@@ -78,7 +78,7 @@ class MainController {
 			transactorService.addTransactor(transactor)
 			System.out.println("added2!")
 		}else{
-			redirect(uri: request.getHeader('referer') )
+			redirect(uri: "/")
 			return false
 		}	
 	}
