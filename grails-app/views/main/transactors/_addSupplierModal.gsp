@@ -46,7 +46,7 @@
 					<label>Terms</label>
 				</div>
 				<div class="seven wide field">
-					<g:field id="sterms" type="number" name="sterms" value="${sterms}"
+					<g:field id="sterms" type="number" min="5" max="10" name="sterms" value="${sterms}"
 						required="true" />
 				</div>
 				<div class="seven wide field">

@@ -48,7 +48,7 @@ $(document).ready(function() {
 		var tabId = '#' + tabId;
 		$(tabId).click();
 	}
-
+	$("#saddMoreBtn").attr("disabled", "disabled");
 	$("#caddMoreBtn").attr("disabled", "disabled");
 	$("#eaddMoreB").attr("disabled", "disabled");
 	$("#aaddMoreB").attr("disabled", "disabled");
