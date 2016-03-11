@@ -84,7 +84,10 @@ class TransactorService {
 			validationList.add("Terms must only contain numeric character/s and only one decimal point")
 		}else if(terms==null||terms==""){
 			validationList.add("Terms is required.")
+		}else if(Integer.parseInt(terms)>90){
+			validationList.add("Terms must be lesser than or equal to 90 days.")
 		}
+
 		
 		if (transactor_type == 'S') {
 			if (getTransactorByName(name) != null) {

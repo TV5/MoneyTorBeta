@@ -11,7 +11,7 @@ class MainController {
 	}
 	def auth(){
 		if(!session.user){
-		    redirect(uri: request.getHeader('referer') )
+		    redirect(uri: "/" )
 			return false
 		}
 	}
