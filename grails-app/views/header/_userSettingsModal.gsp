@@ -37,7 +37,8 @@
 				</div>
 				<div class="thirteen wide field">
 				   	<text class="displayFirst">********</text>
-				    <input class="displaySec" type="password" value="${user.password}" disabled/>
+				    <input class="displaySec" type="password" value="********" disabled/>
+				    <g:hiddenField name="cpassClicked" id="cpassClicked"  value="no"/>
 				    <a class="displaySec" href="#" onclick="changePassword('${user.password}')" style="margin-left:10px !important;">change password</a>
 				</div>
 			</div>

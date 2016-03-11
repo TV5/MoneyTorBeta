@@ -1,4 +1,4 @@
-<div id="payments" class="ui modal small" style="padding-top: -50px !important;">
+<div id="payments" class="ui modal small">
 	<div class="header" style="padding-top: 16px; padding-bottom: 13px;">
 		<i class="circular teal dollar icon" style="margin-right: 10px;"></i>Payment History
 		<h2 id="pmAccountName" class="ui left pointing teal basic label" style="margin-left: 10px;"></h2>
@@ -7,7 +7,7 @@
 		<div id="yeah" hidden>
 			${paymentList}
 		</div>
-		<div style="overflow-y: scroll; max-height: 200px" id="tablePymnt"></div>
+		<div style="overflow-y: scroll; max-height: 125px" id="tablePymnt"></div>
 		<g:formRemote name="subForm" url="[controller:'payment', action:'addPayment']" class="ui form">
 			<div class="inline fields" style="margin-top: 14px">
 				<div class="eleven wide field">
