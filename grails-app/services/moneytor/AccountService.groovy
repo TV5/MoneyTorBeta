@@ -15,6 +15,10 @@ class AccountService {
 		return Account.findAllByTypeAndStatusNotEqual('R', 'P')
 	}
 	
+	def getReceivableByOR(or) {
+		return Account.findByOr_no(or)
+	}
+	
 	def addAccount(account) {
 		account.save()
 	}

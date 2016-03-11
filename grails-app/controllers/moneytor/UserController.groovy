@@ -51,6 +51,7 @@ class UserController {
 		def fname
 		def lname
 		def usrn
+		def usrnid = null
 		if(params.uF_name!=null){
 			if(params.uF_name ==""){
 				validationList.add("First Name must not be blank.")
@@ -64,20 +65,19 @@ class UserController {
 			}
 			
 			if(session.user.password==params.uCurrPass.encodeAsPassword()){
-				if(params.uNewPass == ""){
-					validationList.add("Please input your new password.")
-				}else if(params.uNewPass.length()<8){
-					validationList.add("New password must be at least 8 characters.")
-	
-				}
 				if(params.uCurrPass==params.uNewPass){
 					validationList.add("New password matches your old password. Please input a new one.")
 				}
-				if(params.uNewPass!=params.uCNewPass){
-					validationList.add("Please confirm your new password.")
-				}
 			}else{
 				validationList.add("Please input your current password correctly.")
+			}
+			if(params.uNewPass == ""){
+				validationList.add("Please input your new password.")
+			}else if(params.uNewPass.length()<8){
+				validationList.add("New password must be at least 8 characters.")
+			}
+			if(params.uNewPass!=params.uCNewPass){
+				validationList.add("Please confirm your new password.")
 			}
 		}else{
 			if(params.ef_name!=null){
@@ -109,8 +109,10 @@ class UserController {
 				username=params.ausername
 			}else if(params.adminUsername!=null){
 				username=params.adminUsername
+				usrnid = params.int('adminId')
 			}else if(params.empUsername!=null){
 				username=params.empUsername
+				usrnid = params.int('empId')
 			}
 			if(username==""){
 				validationList.add("Username is required.")
@@ -120,8 +122,11 @@ class UserController {
 						validationList.add("Username can only contain alphanumeric characters and underscore(_).")
 					}
 					usrn=checkUsername();
+					if(usrnid!=null && userService.getUsername(usrnid)==username){
+						usrn="available"
+					}
 					if(usrn!="available"){
-						validationList.add("Username unavailable.")
+							validationList.add("Username unavailable.")
 					}
 	
 				}else{
@@ -266,11 +271,15 @@ class UserController {
 		def validationList = validations()
 		if(validationList.isEmpty()){
 			if(params.empCpassword==params.empPassword){
+				def pw=userService.getPassword(params.int('empId'))
+				if(pw!=params.empPassword)
+					pw = params.empPassword.encodeAsPassword();
+
 				def user =new User(
 						f_name:params.empF_name,
 						l_name:params.empL_name,
 						username:params.empUsername,
-						password:params.empPassword.encodeAsPassword(),
+						password:pw,
 						updated_on:new Date(),
 						updated_by:session.user.id
 						)
@@ -311,11 +320,14 @@ class UserController {
 		def validationList = validations()
 		if(validationList.isEmpty()){
 			if(params.adminCpassword==params.adminPassword){
+				def pw=userService.getPassword(params.int('adminId'))
+				if(pw!=params.adminPassword)
+					pw = params.adminPassword.encodeAsPassword()
 				def user =new User(
 						f_name:params.adminF_name,
 						l_name:params.adminL_name,
 						username:params.adminUsername,
-						password:params.adminPassword.encodeAsPassword(),
+						password:pw,
 						updated_on:new Date(),
 						updated_by:session.user.id
 						)
