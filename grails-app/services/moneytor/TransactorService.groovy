@@ -82,8 +82,14 @@ class TransactorService {
 		}
 		
 		if (transactor_type == 'S') {
-			if (getTransactorByName(name) != null && Transactor.findById(id).name != name) {
-				validationList.add("Supplier name is already taken.");
+			if (getTransactorByName(name) != null) {
+				if (id != null) {
+					if (Transactor.findById(id).name != name) {
+						validationList.add("Supplier name is already taken.");
+					}
+				} else {
+					validationList.add("Supplier name is already taken.");
+				}
 			}
 		}
 		
