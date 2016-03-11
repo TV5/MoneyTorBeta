@@ -60,6 +60,10 @@
     		a {
     			color: #00b5ad;
     		}
+    		#logout h3{
+				width: 100%;
+				word-break:break-all;
+			}
     		.link {
     			color: #00b5ad !important;
     		}

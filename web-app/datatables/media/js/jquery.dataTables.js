@@ -82,7 +82,7 @@
 	 *    } );
 	 *
 	 *  @example
-	 *    // Initialisation with configuration options - in this case, disable
+	 *    // Initialization with configuration options - in this case, disable
 	 *    // pagination and sorting.
 	 *    $(document).ready( function {
 	 *      $('#example').dataTable( {
