@@ -7,7 +7,7 @@
 		<div id="yeah" hidden>
 			${paymentList}
 		</div>
-		<div style="overflow-y: scroll; max-height: 200px" id="tablePymnt"></div>
+		<div style="overflow-y: scroll; max-height: 180px" id="tablePymnt"></div>
 		<g:formRemote name="subForm" url="[controller:'payment', action:'addPayment']" class="ui form">
 			<div class="inline fields" style="margin-top: 14px">
 				<div class="eleven wide field">
