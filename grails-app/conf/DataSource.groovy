@@ -17,12 +17,12 @@ environments {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
 			
-			username = "sa"
-			password = ""
-			driverClassName = "org.h2.Driver"
-			url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-			//url = "jdbc:mysql://localhost:3306/MoneyTor_DB?useUnicode=yes&characterEncoding=UTF-8"
-			//driverClassName = "com.mysql.jdbc.Driver"
+			username = "root"
+			password = "password"
+			//driverClassName = "org.h2.Driver"
+			//url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+			url = "jdbc:mysql://localhost:3306/MoneyTor_DB?useUnicode=yes&characterEncoding=UTF-8"
+			driverClassName = "com.mysql.jdbc.Driver"
         }
 		hibernate {
 			show_sql = true
