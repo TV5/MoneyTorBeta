@@ -26,7 +26,7 @@ class AccountController {
 		[accountList: Account.findAllByType(params.id)]
 	}
 	
-	def getErrorList(or_no, transactor_id, amount, trans_type) {
+	def getErrorList(id, or_no, transactor_id, amount, trans_type) {
 		if(session.user){
 			def validationList = []
 			try {
@@ -65,7 +65,13 @@ class AccountController {
 			
 			if (trans_type == 'R') {
 				if (accountService.getReceivableByOR(or_no) != null) {
-					validationList.add("OR number is already in use.")
+					if (id != null) {
+						if (accountService.getAcct(id).or_no != or_no) {
+							validationList.add("OR number is already in use.")
+						}
+					} else {
+						validationList.add("OR number is already in use.")
+					}
 				}
 			}
 			
@@ -81,7 +87,7 @@ class AccountController {
 	def addPayable() {
 
 		if(session.user){
-			def errorList = getErrorList(params.por_no,params.transactor_id,params.pamount, 'P')
+			def errorList = getErrorList(null, params.por_no,params.transactor_id,params.pamount, 'P')
 			def transErrorsList = transactorService.validate(null, params.pname, params.paddress, params.ptelephone_no,params.pmobile_no, params.pterms, 'S')
 			def transId = params.transactor_id
 			if (transId == "-1") {
@@ -127,7 +133,7 @@ class AccountController {
 
 	def addReceivable() {
 		if(session.user){
-			def errorList = getErrorList(params.ror_no,params.rtransactor_id,params.ramount, 'R')
+			def errorList = getErrorList(null, params.ror_no,params.rtransactor_id,params.ramount, 'R')
 				def transErrorsList = transactorService.validate(null, params.rname, params.raddress, params.rtelephone_no,params.rmobile_no, params.rterms, 'C')
 				def transId = params.rtransactor_id
 				if (transId == "-1") {
@@ -172,7 +178,7 @@ class AccountController {
 	
 	def editReceivable() {
 		if(session.user){
-			def errorList = getErrorList(params.eror_no, "edit", params.eramount, 'R')
+			def errorList = getErrorList(params.receivable_id, params.eror_no, "edit", params.eramount, 'R')
 			if(errorList.isEmpty()){
 			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
 			Date trans_date = formatter.parse(params.ertransaction_date)
@@ -193,7 +199,7 @@ class AccountController {
 
 	def editPayable() {
 		if(session.user){
-			def errorList = getErrorList(params.epor_no, "edit", params.epamount, 'P')
+			def errorList = getErrorList(null, params.epor_no, "edit", params.epamount, 'P')
 			if(errorList.isEmpty()){
 			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd")
 			Date trans_date = formatter.parse(params.eptransaction_date)
